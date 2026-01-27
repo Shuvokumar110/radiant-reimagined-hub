@@ -194,27 +194,22 @@ function ProcessStepCard({
   const stepStart = 0.1 + index * 0.15;
   const stepEnd = stepStart + 0.15;
 
-  const opacity = useTransform(
-    scrollProgress,
-    [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
-    [0.4, 1, 1, 0.4]
-  );
-
+  // Removed opacity fade to prevent blinking; cards always fully visible
   const scale = useTransform(
     scrollProgress,
     [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
-    [0.97, 1.02, 1.02, 0.97]
+    [0.98, 1.02, 1.02, 0.98]
   );
 
   const x = useTransform(
     scrollProgress,
     [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
-    [10, 0, 0, -10]
+    [6, 0, 0, -6]
   );
 
   return (
     <motion.div
-      style={{ opacity, scale, x }}
+      style={{ scale, x }}
       className={`relative flex items-center gap-3 md:gap-4 rounded-xl bg-background/10 backdrop-blur-sm border border-background/20 ${
         isMobile ? "p-3" : "p-4"
       }`}
@@ -246,7 +241,7 @@ function ProcessStepCard({
       {/* Active indicator */}
       <motion.div
         className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-background rounded-r-full"
-        style={{ opacity }}
+        style={{ opacity: 1 }}
       />
     </motion.div>
   );
