@@ -1,111 +1,164 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
+import worldMap from "@/assets/world-map.png";
+
+const locations = [
+  { name: "TiDi USA", x: "22%", y: "42%", delay: 0 },
+  { name: "TiDi Canada", x: "24%", y: "28%", delay: 0.2 },
+  { name: "TiDi Caribbean", x: "28%", y: "52%", delay: 0.4 },
+  { name: "TiDi Europe", x: "48%", y: "28%", delay: 0.6 },
+  { name: "TiDi Africa", x: "50%", y: "58%", delay: 0.8 },
+  { name: "TiDi Asia", x: "78%", y: "45%", delay: 1 },
+];
+
 export function LocationsSection() {
   return (
-    <section className="min-h-screen py-20 bg-background flex flex-col justify-center">
+    <section className="min-h-screen py-20 bg-background flex flex-col justify-center overflow-hidden">
       <div className="w-full px-8 md:px-16 lg:px-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-6">
-              TiDi Locations
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              With headquarters in the USA and manufacturing partners across the globe, 
-              TiDi Apparel delivers premium athletic wear to teams worldwide. Our strategic 
-              locations ensure fast delivery and exceptional service no matter where you're based.
-            </p>
-            
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-3 bg-muted px-4 py-3 rounded-lg">
-                <MapPin className="h-5 w-5 text-destructive" />
-                <span className="font-medium">USA Headquarters</span>
-              </div>
-              <div className="flex items-center gap-3 bg-muted px-4 py-3 rounded-lg">
-                <MapPin className="h-5 w-5 text-destructive" />
-                <span className="font-medium">Italy Manufacturing</span>
-              </div>
-              <div className="flex items-center gap-3 bg-muted px-4 py-3 rounded-lg">
-                <MapPin className="h-5 w-5 text-destructive" />
-                <span className="font-medium">Global Distribution</span>
-              </div>
-            </div>
-          </motion.div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
+            TiDi Locations
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            With strategic locations worldwide, TiDi Apparel delivers premium athletic wear 
+            to teams across the globe with fast delivery and exceptional service.
+          </p>
+        </motion.div>
 
-          {/* Right - World Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative bg-muted rounded-2xl p-12 overflow-hidden aspect-video">
-              {/* World Map Background */}
-              <svg viewBox="0 0 1200 600" className="w-full h-full opacity-30">
-                {/* Simplified continents */}
-                <ellipse cx="250" cy="280" rx="150" ry="180" fill="currentColor" />
-                <ellipse cx="550" cy="250" rx="180" ry="150" fill="currentColor" />
-                <ellipse cx="900" cy="300" rx="200" ry="160" fill="currentColor" />
-                <ellipse cx="350" cy="450" rx="80" ry="100" fill="currentColor" />
-                <ellipse cx="950" cy="480" rx="100" ry="80" fill="currentColor" />
-              </svg>
+        {/* World Map Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative max-w-6xl mx-auto"
+        >
+          {/* Map Image */}
+          <img
+            src={worldMap}
+            alt="TiDi Global Locations"
+            className="w-full h-auto"
+          />
 
-              {/* Location Markers */}
+          {/* Animated Location Markers */}
+          {locations.map((location) => (
+            <motion.div
+              key={location.name}
+              className="absolute"
+              style={{ left: location.x, top: location.y }}
+              initial={{ opacity: 0, scale: 0, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: location.delay, type: "spring", stiffness: 200 }}
+            >
+              {/* Pulse Ring */}
               <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute top-[40%] left-[20%] w-4 h-4 bg-destructive rounded-full shadow-lg"
-              >
-                <div className="absolute inset-0 bg-destructive rounded-full animate-ping opacity-50" />
-              </motion.div>
+                className="absolute inset-0 -m-4 rounded-full bg-destructive/30"
+                animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, delay: location.delay }}
+              />
+              
+              {/* Marker */}
               <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                className="absolute top-[35%] left-[45%] w-4 h-4 bg-destructive rounded-full shadow-lg"
+                whileHover={{ scale: 1.2 }}
+                className="relative z-10 cursor-pointer group"
               >
-                <div className="absolute inset-0 bg-destructive rounded-full animate-ping opacity-50" />
+                <MapPin className="h-6 w-6 text-destructive fill-destructive drop-shadow-lg" />
+                
+                {/* Tooltip */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  <div className="bg-foreground text-background px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl">
+                    {location.name}
+                  </div>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-foreground" />
+                </div>
               </motion.div>
-              <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                className="absolute top-[40%] right-[20%] w-4 h-4 bg-destructive rounded-full shadow-lg"
-              >
-                <div className="absolute inset-0 bg-destructive rounded-full animate-ping opacity-50" />
-              </motion.div>
+            </motion.div>
+          ))}
 
-              {/* Connection Lines */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <motion.path
-                  d="M20 40 Q 35 25, 45 35"
-                  stroke="hsl(var(--destructive))"
-                  strokeWidth="0.3"
-                  fill="none"
-                  strokeDasharray="2,2"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 2 }}
-                />
-                <motion.path
-                  d="M45 35 Q 60 30, 80 40"
-                  stroke="hsl(var(--destructive))"
-                  strokeWidth="0.3"
-                  fill="none"
-                  strokeDasharray="2,2"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 2, delay: 0.5 }}
-                />
-              </svg>
-            </div>
-          </motion.div>
-        </div>
+          {/* Animated Connection Lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+            {/* USA to Europe */}
+            <motion.path
+              d="M 24 42 Q 36 25, 48 28"
+              stroke="hsl(var(--destructive))"
+              strokeWidth="0.15"
+              fill="none"
+              strokeDasharray="1,1"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, delay: 1.2 }}
+            />
+            {/* Europe to Asia */}
+            <motion.path
+              d="M 48 28 Q 63 30, 78 45"
+              stroke="hsl(var(--destructive))"
+              strokeWidth="0.15"
+              fill="none"
+              strokeDasharray="1,1"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, delay: 1.5 }}
+            />
+            {/* USA to Africa */}
+            <motion.path
+              d="M 28 52 Q 39 55, 50 58"
+              stroke="hsl(var(--destructive))"
+              strokeWidth="0.15"
+              fill="none"
+              strokeDasharray="1,1"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, delay: 1.8 }}
+            />
+          </svg>
+        </motion.div>
+
+        {/* Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+        >
+          {[
+            { value: "6", label: "Regions" },
+            { value: "50+", label: "Countries" },
+            { value: "500+", label: "Teams Served" },
+            { value: "24/7", label: "Support" },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 + index * 0.1 }}
+              className="text-center p-4 bg-muted rounded-xl"
+            >
+              <motion.span 
+                className="text-3xl md:text-4xl font-serif font-bold text-foreground block"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.9 + index * 0.1, type: "spring" }}
+              >
+                {stat.value}
+              </motion.span>
+              <span className="text-sm text-muted-foreground">{stat.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
