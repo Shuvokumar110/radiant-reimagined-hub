@@ -58,8 +58,8 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full">
-      {/* Main Hero */}
-      <div className="relative h-[85vh] min-h-[600px]">
+      {/* Main Hero - Full Width */}
+      <div className="relative h-screen min-h-[600px]">
         {/* Slides */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -74,13 +74,13 @@ export function HeroSection() {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url('${slides[current].image}')` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           </motion.div>
         </AnimatePresence>
 
-        {/* Content */}
+        {/* Content - Full Width */}
         <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-6">
+          <div className="w-full px-8 md:px-16 lg:px-24">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -88,18 +88,18 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="max-w-xl"
+                className="max-w-2xl"
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-1">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-2">
                   {slides[current].title}
                 </h1>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white/90 leading-tight mb-6">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white/90 leading-tight mb-8">
                   {slides[current].subtitle}
                 </h2>
 
                 <Link 
                   to="/shop"
-                  className="inline-block bg-destructive hover:bg-destructive/90 text-white px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all rounded"
+                  className="inline-block bg-destructive hover:bg-destructive/90 text-white px-10 py-4 text-sm font-semibold tracking-wide uppercase transition-all rounded"
                 >
                   Shop Collection
                 </Link>
@@ -109,37 +109,37 @@ export function HeroSection() {
         </div>
 
         {/* Slide Navigation */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
           <button 
             onClick={prev} 
-            className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
+            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-5 w-5" />
           </button>
-          <div className="flex gap-1.5">
+          <div className="flex gap-2">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === current ? "w-6 bg-white" : "w-1.5 bg-white/50"
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === current ? "w-8 bg-white" : "w-2 bg-white/50"
                 }`}
               />
             ))}
           </div>
           <button 
             onClick={next} 
-            className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
+            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-5 w-5" />
           </button>
         </div>
       </div>
 
-      {/* Trust Badges Section */}
-      <div className="bg-background py-8 border-b border-border">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Trust Badges Section - Full Width */}
+      <div className="bg-background py-10 border-b border-border">
+        <div className="w-full px-8 md:px-16 lg:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {trustBadges.map((badge, index) => (
               <motion.div
                 key={badge.title}
@@ -147,14 +147,14 @@ export function HeroSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="flex items-center gap-3 justify-center md:justify-start"
+                className="flex items-center gap-4 justify-center md:justify-start"
               >
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
                   <badge.icon className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-sm text-foreground">{badge.title}</h3>
-                  <p className="text-xs text-muted-foreground">{badge.description}</p>
+                  <h3 className="font-semibold text-foreground">{badge.title}</h3>
+                  <p className="text-sm text-muted-foreground">{badge.description}</p>
                 </div>
               </motion.div>
             ))}
