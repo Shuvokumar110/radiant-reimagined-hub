@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
@@ -33,28 +34,30 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/:slug" element={<ProductDetail />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/affiliate" element={<AffiliateProgram />} />
-            <Route path="/programs/high-school" element={<HighSchoolPrograms />} />
-            <Route path="/programs/collegiate" element={<CollegiateAthletics />} />
-            <Route path="/programs/club-travel" element={<ClubTravel />} />
-            <Route path="/programs/leagues-academies" element={<LeaguesAcademies />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <SmoothScroll>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/:slug" element={<ProductDetail />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/affiliate" element={<AffiliateProgram />} />
+              <Route path="/programs/high-school" element={<HighSchoolPrograms />} />
+              <Route path="/programs/collegiate" element={<CollegiateAthletics />} />
+              <Route path="/programs/club-travel" element={<ClubTravel />} />
+              <Route path="/programs/leagues-academies" element={<LeaguesAcademies />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </SmoothScroll>
         </BrowserRouter>
       </TooltipProvider>
     </CartProvider>
