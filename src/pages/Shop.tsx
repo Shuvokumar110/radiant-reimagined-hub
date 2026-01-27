@@ -106,9 +106,9 @@ export default function Shop() {
       </section>
 
       {/* Filters */}
-      <section className="sticky top-20 z-30 bg-background border-b border-border py-4">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-wrap items-center gap-4">
+      <section className="sticky top-20 z-30 bg-background border-b border-border py-3 md:py-4">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Filter className="h-4 w-4" />
               <span className="text-sm font-medium">Filter:</span>
@@ -119,7 +119,7 @@ export default function Shop() {
                 onClick={() => setActiveCategory(category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-colors ${
                   activeCategory === category
                     ? "bg-foreground text-background"
                     : "bg-muted text-foreground hover:bg-muted/80"
@@ -133,9 +133,9 @@ export default function Shop() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-6">
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {filteredProducts.map((product) => (
               <StaggerItem key={product.id}>
                 <motion.div
@@ -217,8 +217,8 @@ export default function Shop() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
           <FadeInUp>
             <h2 className="text-headline mb-4">Need Custom Orders?</h2>
           </FadeInUp>

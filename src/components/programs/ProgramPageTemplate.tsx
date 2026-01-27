@@ -70,9 +70,9 @@ export function ProgramPageTemplate({
       </section>
 
       {/* Key Highlights */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-16">
             <FadeInUp>
               <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">
                 Why Choose Us
@@ -83,7 +83,7 @@ export function ProgramPageTemplate({
             </FadeInUp>
           </div>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-8">
+          <StaggerContainer className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             {highlights.map((highlight, index) => (
               <StaggerItem key={index}>
                 <motion.div
@@ -111,9 +111,9 @@ export function ProgramPageTemplate({
       <ProcessSection />
 
       {/* Complete Outfit Solutions */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-16">
             <FadeInUp>
               <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">
                 Complete Solutions
@@ -124,7 +124,7 @@ export function ProgramPageTemplate({
             </FadeInUp>
           </div>
 
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
             {outfitSolutions.map((item, index) => (
               <StaggerItem key={index}>
                 <motion.div
@@ -150,9 +150,9 @@ export function ProgramPageTemplate({
       </section>
 
       {/* Benefits */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-16">
             <FadeInUp>
               <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
                 The TiDi Difference
@@ -163,7 +163,7 @@ export function ProgramPageTemplate({
             </FadeInUp>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
             {benefits.map((benefit, index) => (
               <FadeInUp key={index} delay={index * 0.1}>
                 <div className="border-l-2 border-background/30 pl-6">
@@ -179,9 +179,9 @@ export function ProgramPageTemplate({
       </section>
 
       {/* Trust Badges */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-6">
-          <StaggerContainer className="flex flex-wrap justify-center gap-12">
+      <section className="py-12 md:py-16 bg-muted">
+        <div className="container mx-auto px-4 sm:px-6">
+          <StaggerContainer className="flex flex-wrap justify-center gap-6 md:gap-12">
             {[
               { icon: <Shield className="h-8 w-8" />, title: "Pro-Grade Quality" },
               { icon: <Globe className="h-8 w-8" />, title: "Worldwide Delivery" },
@@ -204,8 +204,8 @@ export function ProgramPageTemplate({
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
           <FadeInUp>
             <h2 className="text-headline mb-6">Ready to Get Started?</h2>
           </FadeInUp>

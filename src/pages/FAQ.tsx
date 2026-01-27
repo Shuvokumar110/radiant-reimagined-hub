@@ -267,8 +267,8 @@ const FAQ = () => {
       </section>
 
       {/* Help Center Section */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -319,14 +319,14 @@ const FAQ = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3 mb-12"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 md:mb-12"
           >
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                  "px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300",
                   activeCategory === category.id
                     ? "bg-foreground text-background"
                     : "bg-muted text-foreground hover:bg-foreground/10"
@@ -421,8 +421,8 @@ const FAQ = () => {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 md:py-28 bg-muted">
-        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-28 bg-muted">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -437,17 +437,17 @@ const FAQ = () => {
               Our team is here to help. Reach out and we'll get back to you as soon as possible.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <a
                 href="mailto:info@tidiapparel.com"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-medium hover:bg-foreground/90 transition-colors"
+                className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-foreground text-background rounded-full font-medium hover:bg-foreground/90 transition-colors w-full sm:w-auto justify-center"
               >
                 <Mail className="h-5 w-5" />
                 Email Us
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center gap-3 px-8 py-4 border-2 border-foreground text-foreground rounded-full font-medium hover:bg-foreground hover:text-background transition-colors"
+                className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-foreground text-foreground rounded-full font-medium hover:bg-foreground hover:text-background transition-colors w-full sm:w-auto justify-center"
               >
                 <MessageCircle className="h-5 w-5" />
                 Contact Form
