@@ -75,7 +75,7 @@ export default function AffiliateProgram() {
           />
         </motion.div>
 
-        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pb-20">
+        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pb-16 md:pb-20">
           <div className="max-w-3xl">
             <FadeInUp>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">

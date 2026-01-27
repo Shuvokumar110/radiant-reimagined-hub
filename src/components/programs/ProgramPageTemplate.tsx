@@ -43,7 +43,7 @@ export function ProgramPageTemplate({
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
         </motion.div>
 
-        <div className="container mx-auto px-6 relative z-10 py-32">
+        <div className="container mx-auto px-6 relative z-10 pt-32 pb-16 md:pb-20">
           <div className="max-w-2xl">
             <FadeInUp>
               <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">

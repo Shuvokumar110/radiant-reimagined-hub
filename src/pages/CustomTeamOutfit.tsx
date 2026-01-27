@@ -85,7 +85,7 @@ export default function CustomTeamOutfit() {
           />
         </motion.div>
 
-        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pb-32">
+        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pb-24 md:pb-32">
           <div className="max-w-3xl">
             <FadeInUp>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
