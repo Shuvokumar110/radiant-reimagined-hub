@@ -11,13 +11,13 @@ import hockeyImage from "@/assets/team-outfit-hockey.png";
 import cricketImage from "@/assets/team-outfit-cricket.png";
 
 const sports = [
-  { name: "Soccer", icon: "⚽" },
-  { name: "Basketball", icon: "🏀" },
-  { name: "American Football", icon: "🏈" },
-  { name: "Baseball/Softball", icon: "⚾" },
-  { name: "Track and Field", icon: "🏃" },
-  { name: "Cricket", icon: "🏏" },
-  { name: "Business", icon: "💼" },
+  "Soccer",
+  "Basketball",
+  "American Football",
+  "Baseball/Softball",
+  "Track and Field",
+  "Cricket",
+  "Business",
 ];
 
 const processSteps = [
@@ -112,7 +112,7 @@ export default function CustomTeamOutfit() {
           <div className="max-w-3xl">
             <FadeInUp>
               <span className="inline-block px-4 py-2 rounded-full bg-background/10 backdrop-blur-sm text-sm font-medium mb-6 border border-background/20">
-                Custom Team Outfit
+                Custom Outfit
               </span>
             </FadeInUp>
             <FadeInUp delay={0.1}>
@@ -173,13 +173,12 @@ export default function CustomTeamOutfit() {
 
           <StaggerContainer className="flex flex-wrap justify-center gap-4 md:gap-6">
             {sports.map((sport) => (
-              <StaggerItem key={sport.name}>
+              <StaggerItem key={sport}>
                 <motion.div
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="px-6 py-4 bg-foreground text-background rounded-full flex items-center gap-3 cursor-pointer shadow-elegant hover:shadow-luxury transition-shadow"
+                  className="px-6 py-4 bg-foreground text-background rounded-full flex items-center cursor-pointer shadow-elegant hover:shadow-luxury transition-shadow"
                 >
-                  <span className="text-2xl">{sport.icon}</span>
-                  <span className="font-medium">{sport.name}</span>
+                  <span className="font-medium">{sport}</span>
                 </motion.div>
               </StaggerItem>
             ))}
