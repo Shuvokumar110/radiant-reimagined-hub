@@ -29,22 +29,27 @@ export function TeamNeedsSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Content with parallax */}
           <motion.div style={{ y: contentY }}>
-            <motion.span
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3 block"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full mb-6"
             >
-              Complete Solutions
-            </motion.span>
+              <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                Complete Solutions
+              </span>
+            </motion.div>
             
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-bold text-foreground mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
             >
-              Everything Your Team Needs
+              <span className="text-foreground">Everything You Need.</span>
+              <br />
+              <span className="text-muted-foreground">All in One Place.</span>
             </motion.h2>
             
             <motion.p

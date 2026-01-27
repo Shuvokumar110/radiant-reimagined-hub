@@ -50,22 +50,27 @@ export function SoccerBootsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3 block"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6"
           >
-            Premium Italian-Made Boots
-          </motion.span>
+            <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+            <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+              Premium Italian-Made
+            </span>
+          </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl md:text-3xl font-bold text-foreground"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
           >
-            Special Order Soccer
+            <span className="text-foreground">Special Order Soccer.</span>
+            <br />
+            <span className="text-muted-foreground">Crafted for Champions.</span>
           </motion.h2>
         </motion.div>
 

@@ -56,14 +56,19 @@ export function ProcessSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
-                How It Works
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                5 Steps to Team Greatness
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-background rounded-full" />
+                <span className="text-xs font-medium tracking-widest uppercase text-background/60">
+                  How It Works
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                <span className="text-background">5 Steps to Greatness.</span>
+                <br />
+                <span className="text-background/50">Seamless & Stress-Free.</span>
               </h2>
-              <p className="text-lg text-background/70 mb-10">
-                From initial concept to final delivery, we make outfitting your team seamless and stress-free.
+              <p className="text-background/70 mb-10">
+                From initial concept to final delivery.
               </p>
 
               {/* Progress Ring */}

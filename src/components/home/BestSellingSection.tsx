@@ -51,11 +51,16 @@ export function BestSellingSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2 block">
-              Best Sellers
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              Popular Team Apparel
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full mb-4">
+              <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                Best Sellers
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-foreground">Popular Apparel.</span>
+              <br />
+              <span className="text-muted-foreground">Team Favorites.</span>
             </h2>
           </motion.div>
 
