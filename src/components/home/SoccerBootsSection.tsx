@@ -50,29 +50,23 @@ export function SoccerBootsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "60px" }}
-            viewport={{ once: true }}
-            className="h-0.5 bg-background/50 mx-auto mb-6"
-          />
-          <motion.h2 
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl md:text-3xl font-bold mb-3"
+            className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3 block"
+          >
+            Premium Italian-Made Boots
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl md:text-3xl font-bold text-foreground"
           >
             Special Order Soccer
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-background/60 max-w-xl mx-auto"
-          >
-            Premium Italian-made boots crafted for champions
-          </motion.p>
         </motion.div>
 
         {/* Main Boots Display with 3D Effect */}
