@@ -1,24 +1,26 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
-import { BrandStorySection } from "@/components/home/BrandStorySection";
-import { ProcessSection } from "@/components/home/ProcessSection";
+import { ElevateSection } from "@/components/home/ElevateSection";
 import { SoccerBootsSection } from "@/components/home/SoccerBootsSection";
-import { FeaturedProductsSection } from "@/components/home/FeaturedProductsSection";
-import { CategoriesSection } from "@/components/home/CategoriesSection";
+import { BestSellingSection } from "@/components/home/BestSellingSection";
+import { LocationsSection } from "@/components/home/LocationsSection";
+import { TeamNeedsSection } from "@/components/home/TeamNeedsSection";
 import { AffiliatesSection } from "@/components/home/AffiliatesSection";
-import { CTASection } from "@/components/home/CTASection";
+import { GearUpSection } from "@/components/home/GearUpSection";
+import { ContactBarSection } from "@/components/home/ContactBarSection";
 
 const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      <BrandStorySection />
-      <ProcessSection />
+      <ElevateSection />
       <SoccerBootsSection />
-      <FeaturedProductsSection />
-      <CategoriesSection />
+      <BestSellingSection />
+      <LocationsSection />
+      <TeamNeedsSection />
       <AffiliatesSection />
-      <CTASection />
+      <GearUpSection />
+      <ContactBarSection />
     </Layout>
   );
 };
