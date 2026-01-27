@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingBag, Heart, ChevronDown } from "lucide-react";
+import { Menu, ShoppingBag, Heart, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import tidiLogo from "@/assets/tidi-logo.webp";
+import { MobileMenu } from "./MobileMenu";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -181,7 +182,7 @@ export function Navigation() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen(true)}
               className={cn(
                 "lg:hidden p-2 transition-colors duration-300",
                 useDarkText
@@ -189,90 +190,14 @@ export function Navigation() {
                   : "text-white"
               )}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background"
-          >
-            <motion.nav
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-8"
-            >
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.1 }}
-                  className="text-center"
-                >
-                  {link.children ? (
-                    <div className="space-y-4">
-                      <span className="text-2xl font-serif font-semibold text-foreground">
-                        {link.name}
-                      </span>
-                      <div className="flex flex-col gap-2">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.name}
-                            to={child.href}
-                            className="text-lg text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className="text-3xl font-serif font-semibold text-foreground hover:text-muted-foreground transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-              
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="flex gap-6 mt-8"
-              >
-                <Link
-                  to="/wishlist"
-                  className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
-                >
-                  <Heart className="h-5 w-5" />
-                  <span>Wishlist</span>
-                </Link>
-                <Link
-                  to="/cart"
-                  className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
-                >
-                  <ShoppingBag className="h-5 w-5" />
-                  <span>Cart</span>
-                </Link>
-              </motion.div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Advanced Mobile Menu */}
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </>
   );
 }
