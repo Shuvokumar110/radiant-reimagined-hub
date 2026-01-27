@@ -126,7 +126,7 @@ export function AffiliatesSection() {
                 <img
                   src={affiliate.logo}
                   alt={affiliate.name}
-                  className="h-16 md:h-20 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="h-16 md:h-20 w-auto object-contain transition-all duration-300"
                 />
               </div>
             </motion.div>
