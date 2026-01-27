@@ -47,7 +47,7 @@ export default function About() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[70vh] flex items-center bg-foreground text-background overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[70vh] flex items-center bg-foreground text-background overflow-hidden pt-24 md:pt-32">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0 z-0"
