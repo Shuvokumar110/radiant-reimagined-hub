@@ -23,12 +23,24 @@ export function LocationsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-            TiDi Locations
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6"
+          >
+            <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+            <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+              Global Reach
+            </span>
+          </motion.div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <span className="text-foreground">TiDi Locations.</span>
+            <br />
+            <span className="text-muted-foreground">Worldwide Delivery.</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            With strategic locations worldwide, TiDi Apparel delivers premium athletic wear 
-            to teams across the globe with fast delivery and exceptional service.
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Strategic locations across the globe for fast delivery and exceptional service.
           </p>
         </motion.div>
 

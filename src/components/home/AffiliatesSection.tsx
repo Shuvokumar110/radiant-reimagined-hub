@@ -35,22 +35,27 @@ export function AffiliatesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3 block"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full mb-6"
           >
-            Trusted Partners
-          </motion.span>
+            <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+            <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+              Trusted Partners
+            </span>
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl md:text-3xl font-bold text-foreground"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
           >
-            Our Affiliates
+            <span className="text-foreground">Our Affiliates.</span>
+            <br />
+            <span className="text-muted-foreground">Trusted Worldwide.</span>
           </motion.h2>
         </motion.div>
 
