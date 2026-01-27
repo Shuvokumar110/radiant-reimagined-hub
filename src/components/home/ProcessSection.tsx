@@ -63,9 +63,9 @@ export function ProcessSection() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                <span className="text-background">5 Steps to Greatness.</span>
+                <span className="text-background">5 Simple Steps.</span>
                 <br />
-                <span className="text-background/50">Seamless & Stress-Free.</span>
+                <span className="text-background/50">Stress-Free.</span>
               </h2>
               <p className="text-background/70 mb-10">
                 From initial concept to final delivery.

@@ -75,7 +75,7 @@ export function ElevateSection() {
           >
             <span className="text-foreground">Elevate Your Game.</span>
             <br />
-            <span className="text-muted-foreground">Stand Out from the Rest.</span>
+            <span className="text-muted-foreground">Stand Out.</span>
           </motion.h2>
         </motion.div>
 

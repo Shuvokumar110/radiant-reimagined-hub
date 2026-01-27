@@ -47,9 +47,9 @@ export function TeamNeedsSection() {
               viewport={{ once: true }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
             >
-              <span className="text-foreground">Everything You Need.</span>
+              <span className="text-foreground">All You Need.</span>
               <br />
-              <span className="text-muted-foreground">All in One Place.</span>
+              <span className="text-muted-foreground">One Place.</span>
             </motion.h2>
             
             <motion.p
