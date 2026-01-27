@@ -2,13 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Award, Globe, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
-import heroSlide1 from "@/assets/hero-slide-1.png";
+import heroAthlete from "@/assets/hero-athlete.jpg";
 import heroSlide2 from "@/assets/hero-slide-2.png";
 import heroSlide3 from "@/assets/hero-slide-3.png";
 
 const slides = [
   {
-    image: heroSlide1,
+    image: heroAthlete,
     title: "PLAY BOLD.",
     subtitle: "LOOK BOLD.",
   },
