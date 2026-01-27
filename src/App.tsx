@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Gallery from "./pages/Gallery";
+import VideoGallery from "./pages/VideoGallery";
 import HighSchoolPrograms from "./pages/programs/HighSchoolPrograms";
 import CollegiateAthletics from "./pages/programs/CollegiateAthletics";
 import ClubTravel from "./pages/programs/ClubTravel";
@@ -44,6 +45,7 @@ const App = () => (
               <Route path="/shop" element={<Shop />} />
               <Route path="/shop/:slug" element={<ProductDetail />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/videos" element={<VideoGallery />} />
               <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
               <Route path="/about" element={<About />} />
               <Route path="/affiliate" element={<AffiliateProgram />} />
