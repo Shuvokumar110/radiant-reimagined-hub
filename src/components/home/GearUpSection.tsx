@@ -22,7 +22,7 @@ export function GearUpSection() {
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-destructive hover:bg-destructive/90 text-white px-10 py-4 text-base font-semibold tracking-wide uppercase transition-colors rounded"
+            className="inline-block bg-foreground hover:bg-foreground/90 text-background px-10 py-4 text-base font-semibold tracking-wide uppercase transition-colors rounded"
           >
             Request Quote
           </Link>
