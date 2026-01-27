@@ -103,7 +103,7 @@ export function ProgramPageTemplate({
                   >
                     {highlight.icon}
                   </motion.div>
-                  <h3 className="font-serif text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3">
                     {highlight.title}
                   </h3>
                   <p className="text-muted-foreground">{highlight.description}</p>
@@ -154,7 +154,7 @@ export function ProgramPageTemplate({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-serif font-medium">{item.name}</h3>
+                    <h3 className="text-white font-medium">{item.name}</h3>
                   </div>
                 </motion.div>
               </StaggerItem>
@@ -188,7 +188,7 @@ export function ProgramPageTemplate({
             {benefits.map((benefit, index) => (
               <FadeInUp key={index} delay={index * 0.1}>
                 <div className="border-l-2 border-background/30 pl-6">
-                  <h3 className="font-serif text-xl font-semibold mb-2">
+                  <h3 className="text-xl font-semibold mb-2">
                     {benefit.title}
                   </h3>
                   <p className="text-background/70">{benefit.description}</p>
@@ -216,7 +216,7 @@ export function ProgramPageTemplate({
                   <div className="w-14 h-14 bg-foreground text-background rounded-full flex items-center justify-center">
                     {badge.icon}
                   </div>
-                  <span className="font-serif font-medium">{badge.title}</span>
+                  <span className="font-medium">{badge.title}</span>
                 </motion.div>
               </StaggerItem>
             ))}
