@@ -20,26 +20,25 @@ const Index = () => {
     <>
       <Preloader onComplete={() => setShowContent(true)} />
       
-      {showContent && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Layout>
-            <HeroSection />
-            <ElevateSection />
-            <SoccerBootsSection />
-            <ProcessSection />
-            <BestSellingSection />
-            <LocationsSection />
-            <TeamNeedsSection />
-            <AffiliatesSection />
-            <GearUpSection />
-            <ContactBarSection />
-          </Layout>
-        </motion.div>
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        style={{ visibility: showContent ? "visible" : "hidden" }}
+      >
+        <Layout>
+          <HeroSection />
+          <ElevateSection />
+          <SoccerBootsSection />
+          <ProcessSection />
+          <BestSellingSection />
+          <LocationsSection />
+          <TeamNeedsSection />
+          <AffiliatesSection />
+          <GearUpSection />
+          <ContactBarSection />
+        </Layout>
+      </motion.div>
     </>
   );
 };
