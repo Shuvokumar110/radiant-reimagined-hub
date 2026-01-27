@@ -1,76 +1,77 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart, ShoppingBag, Filter, X } from "lucide-react";
+import { Heart, ShoppingBag, Filter } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
 
-const categories = ["All", "Soccer Boots", "Training Wear", "Match Day Kits", "Accessories"];
+// Import uploaded product images
+import style672_1 from "@/assets/products/style-672-1.png";
+import style672_2 from "@/assets/products/style-672-2.png";
+import style672_3 from "@/assets/products/style-672-3.png";
+import style672_4 from "@/assets/products/style-672-4.png";
+import style972_1 from "@/assets/products/style-972-1.png";
+import giveAKick1 from "@/assets/products/give-a-kick-to-racism-1.png";
+import giveAKick2 from "@/assets/products/give-a-kick-to-racism-2.png";
+
+const categories = ["All", "Soccer Boots", "Special Edition"];
 
 const products = [
   {
     id: 1,
-    name: "Elite Pro Jersey",
-    category: "Training Wear",
-    price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?q=80&w=800",
-    tags: ["Pro-Grade", "Moisture Wicking"],
-  },
-  {
-    id: 2,
-    name: "Championship Shorts",
-    category: "Match Day Kits",
-    price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=800",
-    tags: ["Lightweight", "Breathable"],
-  },
-  {
-    id: 3,
-    name: "Kangaroo Leather Boots",
+    name: "Style 672 - Classic",
     category: "Soccer Boots",
     price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?q=80&w=800",
+    image: style672_1,
     tags: ["Made in Italy", "Kangaroo Leather"],
   },
   {
-    id: 4,
-    name: "Team Training Kit",
-    category: "Training Wear",
+    id: 2,
+    name: "Style 672 - Premium",
+    category: "Soccer Boots",
     price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=800",
-    tags: ["Complete Set"],
+    image: style672_2,
+    tags: ["Made in Italy", "Premium"],
+  },
+  {
+    id: 3,
+    name: "Style 672 - Pro",
+    category: "Soccer Boots",
+    price: "Contact for Pricing",
+    image: style672_3,
+    tags: ["Made in Italy", "Pro-Grade"],
+  },
+  {
+    id: 4,
+    name: "Style 672 - Elite",
+    category: "Soccer Boots",
+    price: "Contact for Pricing",
+    image: style672_4,
+    tags: ["Made in Italy", "Elite"],
   },
   {
     id: 5,
-    name: "Pro Match Socks",
-    category: "Accessories",
+    name: "Style 972",
+    category: "Soccer Boots",
     price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?q=80&w=800",
-    tags: ["Cushioned", "Anti-Slip"],
+    image: style972_1,
+    tags: ["Made in Italy", "Kangaroo Leather"],
   },
   {
     id: 6,
-    name: "Goalkeeper Gloves",
-    category: "Accessories",
+    name: "Give A Kick To Racism",
+    category: "Special Edition",
     price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800",
-    tags: ["Grip Technology"],
+    image: giveAKick1,
+    tags: ["Special Edition", "Limited"],
   },
   {
     id: 7,
-    name: "Track Jacket",
-    category: "Training Wear",
+    name: "Give A Kick To Racism - Alt",
+    category: "Special Edition",
     price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882b68?q=80&w=800",
-    tags: ["Windproof", "Lightweight"],
-  },
-  {
-    id: 8,
-    name: "Classic Boot Collection",
-    category: "Soccer Boots",
-    price: "Contact for Pricing",
-    image: "https://images.unsplash.com/photo-1560769680-ba2f3767c785?q=80&w=800",
-    tags: ["Premium Leather"],
+    image: giveAKick2,
+    tags: ["Special Edition", "Limited"],
   },
 ];
 
