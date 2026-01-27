@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Award, Globe, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import heroSlide1 from "@/assets/hero-slide-1.png";
@@ -10,18 +9,18 @@ import heroSlide3 from "@/assets/hero-slide-3.png";
 const slides = [
   {
     image: heroSlide1,
-    title: "Play Bold.",
-    subtitle: "Look Bold.",
+    title: "PLAY BOLD.",
+    subtitle: "LOOK BOLD.",
   },
   {
     image: heroSlide2,
-    title: "Win Together.",
-    subtitle: "Stand Out.",
+    title: "WIN TOGETHER.",
+    subtitle: "STAND OUT.",
   },
   {
     image: heroSlide3,
-    title: "Own The Game.",
-    subtitle: "Own The Style.",
+    title: "OWN THE GAME.",
+    subtitle: "OWN THE STYLE.",
   },
 ];
 
@@ -74,45 +73,37 @@ export function HeroSection() {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url('${slides[current].image}')` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           </motion.div>
         </AnimatePresence>
 
-        {/* Content - Full Width */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="w-full px-8 md:px-16 lg:px-24">
+        {/* Content - Bottom Positioned */}
+        <div className="relative z-10 h-full flex items-end">
+          <div className="w-full px-8 md:px-16 lg:px-24 pb-32">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.5 }}
-                className="max-w-2xl"
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-2">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-tight">
                   {slides[current].title}
                 </h1>
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white/90 leading-tight mb-8">
+                <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white/80 leading-none tracking-tight">
                   {slides[current].subtitle}
                 </h2>
-
-                <Link 
-                  to="/shop"
-                  className="inline-block bg-destructive hover:bg-destructive/90 text-white px-10 py-4 text-sm font-semibold tracking-wide uppercase transition-all rounded"
-                >
-                  Shop Collection
-                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
         {/* Slide Navigation */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+        <div className="absolute bottom-8 right-8 md:right-16 lg:right-24 z-20 flex items-center gap-4">
           <button 
             onClick={prev} 
-            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/20 transition-all border border-white/20"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -129,7 +120,7 @@ export function HeroSection() {
           </div>
           <button 
             onClick={next} 
-            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/30 transition-all"
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/80 hover:bg-white/20 transition-all border border-white/20"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
