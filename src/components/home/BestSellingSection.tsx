@@ -3,30 +3,39 @@ import { Link } from "react-router-dom";
 import { Heart, ShoppingBag, Eye } from "lucide-react";
 import { useRef, useState } from "react";
 
+import jerseyRedWhite from "@/assets/products/jersey-red-white.png";
+import jerseyOrange from "@/assets/products/jersey-orange.png";
+import jerseyGreen from "@/assets/products/jersey-green.png";
+import basketballFlame from "@/assets/products/basketball-flame.png";
+
 const products = [
   {
     id: 1,
-    name: "Custom Pro Jersey",
-    category: "Team Wear",
-    image: "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?q=80&w=400",
+    name: "Pro Jersey - Red Storm",
+    category: "Jerseys",
+    slug: "jersey-red-storm",
+    image: jerseyRedWhite,
   },
   {
     id: 2,
-    name: "Training Tracksuit",
-    category: "Training",
-    image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=400",
+    name: "Pro Jersey - Sunset Orange",
+    category: "Jerseys",
+    slug: "jersey-sunset-orange",
+    image: jerseyOrange,
   },
   {
     id: 3,
-    name: "Team Polo Shirt",
-    category: "Casual",
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=400",
+    name: "Pro Jersey - Forest Green",
+    category: "Jerseys",
+    slug: "jersey-forest-green",
+    image: jerseyGreen,
   },
   {
     id: 4,
-    name: "Performance Jersey",
-    category: "Match Day",
-    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=400",
+    name: "Basketball - Flame Edition",
+    category: "Team Uniforms",
+    slug: "basketball-flame",
+    image: basketballFlame,
   },
 ];
 
@@ -106,7 +115,7 @@ export function BestSellingSection() {
               onHoverEnd={() => setHoveredProduct(null)}
               className="group"
             >
-              <Link to={`/shop?product=${product.id}`}>
+              <Link to={`/shop/${product.slug}`}>
                 {/* Image Container */}
                 <motion.div 
                   className="relative overflow-hidden rounded-2xl bg-background mb-4 aspect-[3/4]"
