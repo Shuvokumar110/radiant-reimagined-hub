@@ -11,6 +11,7 @@ import hockeyImage from "@/assets/about-hockey.png";
 import soccerImage from "@/assets/about-soccer.png";
 import cricketActionImage from "@/assets/about-cricket-action.png";
 import teamImage from "@/assets/about-team.png";
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
 
 const whyChoose = [
   {
@@ -49,7 +50,10 @@ export default function About() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[70vh] flex items-center bg-foreground text-background overflow-hidden pt-24 md:pt-32">
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
+          style={{
+            y: PARALLAX_ENABLED ? heroY : 0,
+            opacity: PARALLAX_ENABLED ? heroOpacity : 1,
+          }}
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 z-10" />
@@ -333,3 +337,4 @@ export default function About() {
     </Layout>
   );
 }
+

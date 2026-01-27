@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { CheckCircle, Package, Truck, Users } from "lucide-react";
 import { useRef } from "react";
 
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
+
 import heroTeam from "@/assets/hero-team.png";
 
 const features = [
@@ -24,11 +26,11 @@ export function TeamNeedsSection() {
   const contentY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden">
+    <section ref={containerRef} className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden relative">
       <div className="w-full px-8 md:px-16 lg:px-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Content with parallax */}
-          <motion.div style={{ y: contentY }}>
+          <motion.div style={{ y: PARALLAX_ENABLED ? contentY : 0 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +115,7 @@ export function TeamNeedsSection() {
 
           {/* Right - Image with parallax and decoration */}
           <motion.div 
-            style={{ y: imageY }}
+            style={{ y: PARALLAX_ENABLED ? imageY : 0 }}
             className="relative"
           >
             <motion.div

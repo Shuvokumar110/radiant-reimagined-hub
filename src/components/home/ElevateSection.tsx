@@ -6,6 +6,7 @@ import galleryTeam1 from "@/assets/gallery/team-1.png";
 import galleryTeam2 from "@/assets/gallery/team-2.png";
 import galleryTeam3 from "@/assets/gallery/team-3.png";
 import galleryTeam4 from "@/assets/gallery/team-4.png";
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
 
 const categories = [
   "All Products", "Team Uniforms", "Jerseys", "Tracksuits", "T-Shirts", 
@@ -53,11 +54,11 @@ export function ElevateSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-20 bg-background flex flex-col justify-center overflow-hidden">
+    <section ref={containerRef} className="min-h-screen py-20 bg-background flex flex-col justify-center overflow-hidden relative">
       <div className="w-full px-8 md:px-16 lg:px-24">
         {/* Header with reveal animation */}
         <motion.div
-          style={{ opacity }}
+          style={{ opacity: PARALLAX_ENABLED ? opacity : 1 }}
           className="text-center mb-12"
         >
           <motion.div
@@ -123,7 +124,7 @@ export function ElevateSection() {
               transition={{ delay: index * 0.15, duration: 0.6 }}
               onHoverStart={() => setHoveredIndex(index)}
               onHoverEnd={() => setHoveredIndex(null)}
-              style={{ y: index % 2 === 0 ? y : undefined }}
+              style={{ y: PARALLAX_ENABLED && index % 2 === 0 ? y : 0 }}
             >
               <Link to={program.href}>
                 <motion.div 
@@ -201,3 +202,4 @@ export function ElevateSection() {
     </section>
   );
 }
+

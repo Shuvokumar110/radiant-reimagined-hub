@@ -7,6 +7,7 @@ import jerseyRedWhite from "@/assets/products/jersey-red-white.png";
 import jerseyOrange from "@/assets/products/jersey-orange.png";
 import jerseyGreen from "@/assets/products/jersey-green.png";
 import basketballFlame from "@/assets/products/basketball-flame.png";
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
 
 const products = [
   {
@@ -51,7 +52,7 @@ export function BestSellingSection() {
   const x = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden">
+    <section ref={containerRef} className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden relative">
       <div className="w-full px-8 md:px-16 lg:px-24">
         {/* Header with animated line */}
         <div className="flex items-center justify-between mb-12">
@@ -192,7 +193,7 @@ export function BestSellingSection() {
 
         {/* Bottom floating text */}
         <motion.div 
-          style={{ x }}
+          style={{ x: PARALLAX_ENABLED ? x : 0 }}
           className="mt-16 overflow-hidden"
         >
           <div className="text-[100px] md:text-[150px] font-bold text-foreground/5 whitespace-nowrap">
@@ -203,3 +204,4 @@ export function BestSellingSection() {
     </section>
   );
 }
+
