@@ -20,6 +20,7 @@ const navLinks = [
       { name: "Leagues & Academies", href: "/programs/leagues-academies" },
     ],
   },
+  { name: "Affiliate", href: "/affiliate" },
   { name: "Contact", href: "/contact" },
 ];
 

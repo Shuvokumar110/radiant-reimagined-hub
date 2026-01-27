@@ -11,6 +11,7 @@ import ClubTravel from "./pages/programs/ClubTravel";
 import LeaguesAcademies from "./pages/programs/LeaguesAcademies";
 import CustomTeamOutfit from "./pages/CustomTeamOutfit";
 import About from "./pages/About";
+import AffiliateProgram from "./pages/AffiliateProgram";
 import Account from "./pages/Account";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/shop" element={<Shop />} />
           <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
           <Route path="/about" element={<About />} />
+          <Route path="/affiliate" element={<AffiliateProgram />} />
           <Route path="/programs/high-school" element={<HighSchoolPrograms />} />
           <Route path="/programs/collegiate" element={<CollegiateAthletics />} />
           <Route path="/programs/club-travel" element={<ClubTravel />} />
