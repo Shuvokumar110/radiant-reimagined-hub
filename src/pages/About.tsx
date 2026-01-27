@@ -92,7 +92,7 @@ export default function About() {
       </section>
 
       {/* Story Section */}
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section className="py-16 md:py-20 lg:py-24 bg-background relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -104,8 +104,8 @@ export default function About() {
           />
         </div>
 
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <FadeInUp>
                 <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">
@@ -214,8 +214,8 @@ export default function About() {
       </section>
 
       {/* Why Choose TiDi */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -234,7 +234,7 @@ export default function About() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {whyChoose.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -257,8 +257,8 @@ export default function About() {
       </section>
 
       {/* Team Image Section */}
-      <section className="py-24 bg-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -293,8 +293,8 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24 text-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

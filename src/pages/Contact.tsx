@@ -82,9 +82,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Form & Info Section */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container mx-auto px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-3 gap-16">
+      <section className="py-16 md:py-20 lg:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-16">
             {/* Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}

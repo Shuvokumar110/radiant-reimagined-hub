@@ -122,8 +122,8 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* Sports Categories */}
-      <section className="py-20 bg-background border-b border-border">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-12 md:py-16 lg:py-20 bg-background border-b border-border">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -155,9 +155,9 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -230,8 +230,8 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* Complete Outfit Solutions */}
-      <section className="py-24 bg-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -244,7 +244,7 @@ export default function CustomTeamOutfit() {
             <h2 className="text-headline">Complete Outfit Solutions</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {outfitSolutions.map((solution, index) => (
               <motion.div
                 key={solution.title}
@@ -267,9 +267,9 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* Why Choose TiDi */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -340,8 +340,8 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-20 bg-background border-b border-border">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-12 md:py-16 lg:py-20 bg-background border-b border-border">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {trustBadges.map((badge, index) => (
               <motion.div
@@ -366,8 +366,8 @@ export default function CustomTeamOutfit() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24 text-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

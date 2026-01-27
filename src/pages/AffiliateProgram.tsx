@@ -112,8 +112,8 @@ export default function AffiliateProgram() {
       </section>
 
       {/* Why Join Section */}
-      <section className="py-24 bg-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +126,7 @@ export default function AffiliateProgram() {
             <h2 className="text-headline">Why Join?</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {whyJoin.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -149,9 +149,9 @@ export default function AffiliateProgram() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -215,9 +215,9 @@ export default function AffiliateProgram() {
       </section>
 
       {/* About Program Section */}
-      <section className="py-24 bg-background">
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -262,8 +262,8 @@ export default function AffiliateProgram() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="w-full px-8 md:px-16 lg:px-24 text-center">
+      <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
