@@ -72,7 +72,7 @@ export default function CustomTeamOutfit() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end bg-foreground text-background overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-end bg-foreground text-background overflow-hidden pt-24 md:pt-32">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0 z-0"

@@ -29,7 +29,7 @@ export function ProgramPageTemplate({
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center bg-foreground text-background overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center bg-foreground text-background overflow-hidden pt-24 md:pt-32">
         <motion.div
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
