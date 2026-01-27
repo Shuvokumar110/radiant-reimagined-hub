@@ -1,50 +1,43 @@
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { frame, cancelFrame } from "framer-motion";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
-  const rafIdRef = useRef<number | null>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
-    // Avoid Lenis on mobile/touch devices to prevent scroll jank/blinking
-    // (Framer Motion's useScroll can fight with custom scroll raf loops on mobile.)
-    const isCoarsePointer =
-      typeof window !== "undefined" && window.matchMedia
-        ? window.matchMedia("(pointer: coarse)").matches
-        : false;
+    // Only skip for users who prefer reduced motion (accessibility)
     const prefersReducedMotion =
       typeof window !== "undefined" && window.matchMedia
         ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
         : false;
 
-    if (isMobile || isCoarsePointer || prefersReducedMotion) return;
+    if (prefersReducedMotion) return;
 
-    // Initialize Lenis with smooth, slow scrolling settings
+    // Initialize Lenis with smooth scrolling for ALL devices
     lenisRef.current = new Lenis({
-      duration: 1.8, // Slower, more luxurious scroll
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing
+      duration: 1.6,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.5,
+      syncTouch: true, // Enable smooth touch scrolling
     });
 
-    const raf = (time: number) => {
-      lenisRef.current?.raf(time);
-      rafIdRef.current = requestAnimationFrame(raf);
+    // Sync Lenis with Framer Motion's frame loop to prevent blinking
+    const update = (data: { timestamp: number }) => {
+      lenisRef.current?.raf(data.timestamp);
     };
 
-    rafIdRef.current = requestAnimationFrame(raf);
+    frame.update(update, true);
 
     return () => {
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      rafIdRef.current = null;
+      cancelFrame(update);
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };
-  }, [isMobile]);
+  }, []);
 
   return <>{children}</>;
 }
