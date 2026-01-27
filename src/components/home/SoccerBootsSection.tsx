@@ -33,7 +33,7 @@ export function SoccerBootsSection() {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 0.9]);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-20 bg-foreground text-background flex flex-col justify-center overflow-hidden relative">
+    <section ref={containerRef} className="min-h-screen py-20 bg-background text-foreground flex flex-col justify-center overflow-hidden relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
