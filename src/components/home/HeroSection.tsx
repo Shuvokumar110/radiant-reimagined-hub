@@ -128,9 +128,9 @@ export function HeroSection() {
       </div>
 
       {/* Trust Badges Section - Full Width */}
-      <div className="bg-background py-10 border-b border-border">
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="bg-background py-8 md:py-10 border-b border-border">
+        <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-8">
             {trustBadges.map((badge, index) => (
               <motion.div
                 key={badge.title}
@@ -138,14 +138,14 @@ export function HeroSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="flex items-center gap-4 justify-center md:justify-start"
+                className="flex items-center gap-3 md:gap-4"
               >
-                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                  <badge.icon className="h-5 w-5 text-foreground" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                  <badge.icon className="h-4 w-4 md:h-5 md:w-5 text-foreground" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">{badge.title}</h3>
-                  <p className="text-sm text-muted-foreground">{badge.description}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-sm md:text-base text-foreground">{badge.title}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">{badge.description}</p>
                 </div>
               </motion.div>
             ))}
