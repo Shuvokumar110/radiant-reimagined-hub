@@ -9,21 +9,38 @@ import { TeamNeedsSection } from "@/components/home/TeamNeedsSection";
 import { AffiliatesSection } from "@/components/home/AffiliatesSection";
 import { GearUpSection } from "@/components/home/GearUpSection";
 import { ContactBarSection } from "@/components/home/ContactBarSection";
+import { Preloader } from "@/components/ui/Preloader";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Index = () => {
+  const [showContent, setShowContent] = useState(false);
+
   return (
-    <Layout>
-      <HeroSection />
-      <ElevateSection />
-      <SoccerBootsSection />
-      <ProcessSection />
-      <BestSellingSection />
-      <LocationsSection />
-      <TeamNeedsSection />
-      <AffiliatesSection />
-      <GearUpSection />
-      <ContactBarSection />
-    </Layout>
+    <>
+      <Preloader onComplete={() => setShowContent(true)} />
+      
+      {showContent && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Layout>
+            <HeroSection />
+            <ElevateSection />
+            <SoccerBootsSection />
+            <ProcessSection />
+            <BestSellingSection />
+            <LocationsSection />
+            <TeamNeedsSection />
+            <AffiliatesSection />
+            <GearUpSection />
+            <ContactBarSection />
+          </Layout>
+        </motion.div>
+      )}
+    </>
   );
 };
 
