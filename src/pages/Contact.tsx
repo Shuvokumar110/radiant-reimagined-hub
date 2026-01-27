@@ -1,13 +1,34 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Globe } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
-import { FadeInUp, AnimatedText } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const contactRegions = [
+  {
+    region: "US East Coast",
+    phones: ["+1 336-655-1312", "+1 336-682-8661", "+1 917-362-4200"],
+  },
+  {
+    region: "Caribbean",
+    phones: ["+1 868-373-2800"],
+  },
+  {
+    region: "Africa",
+    phones: ["+1 407-607-1890"],
+  },
+];
+
+const locations = [
+  "Fort Lauderdale, Florida, US",
+  "Winston-Salem, North Carolina, US",
+  "Las Vegas, Nevada, US",
+  "Toronto, Ontario, CA",
+];
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,48 +41,81 @@ export default function Contact() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="pt-32 pb-20 bg-foreground text-background">
-        <div className="container mx-auto px-6 text-center">
-          <FadeInUp>
-            <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
-              Get In Touch
+      {/* Hero Section */}
+      <section className="relative min-h-[50vh] flex items-center justify-center bg-foreground overflow-hidden pt-32 md:pt-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
+        
+        <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10 text-center">
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <span className="inline-flex items-center gap-2 text-white/60 text-sm tracking-wider">
+              Home
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              Contact Us
             </span>
-          </FadeInUp>
-          <AnimatedText
-            text="Request a Quote"
-            className="text-display mb-6"
-            delay={0.1}
-          />
-          <FadeInUp delay={0.3}>
-            <p className="text-background/70 max-w-2xl mx-auto">
-              Ready to outfit your team? Fill out the form below and our team
-              will get back to you with custom pricing within 24 hours.
-            </p>
-          </FadeInUp>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-sans"
+          >
+            Ready to start
+            <span className="block text-white/60">something together?</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-white/70 text-lg max-w-2xl mx-auto"
+          >
+            Whether you're looking for answers, would like to solve a problem, or just want to let us know how we did, you'll find many ways to contact us right here.
+          </motion.p>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
+      {/* Contact Form & Info Section */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <div className="grid lg:grid-cols-3 gap-16">
             {/* Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="lg:col-span-2"
             >
+              {/* Section Header */}
+              <div className="mb-10">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted mb-6">
+                  <span className="w-2 h-2 rounded-full bg-foreground" />
+                  <span className="text-sm font-medium tracking-widest uppercase text-foreground">
+                    Get In Touch
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold font-sans">
+                  <span className="text-foreground">Send us a</span>
+                  <span className="text-muted-foreground"> message</span>
+                </h2>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" required />
+                    <Input id="firstName" placeholder="John" required className="h-12 rounded-xl border-2" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" required />
+                    <Input id="lastName" placeholder="Doe" required className="h-12 rounded-xl border-2" />
                   </div>
                 </div>
 
@@ -73,11 +127,12 @@ export default function Contact() {
                       type="email"
                       placeholder="john@example.com"
                       required
+                      className="h-12 rounded-xl border-2"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone</Label>
-                    <Input id="phone" type="tel" placeholder="(123) 456-7890" />
+                    <Input id="phone" type="tel" placeholder="(123) 456-7890" className="h-12 rounded-xl border-2" />
                   </div>
                 </div>
 
@@ -88,12 +143,13 @@ export default function Contact() {
                       id="organization"
                       placeholder="Your team or organization name"
                       required
+                      className="h-12 rounded-xl border-2"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="program">Program Type *</Label>
                     <Select required>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="Select program type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -111,7 +167,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <Label htmlFor="quantity">Estimated Quantity</Label>
                     <Select>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="Select quantity range" />
                       </SelectTrigger>
                       <SelectContent>
@@ -125,7 +181,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <Label htmlFor="timeline">Timeline</Label>
                     <Select>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="When do you need it?" />
                       </SelectTrigger>
                       <SelectContent>
@@ -146,13 +202,14 @@ export default function Contact() {
                     placeholder="Tell us about your project requirements, customization needs, and any specific questions..."
                     rows={6}
                     required
+                    className="rounded-xl border-2"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   size="lg"
-                  className="bg-foreground text-background hover:bg-foreground/90"
+                  className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-10 h-14"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -167,68 +224,94 @@ export default function Contact() {
               </form>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Contact Info Sidebar */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-8"
+              className="space-y-6"
             >
-              <div className="p-8 bg-muted rounded-lg">
-                <h3 className="font-serif text-xl font-semibold mb-6">
-                  Contact Information
-                </h3>
+              {/* Our Address Card */}
+              <div className="p-8 bg-muted rounded-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                  <span className="text-xs font-medium tracking-widest uppercase text-foreground">
+                    Our Address
+                  </span>
+                </div>
+                
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-foreground text-background rounded-full flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5" />
+                  {contactRegions.map((region, index) => (
+                    <div key={index} className="space-y-2">
+                      <h4 className="font-semibold text-foreground">{region.region}</h4>
+                      {region.phones.map((phone, phoneIndex) => (
+                        <a
+                          key={phoneIndex}
+                          href={`tel:${phone.replace(/\s/g, '')}`}
+                          className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
+                        >
+                          <Phone className="h-3.5 w-3.5" />
+                          {phone}
+                        </a>
+                      ))}
                     </div>
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <a
-                        href="mailto:info@tidiapparel.com"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        info@tidiapparel.com
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-foreground text-background rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <a
-                        href="tel:+1234567890"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        (123) 456-7890
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-foreground text-background rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Shipping</p>
-                      <p className="text-muted-foreground">
-                        USA & International Delivery
-                      </p>
-                    </div>
+                  ))}
+                  
+                  <div className="pt-4 border-t border-border space-y-3">
+                    <a
+                      href="mailto:info@TidiApparel.com"
+                      className="flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-foreground text-background flex items-center justify-center">
+                        <Mail className="h-4 w-4" />
+                      </div>
+                      <span className="font-medium">info@TidiApparel.com</span>
+                    </a>
+                    <a
+                      href="tel:+13366551312"
+                      className="flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-foreground text-background flex items-center justify-center">
+                        <Phone className="h-4 w-4" />
+                      </div>
+                      <span className="font-medium">(336) 655-1312</span>
+                    </a>
                   </div>
                 </div>
               </div>
 
-              <div className="p-8 bg-foreground text-background rounded-lg">
-                <h3 className="font-serif text-xl font-semibold mb-4">
-                  Quick Response
-                </h3>
-                <p className="text-background/70 mb-4">
+              {/* Locations Card */}
+              <div className="p-8 bg-foreground text-background rounded-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                  <span className="text-xs font-medium tracking-widest uppercase text-white">
+                    Locations
+                  </span>
+                </div>
+                
+                <div className="space-y-4">
+                  {locations.map((location, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <MapPin className="h-4 w-4 mt-0.5 text-white/60 flex-shrink-0" />
+                      <span className="text-white/80 text-sm">{location}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Response Card */}
+              <div className="p-8 border-2 border-border rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                    <Globe className="h-5 w-5 text-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-foreground">Quick Response</h3>
+                </div>
+                <p className="text-muted-foreground text-sm mb-3">
                   We typically respond to all inquiries within 24 business hours.
                 </p>
-                <p className="text-sm text-background/60">
+                <p className="text-xs text-muted-foreground">
                   For urgent orders, please call us directly.
                 </p>
               </div>

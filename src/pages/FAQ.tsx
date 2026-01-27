@@ -227,7 +227,7 @@ const FAQ = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center bg-foreground overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center justify-center bg-foreground overflow-hidden pt-32 md:pt-40">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
         
         <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10 text-center">
