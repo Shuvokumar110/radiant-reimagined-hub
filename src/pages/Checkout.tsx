@@ -109,12 +109,22 @@ export default function Checkout() {
       <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4">
-              Request a Quote
-            </h1>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 bg-background rounded-full" />
+              <span className="text-xs font-medium tracking-widest uppercase text-background/70">
+                Complete Your Order
+              </span>
+            </div>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <p className="text-center text-background/70 max-w-xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <span className="text-background">Request.</span>
+              <br />
+              <span className="text-background/50">A Quote.</span>
+            </h1>
+          </FadeInUp>
+          <FadeInUp delay={0.2}>
+            <p className="text-background/70 max-w-xl mt-6">
               Complete the form below and we'll provide you with custom pricing for your order.
             </p>
           </FadeInUp>

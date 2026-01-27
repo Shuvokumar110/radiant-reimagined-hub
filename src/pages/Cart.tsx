@@ -53,13 +53,26 @@ export default function Cart() {
 
   return (
     <Layout>
-      <section className="pt-32 pb-16 bg-foreground text-background">
-        <div className="container mx-auto px-6">
+      {/* Hero */}
+      <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
+        <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <h1 className="text-display text-center mb-4">Shopping Cart</h1>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 bg-background rounded-full" />
+              <span className="text-xs font-medium tracking-widest uppercase text-background/70">
+                Your Selection
+              </span>
+            </div>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <p className="text-center text-background/70">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <span className="text-background">Cart.</span>
+              <br />
+              <span className="text-background/50">Your Items.</span>
+            </h1>
+          </FadeInUp>
+          <FadeInUp delay={0.2}>
+            <p className="text-background/70 mt-6">
               {totalItems} {totalItems === 1 ? "item" : "items"} in your cart
             </p>
           </FadeInUp>

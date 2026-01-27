@@ -227,39 +227,36 @@ const FAQ = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center bg-foreground overflow-hidden pt-32 md:pt-40 pb-16 md:pb-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
-        
-        <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10 text-center">
-          {/* Breadcrumb */}
+      <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8"
           >
-            <span className="inline-flex items-center gap-2 text-white/60 text-sm tracking-wider">
-              Home
-              <span className="w-1 h-1 rounded-full bg-white/40" />
-              Frequently Asked Questions
-            </span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 bg-background rounded-full" />
+              <span className="text-xs font-medium tracking-widest uppercase text-background/70">
+                Help Center
+              </span>
+            </div>
           </motion.div>
-
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-sans"
           >
-            Frequently Asked
-            <span className="block text-white/60">Questions</span>
-          </motion.h1>
-
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <span className="text-background">FAQ.</span>
+              <br />
+              <span className="text-background/50">Get Answers.</span>
+            </h1>
+          </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-white/70 text-lg max-w-2xl mx-auto"
+            className="text-background/70 max-w-xl mt-6"
           >
             Find answers to common questions about our services, ordering process, and more.
           </motion.p>

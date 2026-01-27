@@ -15,6 +15,7 @@ import team7 from "@/assets/gallery/team-7.png";
 import team8 from "@/assets/gallery/team-8.png";
 import team9 from "@/assets/gallery/team-9.png";
 import team10 from "@/assets/gallery/team-10.png";
+import team11 from "@/assets/gallery/team-11.png";
 
 const galleryImages = [
   { id: 1, src: team1, title: "DNC Academy Seniors", category: "Team" },
@@ -27,6 +28,7 @@ const galleryImages = [
   { id: 8, src: team8, title: "DNC Match Day", category: "Match Day" },
   { id: 9, src: team9, title: "Junior Champions", category: "Youth" },
   { id: 10, src: team10, title: "Game Day Lineup", category: "Match Day" },
+  { id: 11, src: team11, title: "Youth Celebration", category: "Youth" },
 ];
 
 const categories = ["All", "Team", "Youth", "Academy", "Match Day", "Training"];
@@ -67,20 +69,22 @@ export default function Gallery() {
       <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
               <span className="w-1.5 h-1.5 bg-background rounded-full" />
-              <span className="text-xs font-medium tracking-widest uppercase text-background/60">
+              <span className="text-xs font-medium tracking-widest uppercase text-background/70">
                 Our Teams in Action
               </span>
             </div>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
-              Gallery
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <span className="text-background">Gallery.</span>
+              <br />
+              <span className="text-background/50">Moments Captured.</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <p className="text-center text-background/70 max-w-2xl mx-auto">
+            <p className="text-background/70 max-w-xl mt-6">
               Celebrating the teams we've had the honor of outfitting. See our custom 
               apparel in action on pitches around the world.
             </p>
