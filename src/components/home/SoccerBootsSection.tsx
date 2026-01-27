@@ -48,87 +48,31 @@ export function SoccerBootsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          {/* Decorative line with diamond */}
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "80px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-px bg-gradient-to-r from-transparent to-foreground/30"
-            />
-            <motion.div
-              initial={{ scale: 0, rotate: 45 }}
-              whileInView={{ scale: 1, rotate: 45 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-2 h-2 bg-foreground/40"
-            />
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "80px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-px bg-gradient-to-l from-transparent to-foreground/30"
-            />
-          </div>
-
-          {/* Small label */}
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "60px" }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="inline-block text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4"
-          >
-            Exclusive Collection
-          </motion.span>
-
-          {/* Main Title with split animation */}
-          <div className="overflow-hidden mb-4">
-            <motion.h2 
-              initial={{ y: 100 }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight"
-            >
-              Special Order
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden mb-6">
-            <motion.h2 
-              initial={{ y: 100 }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight italic"
-            >
-              Soccer
-            </motion.h2>
-          </div>
-
-          {/* Subtitle with reveal */}
-          <motion.p
+            className="h-0.5 bg-background/50 mx-auto mb-6"
+          />
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-muted-foreground max-w-md mx-auto text-sm md:text-base tracking-wide"
+            className="text-2xl md:text-3xl font-bold mb-3"
+          >
+            Special Order Soccer
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-background/60 max-w-xl mx-auto"
           >
             Premium Italian-made boots crafted for champions
           </motion.p>
-
-          {/* Bottom decorative element */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="w-24 h-px bg-foreground/20 mx-auto mt-8"
-          />
         </motion.div>
 
         {/* Main Boots Display with 3D Effect */}
