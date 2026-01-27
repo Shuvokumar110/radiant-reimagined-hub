@@ -42,10 +42,14 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   return { ref, isInView, hasAnimated };
 }
 
-export function useParallax(speed: number = 0.5): {
+export function useParallax(
+  speed: number = 0.5,
+  options: { enabled?: boolean } = {}
+): {
   ref: RefObject<HTMLDivElement>;
   offset: MotionValue<number>;
 } {
+  const { enabled = true } = options;
   // IMPORTANT:
   // Using React state here causes a full component re-render on every scroll tick.
   // With Lenis + Framer Motion, that can manifest as "blinking"/flicker.
@@ -58,6 +62,11 @@ export function useParallax(speed: number = 0.5): {
   latestSpeedRef.current = speed;
 
   useEffect(() => {
+    if (!enabled) {
+      offset.set(0);
+      return;
+    }
+
     const compute = () => {
       rafIdRef.current = null;
       const el = ref.current;
@@ -84,7 +93,8 @@ export function useParallax(speed: number = 0.5): {
       if (rafIdRef.current != null) window.cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
     };
-  }, [offset]);
+  }, [enabled, offset]);
 
   return { ref, offset };
 }
+

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 import tidiLogo from "@/assets/tidi-logo.webp";
 import multiSportAction from "@/assets/multi-sport-action.jpg";
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
 
 export function GearUpSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,7 +23,7 @@ export function GearUpSection() {
       {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-0"
-        style={{ y }}
+        style={{ y: PARALLAX_ENABLED ? y : 0 }}
       >
         <img 
           src={multiSportAction} 
@@ -127,3 +128,4 @@ export function GearUpSection() {
     </section>
   );
 }
+

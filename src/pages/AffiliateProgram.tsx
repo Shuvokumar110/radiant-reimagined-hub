@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { DollarSign, Globe, Palette, BarChart3, Shield, UserPlus, Share2, Gift, Calendar, Award } from "lucide-react";
 
 import heroImage from "@/assets/affiliate-hero.png";
+import { PARALLAX_ENABLED } from "@/lib/motionConfig";
 
 const whyJoin = [
   {
@@ -64,7 +65,10 @@ export default function AffiliateProgram() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[70vh] flex items-end bg-foreground text-background overflow-hidden pt-24 md:pt-32">
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
+          style={{
+            y: PARALLAX_ENABLED ? heroY : 0,
+            opacity: PARALLAX_ENABLED ? heroOpacity : 1,
+          }}
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 z-10" />
