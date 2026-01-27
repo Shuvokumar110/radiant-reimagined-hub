@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { useMotionValue, MotionValue } from "framer-motion";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -41,23 +42,49 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   return { ref, isInView, hasAnimated };
 }
 
-export function useParallax(speed: number = 0.5) {
-  const [offset, setOffset] = useState(0);
+export function useParallax(speed: number = 0.5): {
+  ref: RefObject<HTMLDivElement>;
+  offset: MotionValue<number>;
+} {
+  // IMPORTANT:
+  // Using React state here causes a full component re-render on every scroll tick.
+  // With Lenis + Framer Motion, that can manifest as "blinking"/flicker.
+  // A MotionValue updates styles without re-rendering.
+  const offset = useMotionValue(0);
   const ref = useRef<HTMLDivElement>(null);
 
+  const rafIdRef = useRef<number | null>(null);
+  const latestSpeedRef = useRef(speed);
+  latestSpeedRef.current = speed;
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-      setOffset(scrollProgress * speed * 100);
+    const compute = () => {
+      rafIdRef.current = null;
+      const el = ref.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const scrollProgress =
+        (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+
+      // Keep the same output range as before (px-ish values)
+      offset.set(scrollProgress * latestSpeedRef.current * 100);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    const onScroll = () => {
+      if (rafIdRef.current != null) return;
+      rafIdRef.current = window.requestAnimationFrame(compute);
+    };
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [speed]);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafIdRef.current != null) window.cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    };
+  }, [offset]);
 
   return { ref, offset };
 }
