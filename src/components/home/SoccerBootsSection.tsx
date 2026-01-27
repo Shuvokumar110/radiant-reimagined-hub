@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Award, Globe, Zap, Package } from "lucide-react";
+import { useRef, useState } from "react";
+import { Sparkles, Star, Zap } from "lucide-react";
 
 import heroBoots from "@/assets/hero-boots.png";
 import heroSlide1 from "@/assets/hero-slide-1.png";
@@ -8,97 +9,177 @@ import heroSlide2 from "@/assets/hero-slide-2.png";
 import heroSlide3 from "@/assets/hero-slide-3.png";
 
 const features = [
-  { icon: Award, label: "Pro-Grade Quality" },
-  { icon: Globe, label: "Made in Italy" },
-  { icon: Zap, label: "Custom Colors" },
-  { icon: Package, label: "Team Orders" },
+  { label: "Italian Craftsmanship", icon: Star },
+  { label: "Kangaroo Leather", icon: Sparkles },
+  { label: "Custom Colors", icon: Zap },
 ];
 
 const bootImages = [
-  { src: heroSlide1, alt: "Blue Soccer Boot" },
-  { src: heroSlide2, alt: "White Soccer Boot" },
-  { src: heroSlide3, alt: "Black Soccer Boot" },
+  { src: heroSlide1, label: "Pro Blue" },
+  { src: heroSlide2, label: "Classic White" },
+  { src: heroSlide3, label: "Elite Black" },
 ];
 
 export function SoccerBootsSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-15, 0, 15]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 0.9]);
+
   return (
-    <section className="min-h-screen py-20 bg-background flex flex-col justify-center">
-      <div className="w-full px-8 md:px-16 lg:px-24">
+    <section ref={containerRef} className="min-h-screen py-20 bg-foreground text-background flex flex-col justify-center overflow-hidden relative">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+          backgroundSize: "40px 40px",
+        }} />
+      </div>
+
+      <div className="w-full px-8 md:px-16 lg:px-24 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "60px" }}
+            viewport={{ once: true }}
+            className="h-0.5 bg-background/50 mx-auto mb-6"
+          />
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl font-bold mb-3"
+          >
             Special Order Soccer
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Premium Italian-made soccer boots crafted from kangaroo leather with custom color options for your team.
-          </p>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-background/60 max-w-xl mx-auto"
+          >
+            Premium Italian-made boots crafted for champions
+          </motion.p>
         </motion.div>
 
-        {/* Main Boots Display */}
+        {/* Main Boots Display with 3D Effect */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="mb-12"
+          style={{ rotateY, scale }}
+          className="mb-12 perspective-1000"
         >
-          <img
+          <motion.img
             src={heroBoots}
             alt="TiDi Soccer Boots Collection"
-            className="w-full max-w-5xl mx-auto"
+            className="w-full max-w-4xl mx-auto drop-shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           />
         </motion.div>
 
-        {/* Action Shots Grid */}
-        <div className="grid grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
+        {/* Interactive Boot Selector */}
+        <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-12">
           {bootImages.map((img, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative overflow-hidden rounded-xl aspect-square group"
+              transition={{ delay: index * 0.15 }}
+              onHoverStart={() => setActiveImage(index)}
+              className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
+                activeImage === index ? "ring-2 ring-background" : ""
+              }`}
             >
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              <motion.div
+                className="aspect-square"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={img.src}
+                  alt={img.label}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <motion.div 
+                  className="absolute bottom-3 left-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: activeImage === index ? 1 : 0.7, y: 0 }}
+                >
+                  <span className="text-sm font-medium text-white">{img.label}</span>
+                </motion.div>
+              </motion.div>
+              
+              {/* Active Indicator */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1 bg-background"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: activeImage === index ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
               />
             </motion.div>
           ))}
         </div>
 
-        {/* Features Bar */}
-        <div className="flex flex-wrap justify-center gap-8 mb-12">
+        {/* Feature Pills */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4 mb-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
           {features.map((feature, index) => (
             <motion.div
               key={feature.label}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="flex items-center gap-3"
+              transition={{ delay: 0.3 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="flex items-center gap-2 px-4 py-2 bg-background/10 backdrop-blur-sm rounded-full border border-background/20"
             >
-              <feature.icon className="h-5 w-5 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">{feature.label}</span>
+              <feature.icon className="h-4 w-4" />
+              <span className="text-sm font-medium">{feature.label}</span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* CTA Button */}
-        <div className="text-center">
+        {/* CTA */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
           <Link
             to="/shop?category=boots"
-            className="inline-block bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-colors rounded"
+            className="inline-block bg-background text-foreground px-8 py-3 text-sm font-semibold tracking-wide uppercase hover:bg-background/90 transition-all rounded group"
           >
-            Explore Collection
+            <span className="flex items-center gap-2">
+              Explore Collection
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </span>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
