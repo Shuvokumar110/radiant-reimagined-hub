@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight, ArrowUpRight } from "lucide-react";
+import { X, ChevronRight, ArrowUpRight, Search, Heart, ShoppingBag, User } from "lucide-react";
 import tidiLogo from "@/assets/tidi-logo.webp";
 
 interface MobileMenuProps {
@@ -13,8 +13,9 @@ const menuItems = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop" },
   { name: "Custom Outfit", href: "/custom-team-outfit" },
-  { name: "About", href: "/about" },
   { name: "Gallery", href: "/gallery" },
+  { name: "Videos", href: "/videos" },
+  { name: "About", href: "/about" },
 ];
 
 const programItems = [
@@ -32,9 +33,29 @@ const quickLinks = [
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showPrograms, setShowPrograms] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const isActive = (href: string) => location.pathname === href;
+
+  // Reset search when menu closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSearchQuery("");
+      setIsSearchFocused(false);
+    }
+  }, [isOpen]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      onClose();
+    }
+  };
 
   const menuVariants = {
     closed: { x: "100%" },
@@ -46,7 +67,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     open: (i: number) => ({
       opacity: 1,
       x: 0,
-      transition: { delay: 0.1 + i * 0.05 },
+      transition: { delay: 0.05 + i * 0.03 },
     }),
   };
 
@@ -60,7 +81,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-[100] bg-foreground/20 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-foreground/30 backdrop-blur-md"
           />
 
           {/* Menu Panel */}
@@ -70,26 +91,85 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate="open"
             exit="closed"
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed top-0 right-0 bottom-0 z-[101] w-full max-w-sm bg-background shadow-2xl flex flex-col"
+            className="fixed top-0 right-0 bottom-0 z-[101] w-full max-w-[320px] bg-background flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-border">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-border/50">
               <Link to="/" onClick={onClose}>
-                <img src={tidiLogo} alt="TiDi" className="h-9" />
+                <img src={tidiLogo} alt="TiDi" className="h-8" />
               </Link>
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-muted/80 transition-colors"
+                className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-all"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </button>
+            </div>
+
+            {/* Search Bar */}
+            <div className="px-4 py-3 border-b border-border/50">
+              <form onSubmit={handleSearch}>
+                <div
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-full transition-all ${
+                    isSearchFocused
+                      ? "bg-background ring-2 ring-foreground"
+                      : "bg-muted"
+                  }`}
+                >
+                  <Search className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onBlur={() => setIsSearchFocused(false)}
+                    className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+
+            {/* Quick Access Icons */}
+            <div className="px-4 py-3 border-b border-border/50">
+              <div className="flex items-center justify-between">
+                {[
+                  { icon: Heart, label: "Wishlist", href: "/wishlist" },
+                  { icon: ShoppingBag, label: "Cart", href: "/cart" },
+                  { icon: User, label: "Account", href: "/account" },
+                ].map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={onClose}
+                    className={`flex flex-col items-center gap-1.5 py-2 px-6 rounded-xl transition-all ${
+                      isActive(item.href)
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span className="text-[10px] font-medium">{item.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Main Navigation */}
             <div className="flex-1 overflow-y-auto">
-              <nav className="p-5">
+              <nav className="py-3">
                 {/* Primary Links */}
-                <div className="space-y-1">
+                <div className="px-3">
                   {menuItems.map((item, i) => (
                     <motion.div
                       key={item.href}
@@ -101,7 +181,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       <Link
                         to={item.href}
                         onClick={onClose}
-                        className={`flex items-center justify-between py-4 px-4 rounded-xl text-lg font-medium transition-all ${
+                        className={`flex items-center justify-between py-3 px-4 rounded-xl text-[15px] font-medium transition-all ${
                           isActive(item.href)
                             ? "bg-foreground text-background"
                             : "text-foreground hover:bg-muted"
@@ -109,7 +189,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       >
                         {item.name}
                         {isActive(item.href) && (
-                          <span className="w-2 h-2 rounded-full bg-background" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-background" />
                         )}
                       </Link>
                     </motion.div>
@@ -124,11 +204,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   >
                     <button
                       onClick={() => setShowPrograms(!showPrograms)}
-                      className="flex items-center justify-between w-full py-4 px-4 rounded-xl text-lg font-medium text-foreground hover:bg-muted transition-all"
+                      className={`flex items-center justify-between w-full py-3 px-4 rounded-xl text-[15px] font-medium transition-all ${
+                        showPrograms
+                          ? "bg-muted text-foreground"
+                          : "text-foreground hover:bg-muted"
+                      }`}
                     >
                       Programs
                       <ChevronRight
-                        className={`h-5 w-5 transition-transform ${
+                        className={`h-4 w-4 transition-transform duration-200 ${
                           showPrograms ? "rotate-90" : ""
                         }`}
                       />
@@ -139,20 +223,22 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
-                          <div className="pl-4 pb-2 space-y-1">
+                          <div className="py-1 space-y-0.5">
                             {programItems.map((item) => (
                               <Link
                                 key={item.href}
                                 to={item.href}
                                 onClick={onClose}
-                                className={`flex items-center py-3 px-4 rounded-lg text-base transition-all ${
+                                className={`flex items-center py-2.5 px-8 text-sm transition-all ${
                                   isActive(item.href)
-                                    ? "bg-muted text-foreground font-medium"
-                                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                                    ? "text-foreground font-medium bg-muted/50"
+                                    : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
                                 }`}
                               >
+                                <span className="w-1 h-1 rounded-full bg-current mr-3 opacity-50" />
                                 {item.name}
                               </Link>
                             ))}
@@ -164,7 +250,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </div>
 
                 {/* Divider */}
-                <div className="my-6 h-px bg-border" />
+                <div className="my-3 mx-4 h-px bg-border/50" />
 
                 {/* Quick Links */}
                 <motion.div
@@ -172,9 +258,9 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   variants={itemVariants}
                   initial="closed"
                   animate="open"
-                  className="space-y-1"
+                  className="px-3"
                 >
-                  <p className="px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                  <p className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                     Quick Links
                   </p>
                   {quickLinks.map((item) => (
@@ -182,38 +268,22 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       key={item.href}
                       to={item.href}
                       onClick={onClose}
-                      className="flex items-center justify-between py-3 px-4 rounded-lg text-base text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+                      className="flex items-center justify-between py-2.5 px-4 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
                     >
                       {item.name}
-                      <ArrowUpRight className="h-4 w-4" />
+                      <ArrowUpRight className="h-3.5 w-3.5" />
                     </Link>
                   ))}
                 </motion.div>
               </nav>
             </div>
 
-            {/* Footer Actions */}
-            <div className="p-5 border-t border-border bg-muted/30">
-              <div className="grid grid-cols-2 gap-3">
-                <Link
-                  to="/wishlist"
-                  onClick={onClose}
-                  className="flex items-center justify-center gap-2 py-3.5 bg-background border border-border rounded-xl text-sm font-medium text-foreground hover:bg-muted transition-colors"
-                >
-                  Wishlist
-                </Link>
-                <Link
-                  to="/cart"
-                  onClick={onClose}
-                  className="flex items-center justify-center gap-2 py-3.5 bg-foreground rounded-xl text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
-                >
-                  Cart
-                </Link>
-              </div>
+            {/* Footer CTA */}
+            <div className="p-4 border-t border-border/50 bg-muted/20">
               <Link
                 to="/contact"
                 onClick={onClose}
-                className="mt-3 flex items-center justify-center gap-2 w-full py-3.5 border border-foreground rounded-xl text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-foreground rounded-xl text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
               >
                 Get a Quote
                 <ArrowUpRight className="h-4 w-4" />
