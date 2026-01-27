@@ -35,9 +35,9 @@ export function LocationsSection() {
             </span>
           </motion.div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-foreground">TiDi Locations.</span>
+            <span className="text-foreground">Global Reach.</span>
             <br />
-            <span className="text-muted-foreground">Worldwide Delivery.</span>
+            <span className="text-muted-foreground">Local Service.</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Strategic locations across the globe for fast delivery and exceptional service.

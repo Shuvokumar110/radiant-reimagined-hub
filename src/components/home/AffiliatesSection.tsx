@@ -53,9 +53,9 @@ export function AffiliatesSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold"
           >
-            <span className="text-foreground">Our Affiliates.</span>
+            <span className="text-foreground">Our Partners.</span>
             <br />
-            <span className="text-muted-foreground">Trusted Worldwide.</span>
+            <span className="text-muted-foreground">Trusted Globally.</span>
           </motion.h2>
         </motion.div>
 

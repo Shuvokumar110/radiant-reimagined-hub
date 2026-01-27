@@ -68,9 +68,9 @@ export function SoccerBootsSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold"
           >
-            <span className="text-foreground">Special Order Soccer.</span>
+            <span className="text-foreground">Special Order.</span>
             <br />
-            <span className="text-muted-foreground">Crafted for Champions.</span>
+            <span className="text-muted-foreground">Built to Last.</span>
           </motion.h2>
         </motion.div>
 

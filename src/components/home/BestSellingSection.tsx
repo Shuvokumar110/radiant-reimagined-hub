@@ -58,9 +58,9 @@ export function BestSellingSection() {
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-foreground">Popular Apparel.</span>
+              <span className="text-foreground">Top Picks.</span>
               <br />
-              <span className="text-muted-foreground">Team Favorites.</span>
+              <span className="text-muted-foreground">Fan Favorites.</span>
             </h2>
           </motion.div>
 
