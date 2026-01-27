@@ -22,7 +22,7 @@ const bootImages = [
 
 export function SoccerBootsSection() {
   return (
-    <section className="py-12 bg-background">
+    <section className="min-h-screen py-16 bg-background flex flex-col justify-center">
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div

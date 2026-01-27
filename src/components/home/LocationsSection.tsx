@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 
 export function LocationsSection() {
   return (
-    <section className="py-12 bg-background">
+    <section className="min-h-screen py-16 bg-background flex flex-col justify-center">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left - Text */}

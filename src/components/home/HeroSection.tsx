@@ -59,7 +59,7 @@ export function HeroSection() {
   return (
     <section className="relative w-full">
       {/* Main Hero */}
-      <div className="relative h-[70vh] min-h-[500px] max-h-[700px]">
+      <div className="relative h-[85vh] min-h-[600px]">
         {/* Slides */}
         <AnimatePresence mode="wait">
           <motion.div
