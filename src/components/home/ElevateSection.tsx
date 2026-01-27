@@ -2,6 +2,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 
+import galleryTeam1 from "@/assets/gallery/team-1.png";
+import galleryTeam2 from "@/assets/gallery/team-2.png";
+import galleryTeam3 from "@/assets/gallery/team-3.png";
+import galleryTeam4 from "@/assets/gallery/team-4.png";
+
 const categories = [
   "All Products", "Team Uniforms", "Jerseys", "Tracksuits", "T-Shirts", 
   "Hoodies", "Jackets", "Shorts", "Caps", "Accessories"
@@ -11,26 +16,26 @@ const programs = [
   {
     name: "High School",
     subtitle: "Programs",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=600",
+    image: galleryTeam1,
     href: "/programs/high-school",
   },
   {
     name: "Club & Travel",
     subtitle: "Teams",
-    image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=600",
+    image: galleryTeam2,
     href: "/programs/club-travel",
   },
   {
     name: "Collegiate",
     subtitle: "Athletics",
-    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600",
+    image: galleryTeam3,
     href: "/programs/collegiate",
   },
   {
     name: "Leagues",
     subtitle: "& Academies",
-    image: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=600",
-    href: "/programs/leagues",
+    image: galleryTeam4,
+    href: "/programs/leagues-academies",
   },
 ];
 
