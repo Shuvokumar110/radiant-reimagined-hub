@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag, Minus, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,50 +5,17 @@ import { Layout } from "@/components/layout/Layout";
 import { FadeInUp } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-
-interface CartItem {
-  id: number;
-  name: string;
-  category: string;
-  image: string;
-  quantity: number;
-}
-
-const initialCart: CartItem[] = [
-  {
-    id: 1,
-    name: "Elite Pro Jersey",
-    category: "Training Wear",
-    image: "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?q=80&w=800",
-    quantity: 2,
-  },
-  {
-    id: 3,
-    name: "Kangaroo Leather Boots",
-    category: "Soccer Boots",
-    image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?q=80&w=800",
-    quantity: 1,
-  },
-];
+import { useCart } from "@/context/CartContext";
 
 export default function Cart() {
-  const [cart, setCart] = useState<CartItem[]>(initialCart);
+  const { items: cart, updateQuantity, removeFromCart, totalItems } = useCart();
 
-  const updateQuantity = (id: number, delta: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
-    );
+  const handleQuantityChange = (id: number, delta: number) => {
+    const item = cart.find((i) => i.id === id);
+    if (item) {
+      updateQuantity(id, Math.max(1, item.quantity + delta));
+    }
   };
-
-  const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Layout>
@@ -120,7 +86,7 @@ export default function Cart() {
                       <div className="flex items-center gap-4 mt-4">
                         <div className="flex items-center border border-border rounded-lg">
                           <button
-                            onClick={() => updateQuantity(item.id, -1)}
+                            onClick={() => handleQuantityChange(item.id, -1)}
                             className="p-2 hover:bg-muted transition-colors"
                           >
                             <Minus className="h-4 w-4" />
@@ -129,7 +95,7 @@ export default function Cart() {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => updateQuantity(item.id, 1)}
+                            onClick={() => handleQuantityChange(item.id, 1)}
                             className="p-2 hover:bg-muted transition-colors"
                           >
                             <Plus className="h-4 w-4" />
