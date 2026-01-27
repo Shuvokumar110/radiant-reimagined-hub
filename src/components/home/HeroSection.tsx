@@ -12,11 +12,11 @@ export function HeroSection() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-foreground">
-      {/* Background Image with Parallax */}
+      {/* Background Image with Subtle Zoom */}
       <motion.div
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        initial={{ scale: 1.05, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
         className="absolute inset-0"
       >
         <div
@@ -25,79 +25,92 @@ export function HeroSection() {
             backgroundImage: `url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2036')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+        {/* Elegant gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
       </motion.div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [null, -100],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
+      {/* Decorative Lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+          className="absolute left-[10%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/20 to-transparent origin-top"
+        />
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 1.5, delay: 0.7, ease: "easeOut" }}
+          className="absolute right-[10%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/20 to-transparent origin-top"
+        />
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.5, delay: 0.9, ease: "easeOut" }}
+          className="absolute top-[20%] left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent origin-left"
+        />
       </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
-        {/* Animated Logo */}
+        {/* Logo - Static & Elegant */}
         <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.3, type: "spring" }}
-          className="mb-8"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-10"
         >
-          <motion.img
+          <img
             src={tidiLogo}
             alt="TiDi Apparel"
-            className="h-24 md:h-32 w-auto invert"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="h-20 md:h-28 w-auto invert opacity-90"
           />
+        </motion.div>
+
+        {/* Overline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="flex items-center gap-4 mb-6"
+        >
+          <span className="h-px w-12 bg-white/40" />
+          <span className="text-xs tracking-[0.3em] uppercase text-white/60 font-light">
+            Premium Athletic Wear
+          </span>
+          <span className="h-px w-12 bg-white/40" />
         </motion.div>
 
         {/* Main Headline */}
         <AnimatedText
           text="Built for Champions"
-          className="text-display mb-6"
-          delay={0.5}
+          className="text-display mb-8"
+          delay={0.6}
         />
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="text-lg md:text-xl text-white/80 max-w-2xl mb-10 font-light tracking-wide"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="text-base md:text-lg text-white/70 max-w-xl mb-12 font-light tracking-wide leading-relaxed"
         >
-          Premium athletic apparel and footwear for teams who demand excellence
-          on and off the field.
+          Premium athletic apparel and footwear crafted for teams who demand
+          excellence on and off the field.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <MagneticButton className="bg-white text-black px-10 py-4 text-sm font-medium tracking-widest uppercase hover:bg-white/90 transition-colors">
-            <Link to="/shop">Shop Now</Link>
+          <MagneticButton className="bg-white text-black px-12 py-4 text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/90 transition-all duration-300">
+            <Link to="/shop">Explore Collection</Link>
           </MagneticButton>
-          <MagneticButton className="border border-white/50 text-white px-10 py-4 text-sm font-medium tracking-widest uppercase hover:bg-white/10 transition-colors">
+          <MagneticButton className="border border-white/30 text-white px-12 py-4 text-xs font-medium tracking-[0.2em] uppercase hover:bg-white/10 hover:border-white/50 transition-all duration-300">
             <Link to="/contact">Request Quote</Link>
           </MagneticButton>
         </motion.div>
@@ -109,16 +122,19 @@ export function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
         onClick={scrollToContent}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white flex flex-col items-center gap-2"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/60 hover:text-white flex flex-col items-center gap-3 transition-colors duration-300"
       >
-        <span className="text-xs tracking-widest uppercase">Scroll</span>
+        <span className="text-[10px] tracking-[0.3em] uppercase">Discover</span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-6 w-6" />
+          <ChevronDown className="h-5 w-5" />
         </motion.div>
       </motion.button>
+
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }
