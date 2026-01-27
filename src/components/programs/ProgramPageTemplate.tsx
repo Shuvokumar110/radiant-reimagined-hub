@@ -72,14 +72,21 @@ export function ProgramPageTemplate({
       {/* Key Highlights */}
       <section className="py-16 md:py-20 lg:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="mb-10 md:mb-16">
             <FadeInUp>
-              <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">
-                Why Choose Us
-              </span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+                <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                  Why Choose Us
+                </span>
+              </div>
             </FadeInUp>
             <FadeInUp delay={0.1}>
-              <h2 className="text-headline">Key Highlights</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                <span className="text-foreground">Key Highlights.</span>
+                <br />
+                <span className="text-muted-foreground">What We Offer.</span>
+              </h2>
             </FadeInUp>
           </div>
 
@@ -113,14 +120,21 @@ export function ProgramPageTemplate({
       {/* Complete Outfit Solutions */}
       <section className="py-16 md:py-20 lg:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="mb-10 md:mb-16">
             <FadeInUp>
-              <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">
-                Complete Solutions
-              </span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+                <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                  Complete Solutions
+                </span>
+              </div>
             </FadeInUp>
             <FadeInUp delay={0.1}>
-              <h2 className="text-headline">Everything Your Team Needs</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                <span className="text-foreground">Everything.</span>
+                <br />
+                <span className="text-muted-foreground">Your Team Needs.</span>
+              </h2>
             </FadeInUp>
           </div>
 
@@ -152,14 +166,21 @@ export function ProgramPageTemplate({
       {/* Benefits */}
       <section className="py-16 md:py-20 lg:py-24 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="mb-10 md:mb-16">
             <FadeInUp>
-              <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
-                The TiDi Difference
-              </span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-background rounded-full" />
+                <span className="text-xs font-medium tracking-widest uppercase text-background/70">
+                  The TiDi Difference
+                </span>
+              </div>
             </FadeInUp>
             <FadeInUp delay={0.1}>
-              <h2 className="text-headline">Why Teams Choose Us</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                <span className="text-background">Why Teams.</span>
+                <br />
+                <span className="text-background/50">Choose Us.</span>
+              </h2>
             </FadeInUp>
           </div>
 
