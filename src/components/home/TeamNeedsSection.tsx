@@ -137,7 +137,7 @@ export function TeamNeedsSection() {
                 transition={{ delay: 0.5, type: "spring" }}
                 className="absolute -bottom-4 -left-4 bg-foreground text-background px-6 py-3 rounded-xl shadow-xl"
               >
-                <span className="text-2xl font-bold">5+</span>
+                <span className="text-2xl font-bold">7+</span>
                 <p className="text-xs text-background/70">Sports Covered</p>
               </motion.div>
             </motion.div>
