@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Heart, Eye, Menu, ChevronDown, X } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
@@ -8,9 +8,19 @@ import { Button } from "@/components/ui/button";
 import { products, categories } from "@/data/products";
 
 export default function Shop() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  
+  const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
+  // Update category when URL param changes
+  useEffect(() => {
+    if (categoryParam) {
+      setActiveCategory(categoryParam);
+    }
+  }, [categoryParam]);
 
   const filteredProducts = activeCategory === "All"
     ? products

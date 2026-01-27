@@ -204,7 +204,7 @@ export function SoccerBootsSection() {
           viewport={{ once: true }}
         >
           <Link
-            to="/shop?category=boots"
+            to="/shop?category=Soccer+Boots"
             className="inline-block bg-foreground text-background px-6 py-2.5 md:px-8 md:py-3 text-xs md:text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-all rounded"
           >
             <span className="flex items-center gap-2">
