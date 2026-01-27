@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ShoppingBag, Minus, Plus, ArrowLeft, Check } from "lucide-react";
@@ -17,8 +17,24 @@ export default function ProductDetail() {
   
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedOutsole, setSelectedOutsole] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  // Get current price based on variant selection
+  const currentPrice = useMemo(() => {
+    if (!product) return "";
+    if (!product.variants || product.variants.length === 0) return product.price;
+    
+    const variant = product.variants.find(v => {
+      const matchOutsole = !selectedOutsole || v.outsole === selectedOutsole;
+      const matchColor = !selectedColor || !v.color || v.color === selectedColor;
+      return matchOutsole && matchColor;
+    });
+    
+    return variant?.price || product.price;
+  }, [product, selectedOutsole, selectedColor]);
 
   if (!product) {
     return (
@@ -44,19 +60,34 @@ export default function ProductDetail() {
       });
       return;
     }
+
+    if (product.outsoles && product.outsoles.length > 0 && !selectedOutsole) {
+      toast({
+        title: "Please select an outsole type",
+        description: "You must select an outsole type before adding to cart.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const variantInfo = [
+      selectedSize && `Size ${selectedSize}`,
+      selectedOutsole && `${selectedOutsole} Outsole`,
+      selectedColor && selectedColor,
+    ].filter(Boolean).join(" / ");
     
     addToCart({
       id: product.id,
       name: product.name,
       category: product.category,
-      price: product.price,
+      price: currentPrice,
       image: product.image,
-      size: selectedSize,
+      size: variantInfo,
     }, quantity);
     
     toast({
       title: "Added to cart",
-      description: `${quantity}x ${product.name} (Size ${selectedSize}) added to your cart.`,
+      description: `${quantity}x ${product.name} (${variantInfo}) added to your cart.`,
     });
   };
 
@@ -69,14 +100,13 @@ export default function ProductDetail() {
       {/* Breadcrumb */}
       <section className="pt-28 md:pt-36 pb-4 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <motion.button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            whileHover={{ x: -4 }}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm">Back</span>
-          </motion.button>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <span>/</span>
+            <Link to="/shop" className="hover:text-foreground transition-colors">Shop</Link>
+            <span>/</span>
+            <span className="text-foreground">{product.name}</span>
+          </div>
         </div>
       </section>
 
@@ -106,7 +136,7 @@ export default function ProductDetail() {
               </motion.div>
               
               {product.images.length > 1 && (
-                <div className="flex gap-3">
+                <div className="flex gap-3 flex-wrap">
                   {product.images.map((img, index) => (
                     <motion.button
                       key={index}
@@ -143,38 +173,111 @@ export default function ProductDetail() {
 
               <FadeInUp delay={0.1}>
                 <span className="text-sm text-muted-foreground uppercase tracking-wider">
-                  {product.category}
+                  {product.category} · SKU: {product.sku}
                 </span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
+                <h1 className="text-3xl md:text-4xl font-bold mt-2">
                   {product.name}
                 </h1>
+                <p className="text-2xl font-bold text-foreground mt-3">
+                  {currentPrice}
+                </p>
               </FadeInUp>
 
               <FadeInUp delay={0.2}>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {product.description}
                 </p>
+                {product.shortDescription && (
+                  <p className="text-sm text-muted-foreground mt-2 italic">
+                    {product.shortDescription}
+                  </p>
+                )}
               </FadeInUp>
 
               <FadeInUp delay={0.3}>
                 <div className="border-t border-b border-border py-6 space-y-6">
+                  {/* Material Info */}
+                  {product.material && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">Material:</span>
+                      <span className="px-3 py-1 bg-muted text-sm rounded-full">
+                        {product.material}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Outsole Selection */}
+                  {product.outsoles && product.outsoles.length > 0 && (
+                    <div>
+                      <label className="text-sm font-medium mb-3 block">
+                        Select Outsole Type
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {product.outsoles.map((outsole) => (
+                          <motion.button
+                            key={outsole}
+                            onClick={() => setSelectedOutsole(outsole)}
+                            className={`px-4 py-2 rounded-lg border-2 font-medium text-sm transition-colors ${
+                              selectedOutsole === outsole
+                                ? "bg-foreground text-background border-foreground"
+                                : "border-border hover:border-foreground"
+                            }`}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            {outsole}
+                          </motion.button>
+                        ))}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        FG = Firm Ground, SG = Soft Ground, MIX = Mixed, TURF = Artificial Turf
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Color Selection */}
+                  {product.colors && product.colors.length > 0 && (
+                    <div>
+                      <label className="text-sm font-medium mb-3 block">
+                        Select Color
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {product.colors.map((color) => (
+                          <motion.button
+                            key={color}
+                            onClick={() => setSelectedColor(color)}
+                            className={`px-4 py-2 rounded-lg border-2 font-medium text-sm transition-colors ${
+                              selectedColor === color
+                                ? "bg-foreground text-background border-foreground"
+                                : "border-border hover:border-foreground"
+                            }`}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            {color}
+                          </motion.button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Size Selection */}
                   <div>
                     <label className="text-sm font-medium mb-3 block">
-                      Select Size
+                      Select Size (US)
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {product.sizes.map((size) => (
                         <motion.button
                           key={size}
                           onClick={() => setSelectedSize(size)}
-                          className={`w-12 h-12 rounded-lg border-2 font-medium transition-colors ${
+                          className={`min-w-[48px] h-10 px-2 rounded-lg border-2 font-medium text-sm transition-colors ${
                             selectedSize === size
                               ? "bg-foreground text-background border-foreground"
                               : "border-border hover:border-foreground"
                           }`}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                         >
                           {size}
                         </motion.button>
@@ -259,7 +362,17 @@ export default function ProductDetail() {
         <section className="py-16 md:py-20 bg-muted">
           <div className="container mx-auto px-4 sm:px-6">
             <FadeInUp>
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">Related Products</h2>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
+                <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                  You May Also Like
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8">
+                <span className="text-foreground">Related.</span>
+                <br />
+                <span className="text-muted-foreground">Products.</span>
+              </h2>
             </FadeInUp>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedProducts.map((relProduct) => (
@@ -284,7 +397,7 @@ export default function ProductDetail() {
                           {relProduct.category}
                         </span>
                         <h3 className="font-semibold mt-1">{relProduct.name}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{relProduct.price}</p>
+                        <p className="text-sm font-medium mt-1">{relProduct.price}</p>
                       </div>
                     </div>
                   </Link>
