@@ -37,6 +37,22 @@ export function Navigation() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
 
+  // Pages with light backgrounds that need dark navigation
+  const lightBackgroundPages = [
+    '/shop/',
+    '/cart',
+    '/checkout',
+    '/wishlist',
+    '/account',
+  ];
+  
+  const needsDarkNav = lightBackgroundPages.some(page => 
+    location.pathname.startsWith(page) || location.pathname === page
+  );
+
+  // Use dark text when scrolled OR on light background pages
+  const useDarkText = isScrolled || needsDarkNav;
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -58,7 +74,7 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled
+          isScrolled || needsDarkNav
             ? "bg-background/95 backdrop-blur-md shadow-elegant py-3"
             : "bg-transparent py-6"
         )}
@@ -88,7 +104,7 @@ export function Navigation() {
                   <button
                     className={cn(
                       "flex items-center gap-1 text-sm font-medium tracking-wide uppercase transition-colors duration-300",
-                      isScrolled
+                      useDarkText
                         ? "text-foreground hover:text-muted-foreground"
                         : "text-white hover:text-white/70"
                     )}
@@ -101,7 +117,7 @@ export function Navigation() {
                     to={link.href}
                     className={cn(
                       "text-sm font-medium tracking-wide uppercase transition-colors duration-300 relative group",
-                      isScrolled
+                      useDarkText
                         ? "text-foreground hover:text-muted-foreground"
                         : "text-white hover:text-white/70",
                       location.pathname === link.href && "font-semibold"
@@ -144,7 +160,7 @@ export function Navigation() {
               to="/wishlist"
               className={cn(
                 "relative p-2 transition-colors duration-300",
-                isScrolled
+                useDarkText
                   ? "text-foreground hover:text-muted-foreground"
                   : "text-white hover:text-white/70"
               )}
@@ -155,7 +171,7 @@ export function Navigation() {
               to="/cart"
               className={cn(
                 "relative p-2 transition-colors duration-300",
-                isScrolled
+                useDarkText
                   ? "text-foreground hover:text-muted-foreground"
                   : "text-white hover:text-white/70"
               )}
@@ -168,7 +184,7 @@ export function Navigation() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={cn(
                 "lg:hidden p-2 transition-colors duration-300",
-                isScrolled
+                useDarkText
                   ? "text-foreground"
                   : "text-white"
               )}
