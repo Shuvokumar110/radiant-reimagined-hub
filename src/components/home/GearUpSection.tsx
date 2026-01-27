@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
 import tidiLogo from "@/assets/tidi-logo.webp";
+import multiSportAction from "@/assets/multi-sport-action.jpg";
 
 export function GearUpSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,26 +14,27 @@ export function GearUpSection() {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-20 bg-foreground text-background flex flex-col justify-center overflow-hidden relative">
-      {/* Animated background circles */}
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-background/10"
-      />
-      <motion.div
-        animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 8, repeat: Infinity, delay: 2 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-background/10"
-      />
+    <section ref={containerRef} className="min-h-screen py-0 flex flex-col justify-center overflow-hidden relative">
+      {/* Background Image with Parallax */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y }}
+      >
+        <img 
+          src={multiSportAction} 
+          alt="Multi-sport action" 
+          className="w-full h-[120%] object-cover"
+        />
+        <div className="absolute inset-0 bg-foreground/80" />
+      </motion.div>
 
-      <div className="w-full px-8 md:px-16 lg:px-24 relative z-10">
+      <div className="w-full px-8 md:px-16 lg:px-24 relative z-10 py-32 text-background">
         <motion.div
-          style={{ scale, opacity }}
+          style={{ scale }}
           className="text-center max-w-3xl mx-auto"
         >
           {/* Animated line */}
@@ -80,7 +82,7 @@ export function GearUpSection() {
       </div>
 
       {/* Think It / Do It Banner - Infinite Scroll */}
-      <div className="mt-20 py-8 overflow-hidden border-t border-b border-background/10">
+      <div className="relative z-10 py-8 overflow-hidden border-t border-b border-background/10 bg-foreground">
         <div className="relative flex overflow-hidden">
           <motion.div
             className="flex shrink-0"
@@ -94,9 +96,9 @@ export function GearUpSection() {
           >
             {[...Array(6)].map((_, i) => (
               <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
-                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap">THINK IT</span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
                 <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
-                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap">DO IT</span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
                 <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
               </div>
             ))}
@@ -113,9 +115,9 @@ export function GearUpSection() {
           >
             {[...Array(6)].map((_, i) => (
               <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
-                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap">THINK IT</span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
                 <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
-                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap">DO IT</span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
                 <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
               </div>
             ))}
