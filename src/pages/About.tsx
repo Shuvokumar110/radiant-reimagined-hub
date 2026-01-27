@@ -60,7 +60,7 @@ export default function About() {
           />
         </motion.div>
 
-        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pt-32 pb-20">
+        <div className="w-full px-8 md:px-16 lg:px-24 relative z-20 pt-32 pb-16 md:pb-20">
           <div className="max-w-3xl">
             {/* Breadcrumb */}
             <FadeInUp>

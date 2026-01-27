@@ -91,7 +91,7 @@ export default function Shop() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-16 bg-foreground text-background">
+      <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
         <div className="container mx-auto px-6">
           <FadeInUp>
             <h1 className="text-display text-center mb-6">Shop</h1>
