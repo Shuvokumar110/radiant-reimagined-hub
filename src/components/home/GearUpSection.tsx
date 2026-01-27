@@ -13,7 +13,7 @@ export function GearUpSection() {
           viewport={{ once: true }}
           className="text-center max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             Gear Up Your Team Today
           </h2>
           <p className="text-lg text-muted-foreground mb-10">

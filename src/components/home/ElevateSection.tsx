@@ -43,8 +43,8 @@ export function ElevateSection() {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground">
-            Elevate Your Game with TiDi Apparel!
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+            Elevate Your Game with TiDi Apparel
           </h2>
         </motion.div>
 

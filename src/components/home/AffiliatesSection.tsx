@@ -22,7 +22,7 @@ export function AffiliatesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
             Our Affiliates
           </h2>
           <p className="text-lg text-muted-foreground mt-4">

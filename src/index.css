@@ -4,7 +4,7 @@
 
 /* TiDi Apparel - Luxurious Black & White Design System */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
@@ -50,7 +50,7 @@
     --luxury-shadow: 0 35px 60px -15px hsla(0, 0%, 0%, 0.4);
 
     /* Typography */
-    --font-display: 'Montserrat', system-ui, sans-serif;
+    --font-display: 'Inter', system-ui, sans-serif;
     --font-sans: 'Inter', system-ui, sans-serif;
 
     /* Sidebar */

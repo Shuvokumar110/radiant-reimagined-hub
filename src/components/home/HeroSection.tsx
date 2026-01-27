@@ -88,10 +88,10 @@ export function HeroSection() {
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
                   {slides[current].title}
                 </h1>
-                <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white/80 leading-none tracking-tight">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/70 leading-tight tracking-tight">
                   {slides[current].subtitle}
                 </h2>
               </motion.div>
