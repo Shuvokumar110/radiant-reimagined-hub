@@ -1,102 +1,180 @@
-import { motion } from "framer-motion";
-import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ClipboardList, Palette, CheckCircle, Factory, Truck } from "lucide-react";
 
 const steps = [
   {
     number: "01",
     title: "Plan",
-    description: "Work with our team to define your vision and requirements",
+    description: "Work with our team to define your vision, team colors, and requirements.",
     icon: ClipboardList,
   },
   {
     number: "02",
     title: "Design",
-    description: "Custom designs tailored to your team's identity and colors",
+    description: "Our designers create custom mockups tailored to your team's identity.",
     icon: Palette,
   },
   {
     number: "03",
     title: "Approve",
-    description: "Review and approve mockups before production begins",
+    description: "Review detailed proofs and approve final designs before production.",
     icon: CheckCircle,
   },
   {
     number: "04",
     title: "Produce",
-    description: "Premium manufacturing with quality materials",
+    description: "Premium manufacturing with quality materials and attention to detail.",
     icon: Factory,
   },
   {
     number: "05",
     title: "Deliver",
-    description: "Fast, reliable delivery worldwide to your doorstep",
+    description: "Fast, reliable worldwide delivery straight to your doorstep.",
     icon: Truck,
   },
 ];
 
 export function ProcessSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const progress = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
+
   return (
-    <section className="py-32 bg-foreground text-background relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 noise-overlay" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <FadeInUp>
-            <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
-              How It Works
-            </span>
-          </FadeInUp>
-          <FadeInUp delay={0.1}>
-            <h2 className="text-headline">5 Steps to Greatness</h2>
-          </FadeInUp>
-        </div>
+    <section ref={containerRef} className="min-h-[250vh] bg-foreground text-background relative">
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div className="w-full px-8 md:px-16 lg:px-24">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Header & Visual */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
+                How It Works
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">
+                5 Steps to<br />Team Greatness
+              </h2>
+              <p className="text-lg text-background/70 mb-10">
+                From initial concept to final delivery, we make outfitting your team seamless and stress-free.
+              </p>
 
-        <StaggerContainer className="relative">
-          {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-background/20 hidden lg:block" />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {steps.map((step, index) => (
-              <StaggerItem key={step.number}>
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className="relative text-center group"
+              {/* Progress Ring */}
+              <div className="relative w-48 h-48 mx-auto lg:mx-0">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    className="opacity-20"
+                  />
+                  <motion.circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                    strokeLinecap="round"
+                    style={{
+                      pathLength: progress,
+                    }}
+                    className="stroke-background"
+                  />
+                </svg>
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center"
                 >
-                  {/* Step Number */}
-                  <div className="relative z-10 mx-auto mb-6">
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                      className="w-20 h-20 mx-auto bg-background text-foreground rounded-full flex items-center justify-center shadow-luxury"
-                    >
-                      <step.icon className="h-8 w-8" />
-                    </motion.div>
-                    
-                    {/* Number Badge */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-foreground border-2 border-background rounded-full flex items-center justify-center text-xs font-bold">
-                      {step.number}
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-serif font-semibold mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-background/70 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-
-                  {/* Connecting Line for Mobile */}
-                  {index < steps.length - 1 && (
-                    <div className="h-8 w-px bg-background/20 mx-auto mt-6 lg:hidden" />
-                  )}
+                  <motion.span className="text-5xl font-serif font-bold">
+                    {steps.length}
+                  </motion.span>
                 </motion.div>
-              </StaggerItem>
-            ))}
+              </div>
+            </motion.div>
+
+            {/* Right - Steps */}
+            <div className="space-y-4">
+              {steps.map((step, index) => (
+                <ProcessStepCard 
+                  key={step.number} 
+                  step={step} 
+                  index={index} 
+                  scrollProgress={scrollYProgress}
+                />
+              ))}
+            </div>
           </div>
-        </StaggerContainer>
+        </div>
       </div>
     </section>
+  );
+}
+
+function ProcessStepCard({ 
+  step, 
+  index, 
+  scrollProgress 
+}: { 
+  step: typeof steps[0]; 
+  index: number; 
+  scrollProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  // Calculate when this step should be active based on scroll
+  const stepStart = 0.1 + (index * 0.15);
+  const stepEnd = stepStart + 0.15;
+  
+  const opacity = useTransform(
+    scrollProgress,
+    [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
+    [0.4, 1, 1, 0.4]
+  );
+
+  const scale = useTransform(
+    scrollProgress,
+    [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
+    [0.95, 1.02, 1.02, 0.95]
+  );
+
+  const x = useTransform(
+    scrollProgress,
+    [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
+    [20, 0, 0, -20]
+  );
+
+  return (
+    <motion.div
+      style={{ opacity, scale, x }}
+      className="relative flex items-center gap-5 p-5 rounded-xl bg-background/10 backdrop-blur-sm border border-background/20"
+    >
+      {/* Icon */}
+      <div className="flex-shrink-0 w-14 h-14 rounded-full bg-background text-foreground flex items-center justify-center">
+        <step.icon className="h-6 w-6" />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-3 mb-1">
+          <span className="text-xs font-bold text-background/60">{step.number}</span>
+          <h3 className="text-lg font-semibold">{step.title}</h3>
+        </div>
+        <p className="text-sm text-background/70">{step.description}</p>
+      </div>
+
+      {/* Active indicator line */}
+      <motion.div
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-background rounded-r-full"
+        style={{ opacity }}
+      />
+    </motion.div>
   );
 }

@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ElevateSection } from "@/components/home/ElevateSection";
 import { SoccerBootsSection } from "@/components/home/SoccerBootsSection";
+import { ProcessSection } from "@/components/home/ProcessSection";
 import { BestSellingSection } from "@/components/home/BestSellingSection";
 import { LocationsSection } from "@/components/home/LocationsSection";
 import { TeamNeedsSection } from "@/components/home/TeamNeedsSection";
@@ -15,6 +16,7 @@ const Index = () => {
       <HeroSection />
       <ElevateSection />
       <SoccerBootsSection />
+      <ProcessSection />
       <BestSellingSection />
       <LocationsSection />
       <TeamNeedsSection />

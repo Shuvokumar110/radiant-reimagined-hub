@@ -14,35 +14,38 @@ const affiliates = [
 
 export function AffiliatesSection() {
   return (
-    <section className="min-h-screen py-16 bg-background flex flex-col justify-center">
-      <div className="container mx-auto px-6">
+    <section className="min-h-screen py-20 bg-background flex flex-col justify-center">
+      <div className="w-full px-8 md:px-16 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-16"
         >
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground">
             Our Affiliates
           </h2>
+          <p className="text-lg text-muted-foreground mt-4">
+            Trusted by teams and organizations worldwide
+          </p>
         </motion.div>
 
-        {/* Logos Grid */}
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        {/* Logos Grid - Full Width */}
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
           {affiliates.map((affiliate, index) => (
             <motion.div
               key={affiliate.name}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="opacity-80 hover:opacity-100 transition-opacity"
+              transition={{ delay: index * 0.15 }}
+              whileHover={{ scale: 1.1 }}
+              className="opacity-70 hover:opacity-100 transition-all duration-300"
             >
               <img
                 src={affiliate.logo}
                 alt={affiliate.name}
-                className="h-16 md:h-20 w-auto object-contain"
+                className="h-24 md:h-32 w-auto object-contain"
               />
             </motion.div>
           ))}

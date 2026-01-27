@@ -22,19 +22,19 @@ const bootImages = [
 
 export function SoccerBootsSection() {
   return (
-    <section className="min-h-screen py-16 bg-background flex flex-col justify-center">
-      <div className="container mx-auto px-6">
+    <section className="min-h-screen py-20 bg-background flex flex-col justify-center">
+      <div className="w-full px-8 md:px-16 lg:px-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-2">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
             Special Order Soccer
           </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Premium Italian-made soccer boots crafted from kangaroo leather with custom color options for your team.
           </p>
         </motion.div>
@@ -44,17 +44,17 @@ export function SoccerBootsSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mb-8"
+          className="mb-12"
         >
           <img
             src={heroBoots}
             alt="TiDi Soccer Boots Collection"
-            className="w-full max-w-3xl mx-auto"
+            className="w-full max-w-5xl mx-auto"
           />
         </motion.div>
 
         {/* Action Shots Grid */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
           {bootImages.map((img, index) => (
             <motion.div
               key={index}
@@ -62,19 +62,19 @@ export function SoccerBootsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="relative overflow-hidden rounded-lg aspect-square"
+              className="relative overflow-hidden rounded-xl aspect-square group"
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </motion.div>
           ))}
         </div>
 
         {/* Features Bar */}
-        <div className="flex flex-wrap justify-center gap-6 mb-8">
+        <div className="flex flex-wrap justify-center gap-8 mb-12">
           {features.map((feature, index) => (
             <motion.div
               key={feature.label}
@@ -82,10 +82,10 @@ export function SoccerBootsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-3"
             >
-              <feature.icon className="h-4 w-4 text-muted-foreground" />
-              <span className="text-xs font-medium text-muted-foreground">{feature.label}</span>
+              <feature.icon className="h-5 w-5 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">{feature.label}</span>
             </motion.div>
           ))}
         </div>
@@ -94,7 +94,7 @@ export function SoccerBootsSection() {
         <div className="text-center">
           <Link
             to="/shop?category=boots"
-            className="inline-block bg-foreground text-background px-6 py-2.5 text-xs font-medium tracking-wide uppercase hover:bg-foreground/90 transition-colors rounded"
+            className="inline-block bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-colors rounded"
           >
             Explore Collection
           </Link>

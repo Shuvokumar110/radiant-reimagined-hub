@@ -35,25 +35,25 @@ const products = [
 
 export function BestSellingSection() {
   return (
-    <section className="min-h-screen py-16 bg-muted flex flex-col justify-center">
-      <div className="container mx-auto px-6">
+    <section className="min-h-screen py-20 bg-muted flex flex-col justify-center">
+      <div className="w-full px-8 md:px-16 lg:px-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2 block">
+          <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-3 block">
             Best Selling Products
           </span>
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground">
             Popular Team Apparel
           </h2>
         </motion.div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {/* Products Grid - Full Width */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -65,31 +65,31 @@ export function BestSellingSection() {
             >
               <Link to={`/shop?product=${product.id}`}>
                 {/* Image */}
-                <div className="relative overflow-hidden rounded-lg bg-background mb-3 aspect-square">
+                <div className="relative overflow-hidden rounded-xl bg-background mb-4 aspect-square">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <button className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Heart className="h-4 w-4 text-foreground" />
+                  <button className="absolute top-3 right-3 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <Heart className="h-5 w-5 text-foreground" />
                   </button>
                 </div>
 
                 {/* Info */}
-                <h3 className="text-sm font-medium text-foreground mb-1 line-clamp-1">
+                <h3 className="text-base font-semibold text-foreground mb-1 line-clamp-1">
                   {product.name}
                 </h3>
-                <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
+                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                   {product.description}
                 </p>
 
                 {/* Color Options */}
-                <div className="flex gap-1">
+                <div className="flex gap-2">
                   {product.colors.map((color, i) => (
                     <span
                       key={i}
-                      className="w-4 h-4 rounded-full border border-border"
+                      className="w-5 h-5 rounded-full border-2 border-border"
                       style={{ backgroundColor: color }}
                     />
                   ))}
