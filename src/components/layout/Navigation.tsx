@@ -7,6 +7,7 @@ import tidiLogo from "@/assets/tidi-logo.webp";
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
   { name: "Shop", href: "/shop" },
   { name: "Custom Outfit", href: "/custom-team-outfit" },
   {
