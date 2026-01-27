@@ -14,13 +14,19 @@ const footerLinks = {
   ],
   shop: [
     { name: "All Products", href: "/shop" },
-    { name: "Soccer Boots", href: "/shop?category=boots" },
-    { name: "Training Gear", href: "/shop?category=training" },
-    { name: "Apparel", href: "/shop?category=apparel" },
+    { name: "Soccer Boots", href: "/shop?category=Soccer+Boots" },
+    { name: "Jerseys", href: "/shop?category=Jerseys" },
+    { name: "Team Uniforms", href: "/shop?category=Team+Uniforms" },
   ],
   company: [
     { name: "About Us", href: "/about" },
     { name: "Contact", href: "/contact" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Affiliate Program", href: "/affiliate" },
+  ],
+  support: [
+    { name: "FAQ", href: "/faq" },
+    { name: "Shipping & Returns", href: "/shipping-returns" },
     { name: "My Account", href: "/account" },
     { name: "Wishlist", href: "/wishlist" },
   ],
@@ -40,7 +46,7 @@ export function Footer() {
       
       <div className="container mx-auto px-6 py-16 relative z-10">
         {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/">
@@ -108,6 +114,23 @@ export function Footer() {
             <h4 className="font-serif font-semibold text-lg mb-6">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-background/70 hover:text-background transition-colors duration-300"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="font-serif font-semibold text-lg mb-6">Support</h4>
+            <ul className="space-y-3">
+              {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
