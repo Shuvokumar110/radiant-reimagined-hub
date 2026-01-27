@@ -59,8 +59,8 @@ export function ProcessSection() {
               <span className="text-sm font-medium tracking-widest uppercase text-background/60 mb-4 block">
                 How It Works
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">
-                5 Steps to<br />Team Greatness
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                5 Steps to Team Greatness
               </h2>
               <p className="text-lg text-background/70 mb-10">
                 From initial concept to final delivery, we make outfitting your team seamless and stress-free.

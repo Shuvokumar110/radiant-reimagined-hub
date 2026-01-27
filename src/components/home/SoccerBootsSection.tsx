@@ -31,7 +31,7 @@ export function SoccerBootsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
             Special Order Soccer
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">

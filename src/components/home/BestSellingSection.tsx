@@ -47,7 +47,7 @@ export function BestSellingSection() {
           <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-3 block">
             Best Selling Products
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
             Popular Team Apparel
           </h2>
         </motion.div>
