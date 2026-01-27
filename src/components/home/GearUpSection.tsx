@@ -30,26 +30,49 @@ export function GearUpSection() {
       </div>
 
       {/* Think It / Do It Banner - Infinite Scroll */}
-      <div className="mt-20 bg-foreground text-background py-8 overflow-hidden">
-        <motion.div
-          className="flex whitespace-nowrap"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {/* Duplicate content for seamless loop */}
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 md:gap-12 mx-8 md:mx-12">
-              <span className="text-2xl md:text-4xl font-serif font-bold tracking-wide">THINK IT</span>
-              <img src={tidiLogo} alt="TiDi" className="h-10 md:h-14 invert" />
-              <span className="text-2xl md:text-4xl font-serif font-bold tracking-wide">DO IT</span>
-              <img src={tidiLogo} alt="TiDi" className="h-10 md:h-14 invert" />
-            </div>
-          ))}
-        </motion.div>
+      <div className="mt-20 bg-foreground text-background py-6 overflow-hidden">
+        <div className="relative flex overflow-hidden">
+          <motion.div
+            className="flex shrink-0"
+            animate={{ x: [0, -1920] }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+          >
+            {/* First set */}
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-wider whitespace-nowrap">THINK IT</span>
+                <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-wider whitespace-nowrap">DO IT</span>
+                <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
+              </div>
+            ))}
+          </motion.div>
+          <motion.div
+            className="flex shrink-0"
+            animate={{ x: [0, -1920] }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+          >
+            {/* Second set for seamless loop */}
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-wider whitespace-nowrap">THINK IT</span>
+                <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
+                <span className="text-xl md:text-3xl font-serif font-bold tracking-wider whitespace-nowrap">DO IT</span>
+                <img src={tidiLogo} alt="TiDi" className="h-8 md:h-12 mx-4 md:mx-6 brightness-0 invert" />
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
