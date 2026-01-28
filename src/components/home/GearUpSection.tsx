@@ -8,13 +8,13 @@ import { useFadeIn, useBackgroundParallax } from "@/hooks/useGSAPAnimations";
 
 export function GearUpSection() {
   const contentRef = useFadeIn(0);
-  const bgRef = useBackgroundParallax(0.3);
+  const bgRef = useBackgroundParallax(0.4);
 
   return (
     <section className="min-h-screen py-0 flex flex-col justify-center overflow-hidden relative">
-      {/* Background Image with Parallax */}
+      {/* Background Image with Parallax + Scale */}
       <div className="absolute inset-0 overflow-hidden">
-        <div ref={bgRef} className="absolute inset-0 h-[120%] -top-[10%]">
+        <div ref={bgRef} className="absolute inset-[-10%] will-change-transform">
           <img 
             src={multiSportAction} 
             alt="Multi-sport action" 
@@ -39,10 +39,10 @@ export function GearUpSection() {
 
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 bg-background text-foreground px-10 py-4 text-base font-semibold tracking-wide uppercase transition-all rounded group hover:gap-5"
+            className="inline-flex items-center gap-3 bg-background text-foreground px-10 py-4 text-base font-semibold tracking-wide uppercase transition-all duration-300 rounded group hover:gap-5"
           >
             Request Quote
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

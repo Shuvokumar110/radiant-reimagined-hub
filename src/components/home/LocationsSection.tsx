@@ -1,6 +1,6 @@
 import { MapPin } from "lucide-react";
 import worldMap from "@/assets/world-map.png";
-import { useFadeIn, useStaggerFadeIn, useScaleIn } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn, useScaleIn, useParallax } from "@/hooks/useGSAPAnimations";
 
 const locations = [
   { name: "TiDi USA", x: "22%", y: "42%" },
@@ -20,7 +20,7 @@ const stats = [
 
 export function LocationsSection() {
   const headerRef = useFadeIn(0);
-  const mapRef = useScaleIn(0.2);
+  const mapRef = useParallax(-0.1);
   const statsRef = useStaggerFadeIn(0.1);
 
   return (
@@ -44,8 +44,8 @@ export function LocationsSection() {
           </p>
         </div>
 
-        {/* World Map Container */}
-        <div ref={mapRef} className="relative max-w-6xl mx-auto">
+        {/* World Map Container with Parallax */}
+        <div ref={mapRef} className="relative max-w-6xl mx-auto will-change-transform">
           <img src={worldMap} alt="TiDi Global Locations" className="w-full h-auto" />
 
           {/* Location Markers */}
@@ -55,15 +55,15 @@ export function LocationsSection() {
               className="absolute group"
               style={{ left: location.x, top: location.y }}
             >
-              {/* Pulse Ring - CSS animation */}
+              {/* Pulse Ring */}
               <div className="absolute inset-0 -m-4 rounded-full bg-destructive/30 animate-ping" />
               
               {/* Marker */}
-              <div className="relative z-10 cursor-pointer transition-transform hover:scale-125">
+              <div className="relative z-10 cursor-pointer transition-transform duration-300 hover:scale-125">
                 <MapPin className="h-6 w-6 text-destructive fill-destructive drop-shadow-lg" />
                 
                 {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                   <div className="bg-foreground text-background px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl">
                     {location.name}
                   </div>
@@ -77,7 +77,7 @@ export function LocationsSection() {
         {/* Stats Bar */}
         <div ref={statsRef} className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center p-4 bg-muted rounded-xl">
+            <div key={stat.label} className="text-center p-4 bg-muted rounded-xl transition-transform duration-300 hover:scale-105">
               <span className="text-3xl md:text-4xl font-bold text-foreground block">
                 {stat.value}
               </span>
