@@ -31,14 +31,14 @@ export function useSmoothScroll() {
       return;
     }
 
-    // Initialize Lenis with slower, smoother settings for desktop
+    // Initialize Lenis with smooth settings for desktop
     lenisRef.current = new Lenis({
-      duration: 1.8, // Slower scroll (higher = slower)
-      easing: (t) => 1 - Math.pow(1 - t, 4), // Smoother easing curve
+      duration: 1.2, // Balanced scroll speed
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential decay for smooth feel
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.8, // Reduce scroll speed
+      wheelMultiplier: 1.0, // Normal scroll speed
       touchMultiplier: 1,
       infinite: false,
     });
