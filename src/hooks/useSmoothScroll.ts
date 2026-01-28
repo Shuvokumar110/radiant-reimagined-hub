@@ -17,15 +17,30 @@ export function useSmoothScroll() {
     ).matches;
     if (prefersReducedMotion) return;
 
-    // Initialize Lenis with optimized settings
+    // Skip for touch/mobile devices - use native scroll
+    const isTouchDevice = 
+      'ontouchstart' in window || 
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches;
+    
+    if (isTouchDevice) {
+      // Still set up ScrollTrigger for animations on mobile, just without Lenis
+      ScrollTrigger.defaults({
+        scroller: window,
+      });
+      return;
+    }
+
+    // Initialize Lenis with slower, smoother settings for desktop
     lenisRef.current = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.8, // Slower scroll (higher = slower)
+      easing: (t) => 1 - Math.pow(1 - t, 4), // Smoother easing curve
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      touchMultiplier: 1.5,
-      syncTouch: true,
+      wheelMultiplier: 0.8, // Reduce scroll speed
+      touchMultiplier: 1,
+      infinite: false,
     });
 
     lenisInstance = lenisRef.current;
@@ -38,7 +53,7 @@ export function useSmoothScroll() {
       lenisRef.current?.raf(time * 1000);
     });
 
-    // Tell GSAP to use Lenis's scroll position
+    // Disable GSAP's lag smoothing for perfect sync
     gsap.ticker.lagSmoothing(0);
 
     return () => {
