@@ -72,17 +72,16 @@ export function SportSelection() {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             
-            {/* Minimal gradient for text legibility - preserves original image colors */}
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
-            
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-end p-3 md:p-4">
-              <h3 className="text-base md:text-lg font-bold text-white text-center mb-1">
-                {sport.name}
-              </h3>
-              <div className="flex items-center gap-1 text-white/80 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>Select</span>
-                <ArrowRight className="w-3 h-3" />
+            {/* Content with blur background for text legibility */}
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center p-3 md:p-4">
+              <div className="bg-black/40 backdrop-blur-md rounded-lg px-4 py-2 md:px-5 md:py-3">
+                <h3 className="text-base md:text-lg font-bold text-white text-center">
+                  {sport.name}
+                </h3>
+                <div className="flex items-center justify-center gap-1 text-white/90 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span>Select</span>
+                  <ArrowRight className="w-3 h-3" />
+                </div>
               </div>
             </div>
           </motion.button>
