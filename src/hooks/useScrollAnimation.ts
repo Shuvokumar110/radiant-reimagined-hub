@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useMotionValue, MotionValue } from "framer-motion";
-import { useAnimationDebug } from "@/context/AnimationDebugContext";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -51,15 +50,7 @@ export function useParallax(
   offset: MotionValue<number>;
 } {
   const { enabled = true } = options;
-  const { state } = useAnimationDebug();
   
-  // Check both the local enabled option AND the global debug parallax toggle
-  const isEnabled = enabled && state.parallax;
-  
-  // IMPORTANT:
-  // Using React state here causes a full component re-render on every scroll tick.
-  // With Lenis + Framer Motion, that can manifest as "blinking"/flicker.
-  // A MotionValue updates styles without re-rendering.
   const offset = useMotionValue(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -68,7 +59,7 @@ export function useParallax(
   latestSpeedRef.current = speed;
 
   useEffect(() => {
-    if (!isEnabled) {
+    if (!enabled) {
       offset.set(0);
       return;
     }
@@ -82,7 +73,6 @@ export function useParallax(
       const scrollProgress =
         (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
 
-      // Keep the same output range as before (px-ish values)
       offset.set(scrollProgress * latestSpeedRef.current * 100);
     };
 
@@ -99,7 +89,7 @@ export function useParallax(
       if (rafIdRef.current != null) window.cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
     };
-  }, [isEnabled, offset]);
+  }, [enabled, offset]);
 
   return { ref, offset };
 }

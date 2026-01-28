@@ -1,49 +1,26 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Award, Globe, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
 import heroAthlete from "@/assets/hero-athlete.jpg";
 import heroSlide2 from "@/assets/hero-slide-2.png";
 import heroSlide3 from "@/assets/hero-slide-3.png";
+import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
 
 const slides = [
-  {
-    image: heroAthlete,
-    title: "PLAY BOLD.",
-    subtitle: "LOOK BOLD.",
-  },
-  {
-    image: heroSlide2,
-    title: "WIN TOGETHER.",
-    subtitle: "STAND OUT.",
-  },
-  {
-    image: heroSlide3,
-    title: "OWN THE GAME.",
-    subtitle: "OWN THE STYLE.",
-  },
+  { image: heroAthlete, title: "PLAY BOLD.", subtitle: "LOOK BOLD." },
+  { image: heroSlide2, title: "WIN TOGETHER.", subtitle: "STAND OUT." },
+  { image: heroSlide3, title: "OWN THE GAME.", subtitle: "OWN THE STYLE." },
 ];
 
 const trustBadges = [
-  {
-    icon: Award,
-    title: "Pro-Grade Quality",
-    description: "Premium materials built for performance",
-  },
-  {
-    icon: Globe,
-    title: "Worldwide Delivery",
-    description: "Fast shipping to teams everywhere",
-  },
-  {
-    icon: Sparkles,
-    title: "Effortless Process",
-    description: "Simple ordering from design to delivery",
-  },
+  { icon: Award, title: "Pro-Grade Quality", description: "Premium materials built for performance" },
+  { icon: Globe, title: "Worldwide Delivery", description: "Fast shipping to teams everywhere" },
+  { icon: Sparkles, title: "Effortless Process", description: "Simple ordering from design to delivery" },
 ];
 
 export function HeroSection() {
   const [current, setCurrent] = useState(0);
+  const badgesRef = useStaggerFadeIn(0.15);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,43 +36,33 @@ export function HeroSection() {
     <section className="relative w-full">
       {/* Main Hero - Full Width */}
       <div className="relative h-screen min-h-[600px]">
-        {/* Slides */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="absolute inset-0"
+        {/* Slides - CSS transitions only */}
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              index === current ? "opacity-100" : "opacity-0"
+            }`}
           >
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('${slides[current].image}')` }}
+              style={{ backgroundImage: `url('${slide.image}')` }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        ))}
 
         {/* Content - Bottom Positioned */}
         <div className="relative z-10 h-full flex items-end">
           <div className="w-full px-8 md:px-16 lg:px-24 pb-32">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                  {slides[current].title}
-                </h1>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/70 leading-tight tracking-tight">
-                  {slides[current].subtitle}
-                </h2>
-              </motion.div>
-            </AnimatePresence>
+            <div className="transition-all duration-500">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+                {slides[current].title}
+              </h1>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/70 leading-tight tracking-tight">
+                {slides[current].subtitle}
+              </h2>
+            </div>
           </div>
         </div>
 
@@ -127,19 +94,12 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Trust Badges Section - Full Width */}
+      {/* Trust Badges Section */}
       <div className="bg-background py-8 md:py-10 border-b border-border">
         <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-8">
-            {trustBadges.map((badge, index) => (
-              <motion.div
-                key={badge.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="flex items-center gap-3 md:gap-4"
-              >
+          <div ref={badgesRef} className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-8">
+            {trustBadges.map((badge) => (
+              <div key={badge.title} className="flex items-center gap-3 md:gap-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
                   <badge.icon className="h-4 w-4 md:h-5 md:w-5 text-foreground" />
                 </div>
@@ -147,7 +107,7 @@ export function HeroSection() {
                   <h3 className="font-semibold text-sm md:text-base text-foreground">{badge.title}</h3>
                   <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">{badge.description}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
