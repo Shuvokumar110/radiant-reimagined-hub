@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 import galleryTeam1 from "@/assets/gallery/team-1.png";
 import galleryTeam2 from "@/assets/gallery/team-2.png";
 import galleryTeam3 from "@/assets/gallery/team-3.png";
 import galleryTeam4 from "@/assets/gallery/team-4.png";
 import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
-
-const categories = [
-  "All Products", "Team Uniforms", "Jerseys", "Tracksuits", "T-Shirts", 
-  "Hoodies", "Jackets", "Shorts", "Caps", "Accessories"
-];
 
 const programs = [
   { name: "High School", subtitle: "Programs", image: galleryTeam1, href: "/programs/high-school" },
@@ -20,9 +14,7 @@ const programs = [
 ];
 
 export function ElevateSection() {
-  const [activeCategory, setActiveCategory] = useState("All Products");
   const headerRef = useFadeIn(0);
-  const pillsRef = useStaggerFadeIn(0.05);
   const cardsRef = useStaggerFadeIn(0.1);
 
   return (
@@ -43,22 +35,6 @@ export function ElevateSection() {
           </h2>
         </div>
 
-        {/* Category Pills */}
-        <div ref={pillsRef} className="flex flex-wrap justify-center gap-2 mb-16">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 hover:scale-105 ${
-                activeCategory === cat
-                  ? "bg-foreground text-background shadow-lg"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
 
         {/* Programs Grid */}
         <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
