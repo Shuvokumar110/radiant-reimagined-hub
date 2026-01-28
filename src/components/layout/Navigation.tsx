@@ -45,6 +45,7 @@ export function Navigation() {
     '/checkout',
     '/wishlist',
     '/account',
+    '/custom-team-outfit',
   ];
   
   const needsDarkNav = lightBackgroundPages.some(page => 
