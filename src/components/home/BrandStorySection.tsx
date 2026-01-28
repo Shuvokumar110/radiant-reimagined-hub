@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { FadeInUp, AnimatedText } from "@/components/ui/animated-text";
 import { useParallax } from "@/hooks/useScrollAnimation";
-import { PARALLAX_ENABLED } from "@/lib/motionConfig";
+import { useAnimationDebug } from "@/context/AnimationDebugContext";
 
 export function BrandStorySection() {
-  const { ref, offset } = useParallax(0.3, { enabled: PARALLAX_ENABLED });
-
+  const { state } = useAnimationDebug();
+  const { ref, offset } = useParallax(0.3, { enabled: state.parallax });
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       {/* Background Pattern */}
@@ -83,7 +83,7 @@ export function BrandStorySection() {
           {/* Right - Image with Parallax */}
           <div ref={ref} className="relative">
             <motion.div
-              style={{ y: PARALLAX_ENABLED ? offset : 0 }}
+              style={{ y: state.parallax ? offset : 0 }}
               className="relative z-10"
             >
               <div className="img-zoom rounded-lg overflow-hidden shadow-luxury">

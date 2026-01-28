@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useAnimationDebug } from "@/context/AnimationDebugContext";
 
 export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const { state } = useAnimationDebug();
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -14,6 +16,9 @@ export function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    // If custom cursor is disabled via debug, skip
+    if (!state.customCursor) return;
+
     // Only show custom cursor on desktop
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) return;
@@ -64,7 +69,12 @@ export function CustomCursor() {
       window.removeEventListener('mouseout', handleMouseOut);
       document.body.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, state.customCursor]);
+
+  // If disabled via debug, don't render
+  if (!state.customCursor) {
+    return null;
+  }
 
   // Don't render on touch devices
   if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
