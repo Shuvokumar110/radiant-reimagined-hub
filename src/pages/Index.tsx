@@ -9,36 +9,12 @@ import { TeamNeedsSection } from "@/components/home/TeamNeedsSection";
 import { AffiliatesSection } from "@/components/home/AffiliatesSection";
 import { GearUpSection } from "@/components/home/GearUpSection";
 import { ContactBarSection } from "@/components/home/ContactBarSection";
-import { AnimationDebugPanel } from "@/components/ui/AnimationDebugPanel";
 import { Preloader } from "@/components/ui/Preloader";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useAnimationDebug } from "@/context/AnimationDebugContext";
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
-  const { state } = useAnimationDebug();
-
-  // If Framer Motion is disabled, skip the motion wrapper and preloader
-  if (!state.framerMotion) {
-    return (
-      <>
-        <Layout>
-          <HeroSection />
-          <ElevateSection />
-          <SoccerBootsSection />
-          <ProcessSection />
-          <BestSellingSection />
-          <LocationsSection />
-          <TeamNeedsSection />
-          <AffiliatesSection />
-          <GearUpSection />
-          <ContactBarSection />
-        </Layout>
-        <AnimationDebugPanel />
-      </>
-    );
-  }
 
   return (
     <>
@@ -63,8 +39,6 @@ const Index = () => {
           <ContactBarSection />
         </Layout>
       </motion.div>
-      
-      <AnimationDebugPanel />
     </>
   );
 };
