@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+let lenisInstance: Lenis | null = null;
+
 export function useSmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -15,9 +17,9 @@ export function useSmoothScroll() {
     ).matches;
     if (prefersReducedMotion) return;
 
-    // Initialize Lenis
+    // Initialize Lenis with optimized settings
     lenisRef.current = new Lenis({
-      duration: 1.2,
+      duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -26,21 +28,29 @@ export function useSmoothScroll() {
       syncTouch: true,
     });
 
-    // Sync Lenis with GSAP's ticker
-    const update = (time: number) => {
-      lenisRef.current?.raf(time * 1000);
-    };
-    gsap.ticker.add(update);
+    lenisInstance = lenisRef.current;
 
-    // Sync ScrollTrigger with Lenis
+    // Update ScrollTrigger on Lenis scroll
     lenisRef.current.on("scroll", ScrollTrigger.update);
 
+    // Use GSAP ticker for smooth animation loop
+    gsap.ticker.add((time) => {
+      lenisRef.current?.raf(time * 1000);
+    });
+
+    // Tell GSAP to use Lenis's scroll position
+    gsap.ticker.lagSmoothing(0);
+
     return () => {
-      gsap.ticker.remove(update);
       lenisRef.current?.destroy();
       lenisRef.current = null;
+      lenisInstance = null;
     };
   }, []);
 
   return lenisRef;
+}
+
+export function getLenis() {
+  return lenisInstance;
 }

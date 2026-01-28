@@ -74,9 +74,10 @@ export function useStaggerFadeIn(stagger: number = 0.1) {
 }
 
 /**
- * Parallax effect - element moves slower/faster than scroll
+ * Smooth parallax effect - element moves at different speed than scroll
+ * Uses scrub for buttery-smooth animation synced with scroll
  */
-export function useParallax(speed: number = 0.5) {
+export function useParallax(speed: number = 0.3) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -85,13 +86,44 @@ export function useParallax(speed: number = 0.5) {
 
     const ctx = gsap.context(() => {
       gsap.to(el, {
-        y: () => speed * 100,
+        y: () => speed * 150, // Adjust multiplier for effect intensity
         ease: "none",
         scrollTrigger: {
           trigger: el,
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: 0.5, // Smooth scrubbing - lower = smoother
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [speed]);
+
+  return ref;
+}
+
+/**
+ * Parallax for background images - moves slower for depth effect
+ */
+export function useBackgroundParallax(speed: number = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(el, {
+        yPercent: speed * 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el.parentElement || el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.8, // Even smoother for backgrounds
+          invalidateOnRefresh: true,
         },
       });
     });
@@ -131,6 +163,38 @@ export function useScaleIn(delay: number = 0) {
 
     return () => ctx.revert();
   }, [delay]);
+
+  return ref;
+}
+
+/**
+ * Horizontal parallax - for marquee-like effects
+ */
+export function useHorizontalParallax(speed: number = 0.5, direction: 'left' | 'right' = 'left') {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const multiplier = direction === 'left' ? -1 : 1;
+
+    const ctx = gsap.context(() => {
+      gsap.to(el, {
+        x: () => multiplier * speed * 200,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [speed, direction]);
 
   return ref;
 }
