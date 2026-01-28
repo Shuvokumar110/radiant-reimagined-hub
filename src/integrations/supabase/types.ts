@@ -14,7 +14,229 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      design_templates: {
+        Row: {
+          created_at: string
+          design_config: Json
+          id: string
+          is_public: boolean | null
+          name: string
+          product_type: string
+          share_code: string | null
+          sport: Database["public"]["Enums"]["sport_type"]
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          design_config: Json
+          id?: string
+          is_public?: boolean | null
+          name: string
+          product_type: string
+          share_code?: string | null
+          sport: Database["public"]["Enums"]["sport_type"]
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          design_config?: Json
+          id?: string
+          is_public?: boolean | null
+          name?: string
+          product_type?: string
+          share_code?: string | null
+          sport?: Database["public"]["Enums"]["sport_type"]
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      order_proofs: {
+        Row: {
+          corrected_logo_url: string | null
+          created_at: string
+          feedback: string | null
+          id: string
+          order_id: string
+          proof_url: string | null
+          reviewed_at: string | null
+          status: Database["public"]["Enums"]["proof_status"]
+          version: number
+        }
+        Insert: {
+          corrected_logo_url?: string | null
+          created_at?: string
+          feedback?: string | null
+          id?: string
+          order_id: string
+          proof_url?: string | null
+          reviewed_at?: string | null
+          status?: Database["public"]["Enums"]["proof_status"]
+          version?: number
+        }
+        Update: {
+          corrected_logo_url?: string | null
+          created_at?: string
+          feedback?: string | null
+          id?: string
+          order_id?: string
+          proof_url?: string | null
+          reviewed_at?: string | null
+          status?: Database["public"]["Enums"]["proof_status"]
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_proofs_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "team_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_roster: {
+        Row: {
+          created_at: string
+          id: string
+          jersey_number: string | null
+          notes: string | null
+          order_id: string
+          player_name: string
+          quantity: number
+          size: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          jersey_number?: string | null
+          notes?: string | null
+          order_id: string
+          player_name: string
+          quantity?: number
+          size: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          jersey_number?: string | null
+          notes?: string | null
+          order_id?: string
+          player_name?: string
+          quantity?: number
+          size?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_roster_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "team_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_orders: {
+        Row: {
+          billing_address: Json | null
+          bulk_discount: number | null
+          collar_type: string | null
+          created_at: string
+          custom_patch: boolean | null
+          customization_fees: number | null
+          design_config: Json | null
+          extra_logo_placement: boolean | null
+          fabric_type: string | null
+          fit: string | null
+          gender: string | null
+          id: string
+          need_by_date: string | null
+          player_name_addon: boolean | null
+          product_sku: string | null
+          product_type: string
+          shipping_address: Json | null
+          shipping_estimate: number | null
+          sleeve_type: string | null
+          special_instructions: string | null
+          sponsor_placement: boolean | null
+          sport: Database["public"]["Enums"]["sport_type"]
+          status: Database["public"]["Enums"]["order_status"]
+          subtotal: number | null
+          tax_estimate: number | null
+          total_amount: number | null
+          total_quantity: number | null
+          unit_price: number | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          billing_address?: Json | null
+          bulk_discount?: number | null
+          collar_type?: string | null
+          created_at?: string
+          custom_patch?: boolean | null
+          customization_fees?: number | null
+          design_config?: Json | null
+          extra_logo_placement?: boolean | null
+          fabric_type?: string | null
+          fit?: string | null
+          gender?: string | null
+          id?: string
+          need_by_date?: string | null
+          player_name_addon?: boolean | null
+          product_sku?: string | null
+          product_type: string
+          shipping_address?: Json | null
+          shipping_estimate?: number | null
+          sleeve_type?: string | null
+          special_instructions?: string | null
+          sponsor_placement?: boolean | null
+          sport: Database["public"]["Enums"]["sport_type"]
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal?: number | null
+          tax_estimate?: number | null
+          total_amount?: number | null
+          total_quantity?: number | null
+          unit_price?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          billing_address?: Json | null
+          bulk_discount?: number | null
+          collar_type?: string | null
+          created_at?: string
+          custom_patch?: boolean | null
+          customization_fees?: number | null
+          design_config?: Json | null
+          extra_logo_placement?: boolean | null
+          fabric_type?: string | null
+          fit?: string | null
+          gender?: string | null
+          id?: string
+          need_by_date?: string | null
+          player_name_addon?: boolean | null
+          product_sku?: string | null
+          product_type?: string
+          shipping_address?: Json | null
+          shipping_estimate?: number | null
+          sleeve_type?: string | null
+          special_instructions?: string | null
+          sponsor_placement?: boolean | null
+          sport?: Database["public"]["Enums"]["sport_type"]
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal?: number | null
+          tax_estimate?: number | null
+          total_amount?: number | null
+          total_quantity?: number | null
+          unit_price?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +245,24 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | "draft"
+        | "submitted"
+        | "proof_sent"
+        | "changes_requested"
+        | "approved"
+        | "in_production"
+        | "shipped"
+        | "delivered"
+      proof_status: "pending" | "approved" | "revision_requested"
+      sport_type:
+        | "soccer"
+        | "basketball"
+        | "american_football"
+        | "baseball_softball"
+        | "track_field"
+        | "cricket"
+        | "business"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +389,27 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        "draft",
+        "submitted",
+        "proof_sent",
+        "changes_requested",
+        "approved",
+        "in_production",
+        "shipped",
+        "delivered",
+      ],
+      proof_status: ["pending", "approved", "revision_requested"],
+      sport_type: [
+        "soccer",
+        "basketball",
+        "american_football",
+        "baseball_softball",
+        "track_field",
+        "cricket",
+        "business",
+      ],
+    },
   },
 } as const
