@@ -81,13 +81,15 @@ export function SportSelection() {
             </div>
 
             {/* Text Content - Compact on mobile */}
-            <div className="p-1.5 sm:p-2.5 md:p-5 bg-card flex items-center justify-between md:justify-center">
-              <h3 className="text-[11px] sm:text-sm md:text-lg font-semibold text-foreground md:text-center group-active:text-primary md:group-hover:text-primary transition-colors duration-300 truncate">
-                {sport.name}
-              </h3>
-              
-              {/* Mobile: Always visible arrow */}
-              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground group-active:text-primary md:hidden transition-colors flex-shrink-0 ml-1" />
+            <div className="p-1.5 sm:p-2.5 md:p-5 bg-card">
+              <div className="flex items-center justify-between md:justify-center">
+                <h3 className="text-[11px] sm:text-sm md:text-lg font-semibold text-foreground md:text-center group-active:text-primary md:group-hover:text-primary transition-colors duration-300 truncate">
+                  {sport.name}
+                </h3>
+                
+                {/* Mobile: Always visible arrow */}
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground group-active:text-primary md:hidden transition-colors flex-shrink-0 ml-1" />
+              </div>
               
               {/* Desktop: Hover text */}
               <p className="hidden md:block text-xs text-muted-foreground text-center mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
