@@ -40,60 +40,60 @@ export function StyleOptions() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-3 mb-6">
         <Button
           variant="ghost"
           size="icon"
           onClick={prevStep}
-          className="rounded-full"
+          className="rounded-full shrink-0"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold">Style Options</h2>
-          <p className="text-muted-foreground">
-            Customize the fit and features for {product.name}
+          <h2 className="text-xl md:text-2xl font-bold">Style Options</h2>
+          <p className="text-sm text-muted-foreground">
+            Customize fit and features
           </p>
         </div>
       </div>
 
-      <div className="space-y-8">
-        {/* Product Preview */}
+      <div className="space-y-6">
+        {/* Product Preview - Compact on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-6 bg-muted rounded-2xl flex items-center gap-6"
+          className="p-4 bg-muted rounded-xl flex items-center gap-4"
         >
-          <div className="w-24 h-24 rounded-xl overflow-hidden bg-foreground/5">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-foreground/5 shrink-0">
             <img
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
-          <div>
-            <h3 className="text-lg font-semibold">{product.name}</h3>
-            <p className="text-muted-foreground text-sm">{product.shortDescription}</p>
-            <p className="text-lg font-bold mt-1">From ${product.basePrice}</p>
+          <div className="min-w-0">
+            <h3 className="text-base md:text-lg font-semibold truncate">{product.name}</h3>
+            <p className="text-muted-foreground text-sm truncate">{product.shortDescription}</p>
+            <p className="text-base md:text-lg font-bold mt-0.5">From ${product.basePrice}</p>
           </div>
         </motion.div>
 
-        {/* Style Options */}
+        {/* Style Options - Mobile optimized */}
         {styleOptions.map((option, index) => (
           <motion.div
             key={option.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index }}
-            className="space-y-3"
+            transition={{ delay: 0.05 * index }}
+            className="space-y-2"
           >
-            <Label className="text-base font-semibold">{option.label}</Label>
+            <Label className="text-sm font-semibold">{option.label}</Label>
             <RadioGroup
               value={styleConfig[option.id as keyof typeof styleConfig] as string || option.defaultValue}
               onValueChange={(value) => handleStyleChange(option.id, value)}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-2"
             >
               {option.options.map((opt) => (
                 <div key={opt} className="flex items-center">
@@ -104,7 +104,7 @@ export function StyleOptions() {
                   />
                   <Label
                     htmlFor={`${option.id}-${opt}`}
-                    className="px-4 py-2 rounded-full border-2 border-border cursor-pointer transition-all peer-data-[state=checked]:border-foreground peer-data-[state=checked]:bg-foreground peer-data-[state=checked]:text-background hover:border-foreground/50"
+                    className="px-3 py-1.5 text-sm rounded-full border-2 border-border cursor-pointer transition-all peer-data-[state=checked]:border-foreground peer-data-[state=checked]:bg-foreground peer-data-[state=checked]:text-background hover:border-foreground/50"
                   >
                     {opt}
                   </Label>
@@ -114,15 +114,15 @@ export function StyleOptions() {
           </motion.div>
         ))}
 
-        {/* Add-Ons */}
+        {/* Add-Ons - Single column on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="space-y-4"
+          transition={{ delay: 0.2 }}
+          className="space-y-3"
         >
-          <Label className="text-base font-semibold">Add-On Options</Label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Label className="text-sm font-semibold">Add-On Options</Label>
+          <div className="space-y-2">
             {addOnOptions.map((addOn) => {
               const addOnKey = addOn.id === 'extra_logo' ? 'extraLogoPlacement' 
                 : addOn.id === 'sponsor' ? 'sponsorPlacement'
@@ -134,7 +134,7 @@ export function StyleOptions() {
                 <div
                   key={addOn.id}
                   className={`
-                    p-4 rounded-xl border-2 transition-all cursor-pointer
+                    p-3 rounded-lg border-2 transition-all cursor-pointer
                     ${isChecked 
                       ? 'border-foreground bg-foreground/5' 
                       : 'border-border hover:border-foreground/30'
@@ -148,12 +148,12 @@ export function StyleOptions() {
                       onCheckedChange={(checked) => handleAddOnToggle(addOn.id, checked as boolean)}
                       className="mt-0.5"
                     />
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">{addOn.label}</span>
-                        <span className="text-sm font-semibold">+${addOn.price}/ea</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-medium text-sm">{addOn.label}</span>
+                        <span className="text-sm font-semibold shrink-0">+${addOn.price}/ea</span>
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">
+                      <p className="text-xs text-muted-foreground mt-0.5">
                         {addOn.description}
                       </p>
                     </div>
@@ -165,8 +165,8 @@ export function StyleOptions() {
         </motion.div>
 
         {/* Navigation */}
-        <div className="flex justify-end pt-6">
-          <Button size="lg" onClick={nextStep} className="gap-2">
+        <div className="flex justify-end pt-4">
+          <Button size="lg" onClick={nextStep} className="gap-2 w-full sm:w-auto">
             Next: Customize Design
             <ArrowRight className="w-4 h-4" />
           </Button>
