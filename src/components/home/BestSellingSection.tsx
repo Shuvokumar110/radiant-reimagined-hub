@@ -6,7 +6,7 @@ import jerseyRedWhite from "@/assets/products/jersey-red-white.png";
 import jerseyOrange from "@/assets/products/jersey-orange.png";
 import jerseyGreen from "@/assets/products/jersey-green.png";
 import basketballFlame from "@/assets/products/basketball-flame.png";
-import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn, useHorizontalParallax } from "@/hooks/useGSAPAnimations";
 
 const products = [
   { id: 1, name: "Pro Jersey - Red Storm", category: "Jerseys", slug: "jersey-red-storm", image: jerseyRedWhite },
@@ -19,6 +19,7 @@ export function BestSellingSection() {
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const headerRef = useFadeIn(0);
   const productsRef = useStaggerFadeIn(0.1);
+  const textRef = useHorizontalParallax(0.3, 'left');
 
   return (
     <section className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden relative">
@@ -106,9 +107,9 @@ export function BestSellingSection() {
           ))}
         </div>
 
-        {/* Bottom floating text */}
+        {/* Bottom floating text with parallax */}
         <div className="mt-16 overflow-hidden">
-          <div className="text-[100px] md:text-[150px] font-bold text-foreground/5 whitespace-nowrap">
+          <div ref={textRef} className="text-[100px] md:text-[150px] font-bold text-foreground/5 whitespace-nowrap">
             PREMIUM QUALITY • CUSTOM DESIGNS • TEAM APPAREL •
           </div>
         </div>

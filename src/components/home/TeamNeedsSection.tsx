@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CheckCircle, Package, Truck, Users } from "lucide-react";
 
 import heroTeam from "@/assets/hero-team.png";
-import { useFadeIn, useStaggerFadeIn, useScaleIn } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn, useParallax } from "@/hooks/useGSAPAnimations";
 
 const features = [
   { icon: CheckCircle, title: "Pro-Grade Quality", value: "100%" },
@@ -14,7 +14,7 @@ const features = [
 export function TeamNeedsSection() {
   const headerRef = useFadeIn(0);
   const featuresRef = useStaggerFadeIn(0.1);
-  const imageRef = useScaleIn(0.2);
+  const imageRef = useParallax(-0.15); // Subtle upward parallax
 
   return (
     <section className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden relative">
@@ -68,7 +68,7 @@ export function TeamNeedsSection() {
             </Link>
           </div>
 
-          {/* Right - Image */}
+          {/* Right - Image with parallax */}
           <div ref={imageRef} className="relative">
             <div className="relative z-10">
               <img

@@ -1,23 +1,26 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import tidiLogo from "@/assets/tidi-logo.webp";
 import multiSportAction from "@/assets/multi-sport-action.jpg";
-import { useFadeIn } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useBackgroundParallax } from "@/hooks/useGSAPAnimations";
 
 export function GearUpSection() {
   const contentRef = useFadeIn(0);
+  const bgRef = useBackgroundParallax(0.3);
 
   return (
     <section className="min-h-screen py-0 flex flex-col justify-center overflow-hidden relative">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img 
-          src={multiSportAction} 
-          alt="Multi-sport action" 
-          className="w-full h-full object-cover"
-        />
+      {/* Background Image with Parallax */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div ref={bgRef} className="absolute inset-0 h-[120%] -top-[10%]">
+          <img 
+            src={multiSportAction} 
+            alt="Multi-sport action" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         <div className="absolute inset-0 bg-foreground/80" />
       </div>
 
@@ -44,7 +47,7 @@ export function GearUpSection() {
         </div>
       </div>
 
-      {/* Think It / Do It Banner - Keep this marquee animation */}
+      {/* Think It / Do It Banner */}
       <div className="relative z-10 py-8 overflow-hidden border-t border-b border-background/10 bg-foreground">
         <div className="relative flex overflow-hidden">
           <motion.div
