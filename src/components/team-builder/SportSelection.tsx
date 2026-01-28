@@ -72,8 +72,8 @@ export function SportSelection() {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             
-            {/* Subtle bottom gradient for text legibility */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+            {/* Minimal gradient for text legibility - preserves original image colors */}
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
             
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-end p-3 md:p-4">
