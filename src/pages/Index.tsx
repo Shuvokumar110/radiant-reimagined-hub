@@ -11,7 +11,6 @@ import { GearUpSection } from "@/components/home/GearUpSection";
 import { ContactBarSection } from "@/components/home/ContactBarSection";
 import { Preloader } from "@/components/ui/Preloader";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
@@ -20,12 +19,7 @@ const Index = () => {
     <>
       <Preloader onComplete={() => setShowContent(true)} />
       
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        style={{ visibility: showContent ? "visible" : "hidden" }}
-      >
+      <div style={{ visibility: showContent ? "visible" : "hidden" }}>
         <Layout>
           <HeroSection />
           <ElevateSection />
@@ -38,7 +32,7 @@ const Index = () => {
           <GearUpSection />
           <ContactBarSection />
         </Layout>
-      </motion.div>
+      </div>
     </>
   );
 };

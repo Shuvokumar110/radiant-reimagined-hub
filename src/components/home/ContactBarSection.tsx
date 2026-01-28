@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MessageCircle } from "lucide-react";
 
@@ -8,12 +7,7 @@ export function ContactBarSection() {
   return (
     <section className="py-10 bg-background">
       <div className="w-full px-8 md:px-16 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-between gap-6 bg-foreground text-background rounded-2xl px-8 py-6"
-        >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-foreground text-background rounded-2xl px-8 py-6">
           <div className="flex items-center gap-5">
             <img src={tidiLogo} alt="TiDi" className="h-10 invert" />
             <div>
@@ -29,7 +23,7 @@ export function ContactBarSection() {
             <MessageCircle className="h-5 w-5" />
             Contact Us
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Instagram, Facebook, Twitter, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -61,23 +60,22 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
-                <motion.a
+                <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
                   className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors duration-300"
                 >
                   <social.icon className="h-5 w-5" />
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
 
           {/* Programs */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Programs</h4>
+            <h4 className="font-semibold text-lg mb-6">Programs</h4>
             <ul className="space-y-3">
               {footerLinks.programs.map((link) => (
                 <li key={link.name}>
@@ -94,7 +92,7 @@ export function Footer() {
 
           {/* Shop */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Shop</h4>
+            <h4 className="font-semibold text-lg mb-6">Shop</h4>
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
@@ -111,7 +109,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Company</h4>
+            <h4 className="font-semibold text-lg mb-6">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -128,7 +126,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-6">Support</h4>
+            <h4 className="font-semibold text-lg mb-6">Support</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
@@ -147,7 +145,7 @@ export function Footer() {
         {/* Newsletter Section */}
         <div className="border-t border-background/20 pt-12 mb-12">
           <div className="max-w-xl">
-            <h4 className="font-serif font-semibold text-2xl mb-2">Stay Updated</h4>
+            <h4 className="font-semibold text-2xl mb-2">Stay Updated</h4>
             <p className="text-background/70 mb-6">
               Subscribe to receive exclusive offers and the latest updates from TiDi Apparel.
             </p>
@@ -196,16 +194,12 @@ export function Footer() {
       </div>
 
       {/* Floating Text Widget */}
-      <motion.a
+      <a
         href="sms:+1234567890"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, type: "spring" }}
-        whileHover={{ scale: 1.1 }}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-background text-foreground rounded-full flex items-center justify-center shadow-luxury"
       >
         <MessageCircle className="h-6 w-6" />
-      </motion.a>
+      </a>
     </footer>
   );
 }
