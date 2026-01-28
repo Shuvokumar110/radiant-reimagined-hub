@@ -60,27 +60,34 @@ export function SportSelection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 * index }}
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -8, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelectSport(sport.id)}
-            className="group relative aspect-[4/5] rounded-xl md:rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+            className="group relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
           >
             {/* Full Color Image */}
             <img
               src={sport.image}
               alt={sport.name}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             
-            {/* Content with blur background for text legibility */}
-            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center p-3 md:p-4">
-              <div className="bg-black/40 backdrop-blur-md rounded-lg px-4 py-2 md:px-5 md:py-3">
-                <h3 className="text-base md:text-lg font-bold text-white text-center">
+            {/* Elegant gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500" />
+            
+            {/* Decorative top accent line */}
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col items-center justify-end p-4 md:p-6">
+              {/* Glassmorphism card */}
+              <div className="w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="text-lg md:text-xl font-bold text-white text-center tracking-wide">
                   {sport.name}
                 </h3>
-                <div className="flex items-center justify-center gap-1 text-white/90 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Select</span>
-                  <ArrowRight className="w-3 h-3" />
+                <div className="flex items-center justify-center gap-2 text-white/80 text-xs md:text-sm mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+                  <span className="font-medium">Get Started</span>
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
