@@ -13,7 +13,7 @@ export function SportSelection() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <div className="text-center mb-8 md:mb-12">
+      <div className="text-center mb-10 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,50 +47,50 @@ export function SportSelection() {
         </motion.p>
       </div>
 
-      {/* Sport Selection Grid - Mobile optimized */}
+      {/* Sport Selection Grid */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6"
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {sportCategories.map((sport, index) => (
           <motion.button
             key={sport.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.05 * index }}
-            whileHover={{ y: -8, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.5, delay: 0.08 * index }}
             onClick={() => handleSelectSport(sport.id)}
-            className="group relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+            className="group relative flex flex-col bg-card rounded-2xl overflow-hidden border border-border hover:border-foreground/20 shadow-sm hover:shadow-xl transition-all duration-500"
           >
-            {/* Full Color Image */}
-            <img
-              src={sport.image}
-              alt={sport.name}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            
-            {/* Elegant gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500" />
-            
-            {/* Decorative top accent line */}
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-end p-4 md:p-6">
-              {/* Glassmorphism card */}
-              <div className="w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <h3 className="text-lg md:text-xl font-bold text-white text-center tracking-wide">
-                  {sport.name}
-                </h3>
-                <div className="flex items-center justify-center gap-2 text-white/80 text-xs md:text-sm mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
-                  <span className="font-medium">Get Started</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                </div>
+            {/* Image Container */}
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <img
+                src={sport.image}
+                alt={sport.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              {/* Subtle vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Hover indicator */}
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                <ArrowRight className="w-4 h-4 text-foreground" />
               </div>
             </div>
+
+            {/* Text Content */}
+            <div className="p-4 md:p-5 bg-card">
+              <h3 className="text-base md:text-lg font-semibold text-foreground text-center group-hover:text-primary transition-colors duration-300">
+                {sport.name}
+              </h3>
+              <p className="text-xs text-muted-foreground text-center mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Customize Now
+              </p>
+            </div>
+
+            {/* Bottom accent line */}
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
           </motion.button>
         ))}
       </motion.div>
