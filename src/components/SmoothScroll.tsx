@@ -1,11 +1,20 @@
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { frame, cancelFrame } from "framer-motion";
+import { useAnimationDebug } from "@/context/AnimationDebugContext";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const { state } = useAnimationDebug();
 
   useEffect(() => {
+    // If smooth scroll is disabled via debug, skip Lenis
+    if (!state.smoothScroll) {
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
+      return;
+    }
+
     // Only skip for users who prefer reduced motion (accessibility)
     const prefersReducedMotion =
       typeof window !== "undefined" && window.matchMedia
@@ -37,7 +46,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };
-  }, []);
+  }, [state.smoothScroll]);
 
   return <>{children}</>;
 }
