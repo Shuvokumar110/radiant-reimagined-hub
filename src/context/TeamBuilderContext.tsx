@@ -11,6 +11,7 @@ export interface RosterEntry {
 }
 
 export interface DesignConfig {
+  selectedTemplateId: string | null;
   primaryColor: string;
   secondaryColor: string;
   accentColor: string;
@@ -114,6 +115,7 @@ const initialState: TeamBuilderState = {
     },
   },
   designConfig: {
+    selectedTemplateId: null,
     primaryColor: '#000000',
     secondaryColor: '#FFFFFF',
     accentColor: '#808080',

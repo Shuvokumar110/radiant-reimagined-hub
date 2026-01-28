@@ -159,3 +159,39 @@ export const fontOptions = [
   { id: 'script', label: 'Script' },
   { id: 'outline', label: 'Block Outline' },
 ];
+
+// Template gallery images
+import templateSolidBlack from "@/assets/templates/jersey-solid-black.jpg";
+import templateStripesNavy from "@/assets/templates/jersey-stripes-navy.jpg";
+import templateGradientRed from "@/assets/templates/jersey-gradient-red.jpg";
+import templateAccentGreen from "@/assets/templates/jersey-accent-green.jpg";
+import templateSashPurple from "@/assets/templates/jersey-sash-purple.jpg";
+import templateGeoOrange from "@/assets/templates/jersey-geo-orange.jpg";
+
+export interface DesignTemplate {
+  id: string;
+  name: string;
+  category: 'solid' | 'stripes' | 'gradient' | 'accent' | 'geometric';
+  image: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+}
+
+export const designTemplates: DesignTemplate[] = [
+  { id: 'solid-black', name: 'Classic Black', category: 'solid', image: templateSolidBlack, primaryColor: '#000000', secondaryColor: '#FFFFFF', accentColor: '#808080' },
+  { id: 'stripes-navy', name: 'Navy Stripes', category: 'stripes', image: templateStripesNavy, primaryColor: '#1E3A8A', secondaryColor: '#FFFFFF', accentColor: '#1E3A8A' },
+  { id: 'gradient-red', name: 'Red Gradient', category: 'gradient', image: templateGradientRed, primaryColor: '#DC2626', secondaryColor: '#000000', accentColor: '#FFFFFF' },
+  { id: 'accent-green', name: 'Green Accent', category: 'accent', image: templateAccentGreen, primaryColor: '#FFFFFF', secondaryColor: '#059669', accentColor: '#000000' },
+  { id: 'sash-purple', name: 'Purple Sash', category: 'geometric', image: templateSashPurple, primaryColor: '#7C3AED', secondaryColor: '#F59E0B', accentColor: '#FFFFFF' },
+  { id: 'geo-orange', name: 'Orange Geometric', category: 'geometric', image: templateGeoOrange, primaryColor: '#F97316', secondaryColor: '#FFFFFF', accentColor: '#000000' },
+];
+
+export const templateCategories = [
+  { id: 'all', label: 'All Designs' },
+  { id: 'solid', label: 'Solid' },
+  { id: 'stripes', label: 'Stripes' },
+  { id: 'gradient', label: 'Gradient' },
+  { id: 'accent', label: 'Accent' },
+  { id: 'geometric', label: 'Geometric' },
+];
