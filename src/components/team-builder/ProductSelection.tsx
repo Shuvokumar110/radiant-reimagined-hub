@@ -17,83 +17,79 @@ export function ProductSelection() {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-3 mb-6 md:mb-8">
         <Button
           variant="ghost"
           size="icon"
           onClick={prevStep}
-          className="rounded-full"
+          className="rounded-full shrink-0"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl">{sportInfo?.icon}</span>
-            <h2 className="text-2xl md:text-3xl font-bold">{sportInfo?.name}</h2>
-          </div>
-          <p className="text-muted-foreground">Select a product type</p>
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">{sportInfo?.name}</h2>
+          <p className="text-sm md:text-base text-muted-foreground">Select a product type</p>
         </div>
       </div>
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {/* Product Grid - Mobile optimized */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
         {products.map((product, index) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 * index }}
-            whileHover={{ y: -8 }}
+            whileHover={{ y: -4 }}
             className="group"
           >
             <button
               onClick={() => dispatch({ type: 'SET_PRODUCT', product })}
               className="w-full text-left"
             >
-              <div className="relative bg-muted rounded-xl overflow-hidden aspect-[4/3] mb-4 shadow-elegant group-hover:shadow-luxury transition-all">
+              <div className="relative bg-muted rounded-lg md:rounded-xl overflow-hidden aspect-[4/3] mb-2 md:mb-3 shadow-sm group-hover:shadow-md transition-shadow">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
-                {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                {/* Badges - compact on mobile */}
+                <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                   <Badge 
                     variant="secondary" 
-                    className="bg-background/90 text-foreground text-xs"
+                    className="bg-background/90 text-foreground text-[10px] md:text-xs px-1.5 py-0.5"
                   >
                     {product.fabricType}
                   </Badge>
                   <Badge 
                     variant="secondary"
-                    className={`text-xs ${
+                    className={`text-[10px] md:text-xs px-1.5 py-0.5 ${
                       product.leadTime === 'Rush' 
                         ? 'bg-yellow-500/90 text-black' 
                         : 'bg-background/90 text-foreground'
                     }`}
                   >
                     {product.leadTime === 'Rush' ? (
-                      <><Zap className="w-3 h-3 mr-1" /> Rush</>
+                      <><Zap className="w-2.5 h-2.5 mr-0.5" /> Rush</>
                     ) : (
-                      <><Clock className="w-3 h-3 mr-1" /> Standard</>
+                      <><Clock className="w-2.5 h-2.5 mr-0.5" /> Std</>
                     )}
                   </Badge>
                 </div>
 
                 {/* Price */}
-                <div className="absolute bottom-3 right-3">
-                  <span className="px-3 py-1.5 bg-background rounded-full text-sm font-semibold">
-                    From ${product.basePrice}
+                <div className="absolute bottom-2 right-2">
+                  <span className="px-2 py-1 bg-background rounded-full text-xs md:text-sm font-semibold">
+                    ${product.basePrice}
                   </span>
                 </div>
               </div>
 
-              <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">
+              <h3 className="text-sm md:text-base font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
                 {product.name}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
                 {product.shortDescription}
               </p>
             </button>

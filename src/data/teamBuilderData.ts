@@ -13,7 +13,6 @@ export interface SportCategory {
   id: SportType;
   name: string;
   image: string;
-  icon: string;
 }
 
 export interface ProductType {
@@ -34,13 +33,13 @@ export interface StyleOption {
 }
 
 export const sportCategories: SportCategory[] = [
-  { id: 'soccer', name: 'Soccer', image: sportSoccer, icon: '⚽' },
-  { id: 'basketball', name: 'Basketball', image: sportBasketball, icon: '🏀' },
-  { id: 'american_football', name: 'American Football', image: sportFootball, icon: '🏈' },
-  { id: 'baseball_softball', name: 'Baseball/Softball', image: sportBaseball, icon: '⚾' },
-  { id: 'track_field', name: 'Track & Field', image: sportTrack, icon: '🏃' },
-  { id: 'cricket', name: 'Cricket', image: sportCricket, icon: '🏏' },
-  { id: 'business', name: 'Business', image: sportBusiness, icon: '👔' },
+  { id: 'soccer', name: 'Soccer', image: sportSoccer },
+  { id: 'basketball', name: 'Basketball', image: sportBasketball },
+  { id: 'american_football', name: 'American Football', image: sportFootball },
+  { id: 'baseball_softball', name: 'Baseball/Softball', image: sportBaseball },
+  { id: 'track_field', name: 'Track & Field', image: sportTrack },
+  { id: 'cricket', name: 'Cricket', image: sportCricket },
+  { id: 'business', name: 'Business', image: sportBusiness },
 ];
 
 export const productsBySport: Record<SportType, ProductType[]> = {
