@@ -47,12 +47,12 @@ export function SportSelection() {
         </motion.p>
       </div>
 
-      {/* Sport Selection Grid - Optimized for mobile */}
+      {/* Sport Selection Grid - 3 columns on mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 md:gap-6"
+        className="grid grid-cols-3 gap-2 sm:gap-3 md:grid-cols-4 lg:grid-cols-4 md:gap-6"
       >
         {sportCategories.map((sport, index) => (
           <motion.button
@@ -61,7 +61,7 @@ export function SportSelection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 * index }}
             onClick={() => handleSelectSport(sport.id)}
-            className="group relative flex flex-col bg-card rounded-xl md:rounded-2xl overflow-hidden border border-border active:border-foreground/30 md:hover:border-foreground/20 shadow-sm active:shadow-md md:hover:shadow-xl transition-all duration-300 active:scale-[0.98] md:hover:scale-[1.02]"
+            className="group relative flex flex-col bg-card rounded-lg md:rounded-2xl overflow-hidden border border-border active:border-foreground/30 md:hover:border-foreground/20 shadow-sm active:shadow-md md:hover:shadow-xl transition-all duration-300 active:scale-[0.98] md:hover:scale-[1.02]"
           >
             {/* Image Container - Taller ratio on mobile for better visuals */}
             <div className="relative aspect-square md:aspect-[4/3] overflow-hidden">
@@ -81,13 +81,13 @@ export function SportSelection() {
             </div>
 
             {/* Text Content - Compact on mobile */}
-            <div className="p-2.5 md:p-5 bg-card flex items-center justify-between md:justify-center">
-              <h3 className="text-sm md:text-lg font-semibold text-foreground md:text-center group-active:text-primary md:group-hover:text-primary transition-colors duration-300">
+            <div className="p-1.5 sm:p-2.5 md:p-5 bg-card flex items-center justify-between md:justify-center">
+              <h3 className="text-[11px] sm:text-sm md:text-lg font-semibold text-foreground md:text-center group-active:text-primary md:group-hover:text-primary transition-colors duration-300 truncate">
                 {sport.name}
               </h3>
               
               {/* Mobile: Always visible arrow */}
-              <ArrowRight className="w-4 h-4 text-muted-foreground group-active:text-primary md:hidden transition-colors" />
+              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground group-active:text-primary md:hidden transition-colors flex-shrink-0 ml-1" />
               
               {/* Desktop: Hover text */}
               <p className="hidden md:block text-xs text-muted-foreground text-center mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
