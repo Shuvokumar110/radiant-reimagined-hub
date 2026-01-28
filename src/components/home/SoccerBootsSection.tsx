@@ -6,7 +6,7 @@ import heroBoots from "@/assets/hero-boots.png";
 import heroSlide1 from "@/assets/hero-slide-1.png";
 import heroSlide2 from "@/assets/hero-slide-2.png";
 import heroSlide3 from "@/assets/hero-slide-3.png";
-import { useFadeIn, useStaggerFadeIn, useParallax } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
 
 const features = [
   { label: "Italian Craft", icon: Star },
@@ -23,7 +23,7 @@ const bootImages = [
 export function SoccerBootsSection() {
   const [activeImage, setActiveImage] = useState(0);
   const headerRef = useFadeIn(0);
-  const bootsRef = useParallax(-0.15);
+  const bootsRef = useFadeIn(0.1);
   const featuresRef = useStaggerFadeIn(0.1);
 
   return (
@@ -52,8 +52,8 @@ export function SoccerBootsSection() {
           </h2>
         </div>
 
-        {/* Main Boots Display with Parallax */}
-        <div ref={bootsRef} className="mb-8 md:mb-12 will-change-transform">
+        {/* Main Boots Display */}
+        <div ref={bootsRef} className="mb-8 md:mb-12">
           <img
             src={heroBoots}
             alt="TiDi Soccer Boots Collection"
@@ -69,7 +69,7 @@ export function SoccerBootsSection() {
               <div
                 key={index}
                 onClick={() => setActiveImage(index)}
-                className={`relative flex-shrink-0 w-28 snap-center overflow-hidden rounded-xl cursor-pointer transition-all duration-500 ${
+                className={`relative flex-shrink-0 w-28 snap-center overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
                   activeImage === index ? "ring-2 ring-foreground" : ""
                 }`}
               >
@@ -80,7 +80,7 @@ export function SoccerBootsSection() {
                     <span className="text-xs font-medium text-white">{img.label}</span>
                   </div>
                 </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-transform duration-500 origin-left ${
+                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-transform duration-300 origin-left ${
                   activeImage === index ? "scale-x-100" : "scale-x-0"
                 }`} />
               </div>
@@ -93,7 +93,7 @@ export function SoccerBootsSection() {
               <div
                 key={index}
                 onMouseEnter={() => setActiveImage(index)}
-                className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-500 ${
+                className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
                   activeImage === index ? "ring-2 ring-foreground" : ""
                 }`}
               >
@@ -101,14 +101,14 @@ export function SoccerBootsSection() {
                   <img
                     src={img.src}
                     alt={img.label}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-3">
                     <span className="text-sm font-medium text-white">{img.label}</span>
                   </div>
                 </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-white transition-transform duration-500 origin-left ${
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-white transition-transform duration-300 origin-left ${
                   activeImage === index ? "scale-x-100" : "scale-x-0"
                 }`} />
               </div>
@@ -121,7 +121,7 @@ export function SoccerBootsSection() {
           {features.map((feature) => (
             <div
               key={feature.label}
-              className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-muted rounded-full border border-border transition-all duration-300 hover:scale-105"
+              className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-muted rounded-full border border-border"
             >
               <feature.icon className="h-3 w-3 md:h-4 md:w-4" />
               <span className="text-xs md:text-sm font-medium">{feature.label}</span>
@@ -133,7 +133,7 @@ export function SoccerBootsSection() {
         <div className="text-center">
           <Link
             to="/shop?category=Soccer+Boots"
-            className="inline-block bg-foreground text-background px-6 py-2.5 md:px-8 md:py-3 text-xs md:text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-all duration-300 rounded"
+            className="inline-block bg-foreground text-background px-6 py-2.5 md:px-8 md:py-3 text-xs md:text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-all rounded"
           >
             <span className="flex items-center gap-2">
               Explore Collection →

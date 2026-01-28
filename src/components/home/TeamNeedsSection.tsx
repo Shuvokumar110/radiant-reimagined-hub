@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CheckCircle, Package, Truck, Users } from "lucide-react";
 
 import heroTeam from "@/assets/hero-team.png";
-import { useFadeIn, useStaggerFadeIn, useImageParallax, useFloat } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn, useParallax } from "@/hooks/useGSAPAnimations";
 
 const features = [
   { icon: CheckCircle, title: "Pro-Grade Quality", value: "100%" },
@@ -14,8 +14,7 @@ const features = [
 export function TeamNeedsSection() {
   const headerRef = useFadeIn(0);
   const featuresRef = useStaggerFadeIn(0.1);
-  const imageRef = useImageParallax(0.2);
-  const badgeRef = useFloat(0.8);
+  const imageRef = useParallax(-0.15); // Subtle upward parallax
 
   return (
     <section className="min-h-screen py-20 bg-muted flex flex-col justify-center overflow-hidden relative">
@@ -48,10 +47,10 @@ export function TeamNeedsSection() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="bg-background p-5 rounded-xl border border-border group cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-lg"
+                  className="bg-background p-5 rounded-xl border border-border group cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <div className="w-10 h-10 bg-foreground text-background rounded-lg flex items-center justify-center transition-transform duration-500 group-hover:rotate-12">
+                    <div className="w-10 h-10 bg-foreground text-background rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-12">
                       <feature.icon className="h-5 w-5" />
                     </div>
                     <span className="text-xl font-bold text-foreground">{feature.value}</span>
@@ -63,26 +62,26 @@ export function TeamNeedsSection() {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-all duration-300 rounded group hover:gap-4"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3 text-sm font-semibold tracking-wide uppercase hover:bg-foreground/90 transition-all rounded group hover:gap-4"
             >
               Get Team Quote →
             </Link>
           </div>
 
           {/* Right - Image with parallax */}
-          <div className="relative overflow-hidden rounded-2xl">
-            <div ref={imageRef} className="will-change-transform">
+          <div ref={imageRef} className="relative">
+            <div className="relative z-10">
               <img
                 src={heroTeam}
                 alt="Multi-sport team apparel"
                 className="w-full rounded-2xl shadow-2xl"
               />
-            </div>
-            
-            {/* Floating badge with float effect */}
-            <div ref={badgeRef} className="absolute -bottom-4 -left-4 bg-foreground text-background px-6 py-3 rounded-xl shadow-xl will-change-transform">
-              <span className="text-2xl font-bold">7+</span>
-              <p className="text-xs text-background/70">Sports Covered</p>
+              
+              {/* Floating badge */}
+              <div className="absolute -bottom-4 -left-4 bg-foreground text-background px-6 py-3 rounded-xl shadow-xl">
+                <span className="text-2xl font-bold">7+</span>
+                <p className="text-xs text-background/70">Sports Covered</p>
+              </div>
             </div>
 
             {/* Background decoration */}

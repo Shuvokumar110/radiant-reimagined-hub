@@ -5,7 +5,7 @@ import galleryTeam1 from "@/assets/gallery/team-1.png";
 import galleryTeam2 from "@/assets/gallery/team-2.png";
 import galleryTeam3 from "@/assets/gallery/team-3.png";
 import galleryTeam4 from "@/assets/gallery/team-4.png";
-import { useFadeIn, useStaggerFadeIn, useLayeredParallax } from "@/hooks/useGSAPAnimations";
+import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
 
 const categories = [
   "All Products", "Team Uniforms", "Jerseys", "Tracksuits", "T-Shirts", 
@@ -13,17 +13,17 @@ const categories = [
 ];
 
 const programs = [
-  { name: "High School", subtitle: "Programs", image: galleryTeam1, href: "/programs/high-school", speed: -0.3 },
-  { name: "Club & Travel", subtitle: "Teams", image: galleryTeam2, href: "/programs/club-travel", speed: 0.2 },
-  { name: "Collegiate", subtitle: "Athletics", image: galleryTeam3, href: "/programs/collegiate", speed: -0.2 },
-  { name: "Leagues", subtitle: "& Academies", image: galleryTeam4, href: "/programs/leagues-academies", speed: 0.3 },
+  { name: "High School", subtitle: "Programs", image: galleryTeam1, href: "/programs/high-school" },
+  { name: "Club & Travel", subtitle: "Teams", image: galleryTeam2, href: "/programs/club-travel" },
+  { name: "Collegiate", subtitle: "Athletics", image: galleryTeam3, href: "/programs/collegiate" },
+  { name: "Leagues", subtitle: "& Academies", image: galleryTeam4, href: "/programs/leagues-academies" },
 ];
 
 export function ElevateSection() {
   const [activeCategory, setActiveCategory] = useState("All Products");
   const headerRef = useFadeIn(0);
   const pillsRef = useStaggerFadeIn(0.05);
-  const cardsRef = useLayeredParallax();
+  const cardsRef = useStaggerFadeIn(0.1);
 
   return (
     <section className="min-h-screen py-20 bg-background flex flex-col justify-center overflow-hidden relative">
@@ -60,47 +60,41 @@ export function ElevateSection() {
           ))}
         </div>
 
-        {/* Programs Grid with Layered Parallax */}
+        {/* Programs Grid */}
         <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {programs.map((program, index) => (
-            <div 
-              key={program.name} 
-              data-parallax-speed={program.speed}
-              className="will-change-transform"
-            >
-              <Link to={program.href}>
-                <div className="relative group overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
-                  {/* Image */}
-                  <img
-                    src={program.image}
-                    alt={program.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
+          {programs.map((program) => (
+            <Link key={program.name} to={program.href}>
+              <div className="relative group overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
+                {/* Image */}
+                <img
+                  src={program.image}
+                  alt={program.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
 
-                  {/* Content */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <div className="transition-transform duration-500 group-hover:-translate-y-2">
-                      <h3 className="text-white text-xl md:text-2xl font-bold leading-tight">
-                        {program.name}
-                      </h3>
-                      <p className="text-white/70 text-sm">{program.subtitle}</p>
-                    </div>
-                    
-                    {/* Arrow on hover */}
-                    <div className="mt-4 flex items-center gap-2 text-white/80 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                      <span className="text-sm font-medium">Explore</span>
-                      <span>→</span>
-                    </div>
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <div className="transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 className="text-white text-xl md:text-2xl font-bold leading-tight">
+                      {program.name}
+                    </h3>
+                    <p className="text-white/70 text-sm">{program.subtitle}</p>
                   </div>
-
-                  {/* Corner Accent */}
-                  <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/50 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100" />
+                  
+                  {/* Arrow on hover */}
+                  <div className="mt-4 flex items-center gap-2 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">Explore</span>
+                    <span>→</span>
+                  </div>
                 </div>
-              </Link>
-            </div>
+
+                {/* Corner Accent */}
+                <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </Link>
           ))}
         </div>
       </div>
