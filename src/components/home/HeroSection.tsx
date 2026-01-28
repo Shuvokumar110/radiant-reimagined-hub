@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Award, Globe, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -59,25 +60,42 @@ export function HeroSection() {
       {/* Main Hero - Full Width */}
       <div className="relative h-screen min-h-[600px]">
         {/* Slides */}
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${slides[current].image}')` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('${slides[current].image}')` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          </motion.div>
+        </AnimatePresence>
 
         {/* Content - Bottom Positioned */}
         <div className="relative z-10 h-full flex items-end">
           <div className="w-full px-8 md:px-16 lg:px-24 pb-32">
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                {slides[current].title}
-              </h1>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/70 leading-tight tracking-tight">
-                {slides[current].subtitle}
-              </h2>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+                  {slides[current].title}
+                </h1>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/70 leading-tight tracking-tight">
+                  {slides[current].subtitle}
+                </h2>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
@@ -113,9 +131,13 @@ export function HeroSection() {
       <div className="bg-background py-8 md:py-10 border-b border-border">
         <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-8">
-            {trustBadges.map((badge) => (
-              <div
+            {trustBadges.map((badge, index) => (
+              <motion.div
                 key={badge.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
                 className="flex items-center gap-3 md:gap-4"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
@@ -125,7 +147,7 @@ export function HeroSection() {
                   <h3 className="font-semibold text-sm md:text-base text-foreground">{badge.title}</h3>
                   <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">{badge.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

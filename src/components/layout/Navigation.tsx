@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ShoppingBag, Heart, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import tidiLogo from "@/assets/tidi-logo.webp";
@@ -68,7 +69,10 @@ export function Navigation() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled || needsDarkNav
@@ -79,10 +83,12 @@ export function Navigation() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="relative z-10">
-            <img
+            <motion.img
               src={tidiLogo}
               alt="TiDi Apparel"
               className="h-12 w-auto"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             />
           </Link>
 
@@ -124,19 +130,27 @@ export function Navigation() {
                 )}
 
                 {/* Dropdown */}
-                {link.children && activeDropdown === link.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-background border border-border rounded-lg shadow-luxury overflow-hidden">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        to={child.href}
-                        className="block px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors duration-200"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {link.children && activeDropdown === link.name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-64 bg-background border border-border rounded-lg shadow-luxury overflow-hidden"
+                    >
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.name}
+                          to={child.href}
+                          className="block px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors duration-200"
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </nav>
@@ -180,7 +194,7 @@ export function Navigation() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Advanced Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
