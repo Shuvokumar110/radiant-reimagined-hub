@@ -7,7 +7,7 @@ interface MaintenanceModeProps {
 }
 
 // Secret path to access the site (change this to whatever you want)
-const SECRET_ACCESS_PATH = "/tidi-preview-2026";
+const SECRET_ACCESS_PATH = "/x7k9m2p4q8";
 
 // Session storage key to remember access
 const ACCESS_KEY = "tidi_maintenance_bypass";
