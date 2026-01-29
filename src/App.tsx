@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { MaintenanceMode } from "@/components/MaintenanceMode";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
@@ -73,7 +74,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AppContent />
+          <MaintenanceMode>
+            <AppContent />
+          </MaintenanceMode>
         </BrowserRouter>
       </TooltipProvider>
     </CartProvider>
