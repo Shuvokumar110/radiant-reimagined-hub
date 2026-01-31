@@ -54,14 +54,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
             alt="TiDi Apparel"
             className="h-12 w-auto brightness-0 invert"
             style={{ objectFit: 'contain', objectPosition: 'center top' }}
-            animate={{
-              rotateY: [0, 360],
-            }}
-            transition={{ 
-              duration: 1.2,
-              ease: "easeInOut",
-              delay: 0.3
-            }}
           />
         </motion.div>
 
