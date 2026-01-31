@@ -52,8 +52,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
           <motion.img
             src={tidiLogo}
             alt="TiDi Apparel"
-            className="h-16 md:h-20 brightness-0 invert"
-            animate={{ 
+            className="h-12 w-auto brightness-0 invert"
+            style={{ objectFit: 'contain', objectPosition: 'center top' }}
+            animate={{
               rotateY: [0, 360],
             }}
             transition={{ 
