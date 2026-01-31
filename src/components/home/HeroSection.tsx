@@ -1,13 +1,13 @@
 import { ChevronLeft, ChevronRight, Award, Globe, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 
-import heroAthlete from "@/assets/hero-athlete.jpg";
+import heroSlide1 from "@/assets/hero-slide-1.png";
 import heroSlide2 from "@/assets/hero-slide-2.png";
 import heroSlide3 from "@/assets/hero-slide-3.png";
 import { useFadeIn, useStaggerFadeIn } from "@/hooks/useGSAPAnimations";
 
 const slides = [
-  { image: heroAthlete, title: "PLAY BOLD.", subtitle: "LOOK BOLD." },
+  { image: heroSlide1, title: "PLAY BOLD.", subtitle: "LOOK BOLD." },
   { image: heroSlide2, title: "WIN TOGETHER.", subtitle: "STAND OUT." },
   { image: heroSlide3, title: "OWN THE GAME.", subtitle: "OWN THE STYLE." },
 ];
