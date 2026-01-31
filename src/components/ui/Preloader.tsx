@@ -49,11 +49,10 @@ export function Preloader({ onComplete }: PreloaderProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <motion.img
+          <img
             src={tidiLogo}
             alt="TiDi Apparel"
-            className="h-12 w-auto brightness-0 invert"
-            style={{ objectFit: 'contain', objectPosition: 'center top' }}
+            className="h-12 w-auto invert"
           />
         </motion.div>
 
