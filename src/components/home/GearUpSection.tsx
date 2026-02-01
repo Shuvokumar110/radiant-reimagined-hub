@@ -55,9 +55,16 @@ export function GearUpSection() {
             animate={{ x: [0, -1920] }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear", repeatType: "loop" }}
           >
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex items-center shrink-0 px-8 md:px-12">
-                <img src={tidiLogo} alt="TiDi Sports" className="h-10 md:h-14 w-auto brightness-0 invert" />
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
+                <span className="mx-4 md:mx-6 inline-flex items-center">
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                </span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
+                <span className="mx-4 md:mx-6 inline-flex items-center">
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                </span>
               </div>
             ))}
           </motion.div>
@@ -66,9 +73,16 @@ export function GearUpSection() {
             animate={{ x: [0, -1920] }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear", repeatType: "loop" }}
           >
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex items-center shrink-0 px-8 md:px-12">
-                <img src={tidiLogo} alt="TiDi Sports" className="h-10 md:h-14 w-auto brightness-0 invert" />
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
+                <span className="mx-4 md:mx-6 inline-flex items-center">
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                </span>
+                <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
+                <span className="mx-4 md:mx-6 inline-flex items-center">
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                </span>
               </div>
             ))}
           </motion.div>
