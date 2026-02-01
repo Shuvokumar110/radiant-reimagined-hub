@@ -1,10 +1,11 @@
-// Sport category images
-import sportSoccer from "@/assets/team-builder/sport-soccer.jpg";
-import sportBasketball from "@/assets/team-builder/sport-basketball.jpg";
-import sportFootball from "@/assets/team-builder/sport-football.jpg";
-import sportBaseball from "@/assets/team-builder/sport-baseball.jpg";
-import sportTrack from "@/assets/team-builder/sport-track.jpg";
-import sportCricket from "@/assets/team-builder/sport-cricket.jpg";
+// Sport category images - using new uploaded images
+import sportSoccer from "@/assets/categories/soccer.png";
+import sportBasketball from "@/assets/categories/basketball.png";
+import sportFootball from "@/assets/categories/american-football.png";
+import sportBaseball from "@/assets/categories/soccer.png"; // Placeholder - no baseball image provided
+import sportVolleyball from "@/assets/categories/volleyball.png";
+import sportNetball from "@/assets/categories/netball.png";
+import sportCricket from "@/assets/categories/cricket.png";
 import sportBusiness from "@/assets/team-builder/sport-business.jpg";
 
 // Product images - Soccer
@@ -59,7 +60,7 @@ import businessWorkShirts from "@/assets/products/business-work-shirts.jpg";
 import businessJackets from "@/assets/products/business-jackets.jpg";
 import businessCaps from "@/assets/products/business-caps.jpg";
 
-export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'track_field' | 'cricket' | 'business';
+export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
   id: SportType;
@@ -89,7 +90,8 @@ export const sportCategories: SportCategory[] = [
   { id: 'basketball', name: 'Basketball', image: sportBasketball },
   { id: 'american_football', name: 'American Football', image: sportFootball },
   { id: 'baseball_softball', name: 'Baseball/Softball', image: sportBaseball },
-  { id: 'track_field', name: 'Track & Field', image: sportTrack },
+  { id: 'volleyball', name: 'Volleyball', image: sportVolleyball },
+  { id: 'netball', name: 'Netball', image: sportNetball },
   { id: 'cricket', name: 'Cricket', image: sportCricket },
   { id: 'business', name: 'Business', image: sportBusiness },
 ];
@@ -127,12 +129,15 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'baseball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Pants + Socks', basePrice: 85, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard' },
     { id: 'baseball-warmup', name: 'Warmup Gear', shortDescription: 'Pre-game warmup apparel', basePrice: 65, image: baseballWarmup, fabricType: 'Embroidered', leadTime: 'Standard' },
   ],
-  track_field: [
-    { id: 'track-singlet', name: 'Singlet', shortDescription: 'Lightweight race singlet', basePrice: 30, image: trackSinglet, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'track-shorts', name: 'Shorts', shortDescription: 'Performance running shorts', basePrice: 25, image: trackShorts, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'track-compression', name: 'Compression', shortDescription: 'Compression tights', basePrice: 35, image: trackCompression, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'track-warmups', name: 'Warmups', shortDescription: 'Team warmup suit', basePrice: 75, image: trackWarmups, fabricType: 'Embroidered', leadTime: 'Standard' },
-    { id: 'track-tees', name: 'Team Tees', shortDescription: 'Team training t-shirts', basePrice: 20, image: trackTees, fabricType: 'Heat Press', leadTime: 'Rush' },
+  volleyball: [
+    { id: 'volleyball-jersey', name: 'Jersey', shortDescription: 'Performance volleyball jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'volleyball-shorts', name: 'Shorts', shortDescription: 'Athletic volleyball shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'volleyball-warmup', name: 'Warmup Jacket', shortDescription: 'Team warmup jacket', basePrice: 55, image: soccerWarmupJacket, fabricType: 'Embroidered', leadTime: 'Standard' },
+  ],
+  netball: [
+    { id: 'netball-dress', name: 'Netball Dress', shortDescription: 'Performance netball dress', basePrice: 45, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'netball-jersey', name: 'Jersey', shortDescription: 'Netball jersey top', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'netball-skirt', name: 'Skirt', shortDescription: 'Athletic netball skirt', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
   ],
   cricket: [
     { id: 'cricket-jersey', name: 'Cricket Jersey', shortDescription: 'Performance cricket jersey', basePrice: 45, image: cricketJersey, fabricType: 'Sublimated', leadTime: 'Standard' },
