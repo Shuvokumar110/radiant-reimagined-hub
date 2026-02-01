@@ -63,12 +63,12 @@ export function SportSelection() {
             onClick={() => handleSelectSport(sport.id)}
             className="group relative flex flex-col bg-card rounded-lg md:rounded-2xl overflow-hidden border border-border active:border-foreground/30 md:hover:border-foreground/20 shadow-sm active:shadow-md md:hover:shadow-xl transition-all duration-300 active:scale-[0.98] md:hover:scale-[1.02]"
           >
-            {/* Image Container - Taller ratio on mobile for better visuals */}
-            <div className="relative aspect-square md:aspect-[4/3] overflow-hidden">
+            {/* Image Container - Show full image */}
+            <div className="relative aspect-[3/4] overflow-hidden bg-muted">
               <img
                 src={sport.image}
                 alt={sport.name}
-                className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-110"
+                className="w-full h-full object-contain transition-transform duration-500 md:group-hover:scale-110"
               />
               
               {/* Mobile: Always visible subtle overlay for depth */}
