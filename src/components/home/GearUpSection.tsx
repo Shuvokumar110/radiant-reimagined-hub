@@ -59,11 +59,11 @@ export function GearUpSection() {
               <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
                 <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
                 <span className="mx-4 md:mx-6 inline-flex items-center">
-                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto" />
                 </span>
                 <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
                 <span className="mx-4 md:mx-6 inline-flex items-center">
-                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto" />
                 </span>
               </div>
             ))}
@@ -77,11 +77,11 @@ export function GearUpSection() {
               <div key={i} className="flex items-center shrink-0 px-6 md:px-10">
                 <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">THINK IT</span>
                 <span className="mx-4 md:mx-6 inline-flex items-center">
-                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto" />
                 </span>
                 <span className="text-xl md:text-3xl font-bold tracking-wider whitespace-nowrap text-background">DO IT</span>
                 <span className="mx-4 md:mx-6 inline-flex items-center">
-                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto brightness-0 invert" />
+                  <img src={tidiLogo} alt="TiDi Sports" className="h-8 md:h-12 w-auto" />
                 </span>
               </div>
             ))}
