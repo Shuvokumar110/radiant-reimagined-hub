@@ -1,42 +1,56 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link, useSearchParams } from "react-router-dom";
-import { Heart, Eye, Menu, ChevronDown, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
-import { Button } from "@/components/ui/button";
-import { products, categories } from "@/data/products";
+
+// Category Images
+import soccerImg from "@/assets/categories/soccer.png";
+import basketballImg from "@/assets/categories/basketball.png";
+import americanFootballImg from "@/assets/categories/american-football.png";
+import cricketImg from "@/assets/categories/cricket.png";
+import volleyballImg from "@/assets/categories/volleyball.png";
+import netballImg from "@/assets/categories/netball.png";
+import tracksuitImg from "@/assets/categories/tracksuits.png";
+import hoodiesImg from "@/assets/categories/hoodies.png";
+import poloImg from "@/assets/categories/polo-jerseys.png";
+import sportsJerseyImg from "@/assets/categories/sports-jersey.png";
+
+// Keep boots images from existing products
+import style672 from "@/assets/products/style-672-4.png";
+import style972 from "@/assets/products/style-972-1.png";
+import giveAKick from "@/assets/products/give-a-kick-to-racism-1.png";
+
+const CATALOG_LINK = "https://drive.google.com/file/d/1V4FtVVC8s1QgytQwGWUlc42flUWOhUM-/view?usp=drivesdk";
+
+interface ShopCategory {
+  id: string;
+  name: string;
+  image: string;
+  link: string;
+}
+
+const categories: ShopCategory[] = [
+  { id: "soccer", name: "Soccer", image: soccerImg, link: CATALOG_LINK },
+  { id: "basketball", name: "Basketball", image: basketballImg, link: CATALOG_LINK },
+  { id: "american-football", name: "American Football", image: americanFootballImg, link: CATALOG_LINK },
+  { id: "baseball-softball", name: "Baseball/Softball", image: soccerImg, link: CATALOG_LINK }, // Using soccer as placeholder
+  { id: "volleyball", name: "Volleyball", image: volleyballImg, link: CATALOG_LINK },
+  { id: "netball", name: "Netball", image: netballImg, link: CATALOG_LINK },
+  { id: "cricket", name: "Cricket", image: cricketImg, link: CATALOG_LINK },
+  { id: "tracksuits", name: "Tracksuits", image: tracksuitImg, link: CATALOG_LINK },
+  { id: "hoodies", name: "Hoodies", image: hoodiesImg, link: CATALOG_LINK },
+  { id: "polo-jerseys", name: "Polo Jerseys", image: poloImg, link: CATALOG_LINK },
+  { id: "sports-jersey", name: "Sports Jersey", image: sportsJerseyImg, link: CATALOG_LINK },
+];
+
+const bootProducts = [
+  { id: 1, name: "Soccer Boots – Style 672", image: style672, slug: "style-672" },
+  { id: 2, name: "Soccer Boots – Style 972", image: style972, slug: "style-972" },
+  { id: 3, name: "Give A Kick To Racism", image: giveAKick, slug: "give-a-kick-to-racism" },
+];
 
 export default function Shop() {
-  const [searchParams] = useSearchParams();
-  const categoryParam = searchParams.get("category");
-  
-  const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
-  const [wishlist, setWishlist] = useState<number[]>([]);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-
-  // Update category when URL param changes
-  useEffect(() => {
-    if (categoryParam) {
-      setActiveCategory(categoryParam);
-    }
-  }, [categoryParam]);
-
-  const filteredProducts = activeCategory === "All"
-    ? products
-    : products.filter((p) => p.category === activeCategory);
-
-  const toggleWishlist = (id: number) => {
-    setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
-  };
-
-  // Get categories that have products
-  const availableCategories = categories.filter(cat => 
-    cat === "All" || products.some(p => p.category === cat)
-  );
-
   return (
     <Layout>
       {/* Hero */}
@@ -58,207 +72,135 @@ export default function Shop() {
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <p className="text-background/70 max-w-xl mt-6">
-              Discover our premium collection of athletic apparel and footwear.
-              All products are available for custom team orders.
+            <p className="text-background/70 max-w-2xl mt-6 text-lg">
+              High-performance gear tailored for clubs, academies, leagues, federations, and organizations.
             </p>
           </FadeInUp>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-8 md:py-12 bg-background">
+      {/* Categories Grid */}
+      <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Category Sidebar - Desktop */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-28 bg-card rounded-xl p-6 shadow-elegant">
-                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                  <Menu className="h-5 w-5" />
-                  Browse Categories
-                </h3>
-                <nav className="space-y-1">
-                  {availableCategories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setActiveCategory(category)}
-                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        activeCategory === category
-                          ? "bg-foreground text-background"
-                          : "text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </nav>
-              </div>
-            </aside>
+          <FadeInUp>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">
+              <span className="text-foreground">Browse</span>{" "}
+              <span className="text-muted-foreground">Categories</span>
+            </h2>
+          </FadeInUp>
 
-            {/* Mobile Category Dropdown */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="w-full flex items-center justify-between bg-card rounded-xl px-4 py-3 shadow-elegant"
-              >
-                <div className="flex items-center gap-2">
-                  <Menu className="h-5 w-5" />
-                  <span className="font-bold">Browse Categories</span>
-                </div>
-                <ChevronDown className={`h-5 w-5 transition-transform ${isCategoryOpen ? "rotate-180" : ""}`} />
-              </button>
-              
-              <AnimatePresence>
-                {isCategoryOpen && (
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {categories.map((category) => (
+              <StaggerItem key={category.id}>
+                <a
+                  href={category.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden"
+                    whileHover={{ y: -8 }}
+                    className="relative bg-card rounded-xl overflow-hidden shadow-elegant hover:shadow-luxury transition-all duration-500 border border-border"
                   >
-                    <div className="bg-card rounded-xl mt-2 p-4 shadow-elegant">
-                      <nav className="grid grid-cols-2 gap-2">
-                        {availableCategories.map((category) => (
-                          <button
-                            key={category}
-                            onClick={() => {
-                              setActiveCategory(category);
-                              setIsCategoryOpen(false);
-                            }}
-                            className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                              activeCategory === category
-                                ? "bg-foreground text-background"
-                                : "text-foreground hover:bg-muted"
-                            }`}
-                          >
-                            {category}
-                          </button>
-                        ))}
-                      </nav>
+                    <div className="relative aspect-[3/4] overflow-hidden">
+                      <motion.img
+                        src={category.image}
+                        alt={category.name}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      
+                      {/* External Link Indicator */}
+                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <ExternalLink className="w-4 h-4 text-foreground" />
+                      </div>
+                      
+                      {/* Category Name */}
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="font-bold text-lg text-white">
+                          {category.name}
+                        </h3>
+                      </div>
                     </div>
                   </motion.div>
-                )}
-              </AnimatePresence>
+                </a>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Boots Section */}
+      <section className="py-12 md:py-16 bg-muted">
+        <div className="container mx-auto px-4 sm:px-6">
+          <FadeInUp>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">
+              <span className="text-foreground">Premium</span>{" "}
+              <span className="text-muted-foreground">Soccer Boots</span>
+            </h2>
+            <p className="text-muted-foreground mb-8">Made in Italy with premium leather</p>
+          </FadeInUp>
+
+          {/* Team Order Notice */}
+          <FadeInUp delay={0.1}>
+            <div className="bg-foreground text-background rounded-xl p-4 md:p-6 mb-8">
+              <p className="text-center font-medium">
+                Contact Support for Team Orders
+              </p>
             </div>
+          </FadeInUp>
 
-            {/* Products Grid */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-muted-foreground">
-                  Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
-                  {activeCategory !== "All" && ` in ${activeCategory}`}
-                </p>
-              </div>
-
-              {filteredProducts.length > 0 ? (
-                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-                  {filteredProducts.map((product) => (
-                    <StaggerItem key={product.id}>
-                      <motion.div
-                        whileHover={{ y: -8 }}
-                        className="group relative bg-card rounded-xl overflow-hidden shadow-elegant hover:shadow-luxury transition-all duration-500"
-                      >
-                        <Link to={`/shop/${product.slug}`} className="block">
-                          {/* Image */}
-                          <div className="relative aspect-square overflow-hidden">
-                            <motion.img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-full h-full object-cover"
-                              whileHover={{ scale: 1.05 }}
-                              transition={{ duration: 0.6 }}
-                            />
-
-                            {/* Quick Actions Overlay */}
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100">
-                              <motion.button
-                                initial={{ scale: 0, y: 20 }}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  toggleWishlist(product.id);
-                                }}
-                                className={`w-11 h-11 rounded-full flex items-center justify-center shadow-lg transition-colors ${
-                                  wishlist.includes(product.id)
-                                    ? "bg-red-500 text-white"
-                                    : "bg-white text-foreground"
-                                }`}
-                              >
-                                <Heart className={`h-5 w-5 ${wishlist.includes(product.id) ? "fill-current" : ""}`} />
-                              </motion.button>
-                              <motion.div
-                                initial={{ scale: 0, y: 20 }}
-                                className="w-11 h-11 bg-white text-foreground rounded-full flex items-center justify-center shadow-lg"
-                              >
-                                <Eye className="h-5 w-5" />
-                              </motion.div>
-                            </div>
-
-                            {/* Tags */}
-                            <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                              {product.tags.slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-2 py-1 bg-foreground text-background text-xs font-medium rounded"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Content */}
-                          <div className="p-5">
-                            <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                              {product.category}
-                            </span>
-                            <h3 className="font-semibold text-base mt-1 mb-2 line-clamp-2">
-                              {product.name}
-                            </h3>
-                            <p className="text-sm font-medium text-foreground">{product.price}</p>
-                            
-                            {/* Sizes Preview */}
-                            {product.outsoles && (
-                              <div className="mt-3 flex flex-wrap gap-1">
-                                {product.outsoles.map((outsole) => (
-                                  <span
-                                    key={outsole}
-                                    className="px-2 py-0.5 bg-muted text-xs font-medium rounded"
-                                  >
-                                    {outsole}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </Link>
-                      </motion.div>
-                    </StaggerItem>
-                  ))}
-                </StaggerContainer>
-              ) : (
-                <div className="text-center py-20">
-                  <p className="text-muted-foreground mb-4">No products found in this category.</p>
-                  <Button
-                    variant="outline"
-                    onClick={() => setActiveCategory("All")}
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {bootProducts.map((product) => (
+              <StaggerItem key={product.id}>
+                <Link to={`/shop/${product.slug}`}>
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    className="group relative bg-card rounded-xl overflow-hidden shadow-elegant hover:shadow-luxury transition-all duration-500"
                   >
-                    View All Products
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
+                    <div className="relative aspect-square overflow-hidden bg-muted">
+                      <motion.img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-contain p-4"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6 }}
+                      />
+                      
+                      {/* Tags */}
+                      <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                        <span className="px-2 py-1 bg-foreground text-background text-xs font-medium rounded">
+                          Made in Italy
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-5">
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                        Soccer Boots
+                      </span>
+                      <h3 className="font-semibold text-base mt-1 mb-2">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm font-medium text-primary">
+                        Contact for Team Pricing
+                      </p>
+                    </div>
+                  </motion.div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-12 md:py-16 lg:py-20 bg-muted">
+      <section className="py-12 md:py-16 lg:py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <FadeInUp>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6">
               <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
               <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
                 Custom Orders
@@ -278,13 +220,12 @@ export default function Shop() {
             </p>
           </FadeInUp>
           <FadeInUp delay={0.3}>
-            <Button
-              asChild
-              size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90"
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors"
             >
-              <Link to="/contact">Request a Quote</Link>
-            </Button>
+              Request a Quote
+            </Link>
           </FadeInUp>
         </div>
       </section>
