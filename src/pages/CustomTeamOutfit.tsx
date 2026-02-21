@@ -20,9 +20,9 @@ function TeamBuilderContent() {
       case 1:
         return <ProductSelection />;
       case 2:
-        return <StyleOptions />;
-      case 3:
         return <DesignBuilder />;
+      case 3:
+        return <StyleOptions />;
       case 4:
         return <RosterBuilder />;
       case 5:
@@ -36,7 +36,7 @@ function TeamBuilderContent() {
 
   return (
     <Layout>
-      {/* Hero Section - Reduced padding on mobile */}
+      {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-4 md:pb-8 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div
@@ -51,6 +51,9 @@ function TeamBuilderContent() {
             </h1>
             <p className="text-background/70 max-w-2xl mx-auto text-sm md:text-lg">
               Create custom designed performance outfits that represent your club, academy, league, or organization.
+            </p>
+            <p className="text-background/50 text-xs md:text-sm mt-2">
+              All products are sublimated apparel — fully customized, dye-sublimated uniforms
             </p>
           </motion.div>
         </div>

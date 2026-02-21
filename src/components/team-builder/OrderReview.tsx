@@ -1,15 +1,24 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Clock, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Clock, Zap, AlertTriangle, FileText, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
 import { sportCategories } from "@/data/teamBuilderData";
 
 export function OrderReview() {
   const { state, dispatch, nextStep, prevStep, calculateTotal } = useTeamBuilder();
-  const { sport, product, styleConfig, designConfig, roster, deliveryOption, proofFirst } = state;
+  const { sport, product, styleConfig, designConfig, roster, deliveryOption, orderApproved, revisionCount } = state;
 
   const sportInfo = sportCategories.find(s => s.id === sport);
   const totals = calculateTotal();
@@ -22,6 +31,13 @@ export function OrderReview() {
     return breakdown;
   };
 
+  const handleRequestProof = () => {
+    dispatch({ type: 'SET_PROOF_FIRST', proofFirst: true });
+    nextStep();
+  };
+
+  const canProceed = orderApproved && totals.quantity >= 18;
+
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Header */}
@@ -31,7 +47,7 @@ export function OrderReview() {
         </Button>
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">Review Your Order</h2>
-          <p className="text-muted-foreground">Confirm details before checkout</p>
+          <p className="text-muted-foreground">Confirm all details before proceeding</p>
         </div>
       </div>
 
@@ -125,13 +141,20 @@ export function OrderReview() {
             </div>
 
             {/* Add-ons */}
-            {(styleConfig.addOns.extraLogoPlacement || styleConfig.addOns.sponsorPlacement || 
-              styleConfig.addOns.customPatch || styleConfig.addOns.playerNameAddon) && (
+            {(styleConfig.addOns.logoPlacement || styleConfig.addOns.sublimatedLogo || styleConfig.addOns.embroideryLogo ||
+              styleConfig.addOns.sponsorPlacement || styleConfig.addOns.customPatch || 
+              styleConfig.addOns.playerNameAddon || styleConfig.addOns.playerNumberAddon) && (
               <div className="pt-2">
                 <span className="text-sm text-muted-foreground">Add-ons:</span>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {styleConfig.addOns.extraLogoPlacement && (
-                    <span className="px-2 py-1 bg-muted rounded text-xs">Extra Logo</span>
+                  {styleConfig.addOns.logoPlacement && (
+                    <span className="px-2 py-1 bg-muted rounded text-xs">Logo Placement</span>
+                  )}
+                  {styleConfig.addOns.sublimatedLogo && (
+                    <span className="px-2 py-1 bg-muted rounded text-xs">Sublimated Logo</span>
+                  )}
+                  {styleConfig.addOns.embroideryLogo && (
+                    <span className="px-2 py-1 bg-muted rounded text-xs">Embroidery Logo</span>
                   )}
                   {styleConfig.addOns.sponsorPlacement && (
                     <span className="px-2 py-1 bg-muted rounded text-xs">Sponsor</span>
@@ -142,12 +165,15 @@ export function OrderReview() {
                   {styleConfig.addOns.playerNameAddon && (
                     <span className="px-2 py-1 bg-muted rounded text-xs">Player Names</span>
                   )}
+                  {styleConfig.addOns.playerNumberAddon && (
+                    <span className="px-2 py-1 bg-muted rounded text-xs">Player Numbers</span>
+                  )}
                 </div>
               </div>
             )}
           </motion.div>
 
-          {/* Roster Summary */}
+          {/* Full Roster Table */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,11 +181,38 @@ export function OrderReview() {
             className="p-6 border rounded-2xl space-y-4"
           >
             <div className="flex justify-between items-center">
-              <Label className="text-sm font-semibold">Roster Summary</Label>
+              <Label className="text-sm font-semibold">Full Roster</Label>
               <span className="text-sm text-muted-foreground">{roster.length} players, {totals.quantity} items</span>
             </div>
             
-            <div className="flex flex-wrap gap-3">
+            {/* Roster Table */}
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="text-xs">Player</TableHead>
+                    <TableHead className="text-xs">#</TableHead>
+                    <TableHead className="text-xs">Size</TableHead>
+                    <TableHead className="text-xs">Qty</TableHead>
+                    <TableHead className="text-xs">Role</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {roster.map((entry) => (
+                    <TableRow key={entry.id}>
+                      <TableCell className="text-sm font-medium">{entry.playerName || '—'}</TableCell>
+                      <TableCell className="text-sm">{entry.jerseyNumber || '—'}</TableCell>
+                      <TableCell className="text-sm">{entry.size}</TableCell>
+                      <TableCell className="text-sm">{entry.quantity}</TableCell>
+                      <TableCell className="text-sm text-muted-foreground">{entry.notes || '—'}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Size Breakdown */}
+            <div className="flex flex-wrap gap-3 pt-2">
               {Object.entries(getSizeBreakdown()).map(([size, count]) => (
                 <div key={size} className="px-4 py-2 bg-muted rounded-full text-sm">
                   <span className="font-semibold">{size}:</span> {count}
@@ -208,6 +261,55 @@ export function OrderReview() {
               </div>
             </RadioGroup>
           </motion.div>
+
+          {/* Revision Policy */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="p-5 bg-muted/50 border border-border rounded-2xl space-y-3"
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-muted-foreground" />
+              <Label className="text-sm font-semibold">Revision Policy</Label>
+            </div>
+            <ul className="text-xs text-muted-foreground space-y-1.5 list-disc list-inside">
+              <li><strong>1–2 free revision rounds</strong> are included as standard.</li>
+              <li>Additional revisions may extend production timeline or incur a revision fee.</li>
+              <li>Changes after approval are not guaranteed without a new order or written exception.</li>
+              <li>Custom orders are <strong>final and non-refundable</strong> once approved and in production.</li>
+            </ul>
+            {revisionCount > 0 && (
+              <p className="text-xs text-yellow-600 font-medium">
+                Revisions used: {revisionCount} of 2 free rounds
+              </p>
+            )}
+          </motion.div>
+
+          {/* Approval Checkbox */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="p-5 border-2 border-foreground/20 rounded-2xl"
+          >
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="approve-order"
+                checked={orderApproved}
+                onCheckedChange={(checked) => dispatch({ type: 'SET_ORDER_APPROVED', approved: checked as boolean })}
+                className="mt-0.5"
+              />
+              <div>
+                <Label htmlFor="approve-order" className="font-medium text-sm cursor-pointer">
+                  I confirm all designs, roster details, sizes, and quantities are correct.
+                </Label>
+                <p className="text-xs text-muted-foreground mt-1">
+                  By checking this box, you acknowledge that custom orders are final and non-refundable once approved and sent to production. Please review all details carefully.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* Right Column - Pricing */}
@@ -243,7 +345,7 @@ export function OrderReview() {
               
               {totals.rushFee > 0 && (
                 <div className="flex justify-between text-yellow-400">
-                  <span>Rush Fee</span>
+                  <span>Rush Fee (20%)</span>
                   <span>+${totals.rushFee.toFixed(2)}</span>
                 </div>
               )}
@@ -252,11 +354,17 @@ export function OrderReview() {
                 <span className="opacity-70">Est. Shipping</span>
                 <span>${totals.estimatedShipping.toFixed(2)}</span>
               </div>
+              <p className="text-[10px] opacity-40">
+                Based on $5/unit, min $25, max $150. Final rate confirmed at checkout.
+              </p>
               
               <div className="flex justify-between">
-                <span className="opacity-70">Est. Tax</span>
+                <span className="opacity-70">Est. Tax (8%)</span>
                 <span>${totals.estimatedTax.toFixed(2)}</span>
               </div>
+              <p className="text-[10px] opacity-40">
+                Estimated sales tax. Actual tax calculated based on shipping address.
+              </p>
             </div>
             
             <Separator className="bg-background/20" />
@@ -280,19 +388,28 @@ export function OrderReview() {
                 size="lg" 
                 variant="secondary"
                 onClick={nextStep}
+                disabled={!canProceed}
                 className="w-full gap-2"
               >
-                Proceed to Checkout
+                Approve & Proceed to Checkout
                 <ArrowRight className="w-4 h-4" />
               </Button>
               
               <Button 
                 variant="outline" 
-                onClick={() => dispatch({ type: 'SET_PROOF_FIRST', proofFirst: true })}
-                className="w-full bg-transparent text-background border-background/30 hover:bg-background/10"
+                onClick={handleRequestProof}
+                className="w-full gap-2 bg-transparent text-background border-background/30 hover:bg-background/10"
               >
+                <Send className="w-4 h-4" />
                 Request Proof First
               </Button>
+
+              {!orderApproved && (
+                <div className="flex items-center gap-2 text-xs text-yellow-400">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                  <span>Please confirm your order details above to proceed</span>
+                </div>
+              )}
             </div>
 
             <p className="text-xs opacity-50 text-center">

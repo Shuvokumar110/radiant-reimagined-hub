@@ -70,7 +70,7 @@ export function DesignBuilder() {
         </Button>
         <div>
           <h2 className="text-xl md:text-2xl font-bold">Choose Your Design</h2>
-          <p className="text-sm text-muted-foreground">Select a template and customize</p>
+          <p className="text-sm text-muted-foreground">Select a template and customize — these are sublimated designs</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export function DesignBuilder() {
         
         {/* Template Gallery */}
         <div className="lg:col-span-3 space-y-4">
-          {/* Category Filters - Scrollable on mobile */}
+          {/* Category Filters */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
             <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
             {templateCategories.map((cat) => (
@@ -95,7 +95,7 @@ export function DesignBuilder() {
             ))}
           </div>
 
-          {/* Template Grid - 2 cols on mobile, 3 on larger screens */}
+          {/* Template Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {filteredTemplates.map((template) => (
               <motion.button
@@ -131,7 +131,7 @@ export function DesignBuilder() {
             ))}
           </div>
 
-          {/* Selected Template Preview - Compact */}
+          {/* Selected Template Preview */}
           {selectedTemplate && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -373,7 +373,7 @@ export function DesignBuilder() {
               className="gap-2 w-full sm:w-auto"
               disabled={!designConfig.selectedTemplateId}
             >
-              Next: Team Roster
+              Next: Style Options
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>

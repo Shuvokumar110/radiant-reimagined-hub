@@ -29,6 +29,8 @@ import {
 import { useTeamBuilder, RosterEntry } from "@/context/TeamBuilderContext";
 import { sizeOptions } from "@/data/teamBuilderData";
 
+const MIN_ORDER_QTY = 18;
+
 export function RosterBuilder() {
   const { state, dispatch, nextStep, prevStep, calculateTotal } = useTeamBuilder();
   const { roster, product } = state;
@@ -77,7 +79,6 @@ export function RosterBuilder() {
       const text = event.target?.result as string;
       const lines = text.split('\n').filter(line => line.trim());
       
-      // Skip header row if it exists
       const startIndex = lines[0].toLowerCase().includes('name') ? 1 : 0;
       
       const newEntries: RosterEntry[] = [];
@@ -289,6 +290,7 @@ export function RosterBuilder() {
         >
           <Label className="text-sm text-muted-foreground">Total Quantity</Label>
           <p className="text-3xl font-bold">{totals.quantity}</p>
+          <p className="text-xs text-muted-foreground mt-1">Min. {MIN_ORDER_QTY} units required</p>
         </motion.div>
 
         <motion.div
@@ -332,10 +334,10 @@ export function RosterBuilder() {
       )}
 
       {/* Minimum Order Note */}
-      {totals.quantity > 0 && totals.quantity < 10 && (
+      {totals.quantity > 0 && totals.quantity < MIN_ORDER_QTY && (
         <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl mb-8">
           <p className="text-sm text-yellow-700 dark:text-yellow-400">
-            <strong>Note:</strong> Minimum order is 10 units. Add {10 - totals.quantity} more to proceed.
+            <strong>Note:</strong> Minimum order is {MIN_ORDER_QTY} units. Add {MIN_ORDER_QTY - totals.quantity} more to proceed.
           </p>
         </div>
       )}
@@ -343,12 +345,12 @@ export function RosterBuilder() {
       {/* Navigation */}
       <div className="flex justify-between pt-6">
         <Button variant="outline" onClick={prevStep}>
-          Back to Design
+          Back to Style Options
         </Button>
         <Button 
           size="lg" 
           onClick={nextStep} 
-          disabled={totals.quantity < 10}
+          disabled={totals.quantity < MIN_ORDER_QTY}
           className="gap-2"
         >
           Next: Review Order
