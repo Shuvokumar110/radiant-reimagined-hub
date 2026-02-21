@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Zap, Users, Package, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,18 +5,18 @@ import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
 import { productsBySport, sportCategories, ProductType, ProductCategory } from "@/data/teamBuilderData";
 
-const categoryOrder: (ProductCategory | undefined)[] = ['Full Kit', 'Jersey', 'Shorts', 'Socks', 'Warmup', 'Uniform', 'Accessory', 'Outerwear', 'Headwear'];
+const categoryOrder: ProductCategory[] = ['Full Kit', 'Jersey', 'Shorts', 'Socks', 'Warmup', 'Uniform', 'Accessory', 'Outerwear', 'Headwear'];
 
-const categoryLabels: Record<string, { label: string; icon: typeof Package }> = {
-  'Full Kit': { label: 'Full Kit Bundles', icon: Package },
-  'Jersey': { label: 'Jerseys', icon: Shirt },
-  'Shorts': { label: 'Shorts', icon: Shirt },
-  'Socks': { label: 'Socks', icon: Shirt },
-  'Warmup': { label: 'Warmups', icon: Shirt },
-  'Uniform': { label: 'Uniforms', icon: Shirt },
-  'Accessory': { label: 'Accessories', icon: Shirt },
-  'Outerwear': { label: 'Outerwear', icon: Shirt },
-  'Headwear': { label: 'Headwear', icon: Shirt },
+const categoryLabels: Record<string, string> = {
+  'Full Kit': 'Full Kit Bundles',
+  'Jersey': 'Jerseys',
+  'Shorts': 'Shorts',
+  'Socks': 'Socks',
+  'Warmup': 'Warmups',
+  'Uniform': 'Uniforms',
+  'Accessory': 'Accessories',
+  'Outerwear': 'Outerwear',
+  'Headwear': 'Headwear',
 };
 
 function groupProducts(products: ProductType[]) {
@@ -27,16 +26,13 @@ function groupProducts(products: ProductType[]) {
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(p);
   }
-  // Sort by categoryOrder
   const sorted: { category: string; products: ProductType[] }[] = [];
   for (const cat of categoryOrder) {
-    const key = cat || 'Other';
-    if (grouped[key]) {
-      sorted.push({ category: key, products: grouped[key] });
-      delete grouped[key];
+    if (grouped[cat]) {
+      sorted.push({ category: cat, products: grouped[cat] });
+      delete grouped[cat];
     }
   }
-  // Any remaining
   for (const [key, prods] of Object.entries(grouped)) {
     sorted.push({ category: key, products: prods });
   }
@@ -46,34 +42,19 @@ function groupProducts(products: ProductType[]) {
 export function ProductSelection() {
   const { state, dispatch, prevStep } = useTeamBuilder();
   const { sport } = state;
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   if (!sport) return null;
 
   const products = productsBySport[sport];
   const sportInfo = sportCategories.find(s => s.id === sport);
   const grouped = groupProducts(products);
-  
-  // Check if products have categories (soccer does, others may not yet)
   const hasCategories = products.some(p => p.category);
-
-  // Filter chips
-  const availableCategories = grouped.map(g => g.category);
-
-  const filteredGroups = activeFilter 
-    ? grouped.filter(g => g.category === activeFilter) 
-    : grouped;
 
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-4 md:mb-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={prevStep}
-          className="rounded-full shrink-0"
-        >
+      <div className="flex items-center gap-3 mb-6 md:mb-8">
+        <Button variant="ghost" size="icon" onClick={prevStep} className="rounded-full shrink-0">
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
@@ -82,42 +63,10 @@ export function ProductSelection() {
         </div>
       </div>
 
-      {/* Filter Chips */}
-      {hasCategories && availableCategories.length > 1 && (
-        <div className="flex flex-wrap gap-2 mb-6">
-          <button
-            onClick={() => setActiveFilter(null)}
-            className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-medium transition-colors ${
-              !activeFilter 
-                ? 'bg-foreground text-background' 
-                : 'bg-muted text-muted-foreground hover:bg-muted/80'
-            }`}
-          >
-            All ({products.length})
-          </button>
-          {availableCategories.map(cat => {
-            const count = grouped.find(g => g.category === cat)?.products.length || 0;
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat === activeFilter ? null : cat)}
-                className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-medium transition-colors ${
-                  activeFilter === cat 
-                    ? 'bg-foreground text-background' 
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                }`}
-              >
-                {categoryLabels[cat]?.label || cat} ({count})
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Grouped Products */}
+      {/* Grouped or flat */}
       {hasCategories ? (
-        <div className="space-y-8 md:space-y-12">
-          {filteredGroups.map(({ category, products: catProducts }) => (
+        <div className="space-y-10 md:space-y-14">
+          {grouped.map(({ category, products: catProducts }) => (
             <div key={category}>
               <div className="flex items-center gap-2 mb-4">
                 {category === 'Full Kit' ? (
@@ -126,11 +75,11 @@ export function ProductSelection() {
                   <Shirt className="w-4 h-4 text-muted-foreground" />
                 )}
                 <h3 className={`font-semibold ${
-                  category === 'Full Kit' 
-                    ? 'text-lg md:text-xl' 
+                  category === 'Full Kit'
+                    ? 'text-lg md:text-xl'
                     : 'text-base md:text-lg text-muted-foreground'
                 }`}>
-                  {categoryLabels[category]?.label || category}
+                  {categoryLabels[category] || category}
                 </h3>
                 <span className="text-xs text-muted-foreground">({catProducts.length})</span>
               </div>
@@ -167,20 +116,15 @@ function ProductGrid({ products, dispatch }: { products: ProductType[]; dispatch
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              
-              {/* Badges */}
               <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                <Badge 
-                  variant="secondary" 
-                  className="bg-background/90 text-foreground text-[10px] md:text-xs px-1.5 py-0.5"
-                >
+                <Badge variant="secondary" className="bg-background/90 text-foreground text-[10px] md:text-xs px-1.5 py-0.5">
                   {product.fabricType}
                 </Badge>
-                <Badge 
+                <Badge
                   variant="secondary"
                   className={`text-[10px] md:text-xs px-1.5 py-0.5 ${
-                    product.leadTime === 'Rush' 
-                      ? 'bg-yellow-500/90 text-black' 
+                    product.leadTime === 'Rush'
+                      ? 'bg-yellow-500/90 text-black'
                       : 'bg-background/90 text-foreground'
                   }`}
                 >
@@ -191,22 +135,18 @@ function ProductGrid({ products, dispatch }: { products: ProductType[]; dispatch
                   )}
                 </Badge>
               </div>
-
-              {/* Price */}
               <div className="absolute bottom-2 right-2">
                 <span className="px-2 py-1 bg-background rounded-full text-xs md:text-sm font-semibold">
                   ${product.basePrice}/ea
                 </span>
               </div>
             </div>
-
             <h3 className="text-sm md:text-base font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
               {product.name}
             </h3>
             <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
               {product.shortDescription}
             </p>
-            {/* MOQ */}
             <div className="flex items-center gap-1 mt-1">
               <Users className="w-3 h-3 text-muted-foreground" />
               <span className="text-[10px] md:text-xs text-muted-foreground">
