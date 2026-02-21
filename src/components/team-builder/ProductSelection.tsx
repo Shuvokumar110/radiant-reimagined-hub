@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Clock, Zap, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
@@ -33,7 +33,7 @@ export function ProductSelection() {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-8 md:mb-10">
+      <div className="flex items-center gap-3 mb-8 md:mb-12">
         <Button variant="ghost" size="icon" onClick={handleBack} className="rounded-full shrink-0">
           <ArrowLeft className="w-5 h-5" />
         </Button>
@@ -56,22 +56,40 @@ export function ProductSelection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 gap-3 md:gap-4 max-w-lg"
+            className="flex flex-col sm:flex-row gap-4 md:gap-6 max-w-2xl mx-auto"
           >
             <button
               onClick={() => setViewMode('kits')}
-              className="rounded-lg bg-foreground text-background px-6 py-8 md:py-10 text-left hover:opacity-90 transition-opacity"
+              className="flex-1 group relative rounded-2xl bg-foreground text-background p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01]"
             >
-              <h3 className="text-base md:text-lg font-bold">Full Kits</h3>
-              <p className="text-xs text-background/50 mt-1">{fullKits.length} styles</p>
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-[11px] uppercase tracking-[0.15em] text-background/40 font-medium">Recommended</span>
+                <ArrowRight className="w-5 h-5 text-background/30 group-hover:text-background/70 group-hover:translate-x-1 transition-all" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Full Kits</h3>
+              <p className="text-sm text-background/50 mt-2 leading-relaxed">
+                Jersey, shorts &amp; socks — bundled and matched.
+              </p>
+              <div className="mt-6 pt-4 border-t border-background/10">
+                <span className="text-xs text-background/40">{fullKits.length} styles available</span>
+              </div>
             </button>
 
             <button
               onClick={() => setViewMode('separated')}
-              className="rounded-lg bg-muted text-foreground px-6 py-8 md:py-10 text-left hover:bg-muted/70 transition-colors border border-border"
+              className="flex-1 group relative rounded-2xl bg-background text-foreground p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01] border border-border"
             >
-              <h3 className="text-base md:text-lg font-bold">Individual Items</h3>
-              <p className="text-xs text-muted-foreground mt-1">{separated.length} items</p>
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Mix &amp; Match</span>
+                <ArrowRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-foreground/70 group-hover:translate-x-1 transition-all" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Individual</h3>
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                Pick jerseys, shorts and socks separately.
+              </p>
+              <div className="mt-6 pt-4 border-t border-border">
+                <span className="text-xs text-muted-foreground">{separated.length} items available</span>
+              </div>
             </button>
           </motion.div>
         )}
@@ -97,17 +115,19 @@ export function ProductSelection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="space-y-10"
+            className="space-y-12"
           >
             {(['Jersey', 'Shorts', 'Socks'] as const).map(cat => {
               const items = separated.filter(p => p.category === cat);
               if (items.length === 0) return null;
               return (
                 <div key={cat}>
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
-                    {cat === 'Jersey' ? 'Jerseys' : cat}
-                    <span className="ml-2 text-xs font-normal normal-case tracking-normal">({items.length})</span>
-                  </h3>
+                  <div className="flex items-baseline gap-3 mb-5">
+                    <h3 className="text-lg md:text-xl font-bold tracking-tight">
+                      {cat === 'Jersey' ? 'Jerseys' : cat}
+                    </h3>
+                    <span className="text-xs text-muted-foreground">{items.length} options</span>
+                  </div>
                   <ProductGrid products={items} dispatch={dispatch} />
                 </div>
               );
@@ -148,7 +168,7 @@ function ProductGrid({ products, dispatch }: { products: ProductType[]; dispatch
             onClick={() => dispatch({ type: 'SET_PRODUCT', product })}
             className="w-full text-left"
           >
-            <div className="relative bg-muted rounded-lg overflow-hidden aspect-[4/3] mb-2 shadow-sm group-hover:shadow-md transition-shadow">
+            <div className="relative bg-muted rounded-xl overflow-hidden aspect-[4/3] mb-2.5 shadow-sm group-hover:shadow-lg transition-all">
               <img
                 src={product.image}
                 alt={product.name}
