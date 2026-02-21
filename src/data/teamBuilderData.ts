@@ -25,6 +25,10 @@ import soccerJerseyYellow from "@/assets/products/soccer-jersey-yellow.png";
 import soccerShortsYellow from "@/assets/products/soccer-shorts-yellow.png";
 import soccerSocksYellow from "@/assets/products/soccer-socks-yellow.png";
 import soccerFullKitYellow from "@/assets/products/soccer-full-kit-yellow.png";
+import soccerJerseyBrush from "@/assets/products/soccer-jersey-brush.png";
+import soccerShortsBrush from "@/assets/products/soccer-shorts-brush.png";
+import soccerSocksBrush from "@/assets/products/soccer-socks-brush.png";
+import soccerFullKitBrush from "@/assets/products/soccer-full-kit-brush.png";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -123,6 +127,10 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'soccer-shorts-yellow', name: 'Shorts (Contrast)', shortDescription: 'Contrast color athletic shorts', basePrice: 25, image: soccerShortsYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks-yellow', name: 'Socks (Two-Tone)', shortDescription: 'Two-tone team socks', basePrice: 12, image: soccerSocksYellow, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit-yellow', name: 'Full Kit Bundle (Center Stripe)', shortDescription: 'Center Stripe Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-brush', name: 'Jersey (Brush Stroke)', shortDescription: 'Polo collar brush stroke jersey', basePrice: 35, image: soccerJerseyBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts-brush', name: 'Shorts (Brush)', shortDescription: 'White shorts with brush detail', basePrice: 25, image: soccerShortsBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks-brush', name: 'Socks (Cuff)', shortDescription: 'White socks with color cuff', basePrice: 12, image: soccerSocksBrush, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit-brush', name: 'Full Kit Bundle (Brush Stroke)', shortDescription: 'Brush Stroke Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
