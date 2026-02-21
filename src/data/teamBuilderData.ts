@@ -92,6 +92,8 @@ export interface SportCategory {
   image: string;
 }
 
+export type ProductCategory = 'Full Kit' | 'Jersey' | 'Shorts' | 'Socks' | 'Warmup' | 'Accessory' | 'Uniform' | 'Outerwear' | 'Headwear';
+
 export interface ProductType {
   id: string;
   name: string;
@@ -101,6 +103,7 @@ export interface ProductType {
   fabricType: 'Sublimated' | 'Embroidered' | 'Heat Press';
   leadTime: 'Standard' | 'Rush';
   moq: number;
+  category?: ProductCategory;
 }
 
 export interface StyleOption {
@@ -123,38 +126,46 @@ export const sportCategories: SportCategory[] = [
 
 export const productsBySport: Record<SportType, ProductType[]> = {
   soccer: [
-    { id: 'soccer-jersey-short', name: 'Jersey (Short Sleeve)', shortDescription: 'Competition-ready short sleeve jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-blue', name: 'Jersey (V-Neck)', shortDescription: 'V-neck raglan sleeve jersey', basePrice: 35, image: soccerJerseyBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-blue', name: 'Shorts (Striped)', shortDescription: 'Athletic shorts with stripe trim', basePrice: 25, image: soccerShortsBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-blue', name: 'Socks (Hooped)', shortDescription: 'Hooped team socks', basePrice: 12, image: soccerSocksBlue, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-blue', name: 'Full Kit Bundle (V-Neck)', shortDescription: 'V-Neck Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-green', name: 'Jersey (Diagonal)', shortDescription: 'Diagonal stripe V-neck jersey', basePrice: 35, image: soccerJerseyGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-green', name: 'Shorts (Side Stripe)', shortDescription: 'White shorts with side stripe', basePrice: 25, image: soccerShortsGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-green', name: 'Socks (Solid)', shortDescription: 'Solid white team socks', basePrice: 12, image: soccerSocksGreen, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-green', name: 'Full Kit Bundle (Diagonal)', shortDescription: 'Diagonal Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-yellow', name: 'Jersey (Center Stripe)', shortDescription: 'Center stripe V-neck jersey', basePrice: 35, image: soccerJerseyYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-yellow', name: 'Shorts (Contrast)', shortDescription: 'Contrast color athletic shorts', basePrice: 25, image: soccerShortsYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-yellow', name: 'Socks (Two-Tone)', shortDescription: 'Two-tone team socks', basePrice: 12, image: soccerSocksYellow, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-yellow', name: 'Full Kit Bundle (Center Stripe)', shortDescription: 'Center Stripe Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-brush', name: 'Jersey (Brush Stroke)', shortDescription: 'Polo collar brush stroke jersey', basePrice: 35, image: soccerJerseyBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-brush', name: 'Shorts (Brush)', shortDescription: 'White shorts with brush detail', basePrice: 25, image: soccerShortsBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-brush', name: 'Socks (Cuff)', shortDescription: 'White socks with color cuff', basePrice: 12, image: soccerSocksBrush, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-brush', name: 'Full Kit Bundle (Brush Stroke)', shortDescription: 'Brush Stroke Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-orange', name: 'Jersey (Panel)', shortDescription: 'Panel stripe notch collar jersey', basePrice: 35, image: soccerJerseyOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-orange', name: 'Shorts (Panel)', shortDescription: 'Orange panel athletic shorts', basePrice: 25, image: soccerShortsOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-orange', name: 'Socks (Orange Cuff)', shortDescription: 'White socks with orange cuff', basePrice: 12, image: soccerSocksOrange, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-orange', name: 'Full Kit Bundle (Panel)', shortDescription: 'Panel Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-marble', name: 'Jersey (Marble)', shortDescription: 'Marble splash crew neck jersey', basePrice: 35, image: soccerJerseyMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-marble', name: 'Shorts (Side Panel)', shortDescription: 'White shorts with side panels', basePrice: 25, image: soccerShortsMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-marble', name: 'Socks (Banded)', shortDescription: 'White socks with contrast bands', basePrice: 12, image: soccerSocksMarble, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-marble', name: 'Full Kit Bundle (Marble)', shortDescription: 'Marble Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-pink', name: 'Jersey (Hex)', shortDescription: 'Hexagonal pattern crew jersey', basePrice: 35, image: soccerJerseyPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-shorts-pink', name: 'Shorts (Marble)', shortDescription: 'Pink marble athletic shorts', basePrice: 25, image: soccerShortsPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-socks-pink', name: 'Socks (Pink)', shortDescription: 'Pink socks with contrast cuff', basePrice: 12, image: soccerSocksPink, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'soccer-full-kit-pink', name: 'Full Kit Bundle (Hex)', shortDescription: 'Hex Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    // Full Kits
+    { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-blue', name: 'Full Kit Bundle (V-Neck)', shortDescription: 'V-Neck Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-green', name: 'Full Kit Bundle (Diagonal)', shortDescription: 'Diagonal Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-yellow', name: 'Full Kit Bundle (Center Stripe)', shortDescription: 'Center Stripe Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-brush', name: 'Full Kit Bundle (Brush Stroke)', shortDescription: 'Brush Stroke Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-orange', name: 'Full Kit Bundle (Panel)', shortDescription: 'Panel Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-marble', name: 'Full Kit Bundle (Marble)', shortDescription: 'Marble Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'soccer-full-kit-pink', name: 'Full Kit Bundle (Hex)', shortDescription: 'Hex Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    
+    // Jerseys
+    { id: 'soccer-jersey-short', name: 'Jersey (Short Sleeve)', shortDescription: 'Competition-ready short sleeve jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-blue', name: 'Jersey (V-Neck)', shortDescription: 'V-neck raglan sleeve jersey', basePrice: 35, image: soccerJerseyBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-green', name: 'Jersey (Diagonal)', shortDescription: 'Diagonal stripe V-neck jersey', basePrice: 35, image: soccerJerseyGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-yellow', name: 'Jersey (Center Stripe)', shortDescription: 'Center stripe V-neck jersey', basePrice: 35, image: soccerJerseyYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-brush', name: 'Jersey (Brush Stroke)', shortDescription: 'Polo collar brush stroke jersey', basePrice: 35, image: soccerJerseyBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-orange', name: 'Jersey (Panel)', shortDescription: 'Panel stripe notch collar jersey', basePrice: 35, image: soccerJerseyOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-marble', name: 'Jersey (Marble)', shortDescription: 'Marble splash crew neck jersey', basePrice: 35, image: soccerJerseyMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'soccer-jersey-pink', name: 'Jersey (Hex)', shortDescription: 'Hexagonal pattern crew jersey', basePrice: 35, image: soccerJerseyPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    
+    // Shorts
+    { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-blue', name: 'Shorts (Striped)', shortDescription: 'Athletic shorts with stripe trim', basePrice: 25, image: soccerShortsBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-green', name: 'Shorts (Side Stripe)', shortDescription: 'White shorts with side stripe', basePrice: 25, image: soccerShortsGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-yellow', name: 'Shorts (Contrast)', shortDescription: 'Contrast color athletic shorts', basePrice: 25, image: soccerShortsYellow, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-brush', name: 'Shorts (Brush)', shortDescription: 'White shorts with brush detail', basePrice: 25, image: soccerShortsBrush, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-orange', name: 'Shorts (Panel)', shortDescription: 'Orange panel athletic shorts', basePrice: 25, image: soccerShortsOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-marble', name: 'Shorts (Side Panel)', shortDescription: 'White shorts with side panels', basePrice: 25, image: soccerShortsMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'soccer-shorts-pink', name: 'Shorts (Marble)', shortDescription: 'Pink marble athletic shorts', basePrice: 25, image: soccerShortsPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    
+    // Socks
+    { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-blue', name: 'Socks (Hooped)', shortDescription: 'Hooped team socks', basePrice: 12, image: soccerSocksBlue, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-green', name: 'Socks (Solid)', shortDescription: 'Solid white team socks', basePrice: 12, image: soccerSocksGreen, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-yellow', name: 'Socks (Two-Tone)', shortDescription: 'Two-tone team socks', basePrice: 12, image: soccerSocksYellow, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-brush', name: 'Socks (Cuff)', shortDescription: 'White socks with color cuff', basePrice: 12, image: soccerSocksBrush, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-orange', name: 'Socks (Orange Cuff)', shortDescription: 'White socks with orange cuff', basePrice: 12, image: soccerSocksOrange, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-marble', name: 'Socks (Banded)', shortDescription: 'White socks with contrast bands', basePrice: 12, image: soccerSocksMarble, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'soccer-socks-pink', name: 'Socks (Pink)', shortDescription: 'Pink socks with contrast cuff', basePrice: 12, image: soccerSocksPink, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
