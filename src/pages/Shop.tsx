@@ -129,37 +129,8 @@ export default function Shop() {
 
   return (
     <Layout>
-      {/* Custom Outfit CTA */}
-      <section className="pt-28 md:pt-36 pb-8 md:pb-10 bg-foreground">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-background/10 rounded-full mb-3">
-                <span className="w-1.5 h-1.5 bg-background rounded-full" />
-                <span className="text-[10px] md:text-xs font-medium tracking-widest uppercase text-background/60">
-                  Team Builder
-                </span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-background mb-2">
-                Design Your Custom Outfit
-              </h2>
-              <p className="text-background/60 text-sm md:text-base max-w-lg">
-                Build fully custom uniforms for your team — choose your sport, style, colors, and add your roster.
-              </p>
-            </div>
-            <Link
-              to="/custom-team-outfit"
-              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-background text-foreground font-bold rounded-xl hover:bg-background/90 transition-colors text-sm md:text-base"
-            >
-              Start Designing
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Hero */}
-      <section className="py-8 md:py-10 bg-foreground text-background">
+      <section className="pt-28 md:pt-36 pb-8 md:pb-10 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-background/10 rounded-full mb-4">
@@ -373,6 +344,34 @@ export default function Shop() {
         </div>
       </section>
 
+      {/* Custom Outfit CTA */}
+      <section className="py-12 md:py-16 bg-foreground">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-background/10 rounded-full mb-3">
+                <span className="w-1.5 h-1.5 bg-background rounded-full" />
+                <span className="text-[10px] md:text-xs font-medium tracking-widest uppercase text-background/60">
+                  Team Builder
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-background mb-2">
+                Design Your Custom Outfit
+              </h2>
+              <p className="text-background/60 text-sm md:text-base max-w-lg">
+                Build fully custom uniforms for your team — choose your sport, style, colors, and add your roster.
+              </p>
+            </div>
+            <Link
+              to="/custom-team-outfit"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-background text-foreground font-bold rounded-xl hover:bg-background/90 transition-colors text-sm md:text-base"
+            >
+              Start Designing
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Quote CTA */}
       <section className="py-10 md:py-14 bg-background">
