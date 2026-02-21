@@ -17,7 +17,7 @@ import HighSchoolPrograms from "./pages/programs/HighSchoolPrograms";
 import CollegiateAthletics from "./pages/programs/CollegiateAthletics";
 import ClubTravel from "./pages/programs/ClubTravel";
 import LeaguesAcademies from "./pages/programs/LeaguesAcademies";
-import CustomTeamOutfit from "./pages/CustomTeamOutfit";
+
 import About from "./pages/About";
 import AffiliateProgram from "./pages/AffiliateProgram";
 import Account from "./pages/Account";
@@ -49,7 +49,7 @@ function AppContent() {
         <Route path="/shop/:slug" element={<ProductDetail />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/videos" element={<VideoGallery />} />
-        <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
+        
         <Route path="/about" element={<About />} />
         <Route path="/affiliate" element={<AffiliateProgram />} />
         <Route path="/programs/high-school" element={<HighSchoolPrograms />} />
