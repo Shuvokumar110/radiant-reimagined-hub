@@ -13,6 +13,10 @@ import soccerJerseyShort from "@/assets/products/soccer-jersey-short-new.png";
 import soccerShorts from "@/assets/products/soccer-shorts-new.png";
 import soccerSocks from "@/assets/products/soccer-socks-new.png";
 import soccerFullKit from "@/assets/products/soccer-full-kit-new.png";
+import soccerJerseyBlue from "@/assets/products/soccer-jersey-blue.png";
+import soccerShortsBlue from "@/assets/products/soccer-shorts-blue.png";
+import soccerSocksBlue from "@/assets/products/soccer-socks-blue.png";
+import soccerFullKitBlue from "@/assets/products/soccer-full-kit-blue.png";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -99,6 +103,10 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-blue', name: 'Jersey (V-Neck)', shortDescription: 'V-neck raglan sleeve jersey', basePrice: 35, image: soccerJerseyBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts-blue', name: 'Shorts (Striped)', shortDescription: 'Athletic shorts with stripe trim', basePrice: 25, image: soccerShortsBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks-blue', name: 'Socks (Hooped)', shortDescription: 'Hooped team socks', basePrice: 12, image: soccerSocksBlue, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit-blue', name: 'Full Kit Bundle (V-Neck)', shortDescription: 'V-Neck Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
