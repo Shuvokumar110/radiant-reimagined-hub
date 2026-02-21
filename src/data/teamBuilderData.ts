@@ -17,6 +17,10 @@ import soccerJerseyBlue from "@/assets/products/soccer-jersey-blue.png";
 import soccerShortsBlue from "@/assets/products/soccer-shorts-blue.png";
 import soccerSocksBlue from "@/assets/products/soccer-socks-blue.png";
 import soccerFullKitBlue from "@/assets/products/soccer-full-kit-blue.png";
+import soccerJerseyGreen from "@/assets/products/soccer-jersey-green.png";
+import soccerShortsGreen from "@/assets/products/soccer-shorts-green.png";
+import soccerSocksGreen from "@/assets/products/soccer-socks-green.png";
+import soccerFullKitGreen from "@/assets/products/soccer-full-kit-green.png";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -107,6 +111,10 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'soccer-shorts-blue', name: 'Shorts (Striped)', shortDescription: 'Athletic shorts with stripe trim', basePrice: 25, image: soccerShortsBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks-blue', name: 'Socks (Hooped)', shortDescription: 'Hooped team socks', basePrice: 12, image: soccerSocksBlue, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit-blue', name: 'Full Kit Bundle (V-Neck)', shortDescription: 'V-Neck Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitBlue, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-green', name: 'Jersey (Diagonal)', shortDescription: 'Diagonal stripe V-neck jersey', basePrice: 35, image: soccerJerseyGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts-green', name: 'Shorts (Side Stripe)', shortDescription: 'White shorts with side stripe', basePrice: 25, image: soccerShortsGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks-green', name: 'Socks (Solid)', shortDescription: 'Solid white team socks', basePrice: 12, image: soccerSocksGreen, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit-green', name: 'Full Kit Bundle (Diagonal)', shortDescription: 'Diagonal Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitGreen, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
