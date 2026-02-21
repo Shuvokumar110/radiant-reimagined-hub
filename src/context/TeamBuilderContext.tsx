@@ -53,6 +53,18 @@ export interface StyleConfig {
   };
 }
 
+export interface TeamInfo {
+  teamName: string;
+  organizationName: string;
+  logoFile: File | null;
+  logoPreview: string;
+  coachName: string;
+  contactEmail: string;
+  contactPhone: string;
+  league: string;
+  season: string;
+}
+
 export interface TeamBuilderState {
   currentStep: number;
   sport: SportType | null;
@@ -65,6 +77,7 @@ export interface TeamBuilderState {
   orderMode: 'kit' | 'individual' | null;
   styleConfig: StyleConfig;
   designConfig: DesignConfig;
+  teamInfo: TeamInfo;
   roster: RosterEntry[];
   shippingAddress: {
     name: string;
@@ -102,6 +115,7 @@ type TeamBuilderAction =
   | { type: 'UPDATE_ROSTER_ENTRY'; id: string; entry: Partial<RosterEntry> }
   | { type: 'DELETE_ROSTER_ENTRY'; id: string }
   | { type: 'SET_ROSTER'; roster: RosterEntry[] }
+  | { type: 'SET_TEAM_INFO'; info: Partial<TeamInfo> }
   | { type: 'SET_SHIPPING_ADDRESS'; address: TeamBuilderState['shippingAddress'] }
   | { type: 'SET_BILLING_ADDRESS'; address: TeamBuilderState['billingAddress'] }
   | { type: 'SET_NEED_BY_DATE'; date: string }
@@ -119,6 +133,17 @@ const initialState: TeamBuilderState = {
   product: null,
   individualSelections: { jersey: null, shorts: null, socks: null },
   orderMode: null,
+  teamInfo: {
+    teamName: '',
+    organizationName: '',
+    logoFile: null,
+    logoPreview: '',
+    coachName: '',
+    contactEmail: '',
+    contactPhone: '',
+    league: '',
+    season: '',
+  },
   styleConfig: {
     gender: 'Unisex',
     fit: 'Athletic',
@@ -214,6 +239,8 @@ function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction):
       return { ...state, roster: state.roster.filter(entry => entry.id !== action.id) };
     case 'SET_ROSTER':
       return { ...state, roster: action.roster };
+    case 'SET_TEAM_INFO':
+      return { ...state, teamInfo: { ...state.teamInfo, ...action.info } };
     case 'SET_SHIPPING_ADDRESS':
       return { ...state, shippingAddress: action.address };
     case 'SET_BILLING_ADDRESS':
