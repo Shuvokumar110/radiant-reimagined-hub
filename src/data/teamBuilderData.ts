@@ -33,6 +33,10 @@ import soccerJerseyOrange from "@/assets/products/soccer-jersey-orange.png";
 import soccerShortsOrange from "@/assets/products/soccer-shorts-orange.png";
 import soccerSocksOrange from "@/assets/products/soccer-socks-orange.png";
 import soccerFullKitOrange from "@/assets/products/soccer-full-kit-orange.png";
+import soccerJerseyMarble from "@/assets/products/soccer-jersey-marble.png";
+import soccerShortsMarble from "@/assets/products/soccer-shorts-marble.png";
+import soccerSocksMarble from "@/assets/products/soccer-socks-marble.png";
+import soccerFullKitMarble from "@/assets/products/soccer-full-kit-marble.png";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -139,6 +143,10 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'soccer-shorts-orange', name: 'Shorts (Panel)', shortDescription: 'Orange panel athletic shorts', basePrice: 25, image: soccerShortsOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks-orange', name: 'Socks (Orange Cuff)', shortDescription: 'White socks with orange cuff', basePrice: 12, image: soccerSocksOrange, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit-orange', name: 'Full Kit Bundle (Panel)', shortDescription: 'Panel Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitOrange, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-marble', name: 'Jersey (Marble)', shortDescription: 'Marble splash crew neck jersey', basePrice: 35, image: soccerJerseyMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts-marble', name: 'Shorts (Side Panel)', shortDescription: 'White shorts with side panels', basePrice: 25, image: soccerShortsMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks-marble', name: 'Socks (Banded)', shortDescription: 'White socks with contrast bands', basePrice: 12, image: soccerSocksMarble, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit-marble', name: 'Full Kit Bundle (Marble)', shortDescription: 'Marble Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
