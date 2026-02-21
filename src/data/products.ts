@@ -34,7 +34,19 @@ export interface Product {
 
 export const categories = [
   "All",
+  "Soccer",
+  "Basketball",
+  "American Football",
+  "Baseball & Softball",
+  "Volleyball",
+  "Netball",
+  "Cricket",
+  "Track & Field",
   "Soccer Boots",
+  "Tracksuits",
+  "Hoodies",
+  "Polo Jerseys",
+  "Sports Jersey",
   "Special Edition",
 ];
 
