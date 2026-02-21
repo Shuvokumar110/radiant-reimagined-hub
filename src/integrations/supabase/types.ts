@@ -53,6 +53,33 @@ export type Database = {
         }
         Relationships: []
       }
+      draft_orders: {
+        Row: {
+          created_at: string
+          id: string
+          name: string | null
+          state: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          state?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          state?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       order_proofs: {
         Row: {
           corrected_logo_url: string | null
@@ -137,6 +164,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          organization_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          organization_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          organization_name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       team_orders: {
         Row: {

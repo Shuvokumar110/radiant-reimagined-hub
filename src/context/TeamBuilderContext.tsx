@@ -102,6 +102,7 @@ type TeamBuilderAction =
   | { type: 'SET_PROOF_FIRST'; proofFirst: boolean }
   | { type: 'SET_ORDER_APPROVED'; approved: boolean }
   | { type: 'INCREMENT_REVISION' }
+  | { type: 'LOAD_STATE'; state: TeamBuilderState }
   | { type: 'RESET' };
 
 const initialState: TeamBuilderState = {
@@ -212,6 +213,8 @@ function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction):
       return { ...state, orderApproved: action.approved };
     case 'INCREMENT_REVISION':
       return { ...state, revisionCount: state.revisionCount + 1, orderApproved: false };
+    case 'LOAD_STATE':
+      return { ...action.state };
     case 'RESET':
       return initialState;
     default:
