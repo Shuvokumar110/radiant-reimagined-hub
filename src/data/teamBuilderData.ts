@@ -9,11 +9,11 @@ import sportCricket from "@/assets/categories/cricket.png";
 import sportBusiness from "@/assets/team-builder/sport-business.jpg";
 
 // Product images - Soccer
-import soccerJerseyShort from "@/assets/products/soccer-jersey-short.jpg";
+import soccerJerseyShort from "@/assets/products/soccer-jersey-short-new.png";
 import soccerJerseyLong from "@/assets/products/soccer-jersey-long.jpg";
-import soccerShorts from "@/assets/products/soccer-shorts.jpg";
-import soccerSocks from "@/assets/products/soccer-socks.jpg";
-import soccerFullKit from "@/assets/products/soccer-full-kit.jpg";
+import soccerShorts from "@/assets/products/soccer-shorts-new.png";
+import soccerSocks from "@/assets/products/soccer-socks-new.png";
+import soccerFullKit from "@/assets/products/soccer-full-kit-new.png";
 import soccerWarmupHoodie from "@/assets/products/soccer-warmup-hoodie.jpg";
 import soccerWarmupJacket from "@/assets/products/soccer-warmup-jacket.jpg";
 import soccerWarmupPants from "@/assets/products/soccer-warmup-pants.jpg";
