@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
 import { productsBySport, sportCategories, ProductType } from "@/data/teamBuilderData";
 
-type ViewMode = 'choose' | 'kits' | 'separated';
+type ViewMode = 'choose' | 'kits' | 'separated' | 'jerseys' | 'shorts' | 'socks';
 
 export function ProductSelection() {
   const { state, dispatch, prevStep } = useTeamBuilder();
@@ -25,8 +25,21 @@ export function ProductSelection() {
   const handleBack = () => {
     if (viewMode === 'choose') {
       prevStep();
+    } else if (viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') {
+      setViewMode('separated');
     } else {
       setViewMode('choose');
+    }
+  };
+
+  const getSubtitle = () => {
+    switch (viewMode) {
+      case 'choose': return 'Choose how you want to order';
+      case 'kits': return 'Select a full kit';
+      case 'separated': return 'What would you like to customize?';
+      case 'jerseys': return 'Select a jersey style';
+      case 'shorts': return 'Select a shorts style';
+      case 'socks': return 'Select a socks style';
     }
   };
 
@@ -40,9 +53,7 @@ export function ProductSelection() {
         <div>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">{sportInfo?.name}</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
-            {viewMode === 'choose' && 'Choose how you want to order'}
-            {viewMode === 'kits' && 'Select a full kit'}
-            {viewMode === 'separated' && 'Select individual items'}
+            {getSubtitle()}
           </p>
         </div>
       </div>
@@ -107,7 +118,7 @@ export function ProductSelection() {
           </motion.div>
         )}
 
-        {/* Separated Grid */}
+        {/* Separated - category chooser */}
         {viewMode === 'separated' && (
           <motion.div
             key="separated"
@@ -115,23 +126,51 @@ export function ProductSelection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="space-y-12"
+            className="flex flex-col sm:flex-row gap-4 md:gap-6 max-w-3xl mx-auto"
           >
-            {(['Jersey', 'Shorts', 'Socks'] as const).map(cat => {
+            {([
+              { key: 'jerseys' as ViewMode, label: 'Jerseys', cat: 'Jersey' },
+              { key: 'shorts' as ViewMode, label: 'Shorts', cat: 'Shorts' },
+              { key: 'socks' as ViewMode, label: 'Socks', cat: 'Socks' },
+            ]).map(({ key, label, cat }) => {
               const items = separated.filter(p => p.category === cat);
-              if (items.length === 0) return null;
               return (
-                <div key={cat}>
-                  <div className="flex items-baseline gap-3 mb-5">
-                    <h3 className="text-lg md:text-xl font-bold tracking-tight">
-                      {cat === 'Jersey' ? 'Jerseys' : cat}
-                    </h3>
-                    <span className="text-xs text-muted-foreground">{items.length} options</span>
+                <button
+                  key={key}
+                  onClick={() => setViewMode(key)}
+                  className="flex-1 group rounded-2xl bg-background text-foreground p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01] border border-border"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Step</span>
+                    <ArrowRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-foreground/70 group-hover:translate-x-1 transition-all" />
                   </div>
-                  <ProductGrid products={items} dispatch={dispatch} />
-                </div>
+                  <h3 className="text-xl md:text-2xl font-bold tracking-tight">{label}</h3>
+                  <div className="mt-4 pt-3 border-t border-border">
+                    <span className="text-xs text-muted-foreground">{items.length} styles</span>
+                  </div>
+                </button>
               );
             })}
+          </motion.div>
+        )}
+
+        {/* Individual category grids */}
+        {(viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') && (
+          <motion.div
+            key={viewMode}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <ProductGrid
+              products={separated.filter(p =>
+                (viewMode === 'jerseys' && p.category === 'Jersey') ||
+                (viewMode === 'shorts' && p.category === 'Shorts') ||
+                (viewMode === 'socks' && p.category === 'Socks')
+              )}
+              dispatch={dispatch}
+            />
           </motion.div>
         )}
 
