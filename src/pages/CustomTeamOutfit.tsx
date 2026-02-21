@@ -5,7 +5,6 @@ import { StepIndicator } from "@/components/team-builder/StepIndicator";
 import { SportSelection } from "@/components/team-builder/SportSelection";
 import { ProductSelection } from "@/components/team-builder/ProductSelection";
 import { StyleOptions } from "@/components/team-builder/StyleOptions";
-import { DesignBuilder } from "@/components/team-builder/DesignBuilder";
 import { RosterBuilder } from "@/components/team-builder/RosterBuilder";
 import { OrderReview } from "@/components/team-builder/OrderReview";
 import { Checkout } from "@/components/team-builder/Checkout";
@@ -112,11 +111,10 @@ function TeamBuilderContent() {
     switch (state.currentStep) {
       case 0: return <SportSelection />;
       case 1: return <ProductSelection />;
-      case 2: return <DesignBuilder />;
-      case 3: return <StyleOptions />;
-      case 4: return <RosterBuilder />;
-      case 5: return <OrderReview />;
-      case 6: return <Checkout />;
+      case 2: return <StyleOptions />;
+      case 3: return <RosterBuilder />;
+      case 4: return <OrderReview />;
+      case 5: return <Checkout />;
       default: return <SportSelection />;
     }
   };
