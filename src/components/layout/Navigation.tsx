@@ -10,6 +10,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Shop", href: "/shop" },
+  { name: "Custom Outfit", href: "/custom-team-outfit" },
   {
     name: "Programs",
     href: "#",
@@ -44,6 +45,7 @@ export function Navigation() {
     '/checkout',
     '/wishlist',
     '/account',
+    '/custom-team-outfit',
   ];
   
   const needsDarkNav = lightBackgroundPages.some(page => 

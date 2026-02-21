@@ -87,7 +87,7 @@ export default function Account() {
               </div>
 
               <div className={`grid ${isAdmin ? 'grid-cols-3' : 'grid-cols-2'} gap-4`}>
-                <Link to="/shop" className="p-6 border rounded-xl hover:border-foreground/30 transition-all text-center">
+                <Link to="/custom-team-outfit" className="p-6 border rounded-xl hover:border-foreground/30 transition-all text-center">
                   <h3 className="font-semibold mb-1">Custom Outfit</h3>
                   <p className="text-xs text-muted-foreground">Start or resume an order</p>
                 </Link>

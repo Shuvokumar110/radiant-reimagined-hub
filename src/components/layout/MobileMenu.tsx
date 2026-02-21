@@ -12,6 +12,7 @@ interface MobileMenuProps {
 const menuItems = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop" },
+  { name: "Custom Outfit", href: "/custom-team-outfit" },
   { name: "Gallery", href: "/gallery" },
   { name: "Videos", href: "/videos" },
   { name: "About", href: "/about" },
