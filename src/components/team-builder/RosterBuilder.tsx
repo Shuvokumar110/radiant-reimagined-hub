@@ -28,12 +28,13 @@ import {
 } from "@/components/ui/dialog";
 import { useTeamBuilder, RosterEntry } from "@/context/TeamBuilderContext";
 import { sizeOptions } from "@/data/teamBuilderData";
+import { TeamInfoForm } from "./TeamInfoForm";
 
 const MIN_ORDER_QTY = 18;
 
 export function RosterBuilder() {
   const { state, dispatch, nextStep, prevStep, calculateTotal } = useTeamBuilder();
-  const { roster, product } = state;
+  const { roster, product, teamInfo } = state;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
 
@@ -172,6 +173,9 @@ export function RosterBuilder() {
           </Button>
         </div>
       </div>
+
+      {/* Team Info Form */}
+      <TeamInfoForm />
 
       {/* Roster Table */}
       <motion.div
@@ -333,10 +337,19 @@ export function RosterBuilder() {
         </motion.div>
       )}
 
+      {/* Missing Info Note */}
+      {(!teamInfo.teamName.trim() || !teamInfo.coachName.trim() || !teamInfo.contactEmail.trim() || !teamInfo.logoPreview) && (
+        <div className="p-4 bg-muted border border-border rounded-xl mb-8">
+          <p className="text-sm text-muted-foreground">
+            <strong>Required:</strong> Please fill in Team Name, Coach Name, Contact Email, and upload your Team Logo to proceed.
+          </p>
+        </div>
+      )}
+
       {/* Minimum Order Note */}
       {totals.quantity > 0 && totals.quantity < MIN_ORDER_QTY && (
-        <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl mb-8">
-          <p className="text-sm text-yellow-700 dark:text-yellow-400">
+        <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-xl mb-8">
+          <p className="text-sm text-destructive">
             <strong>Note:</strong> Minimum order is {MIN_ORDER_QTY} units. Add {MIN_ORDER_QTY - totals.quantity} more to proceed.
           </p>
         </div>
@@ -350,7 +363,7 @@ export function RosterBuilder() {
         <Button 
           size="lg" 
           onClick={nextStep} 
-          disabled={totals.quantity < MIN_ORDER_QTY}
+          disabled={totals.quantity < MIN_ORDER_QTY || !teamInfo.teamName.trim() || !teamInfo.coachName.trim() || !teamInfo.contactEmail.trim() || !teamInfo.logoPreview}
           className="gap-2"
         >
           Next: Review Order
