@@ -6,7 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
 import { productsBySport, sportCategories, ProductType } from "@/data/teamBuilderData";
 
-type ViewMode = 'choose' | 'kits' | 'separated' | 'jerseys' | 'shorts' | 'socks';
+type ViewMode = 'choose' | 'kits' | 'jerseys' | 'shorts' | 'socks';
+
+const stepFlow: ViewMode[] = ['jerseys', 'shorts', 'socks'];
 
 export function ProductSelection() {
   const { state, dispatch, prevStep } = useTeamBuilder();
@@ -20,13 +22,19 @@ export function ProductSelection() {
   const hasCategories = allProducts.some(p => p.category);
 
   const fullKits = allProducts.filter(p => p.category === 'Full Kit');
-  const separated = allProducts.filter(p => p.category && p.category !== 'Full Kit');
+  const jerseys = allProducts.filter(p => p.category === 'Jersey');
+  const shorts = allProducts.filter(p => p.category === 'Shorts');
+  const socks = allProducts.filter(p => p.category === 'Socks');
 
   const handleBack = () => {
     if (viewMode === 'choose') {
       prevStep();
-    } else if (viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') {
-      setViewMode('separated');
+    } else if (viewMode === 'jerseys') {
+      setViewMode('choose');
+    } else if (viewMode === 'shorts') {
+      setViewMode('jerseys');
+    } else if (viewMode === 'socks') {
+      setViewMode('shorts');
     } else {
       setViewMode('choose');
     }
@@ -36,10 +44,19 @@ export function ProductSelection() {
     switch (viewMode) {
       case 'choose': return 'Choose how you want to order';
       case 'kits': return 'Select a full kit';
-      case 'separated': return 'What would you like to customize?';
-      case 'jerseys': return 'Select a jersey style';
-      case 'shorts': return 'Select a shorts style';
-      case 'socks': return 'Select a socks style';
+      case 'jerseys': return 'Step 1 of 3 — Select a jersey';
+      case 'shorts': return 'Step 2 of 3 — Select shorts';
+      case 'socks': return 'Step 3 of 3 — Select socks';
+    }
+  };
+
+  const getProductsForView = () => {
+    switch (viewMode) {
+      case 'kits': return fullKits;
+      case 'jerseys': return jerseys;
+      case 'shorts': return shorts;
+      case 'socks': return socks;
+      default: return allProducts;
     }
   };
 
@@ -52,14 +69,12 @@ export function ProductSelection() {
         </Button>
         <div>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">{sportInfo?.name}</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            {getSubtitle()}
-          </p>
+          <p className="text-sm text-muted-foreground mt-0.5">{getSubtitle()}</p>
         </div>
       </div>
 
       <AnimatePresence mode="wait">
-        {/* Choose mode */}
+        {/* Choose: Full Kits vs Individual */}
         {hasCategories && viewMode === 'choose' && (
           <motion.div
             key="choose"
@@ -87,7 +102,7 @@ export function ProductSelection() {
             </button>
 
             <button
-              onClick={() => setViewMode('separated')}
+              onClick={() => setViewMode('jerseys')}
               className="flex-1 group relative rounded-2xl bg-background text-foreground p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01] border border-border"
             >
               <div className="flex items-center justify-between mb-6">
@@ -96,12 +111,36 @@ export function ProductSelection() {
               </div>
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Individual</h3>
               <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                Pick jerseys, shorts and socks separately.
+                Pick jerseys, shorts and socks one at a time.
               </p>
               <div className="mt-6 pt-4 border-t border-border">
-                <span className="text-xs text-muted-foreground">{separated.length} items available</span>
+                <span className="text-xs text-muted-foreground">{jerseys.length + shorts.length + socks.length} items available</span>
               </div>
             </button>
+          </motion.div>
+        )}
+
+        {/* Individual step indicator */}
+        {(viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') && (
+          <motion.div
+            key={`step-${viewMode}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {/* Mini step bar */}
+            <div className="flex items-center gap-2 mb-8 max-w-xs">
+              {(['jerseys', 'shorts', 'socks'] as const).map((step, i) => (
+                <div key={step} className="flex items-center gap-2 flex-1">
+                  <div className={`h-1 flex-1 rounded-full transition-colors ${
+                    stepFlow.indexOf(viewMode) >= i ? 'bg-foreground' : 'bg-border'
+                  }`} />
+                </div>
+              ))}
+            </div>
+
+            <ProductGrid products={getProductsForView()} dispatch={dispatch} />
           </motion.div>
         )}
 
@@ -118,63 +157,7 @@ export function ProductSelection() {
           </motion.div>
         )}
 
-        {/* Separated - category chooser */}
-        {viewMode === 'separated' && (
-          <motion.div
-            key="separated"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="flex flex-col sm:flex-row gap-4 md:gap-6 max-w-3xl mx-auto"
-          >
-            {([
-              { key: 'jerseys' as ViewMode, label: 'Jerseys', cat: 'Jersey' },
-              { key: 'shorts' as ViewMode, label: 'Shorts', cat: 'Shorts' },
-              { key: 'socks' as ViewMode, label: 'Socks', cat: 'Socks' },
-            ]).map(({ key, label, cat }) => {
-              const items = separated.filter(p => p.category === cat);
-              return (
-                <button
-                  key={key}
-                  onClick={() => setViewMode(key)}
-                  className="flex-1 group rounded-2xl bg-background text-foreground p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01] border border-border"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Step</span>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-foreground/70 group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold tracking-tight">{label}</h3>
-                  <div className="mt-4 pt-3 border-t border-border">
-                    <span className="text-xs text-muted-foreground">{items.length} styles</span>
-                  </div>
-                </button>
-              );
-            })}
-          </motion.div>
-        )}
-
-        {/* Individual category grids */}
-        {(viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') && (
-          <motion.div
-            key={viewMode}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <ProductGrid
-              products={separated.filter(p =>
-                (viewMode === 'jerseys' && p.category === 'Jersey') ||
-                (viewMode === 'shorts' && p.category === 'Shorts') ||
-                (viewMode === 'socks' && p.category === 'Socks')
-              )}
-              dispatch={dispatch}
-            />
-          </motion.div>
-        )}
-
-        {/* Flat fallback */}
+        {/* Flat fallback for sports without categories */}
         {!hasCategories && viewMode === 'choose' && (
           <motion.div
             key="flat"
