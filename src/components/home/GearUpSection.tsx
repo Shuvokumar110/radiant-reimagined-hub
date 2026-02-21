@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -7,7 +6,7 @@ import tidiLogo from "@/assets/tidi-logo.webp";
 import multiSportAction from "@/assets/multi-sport-action.jpg";
 import { useFadeIn, useBackgroundParallax } from "@/hooks/useGSAPAnimations";
 
-export const GearUpSection = forwardRef<HTMLElement>(function GearUpSection(_props, ref) {
+export function GearUpSection() {
   const contentRef = useFadeIn(0);
   const bgRef = useBackgroundParallax(0.3);
 
@@ -91,4 +90,4 @@ export const GearUpSection = forwardRef<HTMLElement>(function GearUpSection(_pro
       </div>
     </section>
   );
-});
+}
