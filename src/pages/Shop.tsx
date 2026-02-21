@@ -1,8 +1,12 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
-import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
+import { FadeInUp } from "@/components/ui/animated-text";
+import { ShopCategoryGrid } from "@/components/shop/ShopCategoryGrid";
+import { ShopProductGrid } from "@/components/shop/ShopProductGrid";
+import { CatalogDownloadBanner } from "@/components/shop/CatalogDownloadButton";
+import { ArrowLeft } from "lucide-react";
 
 // Category Images
 import soccerImg from "@/assets/categories/soccer.png";
@@ -16,213 +20,206 @@ import hoodiesImg from "@/assets/categories/hoodies.png";
 import poloImg from "@/assets/categories/polo-jerseys.png";
 import sportsJerseyImg from "@/assets/categories/sports-jersey.png";
 
-// Keep boots images from existing products
+// Boot product images
 import style672 from "@/assets/products/style-672-4.png";
 import style972 from "@/assets/products/style-972-1.png";
 import giveAKick from "@/assets/products/give-a-kick-to-racism-1.png";
 
-const CATALOG_LINK = "https://drive.google.com/file/d/1V4FtVVC8s1QgytQwGWUlc42flUWOhUM-/view?usp=drivesdk";
+// Import team builder data for category products
+import { productsBySport, type SportType } from "@/data/teamBuilderData";
 
-interface ShopCategory {
-  id: string;
-  name: string;
-  image: string;
-  link: string;
-}
-
-const categories: ShopCategory[] = [
-  { id: "soccer", name: "Soccer", image: soccerImg, link: CATALOG_LINK },
-  { id: "basketball", name: "Basketball", image: basketballImg, link: CATALOG_LINK },
-  { id: "american-football", name: "American Football", image: americanFootballImg, link: CATALOG_LINK },
-  { id: "baseball-softball", name: "Baseball/Softball", image: soccerImg, link: CATALOG_LINK }, // Using soccer as placeholder
-  { id: "volleyball", name: "Volleyball", image: volleyballImg, link: CATALOG_LINK },
-  { id: "netball", name: "Netball", image: netballImg, link: CATALOG_LINK },
-  { id: "cricket", name: "Cricket", image: cricketImg, link: CATALOG_LINK },
-  { id: "tracksuits", name: "Tracksuits", image: tracksuitImg, link: CATALOG_LINK },
-  { id: "hoodies", name: "Hoodies", image: hoodiesImg, link: CATALOG_LINK },
-  { id: "polo-jerseys", name: "Polo Jerseys", image: poloImg, link: CATALOG_LINK },
-  { id: "sports-jersey", name: "Sports Jersey", image: sportsJerseyImg, link: CATALOG_LINK },
+const categories = [
+  { id: "soccer", name: "Soccer", image: soccerImg, sportKey: "soccer" as SportType },
+  { id: "basketball", name: "Basketball", image: basketballImg, sportKey: "basketball" as SportType },
+  { id: "american-football", name: "American Football", image: americanFootballImg, sportKey: "american_football" as SportType },
+  { id: "baseball-softball", name: "Baseball/Softball", image: soccerImg, sportKey: "baseball_softball" as SportType },
+  { id: "volleyball", name: "Volleyball", image: volleyballImg, sportKey: "volleyball" as SportType },
+  { id: "netball", name: "Netball", image: netballImg, sportKey: "netball" as SportType },
+  { id: "cricket", name: "Cricket", image: cricketImg, sportKey: "cricket" as SportType },
+  { id: "tracksuits", name: "Tracksuits", image: tracksuitImg },
+  { id: "hoodies", name: "Hoodies", image: hoodiesImg },
+  { id: "polo-jerseys", name: "Polo Jerseys", image: poloImg },
+  { id: "sports-jersey", name: "Sports Jersey", image: sportsJerseyImg },
 ];
 
 const bootProducts = [
-  { id: 1, name: "Soccer Boots – Style 672", image: style672, slug: "style-672" },
-  { id: 2, name: "Soccer Boots – Style 972", image: style972, slug: "style-972" },
-  { id: 3, name: "Give A Kick To Racism", image: giveAKick, slug: "give-a-kick-to-racism" },
+  { id: "boot-672", name: "Soccer Boots – Style 672", image: style672, shortDescription: "Made in Italy, Kangaroo Leather", basePrice: 166, slug: "style-672" },
+  { id: "boot-972", name: "Soccer Boots – Style 972", image: style972, shortDescription: "Made in Italy, Calf Leather", basePrice: 146, slug: "style-972" },
+  { id: "boot-gaktr", name: "Give A Kick To Racism", image: giveAKick, shortDescription: "Special Edition, Kangaroo Leather", basePrice: 184, slug: "give-a-kick-to-racism" },
 ];
 
 export default function Shop() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const handleCategoryClick = (id: string) => {
+    setActiveCategory(activeCategory === id ? null : id);
+    // Scroll to products section
+    setTimeout(() => {
+      document.getElementById("shop-products")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
+  const activeCat = categories.find((c) => c.id === activeCategory);
+  const activeProducts = activeCat?.sportKey
+    ? productsBySport[activeCat.sportKey]?.map((p) => ({
+        id: p.id,
+        name: p.name,
+        image: p.image,
+        shortDescription: p.shortDescription,
+        basePrice: p.basePrice,
+        category: p.category,
+      })) || []
+    : [];
+
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
+      <section className="pt-28 md:pt-36 pb-8 md:pb-12 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-background/10 rounded-full mb-4">
               <span className="w-1.5 h-1.5 bg-background rounded-full" />
-              <span className="text-xs font-medium tracking-widest uppercase text-background/70">
+              <span className="text-[10px] md:text-xs font-medium tracking-widest uppercase text-background/70">
                 Premium Collection
               </span>
             </div>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-3">
               <span className="text-background">Shop.</span>
               <br />
               <span className="text-background/50">Gear Up.</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <p className="text-background/70 max-w-2xl mt-6 text-lg">
-              High-performance gear tailored for clubs, academies, leagues, federations, and organizations.
+            <p className="text-background/70 max-w-2xl text-sm md:text-lg">
+              High-performance gear tailored for clubs, academies, leagues, and organizations.
             </p>
           </FadeInUp>
         </div>
       </section>
 
+      {/* Catalog Download Banner */}
+      <CatalogDownloadBanner />
+
       {/* Categories Grid */}
-      <section className="py-12 md:py-16 bg-background">
+      <section className="py-8 md:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <h2 className="text-2xl md:text-3xl font-bold mb-8">
-              <span className="text-foreground">Browse</span>{" "}
-              <span className="text-muted-foreground">Categories</span>
-            </h2>
-          </FadeInUp>
-
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {categories.map((category) => (
-              <StaggerItem key={category.id}>
-                <a
-                  href={category.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl md:text-2xl font-bold">
+                <span className="text-foreground">Browse</span>{" "}
+                <span className="text-muted-foreground">Categories</span>
+              </h2>
+              {activeCategory && (
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className="inline-flex items-center gap-1.5 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    className="relative bg-card rounded-xl overflow-hidden shadow-elegant hover:shadow-luxury transition-all duration-500 border border-border"
-                  >
-                    <div className="relative aspect-[3/4] overflow-hidden">
-                      <motion.img
-                        src={category.image}
-                        alt={category.name}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6 }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      
-                      {/* External Link Indicator */}
-                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <ExternalLink className="w-4 h-4 text-foreground" />
-                      </div>
-                      
-                      {/* Category Name */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="font-bold text-lg text-white">
-                          {category.name}
-                        </h3>
-                      </div>
-                    </div>
-                  </motion.div>
-                </a>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Boots Section */}
-      <section className="py-12 md:py-16 bg-muted">
-        <div className="container mx-auto px-4 sm:px-6">
-          <FadeInUp>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">
-              <span className="text-foreground">Premium</span>{" "}
-              <span className="text-muted-foreground">Soccer Boots</span>
-            </h2>
-            <p className="text-muted-foreground mb-8">Made in Italy with premium leather</p>
-          </FadeInUp>
-
-          {/* Team Order Notice */}
-          <FadeInUp delay={0.1}>
-            <div className="bg-foreground text-background rounded-xl p-4 md:p-6 mb-8">
-              <p className="text-center font-medium">
-                Contact Support for Team Orders
-              </p>
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  All Categories
+                </button>
+              )}
             </div>
           </FadeInUp>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {bootProducts.map((product) => (
-              <StaggerItem key={product.id}>
-                <Link to={`/shop/${product.slug}`}>
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    className="group relative bg-card rounded-xl overflow-hidden shadow-elegant hover:shadow-luxury transition-all duration-500"
-                  >
-                    <div className="relative aspect-square overflow-hidden bg-muted">
-                      <motion.img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-contain p-4"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6 }}
-                      />
-                      
-                      {/* Tags */}
-                      <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                        <span className="px-2 py-1 bg-foreground text-background text-xs font-medium rounded">
-                          Made in Italy
-                        </span>
-                      </div>
-                    </div>
+          <ShopCategoryGrid
+            categories={categories}
+            activeCategory={activeCategory}
+            onCategoryClick={handleCategoryClick}
+          />
+        </div>
+      </section>
 
-                    <div className="p-5">
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                        Soccer Boots
+      {/* Category Products */}
+      {activeCategory && (
+        <section id="shop-products" className="py-8 md:py-12 bg-muted/30 scroll-mt-20">
+          <div className="container mx-auto px-4 sm:px-6">
+            <FadeInUp>
+              <h2 className="text-xl md:text-2xl font-bold mb-6">
+                <span className="text-foreground">{activeCat?.name}</span>{" "}
+                <span className="text-muted-foreground">Products</span>
+              </h2>
+            </FadeInUp>
+
+            <ShopProductGrid
+              products={activeProducts}
+              categoryName={activeCat?.name || ""}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Boots Section */}
+      <section className="py-8 md:py-12 bg-muted">
+        <div className="container mx-auto px-4 sm:px-6">
+          <FadeInUp>
+            <h2 className="text-xl md:text-2xl font-bold mb-1">
+              <span className="text-foreground">Premium</span>{" "}
+              <span className="text-muted-foreground">Soccer Boots</span>
+            </h2>
+            <p className="text-muted-foreground text-xs md:text-sm mb-6">
+              Made in Italy with premium leather
+            </p>
+          </FadeInUp>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+            {bootProducts.map((product) => (
+              <Link key={product.id} to={`/shop/${product.slug}`}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="group bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <div className="relative aspect-square overflow-hidden bg-muted">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-3 md:p-4 group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-2 left-2">
+                      <span className="px-2 py-0.5 bg-foreground text-background text-[10px] md:text-xs font-medium rounded">
+                        Made in Italy
                       </span>
-                      <h3 className="font-semibold text-base mt-1 mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm font-medium text-primary">
-                        Contact for Team Pricing
-                      </p>
                     </div>
-                  </motion.div>
-                </Link>
-              </StaggerItem>
+                  </div>
+                  <div className="p-3 md:p-4">
+                    <h3 className="font-semibold text-xs md:text-sm leading-tight line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
+                      {product.shortDescription}
+                    </p>
+                    <p className="text-xs md:text-sm font-bold text-primary mt-2">
+                      From ${product.basePrice}
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-12 md:py-16 lg:py-20 bg-background">
+      <section className="py-10 md:py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <FadeInUp>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full mb-6">
-              <span className="w-1.5 h-1.5 bg-foreground rounded-full" />
-              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
-                Custom Orders
-              </span>
-            </div>
-          </FadeInUp>
-          <FadeInUp delay={0.1}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold mb-3">
               <span className="text-foreground">Need Custom.</span>
               <br />
               <span className="text-muted-foreground">Team Orders?</span>
             </h2>
           </FadeInUp>
-          <FadeInUp delay={0.2}>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+          <FadeInUp delay={0.1}>
+            <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm md:text-base">
               Contact us for bulk team orders, custom designs, and special pricing.
             </p>
           </FadeInUp>
-          <FadeInUp delay={0.3}>
+          <FadeInUp delay={0.2}>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors text-sm md:text-base"
             >
               Request a Quote
             </Link>
