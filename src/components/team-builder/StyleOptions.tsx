@@ -22,11 +22,19 @@ export function StyleOptions() {
     });
   };
 
+  const addOnKeyMap: Record<string, keyof typeof styleConfig.addOns> = {
+    'logo': 'logoPlacement',
+    'sublimated_logo': 'sublimatedLogo',
+    'embroidery_logo': 'embroideryLogo',
+    'sponsor': 'sponsorPlacement',
+    'patch': 'customPatch',
+    'name_addon': 'playerNameAddon',
+    'number_addon': 'playerNumberAddon',
+  };
+
   const handleAddOnToggle = (addOnId: string, checked: boolean) => {
-    const addOnKey = addOnId === 'extra_logo' ? 'extraLogoPlacement' 
-      : addOnId === 'sponsor' ? 'sponsorPlacement'
-      : addOnId === 'patch' ? 'customPatch'
-      : 'playerNameAddon';
+    const addOnKey = addOnKeyMap[addOnId];
+    if (!addOnKey) return;
     
     dispatch({
       type: 'SET_STYLE_CONFIG',
@@ -54,13 +62,13 @@ export function StyleOptions() {
         <div>
           <h2 className="text-xl md:text-2xl font-bold">Style Options</h2>
           <p className="text-sm text-muted-foreground">
-            Customize fit and features
+            Customize fit and features for your {product.name}
           </p>
         </div>
       </div>
 
       <div className="space-y-6">
-        {/* Product Preview - Compact on mobile */}
+        {/* Product Preview */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,11 +84,32 @@ export function StyleOptions() {
           <div className="min-w-0">
             <h3 className="text-base md:text-lg font-semibold truncate">{product.name}</h3>
             <p className="text-muted-foreground text-sm truncate">{product.shortDescription}</p>
-            <p className="text-base md:text-lg font-bold mt-0.5">From ${product.basePrice}</p>
+            <div className="flex items-center gap-2 mt-0.5">
+              <span className="text-base md:text-lg font-bold">From ${product.basePrice}/ea</span>
+              <span className="text-xs text-muted-foreground px-2 py-0.5 bg-background rounded-full">
+                {product.fabricType}
+              </span>
+            </div>
           </div>
         </motion.div>
 
-        {/* Style Options - Mobile optimized */}
+        {/* Print Type Notice */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="p-3 bg-foreground/5 border border-border rounded-lg"
+        >
+          <p className="text-xs text-muted-foreground">
+            <strong>Production Method:</strong> {product.fabricType === 'Sublimated' 
+              ? 'Full dye-sublimation printing — vibrant, all-over designs that never fade, crack, or peel.' 
+              : product.fabricType === 'Embroidered'
+              ? 'Premium embroidery — professional, raised stitching for a classic look.'
+              : 'Heat press transfer — durable application for logos and designs.'}
+          </p>
+        </motion.div>
+
+        {/* Style Options */}
         {styleOptions.map((option, index) => (
           <motion.div
             key={option.id}
@@ -114,7 +143,7 @@ export function StyleOptions() {
           </motion.div>
         ))}
 
-        {/* Add-Ons - Single column on mobile */}
+        {/* Add-Ons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,11 +153,8 @@ export function StyleOptions() {
           <Label className="text-sm font-semibold">Add-On Options</Label>
           <div className="space-y-2">
             {addOnOptions.map((addOn) => {
-              const addOnKey = addOn.id === 'extra_logo' ? 'extraLogoPlacement' 
-                : addOn.id === 'sponsor' ? 'sponsorPlacement'
-                : addOn.id === 'patch' ? 'customPatch'
-                : 'playerNameAddon';
-              const isChecked = styleConfig.addOns[addOnKey as keyof typeof styleConfig.addOns];
+              const addOnKey = addOnKeyMap[addOn.id];
+              const isChecked = addOnKey ? styleConfig.addOns[addOnKey] : false;
 
               return (
                 <div
@@ -167,7 +193,7 @@ export function StyleOptions() {
         {/* Navigation */}
         <div className="flex justify-end pt-4">
           <Button size="lg" onClick={nextStep} className="gap-2 w-full sm:w-auto">
-            Next: Customize Design
+            Next: Team Roster
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Zap } from "lucide-react";
+import { ArrowLeft, Clock, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
@@ -32,7 +32,7 @@ export function ProductSelection() {
         </div>
       </div>
 
-      {/* Product Grid - Mobile optimized */}
+      {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
         {products.map((product, index) => (
           <motion.div
@@ -54,7 +54,7 @@ export function ProductSelection() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 
-                {/* Badges - compact on mobile */}
+                {/* Badges */}
                 <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                   <Badge 
                     variant="secondary" 
@@ -81,7 +81,7 @@ export function ProductSelection() {
                 {/* Price */}
                 <div className="absolute bottom-2 right-2">
                   <span className="px-2 py-1 bg-background rounded-full text-xs md:text-sm font-semibold">
-                    ${product.basePrice}
+                    ${product.basePrice}/ea
                   </span>
                 </div>
               </div>
@@ -89,9 +89,16 @@ export function ProductSelection() {
               <h3 className="text-sm md:text-base font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
                 {product.name}
               </h3>
-              <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
+              <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
                 {product.shortDescription}
               </p>
+              {/* MOQ */}
+              <div className="flex items-center gap-1 mt-1">
+                <Users className="w-3 h-3 text-muted-foreground" />
+                <span className="text-[10px] md:text-xs text-muted-foreground">
+                  Min. {product.moq} units
+                </span>
+              </div>
             </button>
           </motion.div>
         ))}

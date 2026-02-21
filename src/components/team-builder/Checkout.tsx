@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, CreditCard, Building2, Calendar, Lock } from "lucide-react";
+import { ArrowLeft, CreditCard, Calendar, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,7 @@ export function Checkout() {
   const { toast } = useToast();
   const [sameAsBilling, setSameAsBilling] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
 
   const totals = calculateTotal();
 
@@ -29,6 +30,7 @@ export function Checkout() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!acceptTerms) return;
     setIsSubmitting(true);
 
     // Simulate order submission
@@ -37,8 +39,8 @@ export function Checkout() {
     toast({
       title: proofFirst ? "Proof Request Submitted!" : "Order Submitted!",
       description: proofFirst 
-        ? "We'll send your design proof within 24-48 hours."
-        : "Thank you for your order. You'll receive a confirmation email shortly.",
+        ? "We'll send your design proof within 24-48 hours. You'll be notified when it's ready for review."
+        : "Thank you for your order. You'll receive a confirmation email shortly with your Order ID and production timeline.",
     });
 
     setIsSubmitting(false);
@@ -54,7 +56,7 @@ export function Checkout() {
         </Button>
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">
-            {proofFirst ? 'Request Proof' : 'Checkout'}
+            {proofFirst ? 'Request Design Proof' : 'Checkout'}
           </h2>
           <p className="text-muted-foreground">
             {proofFirst ? 'Provide your details to receive a design proof' : 'Complete your order'}
@@ -284,6 +286,26 @@ export function Checkout() {
                 />
               </div>
             </motion.div>
+
+            {/* Terms Acceptance */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="p-4 border rounded-xl"
+            >
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="accept-terms"
+                  checked={acceptTerms}
+                  onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
+                  className="mt-0.5"
+                />
+                <Label htmlFor="accept-terms" className="text-sm cursor-pointer">
+                  I agree to the Terms of Service and Privacy Policy. I understand that custom orders are final and non-refundable once approved and sent to production.
+                </Label>
+              </div>
+            </motion.div>
           </div>
 
           {/* Right Column - Summary */}
@@ -338,7 +360,7 @@ export function Checkout() {
                 type="submit"
                 size="lg" 
                 className="w-full"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !acceptTerms}
               >
                 {isSubmitting 
                   ? 'Processing...' 
@@ -349,7 +371,10 @@ export function Checkout() {
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                By placing your order, you agree to our Terms of Service and Privacy Policy.
+                {proofFirst 
+                  ? "We'll send your design proof within 24-48 hours for your review."
+                  : "By placing your order, you agree to our Terms of Service and Privacy Policy."
+                }
               </p>
             </motion.div>
           </div>

@@ -76,6 +76,7 @@ export interface ProductType {
   image: string;
   fabricType: 'Sublimated' | 'Embroidered' | 'Heat Press';
   leadTime: 'Standard' | 'Rush';
+  moq: number;
 }
 
 export interface StyleOption {
@@ -98,59 +99,59 @@ export const sportCategories: SportCategory[] = [
 
 export const productsBySport: Record<SportType, ProductType[]> = {
   soccer: [
-    { id: 'soccer-jersey-short', name: 'Jersey (Short Sleeve)', shortDescription: 'Competition-ready short sleeve jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'soccer-jersey-long', name: 'Jersey (Long Sleeve)', shortDescription: 'Performance long sleeve jersey', basePrice: 40, image: soccerJerseyLong, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush' },
-    { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'soccer-warmup-hoodie', name: 'Warmup Hoodie', shortDescription: 'Team warmup hoodie', basePrice: 55, image: soccerWarmupHoodie, fabricType: 'Embroidered', leadTime: 'Standard' },
-    { id: 'soccer-warmup-jacket', name: 'Warmup Jacket', shortDescription: 'Lightweight training jacket', basePrice: 60, image: soccerWarmupJacket, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'soccer-warmup-pants', name: 'Warmup Pants', shortDescription: 'Athletic training pants', basePrice: 45, image: soccerWarmupPants, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'soccer-jersey-short', name: 'Jersey (Short Sleeve)', shortDescription: 'Competition-ready short sleeve jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-long', name: 'Jersey (Long Sleeve)', shortDescription: 'Performance long sleeve jersey', basePrice: 40, image: soccerJerseyLong, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-warmup-hoodie', name: 'Warmup Hoodie', shortDescription: 'Team warmup hoodie', basePrice: 55, image: soccerWarmupHoodie, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-warmup-jacket', name: 'Warmup Jacket', shortDescription: 'Lightweight training jacket', basePrice: 60, image: soccerWarmupJacket, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-warmup-pants', name: 'Warmup Pants', shortDescription: 'Athletic training pants', basePrice: 45, image: soccerWarmupPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
-    { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'basketball-shorts', name: 'Shorts', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: basketballShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'basketball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Shorts', basePrice: 65, image: basketballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'basketball-shooting-shirt', name: 'Shooting Shirt', shortDescription: 'Warmup shooting shirt', basePrice: 35, image: basketballShootingShirt, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'basketball-warmup', name: 'Warmup Suit', shortDescription: 'Complete warmup set', basePrice: 85, image: basketballWarmup, fabricType: 'Embroidered', leadTime: 'Standard' },
+    { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'basketball-shorts', name: 'Shorts', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: basketballShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'basketball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Shorts', basePrice: 65, image: basketballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'basketball-shooting-shirt', name: 'Shooting Shirt', shortDescription: 'Warmup shooting shirt', basePrice: 35, image: basketballShootingShirt, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
+    { id: 'basketball-warmup', name: 'Warmup Suit', shortDescription: 'Complete warmup set', basePrice: 85, image: basketballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   american_football: [
-    { id: 'football-game-jersey', name: 'Game Jersey', shortDescription: 'Official game-day jersey', basePrice: 65, image: footballGameJersey, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'football-practice-jersey', name: 'Practice Jersey', shortDescription: 'Durable practice jersey', basePrice: 45, image: footballPracticeJersey, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'football-pants', name: 'Pants', shortDescription: 'Padded football pants', basePrice: 55, image: footballPants, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'football-flag-set', name: 'Flag Football Set', shortDescription: 'Complete flag football kit', basePrice: 40, image: footballFlagSet, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'football-warmup', name: 'Warmup Gear', shortDescription: 'Team warmup apparel', basePrice: 75, image: footballWarmup, fabricType: 'Embroidered', leadTime: 'Standard' },
+    { id: 'football-game-jersey', name: 'Game Jersey', shortDescription: 'Official game-day jersey', basePrice: 65, image: footballGameJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'football-practice-jersey', name: 'Practice Jersey', shortDescription: 'Durable practice jersey', basePrice: 45, image: footballPracticeJersey, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
+    { id: 'football-pants', name: 'Pants', shortDescription: 'Padded football pants', basePrice: 55, image: footballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'football-flag-set', name: 'Flag Football Set', shortDescription: 'Complete flag football kit', basePrice: 40, image: footballFlagSet, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
+    { id: 'football-warmup', name: 'Warmup Gear', shortDescription: 'Team warmup apparel', basePrice: 75, image: footballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   baseball_softball: [
-    { id: 'baseball-jersey-button', name: 'Jersey (Button)', shortDescription: 'Traditional button-front jersey', basePrice: 45, image: baseballJerseyButton, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'baseball-jersey-pullover', name: 'Jersey (Pullover)', shortDescription: 'Modern pullover jersey', basePrice: 40, image: baseballJerseyPullover, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'baseball-pants', name: 'Pants', shortDescription: 'Pro-style baseball pants', basePrice: 35, image: baseballPants, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'baseball-socks', name: 'Socks', shortDescription: 'Stirrup or solid socks', basePrice: 12, image: baseballSocks, fabricType: 'Heat Press', leadTime: 'Rush' },
-    { id: 'baseball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Pants + Socks', basePrice: 85, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'baseball-warmup', name: 'Warmup Gear', shortDescription: 'Pre-game warmup apparel', basePrice: 65, image: baseballWarmup, fabricType: 'Embroidered', leadTime: 'Standard' },
+    { id: 'baseball-jersey-button', name: 'Jersey (Button)', shortDescription: 'Traditional button-front jersey', basePrice: 45, image: baseballJerseyButton, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'baseball-jersey-pullover', name: 'Jersey (Pullover)', shortDescription: 'Modern pullover jersey', basePrice: 40, image: baseballJerseyPullover, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'baseball-pants', name: 'Pants', shortDescription: 'Pro-style baseball pants', basePrice: 35, image: baseballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'baseball-socks', name: 'Socks', shortDescription: 'Stirrup or solid socks', basePrice: 12, image: baseballSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'baseball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Pants + Socks', basePrice: 85, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'baseball-warmup', name: 'Warmup Gear', shortDescription: 'Pre-game warmup apparel', basePrice: 65, image: baseballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   volleyball: [
-    { id: 'volleyball-jersey', name: 'Jersey', shortDescription: 'Performance volleyball jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'volleyball-shorts', name: 'Shorts', shortDescription: 'Athletic volleyball shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'volleyball-warmup', name: 'Warmup Jacket', shortDescription: 'Team warmup jacket', basePrice: 55, image: soccerWarmupJacket, fabricType: 'Embroidered', leadTime: 'Standard' },
+    { id: 'volleyball-jersey', name: 'Jersey', shortDescription: 'Performance volleyball jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'volleyball-shorts', name: 'Shorts', shortDescription: 'Athletic volleyball shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'volleyball-warmup', name: 'Warmup Jacket', shortDescription: 'Team warmup jacket', basePrice: 55, image: soccerWarmupJacket, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   netball: [
-    { id: 'netball-dress', name: 'Netball Dress', shortDescription: 'Performance netball dress', basePrice: 45, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'netball-jersey', name: 'Jersey', shortDescription: 'Netball jersey top', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'netball-skirt', name: 'Skirt', shortDescription: 'Athletic netball skirt', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard' },
+    { id: 'netball-dress', name: 'Netball Dress', shortDescription: 'Performance netball dress', basePrice: 45, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'netball-jersey', name: 'Jersey', shortDescription: 'Netball jersey top', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'netball-skirt', name: 'Skirt', shortDescription: 'Athletic netball skirt', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   cricket: [
-    { id: 'cricket-jersey', name: 'Cricket Jersey', shortDescription: 'Performance cricket jersey', basePrice: 45, image: cricketJersey, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'cricket-pants', name: 'Pants', shortDescription: 'Traditional cricket pants', basePrice: 40, image: cricketPants, fabricType: 'Sublimated', leadTime: 'Standard' },
-    { id: 'cricket-training', name: 'Training Kit', shortDescription: 'Practice and training gear', basePrice: 55, image: cricketTraining, fabricType: 'Sublimated', leadTime: 'Rush' },
-    { id: 'cricket-sweater', name: 'Sweater/Warmup', shortDescription: 'Classic cricket sweater', basePrice: 65, image: cricketSweater, fabricType: 'Embroidered', leadTime: 'Standard' },
+    { id: 'cricket-jersey', name: 'Cricket Jersey', shortDescription: 'Performance cricket jersey', basePrice: 45, image: cricketJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'cricket-pants', name: 'Pants', shortDescription: 'Traditional cricket pants', basePrice: 40, image: cricketPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'cricket-training', name: 'Training Kit', shortDescription: 'Practice and training gear', basePrice: 55, image: cricketTraining, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
+    { id: 'cricket-sweater', name: 'Sweater/Warmup', shortDescription: 'Classic cricket sweater', basePrice: 65, image: cricketSweater, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   business: [
-    { id: 'business-polo', name: 'Polo Shirts', shortDescription: 'Professional polo shirts', basePrice: 35, image: businessPolo, fabricType: 'Embroidered', leadTime: 'Standard' },
-    { id: 'business-button-down', name: 'Button-Down Shirts', shortDescription: 'Corporate dress shirts', basePrice: 45, image: businessButtonDown, fabricType: 'Embroidered', leadTime: 'Standard' },
-    { id: 'business-work-shirts', name: 'Work Shirts', shortDescription: 'Durable work shirts', basePrice: 40, image: businessWorkShirts, fabricType: 'Embroidered', leadTime: 'Rush' },
-    { id: 'business-jackets', name: 'Jackets/Hoodies', shortDescription: 'Corporate outerwear', basePrice: 65, image: businessJackets, fabricType: 'Embroidered', leadTime: 'Standard' },
-    { id: 'business-caps', name: 'Caps', shortDescription: 'Branded headwear', basePrice: 20, image: businessCaps, fabricType: 'Embroidered', leadTime: 'Rush' },
+    { id: 'business-polo', name: 'Polo Shirts', shortDescription: 'Professional polo shirts', basePrice: 35, image: businessPolo, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    { id: 'business-button-down', name: 'Button-Down Shirts', shortDescription: 'Corporate dress shirts', basePrice: 45, image: businessButtonDown, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    { id: 'business-work-shirts', name: 'Work Shirts', shortDescription: 'Durable work shirts', basePrice: 40, image: businessWorkShirts, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
+    { id: 'business-jackets', name: 'Jackets/Hoodies', shortDescription: 'Corporate outerwear', basePrice: 65, image: businessJackets, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    { id: 'business-caps', name: 'Caps', shortDescription: 'Branded headwear', basePrice: 20, image: businessCaps, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
   ],
 };
 
@@ -182,10 +183,13 @@ export const styleOptionsByProduct: Record<string, StyleOption[]> = {
 };
 
 export const addOnOptions = [
-  { id: 'extra_logo', label: 'Extra Logo Placement', description: 'Add logos to additional locations', price: 5 },
+  { id: 'logo', label: 'Logo Placement', description: 'Add logo to your uniform', price: 5 },
+  { id: 'sublimated_logo', label: 'Sublimated Logo', description: 'Full-color dye-sublimated logo printing', price: 3 },
+  { id: 'embroidery_logo', label: 'Embroidery Logo', description: 'Premium embroidered logo', price: 7 },
   { id: 'sponsor', label: 'Sponsor Placement', description: 'Add sponsor logos to jerseys', price: 8 },
   { id: 'patch', label: 'Custom Patch', description: 'Add custom embroidered patches', price: 10 },
-  { id: 'name_addon', label: 'Player Name Add-on', description: 'Individual player name printing', price: 3 },
+  { id: 'name_addon', label: 'Player Name', description: 'Individual player name printing', price: 3 },
+  { id: 'number_addon', label: 'Player Number', description: 'Individual player number printing', price: 3 },
 ];
 
 export const logoPlacementOptions = [

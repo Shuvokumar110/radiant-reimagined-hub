@@ -43,10 +43,13 @@ export interface StyleConfig {
   collar: string;
   fabric: string;
   addOns: {
-    extraLogoPlacement: boolean;
+    logoPlacement: boolean;
+    sublimatedLogo: boolean;
+    embroideryLogo: boolean;
     sponsorPlacement: boolean;
     customPatch: boolean;
     playerNameAddon: boolean;
+    playerNumberAddon: boolean;
   };
 }
 
@@ -77,6 +80,8 @@ export interface TeamBuilderState {
   specialInstructions: string;
   deliveryOption: 'standard' | 'rush';
   proofFirst: boolean;
+  orderApproved: boolean;
+  revisionCount: number;
 }
 
 type TeamBuilderAction =
@@ -95,6 +100,8 @@ type TeamBuilderAction =
   | { type: 'SET_SPECIAL_INSTRUCTIONS'; instructions: string }
   | { type: 'SET_DELIVERY_OPTION'; option: 'standard' | 'rush' }
   | { type: 'SET_PROOF_FIRST'; proofFirst: boolean }
+  | { type: 'SET_ORDER_APPROVED'; approved: boolean }
+  | { type: 'INCREMENT_REVISION' }
   | { type: 'RESET' };
 
 const initialState: TeamBuilderState = {
@@ -108,10 +115,13 @@ const initialState: TeamBuilderState = {
     collar: 'V-Neck',
     fabric: 'Pro Mesh',
     addOns: {
-      extraLogoPlacement: false,
+      logoPlacement: false,
+      sublimatedLogo: false,
+      embroideryLogo: false,
       sponsorPlacement: false,
       customPatch: false,
       playerNameAddon: false,
+      playerNumberAddon: false,
     },
   },
   designConfig: {
@@ -155,6 +165,8 @@ const initialState: TeamBuilderState = {
   specialInstructions: '',
   deliveryOption: 'standard',
   proofFirst: false,
+  orderApproved: false,
+  revisionCount: 0,
 };
 
 function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction): TeamBuilderState {
@@ -162,8 +174,10 @@ function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction):
     case 'SET_STEP':
       return { ...state, currentStep: action.step };
     case 'SET_SPORT':
+      // Step 0 → Step 1 (Product)
       return { ...state, sport: action.sport, product: null, currentStep: 1 };
     case 'SET_PRODUCT':
+      // Step 1 → Step 2 (Design)
       return { ...state, product: action.product, currentStep: 2 };
     case 'SET_STYLE_CONFIG':
       return { ...state, styleConfig: { ...state.styleConfig, ...action.config } };
@@ -194,6 +208,10 @@ function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction):
       return { ...state, deliveryOption: action.option };
     case 'SET_PROOF_FIRST':
       return { ...state, proofFirst: action.proofFirst };
+    case 'SET_ORDER_APPROVED':
+      return { ...state, orderApproved: action.approved };
+    case 'INCREMENT_REVISION':
+      return { ...state, revisionCount: state.revisionCount + 1, orderApproved: false };
     case 'RESET':
       return initialState;
     default:
@@ -242,10 +260,13 @@ export function TeamBuilderProvider({ children }: { children: ReactNode }) {
     
     // Calculate add-on fees
     let addOnFees = 0;
-    if (state.styleConfig.addOns.extraLogoPlacement) addOnFees += 5 * quantity;
+    if (state.styleConfig.addOns.logoPlacement) addOnFees += 5 * quantity;
+    if (state.styleConfig.addOns.sublimatedLogo) addOnFees += 3 * quantity;
+    if (state.styleConfig.addOns.embroideryLogo) addOnFees += 7 * quantity;
     if (state.styleConfig.addOns.sponsorPlacement) addOnFees += 8 * quantity;
     if (state.styleConfig.addOns.customPatch) addOnFees += 10 * quantity;
     if (state.styleConfig.addOns.playerNameAddon) addOnFees += 3 * quantity;
+    if (state.styleConfig.addOns.playerNumberAddon) addOnFees += 3 * quantity;
 
     const subtotal = basePrice * quantity;
     
@@ -260,9 +281,9 @@ export function TeamBuilderProvider({ children }: { children: ReactNode }) {
     const discountedSubtotal = subtotal * (1 - discount);
     
     // Estimated shipping ($5 per item, min $25, max $150)
-    const estimatedShipping = Math.min(Math.max(quantity * 5, 25), 150);
+    const estimatedShipping = quantity > 0 ? Math.min(Math.max(quantity * 5, 25), 150) : 0;
     
-    // Estimated tax (8%)
+    // Estimated tax (8% — standard sales tax estimate)
     const estimatedTax = (discountedSubtotal + addOnFees + rushFee) * 0.08;
     
     const total = discountedSubtotal + addOnFees + rushFee + estimatedShipping + estimatedTax;
