@@ -42,10 +42,53 @@ import soccerShortsPink from "@/assets/products/soccer-shorts-pink.png";
 import soccerSocksPink from "@/assets/products/soccer-socks-pink.png";
 import soccerFullKitPink from "@/assets/products/soccer-full-kit-pink.png";
 
-// Product images - Basketball
-import basketballJersey from "@/assets/products/basketball-jersey.jpg";
-import basketballShorts from "@/assets/products/basketball-shorts.jpg";
-import basketballFullUniform from "@/assets/products/basketball-full-uniform.jpg";
+// Product images - Basketball (9 styles: 100-900)
+// Style 100
+import bask100Kit from "@/assets/products/basketball/bask-100-kit.png";
+import bask100JerseyFront from "@/assets/products/basketball/bask-100-kit.png"; // fallback - original expired
+import bask100ShortsFront from "@/assets/products/basketball/bask-100-shorts-front.png";
+import bask100Socks from "@/assets/products/basketball/bask-100-socks.png";
+// Style 200
+import bask200Kit from "@/assets/products/basketball/bask-200-kit.png";
+import bask200JerseyFront from "@/assets/products/basketball/bask-200-jersey-front.png";
+import bask200ShortsFront from "@/assets/products/basketball/bask-200-shorts-back.png"; // fallback
+import bask200Socks from "@/assets/products/basketball/bask-200-socks.png";
+// Style 300
+import bask300Kit from "@/assets/products/basketball/bask-300-jersey-back.png"; // fallback
+import bask300JerseyFront from "@/assets/products/basketball/bask-300-jersey-back.png"; // fallback
+import bask300ShortsFront from "@/assets/products/basketball/bask-300-shorts-back.png"; // fallback
+import bask300Socks from "@/assets/products/basketball/bask-300-socks.png";
+// Style 400
+import bask400Kit from "@/assets/products/basketball/bask-400-jersey-front.png"; // fallback
+import bask400JerseyFront from "@/assets/products/basketball/bask-400-jersey-front.png";
+import bask400ShortsFront from "@/assets/products/basketball/bask-400-shorts-front.png";
+import bask400Socks from "@/assets/products/basketball/bask-400-socks.png";
+// Style 500
+import bask500Kit from "@/assets/products/basketball/bask-500-kit.png";
+import bask500JerseyFront from "@/assets/products/basketball/bask-500-jersey-front.png";
+import bask500ShortsFront from "@/assets/products/basketball/bask-500-shorts-front.png";
+import bask500Socks from "@/assets/products/basketball/bask-500-socks.png";
+// Style 600
+import bask600Kit from "@/assets/products/basketball/bask-600-kit.png";
+import bask600JerseyFront from "@/assets/products/basketball/bask-600-jersey-front.png";
+import bask600ShortsFront from "@/assets/products/basketball/bask-600-shorts-front.png";
+import bask600Socks from "@/assets/products/basketball/bask-600-socks.png";
+// Style 700
+import bask700Kit from "@/assets/products/basketball/bask-700-kit.png";
+import bask700JerseyFront from "@/assets/products/basketball/bask-700-jersey-front.png";
+import bask700ShortsFront from "@/assets/products/basketball/bask-700-shorts-front.png";
+import bask700Socks from "@/assets/products/basketball/bask-700-socks.png";
+// Style 800
+import bask800Kit from "@/assets/products/basketball/bask-800-kit.png";
+import bask800JerseyFront from "@/assets/products/basketball/bask-800-jersey-front.png";
+import bask800ShortsFront from "@/assets/products/basketball/bask-800-shorts-front.png";
+import bask800Socks from "@/assets/products/basketball/bask-800-socks.png";
+// Style 900
+import bask900Kit from "@/assets/products/basketball/bask-900-kit.png";
+import bask900JerseyFront from "@/assets/products/basketball/bask-900-jersey-front.png";
+import bask900ShortsFront from "@/assets/products/basketball/bask-900-shorts-front.png";
+import bask900Socks from "@/assets/products/basketball/bask-900-socks.png";
+// Legacy
 import basketballShootingShirt from "@/assets/products/basketball-shooting-shirt.jpg";
 import basketballWarmup from "@/assets/products/basketball-warmup.jpg";
 
@@ -168,11 +211,53 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     
   ],
   basketball: [
-    { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'basketball-shorts', name: 'Shorts', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: basketballShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'basketball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Shorts', basePrice: 65, image: basketballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'basketball-shooting-shirt', name: 'Shooting Shirt', shortDescription: 'Warmup shooting shirt', basePrice: 35, image: basketballShootingShirt, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
-    { id: 'basketball-warmup', name: 'Warmup Suit', shortDescription: 'Complete warmup set', basePrice: 85, image: basketballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    // Full Kits (Jersey + Shorts + Socks)
+    { id: 'bask-kit-100', name: 'Full Kit (Style 100)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-200', name: 'Full Kit (Style 200)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-300', name: 'Full Kit (Style 300)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-400', name: 'Full Kit (Style 400)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-500', name: 'Full Kit (Style 500)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-600', name: 'Full Kit (Style 600)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-700', name: 'Full Kit (Style 700)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-800', name: 'Full Kit (Style 800)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+    { id: 'bask-kit-900', name: 'Full Kit (Style 900)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: bask900Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Full Kit' },
+
+    // Jerseys
+    { id: 'bask-jersey-100', name: 'Jersey (Style 100)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask100JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-200', name: 'Jersey (Style 200)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask200JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-300', name: 'Jersey (Style 300)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask300JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-400', name: 'Jersey (Style 400)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask400JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-500', name: 'Jersey (Style 500)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask500JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-600', name: 'Jersey (Style 600)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask600JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-700', name: 'Jersey (Style 700)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask700JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-800', name: 'Jersey (Style 800)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask800JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+    { id: 'bask-jersey-900', name: 'Jersey (Style 900)', shortDescription: 'Sublimated game jersey', basePrice: 40, image: bask900JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Jersey' },
+
+    // Shorts
+    { id: 'bask-shorts-100', name: 'Shorts (Style 100)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask100ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-200', name: 'Shorts (Style 200)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask200ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-300', name: 'Shorts (Style 300)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask300ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-400', name: 'Shorts (Style 400)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask400ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-500', name: 'Shorts (Style 500)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask500ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-600', name: 'Shorts (Style 600)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask600ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-700', name: 'Shorts (Style 700)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask700ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-800', name: 'Shorts (Style 800)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask800ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+    { id: 'bask-shorts-900', name: 'Shorts (Style 900)', shortDescription: 'Pro-cut basketball shorts', basePrice: 30, image: bask900ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 10, category: 'Shorts' },
+
+    // Socks
+    { id: 'bask-socks-100', name: 'Socks (Style 100)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask100Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-200', name: 'Socks (Style 200)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask200Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-300', name: 'Socks (Style 300)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask300Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-400', name: 'Socks (Style 400)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask400Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-500', name: 'Socks (Style 500)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask500Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-600', name: 'Socks (Style 600)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask600Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-700', name: 'Socks (Style 700)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask700Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-800', name: 'Socks (Style 800)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask800Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+    { id: 'bask-socks-900', name: 'Socks (Style 900)', shortDescription: 'Performance basketball socks', basePrice: 12, image: bask900Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 10, category: 'Socks' },
+
+    // Warmup / Extras
+    { id: 'basketball-shooting-shirt', name: 'Shooting Shirt', shortDescription: 'Warmup shooting shirt', basePrice: 35, image: basketballShootingShirt, fabricType: 'Sublimated', leadTime: 'Rush', moq: 10, category: 'Warmup' },
+    { id: 'basketball-warmup', name: 'Warmup Suit', shortDescription: 'Complete warmup set', basePrice: 85, image: basketballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 10, category: 'Warmup' },
   ],
   american_football: [
     { id: 'football-game-jersey', name: 'Game Jersey', shortDescription: 'Official game-day jersey', basePrice: 65, image: footballGameJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
