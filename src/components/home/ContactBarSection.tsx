@@ -1,11 +1,10 @@
-import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MessageCircle } from "lucide-react";
 
 import tidiLogo from "@/assets/tidi-logo.webp";
 
-export const ContactBarSection = forwardRef<HTMLElement>(function ContactBarSection(_props, ref) {
+export function ContactBarSection() {
   return (
     <section className="py-10 bg-background">
       <div className="w-full px-8 md:px-16 lg:px-24">
@@ -34,4 +33,4 @@ export const ContactBarSection = forwardRef<HTMLElement>(function ContactBarSect
       </div>
     </section>
   );
-});
+}
