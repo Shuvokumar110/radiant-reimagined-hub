@@ -10,6 +10,7 @@ import { TeamNeedsSection } from "@/components/home/TeamNeedsSection";
 import { AffiliatesSection } from "@/components/home/AffiliatesSection";
 import { GearUpSection } from "@/components/home/GearUpSection";
 import { ContactBarSection } from "@/components/home/ContactBarSection";
+import { TeamBuilderSection } from "@/components/home/TeamBuilderSection";
 import { Preloader } from "@/components/ui/Preloader";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -30,6 +31,7 @@ const Index = () => {
         <Layout>
           <HeroSection />
           <BrowseCategoriesSection />
+          <TeamBuilderSection />
           <ElevateSection />
           <SoccerBootsSection />
           <ProcessSection />
