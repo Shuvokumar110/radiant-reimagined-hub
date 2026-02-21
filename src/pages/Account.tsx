@@ -5,9 +5,10 @@ import { FadeInUp } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Check, LogOut } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Check, LogOut, Shield } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminRole } from "@/hooks/useAdminRole";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Account() {
@@ -20,6 +21,7 @@ export default function Account() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const { user, loading, signIn, signUp, signOut } = useAuth();
+  const { isAdmin } = useAdminRole();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -84,7 +86,7 @@ export default function Account() {
                 <p className="font-semibold">{user.email}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className={`grid ${isAdmin ? 'grid-cols-3' : 'grid-cols-2'} gap-4`}>
                 <Link to="/custom-team-outfit" className="p-6 border rounded-xl hover:border-foreground/30 transition-all text-center">
                   <h3 className="font-semibold mb-1">Custom Outfit</h3>
                   <p className="text-xs text-muted-foreground">Start or resume an order</p>
@@ -93,6 +95,13 @@ export default function Account() {
                   <h3 className="font-semibold mb-1">Wishlist</h3>
                   <p className="text-xs text-muted-foreground">Saved items</p>
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin" className="p-6 border rounded-xl hover:border-foreground/30 transition-all text-center bg-foreground text-background">
+                    <Shield className="h-5 w-5 mx-auto mb-2" />
+                    <h3 className="font-semibold mb-1">Admin Panel</h3>
+                    <p className="text-xs opacity-70">Manage everything</p>
+                  </Link>
+                )}
               </div>
 
               <Button variant="outline" onClick={handleSignOut} className="w-full gap-2">

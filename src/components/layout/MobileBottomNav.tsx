@@ -8,11 +8,13 @@ const navItems = [
   { label: "Account", href: "/account", icon: User },
 ];
 
-export function MobileBottomNav() {
+import React from "react";
+
+export const MobileBottomNav = React.forwardRef<HTMLElement, {}>((_, ref) => {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border md:hidden">
+    <nav ref={ref} className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border md:hidden">
       <div className="flex items-center justify-around py-2">
         {navItems.map((item) => {
           const isActive = location.pathname === item.href;
@@ -32,4 +34,5 @@ export function MobileBottomNav() {
       </div>
     </nav>
   );
-}
+});
+MobileBottomNav.displayName = "MobileBottomNav";

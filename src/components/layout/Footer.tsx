@@ -38,9 +38,11 @@ const socialLinks = [
   { icon: Twitter, href: "https://twitter.com" },
 ];
 
-export function Footer() {
+import React from "react";
+
+export const Footer = React.forwardRef<HTMLElement, {}>((_, ref) => {
   return (
-    <footer className="bg-foreground text-background relative overflow-hidden">
+    <footer ref={ref} className="bg-foreground text-background relative overflow-hidden">
       {/* Noise overlay */}
       <div className="absolute inset-0 noise-overlay opacity-5" />
       
@@ -208,4 +210,5 @@ export function Footer() {
       </motion.a>
     </footer>
   );
-}
+});
+Footer.displayName = "Footer";
