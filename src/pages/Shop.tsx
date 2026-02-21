@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
-import { FadeInUp } from "@/components/ui/animated-text";
-import { ShopCategoryGrid } from "@/components/shop/ShopCategoryGrid";
-import { ShopProductGrid } from "@/components/shop/ShopProductGrid";
+import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-text";
 import { CatalogDownloadBanner } from "@/components/shop/CatalogDownloadButton";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
+import { shopProductsByCategory } from "@/data/shopProducts";
 
 // Category Images
 import soccerImg from "@/assets/categories/soccer.png";
@@ -20,22 +19,19 @@ import hoodiesImg from "@/assets/categories/hoodies.png";
 import poloImg from "@/assets/categories/polo-jerseys.png";
 import sportsJerseyImg from "@/assets/categories/sports-jersey.png";
 
-// Boot product images
+// Boot images
 import style672 from "@/assets/products/style-672-4.png";
 import style972 from "@/assets/products/style-972-1.png";
 import giveAKick from "@/assets/products/give-a-kick-to-racism-1.png";
 
-// Import team builder data for category products
-import { productsBySport, type SportType } from "@/data/teamBuilderData";
-
 const categories = [
-  { id: "soccer", name: "Soccer", image: soccerImg, sportKey: "soccer" as SportType },
-  { id: "basketball", name: "Basketball", image: basketballImg, sportKey: "basketball" as SportType },
-  { id: "american-football", name: "American Football", image: americanFootballImg, sportKey: "american_football" as SportType },
-  { id: "baseball-softball", name: "Baseball/Softball", image: soccerImg, sportKey: "baseball_softball" as SportType },
-  { id: "volleyball", name: "Volleyball", image: volleyballImg, sportKey: "volleyball" as SportType },
-  { id: "netball", name: "Netball", image: netballImg, sportKey: "netball" as SportType },
-  { id: "cricket", name: "Cricket", image: cricketImg, sportKey: "cricket" as SportType },
+  { id: "soccer", name: "Soccer", image: soccerImg },
+  { id: "basketball", name: "Basketball", image: basketballImg },
+  { id: "american-football", name: "American Football", image: americanFootballImg },
+  { id: "baseball-softball", name: "Baseball/Softball", image: soccerImg },
+  { id: "volleyball", name: "Volleyball", image: volleyballImg },
+  { id: "netball", name: "Netball", image: netballImg },
+  { id: "cricket", name: "Cricket", image: cricketImg },
   { id: "tracksuits", name: "Tracksuits", image: tracksuitImg },
   { id: "hoodies", name: "Hoodies", image: hoodiesImg },
   { id: "polo-jerseys", name: "Polo Jerseys", image: poloImg },
@@ -43,33 +39,28 @@ const categories = [
 ];
 
 const bootProducts = [
-  { id: "boot-672", name: "Soccer Boots – Style 672", image: style672, shortDescription: "Made in Italy, Kangaroo Leather", basePrice: 166, slug: "style-672" },
-  { id: "boot-972", name: "Soccer Boots – Style 972", image: style972, shortDescription: "Made in Italy, Calf Leather", basePrice: 146, slug: "style-972" },
-  { id: "boot-gaktr", name: "Give A Kick To Racism", image: giveAKick, shortDescription: "Special Edition, Kangaroo Leather", basePrice: 184, slug: "give-a-kick-to-racism" },
+  { id: "boot-672", name: "Soccer Boots – Style 672", image: style672, price: "From $166", slug: "style-672", tag: "Made in Italy" },
+  { id: "boot-972", name: "Soccer Boots – Style 972", image: style972, price: "From $146", slug: "style-972", tag: "Made in Italy" },
+  { id: "boot-gaktr", name: "Give A Kick To Racism", image: giveAKick, price: "From $184", slug: "give-a-kick-to-racism", tag: "Special Edition" },
 ];
 
 export default function Shop() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
 
   const handleCategoryClick = (id: string) => {
-    setActiveCategory(activeCategory === id ? null : id);
-    // Scroll to products section
+    if (activeCategory === id) {
+      setActiveCategory(null);
+      return;
+    }
+    setActiveCategory(id);
     setTimeout(() => {
-      document.getElementById("shop-products")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+      productsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
   };
 
   const activeCat = categories.find((c) => c.id === activeCategory);
-  const activeProducts = activeCat?.sportKey
-    ? productsBySport[activeCat.sportKey]?.map((p) => ({
-        id: p.id,
-        name: p.name,
-        image: p.image,
-        shortDescription: p.shortDescription,
-        basePrice: p.basePrice,
-        category: p.category,
-      })) || []
-    : [];
+  const activeProducts = activeCategory ? shopProductsByCategory[activeCategory] || [] : [];
 
   return (
     <Layout>
@@ -99,58 +90,154 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* Catalog Download Banner */}
+      {/* Catalog Download */}
       <CatalogDownloadBanner />
 
-      {/* Categories Grid */}
+      {/* Categories */}
       <section className="py-8 md:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl md:text-2xl font-bold">
-                <span className="text-foreground">Browse</span>{" "}
-                <span className="text-muted-foreground">Categories</span>
-              </h2>
-              {activeCategory && (
+            <h2 className="text-xl md:text-2xl font-bold mb-6">
+              <span className="text-foreground">Browse</span>{" "}
+              <span className="text-muted-foreground">Categories</span>
+            </h2>
+          </FadeInUp>
+
+          <StaggerContainer className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <StaggerItem key={cat.id}>
+                  <button onClick={() => handleCategoryClick(cat.id)} className="w-full text-left">
+                    <motion.div
+                      whileHover={{ y: -4 }}
+                      className={`relative rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                        isActive
+                          ? "border-foreground shadow-lg ring-2 ring-foreground/20"
+                          : "border-border hover:border-foreground/30 shadow-sm hover:shadow-md"
+                      }`}
+                    >
+                      <div className="relative aspect-[3/4] overflow-hidden">
+                        <img
+                          src={cat.image}
+                          alt={cat.name}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                        {isActive && (
+                          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-foreground flex items-center justify-center">
+                            <X className="w-3 h-3 text-background" />
+                          </div>
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
+                          <h3 className="font-bold text-[11px] md:text-sm text-white leading-tight">
+                            {cat.name}
+                          </h3>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </button>
+                </StaggerItem>
+              );
+            })}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Category Products */}
+      <AnimatePresence>
+        {activeCategory && activeCat && (
+          <motion.section
+            ref={productsRef}
+            id="shop-products"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-muted/40 overflow-hidden scroll-mt-20"
+          >
+            <div className="container mx-auto px-4 sm:px-6 py-8 md:py-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg md:text-2xl font-bold">
+                  <span className="text-foreground">{activeCat.name}</span>{" "}
+                  <span className="text-muted-foreground">Products</span>
+                </h2>
                 <button
                   onClick={() => setActiveCategory(null)}
                   className="inline-flex items-center gap-1.5 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
-                  All Categories
+                  Back
                 </button>
+              </div>
+
+              {activeProducts.length > 0 ? (
+                <motion.div
+                  key={activeCategory}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"
+                >
+                  {activeProducts.map((product) => (
+                    <motion.div
+                      key={product.id}
+                      whileHover={{ y: -4 }}
+                      className="bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300"
+                    >
+                      <div className="relative aspect-square overflow-hidden bg-muted">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-contain p-3 md:p-4 hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                        {product.tag && (
+                          <div className="absolute top-2 left-2">
+                            <span className="px-2 py-0.5 bg-foreground text-background text-[10px] md:text-xs font-medium rounded">
+                              {product.tag}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3 md:p-4">
+                        <h4 className="font-semibold text-xs md:text-sm leading-tight">
+                          {product.name}
+                        </h4>
+                        <p className="text-xs md:text-sm font-bold text-primary mt-1.5">
+                          {product.price}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              ) : (
+                <div className="text-center py-10">
+                  <p className="text-muted-foreground text-sm">
+                    Products coming soon. Contact us for custom orders.
+                  </p>
+                </div>
               )}
+
+              {/* Quote CTA */}
+              <div className="mt-6 bg-foreground rounded-xl p-4 md:p-5 text-center">
+                <p className="text-background text-sm font-medium mb-2">
+                  Need custom {activeCat.name} gear for your team?
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-5 py-2 bg-background text-foreground font-semibold rounded-lg hover:bg-background/90 transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
             </div>
-          </FadeInUp>
+          </motion.section>
+        )}
+      </AnimatePresence>
 
-          <ShopCategoryGrid
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryClick={handleCategoryClick}
-          />
-        </div>
-      </section>
-
-      {/* Category Products */}
-      {activeCategory && (
-        <section id="shop-products" className="py-8 md:py-12 bg-muted/30 scroll-mt-20">
-          <div className="container mx-auto px-4 sm:px-6">
-            <FadeInUp>
-              <h2 className="text-xl md:text-2xl font-bold mb-6">
-                <span className="text-foreground">{activeCat?.name}</span>{" "}
-                <span className="text-muted-foreground">Products</span>
-              </h2>
-            </FadeInUp>
-
-            <ShopProductGrid
-              products={activeProducts}
-              categoryName={activeCat?.name || ""}
-            />
-          </div>
-        </section>
-      )}
-
-      {/* Boots Section */}
+      {/* Boots */}
       <section className="py-8 md:py-12 bg-muted">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
@@ -158,9 +245,7 @@ export default function Shop() {
               <span className="text-foreground">Premium</span>{" "}
               <span className="text-muted-foreground">Soccer Boots</span>
             </h2>
-            <p className="text-muted-foreground text-xs md:text-sm mb-6">
-              Made in Italy with premium leather
-            </p>
+            <p className="text-muted-foreground text-xs md:text-sm mb-6">Made in Italy with premium leather</p>
           </FadeInUp>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
@@ -168,31 +253,24 @@ export default function Shop() {
               <Link key={product.id} to={`/shop/${product.slug}`}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="group bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300"
+                  className="bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain p-3 md:p-4 group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain p-3 md:p-4 hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                     <div className="absolute top-2 left-2">
                       <span className="px-2 py-0.5 bg-foreground text-background text-[10px] md:text-xs font-medium rounded">
-                        Made in Italy
+                        {product.tag}
                       </span>
                     </div>
                   </div>
                   <div className="p-3 md:p-4">
-                    <h3 className="font-semibold text-xs md:text-sm leading-tight line-clamp-2">
-                      {product.name}
-                    </h3>
-                    <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
-                      {product.shortDescription}
-                    </p>
-                    <p className="text-xs md:text-sm font-bold text-primary mt-2">
-                      From ${product.basePrice}
-                    </p>
+                    <h3 className="font-semibold text-xs md:text-sm leading-tight line-clamp-2">{product.name}</h3>
+                    <p className="text-xs md:text-sm font-bold text-primary mt-1.5">{product.price}</p>
                   </div>
                 </motion.div>
               </Link>
