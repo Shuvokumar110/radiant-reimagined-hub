@@ -5,11 +5,6 @@ import style672_4 from "@/assets/products/style-672-4.png";
 import style972_1 from "@/assets/products/style-972-1.png";
 import giveAKick1 from "@/assets/products/give-a-kick-to-racism-1.png";
 import giveAKick2 from "@/assets/products/give-a-kick-to-racism-2.png";
-import jerseyRedWhite from "@/assets/products/jersey-red-white.png";
-import jerseyOrange from "@/assets/products/jersey-orange.png";
-import jerseyGreen from "@/assets/products/jersey-green.png";
-import basketballFlame from "@/assets/products/basketball-flame.png";
-import basketballGraffiti from "@/assets/products/basketball-graffiti.png";
 
 export interface ProductVariant {
   outsole: string;
@@ -37,23 +32,9 @@ export interface Product {
   variants?: ProductVariant[];
 }
 
-// Categories based on the reference image
 export const categories = [
   "All",
   "Soccer Boots",
-  "Team Uniforms",
-  "Jerseys",
-  "Tracksuits",
-  "Hoodies",
-  "T-Shirts",
-  "Polo Shirts",
-  "Athlete Shorts",
-  "Varsity Jackets",
-  "Waterproof Jackets",
-  "Backpacks",
-  "Socks",
-  "Youth & Kids",
-  "Balls",
   "Special Edition",
 ];
 
@@ -150,121 +131,6 @@ export const products: Product[] = [
       { outsole: "MIX", color: "Black", price: "$196.66" },
       { outsole: "TURF", color: "Black", price: "$194.26" },
     ]
-  },
-  {
-    id: 3001,
-    sku: "TIDI-JRS-RW",
-    name: "Pro Soccer Jersey - Red Storm",
-    slug: "jersey-red-storm",
-    category: "Jerseys",
-    price: "Contact for Quote",
-    image: jerseyRedWhite,
-    images: [jerseyRedWhite],
-    tags: ["Custom", "Team Uniform", "Full Kit"],
-    shortDescription: "Complete team kit with jersey, shorts, and socks.",
-    description: "Dynamic red and white soccer kit featuring TiDi's signature design elements. Includes customizable jersey, matching shorts with number, and branded socks. Perfect for competitive teams looking to make a statement.",
-    features: [
-      "Sublimated design - won't fade or peel",
-      "Moisture-wicking fabric",
-      "Custom name and number included",
-      "Matching shorts and socks",
-      "Bulk team pricing available"
-    ],
-    sizes: ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"],
-    material: "100% Polyester",
-    outsoles: [],
-  },
-  {
-    id: 3002,
-    sku: "TIDI-JRS-OR",
-    name: "Pro Soccer Jersey - Sunset Orange",
-    slug: "jersey-sunset-orange",
-    category: "Jerseys",
-    price: "Contact for Quote",
-    image: jerseyOrange,
-    images: [jerseyOrange],
-    tags: ["Custom", "Team Uniform", "Full Kit"],
-    shortDescription: "Complete team kit with jersey, shorts, and socks.",
-    description: "Bold orange gradient soccer kit with modern geometric patterns. Features TiDi's premium sublimation printing for lasting vibrance. Complete with shorts and performance socks.",
-    features: [
-      "Gradient sublimation print",
-      "Lightweight performance fabric",
-      "Custom name and number included",
-      "Full kit: Jersey, shorts, socks",
-      "Team bulk discounts"
-    ],
-    sizes: ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"],
-    material: "100% Polyester",
-    outsoles: [],
-  },
-  {
-    id: 3003,
-    sku: "TIDI-JRS-GR",
-    name: "Pro Soccer Jersey - Forest Green",
-    slug: "jersey-forest-green",
-    category: "Jerseys",
-    price: "Contact for Quote",
-    image: jerseyGreen,
-    images: [jerseyGreen],
-    tags: ["Custom", "Team Uniform", "Full Kit"],
-    shortDescription: "Complete team kit with jersey, shorts, and socks.",
-    description: "Striking green soccer kit with bold accent stripes. TiDi branding and premium construction throughout. Includes matched shorts with number placement and high-performance socks.",
-    features: [
-      "Vibrant color-fast printing",
-      "Athletic cut for performance",
-      "Custom name and number",
-      "Complete matching kit",
-      "Youth and adult sizes"
-    ],
-    sizes: ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"],
-    material: "100% Polyester",
-    outsoles: [],
-  },
-  {
-    id: 3004,
-    sku: "TIDI-BBJ-FL",
-    name: "Basketball Jersey - Flame Edition",
-    slug: "basketball-flame",
-    category: "Team Uniforms",
-    price: "Contact for Quote",
-    image: basketballFlame,
-    images: [basketballFlame],
-    tags: ["Custom", "Basketball", "Full Kit"],
-    shortDescription: "Complete basketball kit with flame design.",
-    description: "Eye-catching basketball uniform featuring dramatic flame graphics on a black base. Bold tribal-inspired patterns create an intimidating court presence. Includes jersey, shorts, and branded socks.",
-    features: [
-      "Premium sublimation flames",
-      "Breathable mesh fabric",
-      "Custom numbers and names",
-      "Matching shorts included",
-      "Aggressive game-day look"
-    ],
-    sizes: ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"],
-    material: "100% Polyester Mesh",
-    outsoles: [],
-  },
-  {
-    id: 3005,
-    sku: "TIDI-BBJ-GR",
-    name: "Basketball Jersey - Graffiti Style",
-    slug: "basketball-graffiti",
-    category: "Team Uniforms",
-    price: "Contact for Quote",
-    image: basketballGraffiti,
-    images: [basketballGraffiti],
-    tags: ["Custom", "Basketball", "Full Kit"],
-    shortDescription: "Urban-inspired basketball kit with graffiti design.",
-    description: "Street-style basketball uniform featuring vibrant orange and purple graffiti artwork. Makes a bold statement on the court with unique abstract patterns. Complete with matching shorts and colorful socks.",
-    features: [
-      "Urban graffiti artwork",
-      "High-contrast colors",
-      "Custom player details",
-      "Full uniform set",
-      "Stand-out design"
-    ],
-    sizes: ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"],
-    material: "100% Polyester Mesh",
-    outsoles: [],
   },
 ];
 
