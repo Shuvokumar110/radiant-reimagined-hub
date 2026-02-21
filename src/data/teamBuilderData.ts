@@ -37,6 +37,10 @@ import soccerJerseyMarble from "@/assets/products/soccer-jersey-marble.png";
 import soccerShortsMarble from "@/assets/products/soccer-shorts-marble.png";
 import soccerSocksMarble from "@/assets/products/soccer-socks-marble.png";
 import soccerFullKitMarble from "@/assets/products/soccer-full-kit-marble.png";
+import soccerJerseyPink from "@/assets/products/soccer-jersey-pink.png";
+import soccerShortsPink from "@/assets/products/soccer-shorts-pink.png";
+import soccerSocksPink from "@/assets/products/soccer-socks-pink.png";
+import soccerFullKitPink from "@/assets/products/soccer-full-kit-pink.png";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -147,6 +151,10 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'soccer-shorts-marble', name: 'Shorts (Side Panel)', shortDescription: 'White shorts with side panels', basePrice: 25, image: soccerShortsMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks-marble', name: 'Socks (Banded)', shortDescription: 'White socks with contrast bands', basePrice: 12, image: soccerSocksMarble, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit-marble', name: 'Full Kit Bundle (Marble)', shortDescription: 'Marble Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitMarble, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-jersey-pink', name: 'Jersey (Hex)', shortDescription: 'Hexagonal pattern crew jersey', basePrice: 35, image: soccerJerseyPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-shorts-pink', name: 'Shorts (Marble)', shortDescription: 'Pink marble athletic shorts', basePrice: 25, image: soccerShortsPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'soccer-socks-pink', name: 'Socks (Pink)', shortDescription: 'Pink socks with contrast cuff', basePrice: 12, image: soccerSocksPink, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
+    { id: 'soccer-full-kit-pink', name: 'Full Kit Bundle (Hex)', shortDescription: 'Hex Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKitPink, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
