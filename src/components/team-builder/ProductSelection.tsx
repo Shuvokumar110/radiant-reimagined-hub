@@ -56,57 +56,22 @@ export function ProductSelection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 gap-3 md:gap-5 max-w-3xl"
+            className="grid grid-cols-2 gap-3 md:gap-4 max-w-lg"
           >
-            {/* Full Kits Card */}
             <button
               onClick={() => setViewMode('kits')}
-              className="group relative rounded-xl overflow-hidden text-left transition-all hover:shadow-lg"
+              className="rounded-lg bg-foreground text-background px-6 py-8 md:py-10 text-left hover:opacity-90 transition-opacity"
             >
-              <div className="aspect-[4/3] md:aspect-[3/2] relative bg-foreground">
-                {/* Show first kit image as preview */}
-                {fullKits[0] && (
-                  <img
-                    src={fullKits[0].image}
-                    alt="Full Kit Preview"
-                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity"
-                  />
-                )}
-                <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-background">Full Kits</h3>
-                  <p className="text-xs md:text-sm text-background/60 mt-1 hidden sm:block">
-                    Jersey + Shorts + Socks
-                  </p>
-                  <span className="text-[11px] md:text-xs text-background/40 mt-2">
-                    {fullKits.length} styles
-                  </span>
-                </div>
-              </div>
+              <h3 className="text-base md:text-lg font-bold">Full Kits</h3>
+              <p className="text-xs text-background/50 mt-1">{fullKits.length} styles</p>
             </button>
 
-            {/* Individual Items Card */}
             <button
               onClick={() => setViewMode('separated')}
-              className="group relative rounded-xl overflow-hidden text-left transition-all hover:shadow-lg border border-border"
+              className="rounded-lg bg-muted text-foreground px-6 py-8 md:py-10 text-left hover:bg-muted/70 transition-colors border border-border"
             >
-              <div className="aspect-[4/3] md:aspect-[3/2] relative bg-muted">
-                {separated[0] && (
-                  <img
-                    src={separated[0].image}
-                    alt="Individual Items Preview"
-                    className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity"
-                  />
-                )}
-                <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-foreground">Individual Items</h3>
-                  <p className="text-xs md:text-sm text-muted-foreground mt-1 hidden sm:block">
-                    Pick items separately
-                  </p>
-                  <span className="text-[11px] md:text-xs text-muted-foreground/60 mt-2">
-                    {separated.length} items
-                  </span>
-                </div>
-              </div>
+              <h3 className="text-base md:text-lg font-bold">Individual Items</h3>
+              <p className="text-xs text-muted-foreground mt-1">{separated.length} items</p>
             </button>
           </motion.div>
         )}
