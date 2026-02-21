@@ -267,7 +267,7 @@ export function TeamBuilderProvider({ children }: { children: ReactNode }) {
   };
 
   const nextStep = () => {
-    dispatch({ type: 'SET_STEP', step: Math.min(state.currentStep + 1, 6) });
+    dispatch({ type: 'SET_STEP', step: Math.min(state.currentStep + 1, 5) });
   };
 
   const prevStep = () => {

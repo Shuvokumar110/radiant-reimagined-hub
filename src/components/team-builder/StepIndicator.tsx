@@ -5,11 +5,10 @@ import { useTeamBuilder } from "@/context/TeamBuilderContext";
 const steps = [
   { id: 0, label: "Sport", shortLabel: "1" },
   { id: 1, label: "Product", shortLabel: "2" },
-  { id: 2, label: "Design", shortLabel: "3" },
-  { id: 3, label: "Style", shortLabel: "4" },
-  { id: 4, label: "Roster", shortLabel: "5" },
-  { id: 5, label: "Review", shortLabel: "6" },
-  { id: 6, label: "Checkout", shortLabel: "7" },
+  { id: 2, label: "Style", shortLabel: "3" },
+  { id: 3, label: "Roster", shortLabel: "4" },
+  { id: 4, label: "Review", shortLabel: "5" },
+  { id: 5, label: "Checkout", shortLabel: "6" },
 ];
 
 export function StepIndicator() {
