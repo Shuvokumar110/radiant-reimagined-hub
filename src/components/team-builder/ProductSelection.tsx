@@ -8,8 +8,6 @@ import { productsBySport, sportCategories, ProductType } from "@/data/teamBuilde
 
 type ViewMode = 'choose' | 'kits' | 'jerseys' | 'shorts' | 'socks';
 
-const stepFlow: ViewMode[] = ['jerseys', 'shorts', 'socks'];
-
 export function ProductSelection() {
   const { state, dispatch, prevStep } = useTeamBuilder();
   const { sport } = state;
@@ -29,16 +27,41 @@ export function ProductSelection() {
   const handleBack = () => {
     if (viewMode === 'choose') {
       prevStep();
-    } else if (viewMode === 'jerseys') {
+    } else if (viewMode === 'kits' || viewMode === 'jerseys') {
       setViewMode('choose');
     } else if (viewMode === 'shorts') {
       setViewMode('jerseys');
     } else if (viewMode === 'socks') {
       setViewMode('shorts');
-    } else {
-      setViewMode('choose');
     }
   };
+
+  const handleProductSelect = (product: ProductType) => {
+    if (viewMode === 'kits') {
+      // Full kit → go to Design
+      dispatch({ type: 'SET_ORDER_MODE', mode: 'kit' });
+      dispatch({ type: 'SET_PRODUCT', product });
+    } else if (viewMode === 'jerseys') {
+      dispatch({ type: 'SET_INDIVIDUAL_SELECTION', itemType: 'jersey', product });
+      setViewMode('shorts');
+    } else if (viewMode === 'shorts') {
+      dispatch({ type: 'SET_INDIVIDUAL_SELECTION', itemType: 'shorts', product });
+      setViewMode('socks');
+    } else if (viewMode === 'socks') {
+      dispatch({ type: 'SET_INDIVIDUAL_SELECTION', itemType: 'socks', product });
+      dispatch({ type: 'SET_ORDER_MODE', mode: 'individual' });
+      // Use the jersey as the primary product and advance to Design
+      const jersey = state.individualSelections.jersey;
+      if (jersey) {
+        dispatch({ type: 'SET_PRODUCT', product: jersey });
+      } else {
+        dispatch({ type: 'SET_PRODUCT', product });
+      }
+    }
+  };
+
+  const stepIndex = viewMode === 'jerseys' ? 0 : viewMode === 'shorts' ? 1 : viewMode === 'socks' ? 2 : -1;
+  const stepLabels = ['Jersey', 'Shorts', 'Socks'];
 
   const getSubtitle = () => {
     switch (viewMode) {
@@ -50,7 +73,7 @@ export function ProductSelection() {
     }
   };
 
-  const getProductsForView = () => {
+  const getProducts = () => {
     switch (viewMode) {
       case 'kits': return fullKits;
       case 'jerseys': return jerseys;
@@ -102,7 +125,10 @@ export function ProductSelection() {
             </button>
 
             <button
-              onClick={() => setViewMode('jerseys')}
+              onClick={() => {
+                dispatch({ type: 'SET_ORDER_MODE', mode: 'individual' });
+                setViewMode('jerseys');
+              }}
               className="flex-1 group relative rounded-2xl bg-background text-foreground p-8 md:p-10 text-left transition-all hover:shadow-2xl hover:scale-[1.01] border border-border"
             >
               <div className="flex items-center justify-between mb-6">
@@ -120,44 +146,40 @@ export function ProductSelection() {
           </motion.div>
         )}
 
-        {/* Individual step indicator */}
-        {(viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') && (
+        {/* Sequential individual steps & kit grid */}
+        {(viewMode === 'kits' || viewMode === 'jerseys' || viewMode === 'shorts' || viewMode === 'socks') && (
           <motion.div
-            key={`step-${viewMode}`}
+            key={viewMode}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            {/* Mini step bar */}
-            <div className="flex items-center gap-2 mb-8 max-w-xs">
-              {(['jerseys', 'shorts', 'socks'] as const).map((step, i) => (
-                <div key={step} className="flex items-center gap-2 flex-1">
-                  <div className={`h-1 flex-1 rounded-full transition-colors ${
-                    stepFlow.indexOf(viewMode) >= i ? 'bg-foreground' : 'bg-border'
-                  }`} />
-                </div>
-              ))}
-            </div>
+            {/* Mini step progress for individual flow */}
+            {stepIndex >= 0 && (
+              <div className="flex items-center gap-3 mb-8 max-w-sm">
+                {stepLabels.map((label, i) => (
+                  <div key={label} className="flex items-center gap-2 flex-1">
+                    <div className="flex flex-col flex-1 gap-1">
+                      <span className={`text-[10px] font-medium ${
+                        i <= stepIndex ? 'text-foreground' : 'text-muted-foreground/50'
+                      }`}>
+                        {label}
+                      </span>
+                      <div className={`h-1 rounded-full transition-colors ${
+                        i <= stepIndex ? 'bg-foreground' : 'bg-border'
+                      }`} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
-            <ProductGrid products={getProductsForView()} dispatch={dispatch} />
+            <ProductGrid products={getProducts()} onSelect={handleProductSelect} />
           </motion.div>
         )}
 
-        {/* Full Kits Grid */}
-        {viewMode === 'kits' && (
-          <motion.div
-            key="kits"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <ProductGrid products={fullKits} dispatch={dispatch} />
-          </motion.div>
-        )}
-
-        {/* Flat fallback for sports without categories */}
+        {/* Flat fallback */}
         {!hasCategories && viewMode === 'choose' && (
           <motion.div
             key="flat"
@@ -166,7 +188,7 @@ export function ProductSelection() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <ProductGrid products={allProducts} dispatch={dispatch} />
+            <ProductGrid products={allProducts} onSelect={(p) => dispatch({ type: 'SET_PRODUCT', product: p })} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -174,7 +196,7 @@ export function ProductSelection() {
   );
 }
 
-function ProductGrid({ products, dispatch }: { products: ProductType[]; dispatch: any }) {
+function ProductGrid({ products, onSelect }: { products: ProductType[]; onSelect: (p: ProductType) => void }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
       {products.map((product, index) => (
@@ -187,7 +209,7 @@ function ProductGrid({ products, dispatch }: { products: ProductType[]; dispatch
           className="group"
         >
           <button
-            onClick={() => dispatch({ type: 'SET_PRODUCT', product })}
+            onClick={() => onSelect(product)}
             className="w-full text-left"
           >
             <div className="relative bg-muted rounded-xl overflow-hidden aspect-[4/3] mb-2.5 shadow-sm group-hover:shadow-lg transition-all">

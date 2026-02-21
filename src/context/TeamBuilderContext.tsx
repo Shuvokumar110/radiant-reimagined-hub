@@ -57,6 +57,12 @@ export interface TeamBuilderState {
   currentStep: number;
   sport: SportType | null;
   product: ProductType | null;
+  individualSelections: {
+    jersey: ProductType | null;
+    shorts: ProductType | null;
+    socks: ProductType | null;
+  };
+  orderMode: 'kit' | 'individual' | null;
   styleConfig: StyleConfig;
   designConfig: DesignConfig;
   roster: RosterEntry[];
@@ -88,6 +94,8 @@ type TeamBuilderAction =
   | { type: 'SET_STEP'; step: number }
   | { type: 'SET_SPORT'; sport: SportType }
   | { type: 'SET_PRODUCT'; product: ProductType }
+  | { type: 'SET_ORDER_MODE'; mode: 'kit' | 'individual' }
+  | { type: 'SET_INDIVIDUAL_SELECTION'; itemType: 'jersey' | 'shorts' | 'socks'; product: ProductType }
   | { type: 'SET_STYLE_CONFIG'; config: Partial<StyleConfig> }
   | { type: 'SET_DESIGN_CONFIG'; config: Partial<DesignConfig> }
   | { type: 'ADD_ROSTER_ENTRY'; entry: RosterEntry }
@@ -109,6 +117,8 @@ const initialState: TeamBuilderState = {
   currentStep: 0,
   sport: null,
   product: null,
+  individualSelections: { jersey: null, shorts: null, socks: null },
+  orderMode: null,
   styleConfig: {
     gender: 'Unisex',
     fit: 'Athletic',
@@ -176,10 +186,17 @@ function teamBuilderReducer(state: TeamBuilderState, action: TeamBuilderAction):
       return { ...state, currentStep: action.step };
     case 'SET_SPORT':
       // Step 0 → Step 1 (Product)
-      return { ...state, sport: action.sport, product: null, currentStep: 1 };
+      return { ...state, sport: action.sport, product: null, individualSelections: { jersey: null, shorts: null, socks: null }, orderMode: null, currentStep: 1 };
     case 'SET_PRODUCT':
-      // Step 1 → Step 2 (Design)
+      // Step 1 → Step 2 (Design) — used for full kit selection
       return { ...state, product: action.product, currentStep: 2 };
+    case 'SET_ORDER_MODE':
+      return { ...state, orderMode: action.mode };
+    case 'SET_INDIVIDUAL_SELECTION':
+      return {
+        ...state,
+        individualSelections: { ...state.individualSelections, [action.itemType]: action.product },
+      };
     case 'SET_STYLE_CONFIG':
       return { ...state, styleConfig: { ...state.styleConfig, ...action.config } };
     case 'SET_DESIGN_CONFIG':
