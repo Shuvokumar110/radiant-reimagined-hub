@@ -10,13 +10,9 @@ import sportBusiness from "@/assets/team-builder/sport-business.jpg";
 
 // Product images - Soccer
 import soccerJerseyShort from "@/assets/products/soccer-jersey-short-new.png";
-import soccerJerseyLong from "@/assets/products/soccer-jersey-long.jpg";
 import soccerShorts from "@/assets/products/soccer-shorts-new.png";
 import soccerSocks from "@/assets/products/soccer-socks-new.png";
 import soccerFullKit from "@/assets/products/soccer-full-kit-new.png";
-import soccerWarmupHoodie from "@/assets/products/soccer-warmup-hoodie.jpg";
-import soccerWarmupJacket from "@/assets/products/soccer-warmup-jacket.jpg";
-import soccerWarmupPants from "@/assets/products/soccer-warmup-pants.jpg";
 
 // Product images - Basketball
 import basketballJersey from "@/assets/products/basketball-jersey.jpg";
@@ -100,13 +96,9 @@ export const sportCategories: SportCategory[] = [
 export const productsBySport: Record<SportType, ProductType[]> = {
   soccer: [
     { id: 'soccer-jersey-short', name: 'Jersey (Short Sleeve)', shortDescription: 'Competition-ready short sleeve jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-jersey-long', name: 'Jersey (Long Sleeve)', shortDescription: 'Performance long sleeve jersey', basePrice: 40, image: soccerJerseyLong, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-shorts', name: 'Shorts', shortDescription: 'Lightweight athletic shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'soccer-socks', name: 'Socks', shortDescription: 'Pro-grade team socks', basePrice: 12, image: soccerSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
     { id: 'soccer-full-kit', name: 'Full Kit Bundle', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: soccerFullKit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-warmup-hoodie', name: 'Warmup Hoodie', shortDescription: 'Team warmup hoodie', basePrice: 55, image: soccerWarmupHoodie, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-warmup-jacket', name: 'Warmup Jacket', shortDescription: 'Lightweight training jacket', basePrice: 60, image: soccerWarmupJacket, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'soccer-warmup-pants', name: 'Warmup Pants', shortDescription: 'Athletic training pants', basePrice: 45, image: soccerWarmupPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   basketball: [
     { id: 'basketball-jersey', name: 'Jersey', shortDescription: 'Reversible game jersey', basePrice: 40, image: basketballJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
@@ -133,7 +125,7 @@ export const productsBySport: Record<SportType, ProductType[]> = {
   volleyball: [
     { id: 'volleyball-jersey', name: 'Jersey', shortDescription: 'Performance volleyball jersey', basePrice: 35, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
     { id: 'volleyball-shorts', name: 'Shorts', shortDescription: 'Athletic volleyball shorts', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'volleyball-warmup', name: 'Warmup Jacket', shortDescription: 'Team warmup jacket', basePrice: 55, image: soccerWarmupJacket, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    { id: 'volleyball-warmup', name: 'Warmup Jacket', shortDescription: 'Team warmup jacket', basePrice: 55, image: soccerJerseyShort, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
   ],
   netball: [
     { id: 'netball-dress', name: 'Netball Dress', shortDescription: 'Performance netball dress', basePrice: 45, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
