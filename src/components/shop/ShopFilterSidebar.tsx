@@ -28,19 +28,13 @@ const allTags = [
   "Made in Italy",
   "Kangaroo Leather",
   "Calf Leather",
-  "Custom",
-  "Team Uniform",
-  "Full Kit",
   "Special Edition",
   "Limited",
-  "Basketball",
 ];
 
 const allMaterials = [
   "Kangaroo Leather",
   "Calf Leather",
-  "100% Polyester",
-  "100% Polyester Mesh",
 ];
 
 function FilterSection({
