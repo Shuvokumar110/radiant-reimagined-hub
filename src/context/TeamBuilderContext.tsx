@@ -180,7 +180,14 @@ const initialState: TeamBuilderState = {
     playerNameUppercase: true,
     playerNamePlacement: 'back_top',
   },
-  roster: [],
+  roster: Array.from({ length: 10 }, (_, i) => ({
+    id: `initial-${i}`,
+    playerName: '',
+    jerseyNumber: '',
+    size: 'M',
+    quantity: 1,
+    notes: '',
+  })),
   shippingAddress: {
     name: '',
     address: '',

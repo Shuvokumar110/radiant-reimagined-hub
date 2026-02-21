@@ -30,7 +30,7 @@ import { useTeamBuilder, RosterEntry } from "@/context/TeamBuilderContext";
 import { sizeOptions } from "@/data/teamBuilderData";
 import { TeamInfoForm } from "./TeamInfoForm";
 
-const MIN_ORDER_QTY = 18;
+const MIN_ORDER_QTY = 10;
 
 export function RosterBuilder() {
   const { state, dispatch, nextStep, prevStep, calculateTotal } = useTeamBuilder();
