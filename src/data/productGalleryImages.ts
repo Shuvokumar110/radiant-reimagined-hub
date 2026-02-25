@@ -137,7 +137,7 @@ export interface GalleryImage {
 
 // Helper to extract style number from product ID (e.g., "vol-kit-100" → "100")
 function extractStyleNumber(productId: string): string | null {
-  const match = productId.match(/(\d{3})/);
+  const match = productId.match(/(\d{3,4})/);
   return match ? match[1] : null;
 }
 
@@ -294,9 +294,144 @@ const basketballGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+// Cricket styles 100-1000
+import cric100Kit from "@/assets/products/cricket/cric-100-kit.png";
+import cric100JerseyFront from "@/assets/products/cricket/cric-100-jersey-front.png";
+import cric100JerseyBack from "@/assets/products/cricket/cric-100-jersey-back.png";
+import cric100PantsFront from "@/assets/products/cricket/cric-100-pants-front.png";
+import cric100PantsBack from "@/assets/products/cricket/cric-100-pants-back.png";
+
+import cric200Kit from "@/assets/products/cricket/cric-200-kit.png";
+import cric200JerseyFront from "@/assets/products/cricket/cric-200-jersey-front.png";
+import cric200JerseyBack from "@/assets/products/cricket/cric-200-jersey-back.png";
+import cric200PantsFront from "@/assets/products/cricket/cric-200-pants-front.png";
+import cric200PantsBack from "@/assets/products/cricket/cric-200-pants-back.png";
+
+import cric300Kit from "@/assets/products/cricket/cric-300-kit.png";
+import cric300JerseyFront from "@/assets/products/cricket/cric-300-jersey-front.png";
+import cric300JerseyBack from "@/assets/products/cricket/cric-300-jersey-back.png";
+import cric300PantsFront from "@/assets/products/cricket/cric-300-pants-front.png";
+import cric300PantsBack from "@/assets/products/cricket/cric-300-pants-back.png";
+
+import cric400Kit from "@/assets/products/cricket/cric-400-kit.png";
+import cric400JerseyFront from "@/assets/products/cricket/cric-400-jersey-front.png";
+import cric400JerseyBack from "@/assets/products/cricket/cric-400-jersey-back.png";
+import cric400PantsFront from "@/assets/products/cricket/cric-400-pants-front.png";
+import cric400PantsBack from "@/assets/products/cricket/cric-400-pants-back.png";
+
+import cric500Kit from "@/assets/products/cricket/cric-500-kit.png";
+import cric500JerseyFront from "@/assets/products/cricket/cric-500-jersey-front.png";
+import cric500JerseyBack from "@/assets/products/cricket/cric-500-jersey-back.png";
+import cric500PantsFront from "@/assets/products/cricket/cric-500-pants-front.png";
+import cric500PantsBack from "@/assets/products/cricket/cric-500-pants-back.png";
+
+import cric600Kit from "@/assets/products/cricket/cric-600-kit.png";
+import cric600JerseyFront from "@/assets/products/cricket/cric-600-jersey-front.png";
+import cric600JerseyBack from "@/assets/products/cricket/cric-600-jersey-back.png";
+import cric600PantsFront from "@/assets/products/cricket/cric-600-pants-front.png";
+import cric600PantsBack from "@/assets/products/cricket/cric-600-pants-back.png";
+
+import cric700Kit from "@/assets/products/cricket/cric-700-kit.png";
+import cric700JerseyFront from "@/assets/products/cricket/cric-700-jersey-front.png";
+import cric700JerseyBack from "@/assets/products/cricket/cric-700-jersey-back.png";
+import cric700PantsFront from "@/assets/products/cricket/cric-700-pants-front.png";
+import cric700PantsBack from "@/assets/products/cricket/cric-700-pants-back.png";
+
+import cric800Kit from "@/assets/products/cricket/cric-800-kit.png";
+import cric800JerseyFront from "@/assets/products/cricket/cric-800-jersey-front.png";
+import cric800JerseyBack from "@/assets/products/cricket/cric-800-jersey-back.png";
+import cric800PantsFront from "@/assets/products/cricket/cric-800-pants-front.png";
+import cric800PantsBack from "@/assets/products/cricket/cric-800-pants-back.png";
+
+import cric900Kit from "@/assets/products/cricket/cric-900-kit.png";
+import cric900JerseyFront from "@/assets/products/cricket/cric-900-jersey-front.png";
+import cric900JerseyBack from "@/assets/products/cricket/cric-900-jersey-back.png";
+import cric900PantsFront from "@/assets/products/cricket/cric-900-pants-front.png";
+import cric900PantsBack from "@/assets/products/cricket/cric-900-pants-back.png";
+
+import cric1000Kit from "@/assets/products/cricket/cric-1000-kit.png";
+import cric1000JerseyFront from "@/assets/products/cricket/cric-1000-jersey-front.png";
+import cric1000JerseyBack from "@/assets/products/cricket/cric-1000-jersey-back.png";
+import cric1000PantsFront from "@/assets/products/cricket/cric-1000-pants-front.png";
+import cric1000PantsBack from "@/assets/products/cricket/cric-1000-pants-back.png";
+
+const cricketGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: cric100Kit },
+    { label: 'Jersey Front', image: cric100JerseyFront },
+    { label: 'Jersey Back', image: cric100JerseyBack },
+    { label: 'Pants Front', image: cric100PantsFront },
+    { label: 'Pants Back', image: cric100PantsBack },
+  ],
+  '200': [
+    { label: 'Full Kit', image: cric200Kit },
+    { label: 'Jersey Front', image: cric200JerseyFront },
+    { label: 'Jersey Back', image: cric200JerseyBack },
+    { label: 'Pants Front', image: cric200PantsFront },
+    { label: 'Pants Back', image: cric200PantsBack },
+  ],
+  '300': [
+    { label: 'Full Kit', image: cric300Kit },
+    { label: 'Jersey Front', image: cric300JerseyFront },
+    { label: 'Jersey Back', image: cric300JerseyBack },
+    { label: 'Pants Front', image: cric300PantsFront },
+    { label: 'Pants Back', image: cric300PantsBack },
+  ],
+  '400': [
+    { label: 'Full Kit', image: cric400Kit },
+    { label: 'Jersey Front', image: cric400JerseyFront },
+    { label: 'Jersey Back', image: cric400JerseyBack },
+    { label: 'Pants Front', image: cric400PantsFront },
+    { label: 'Pants Back', image: cric400PantsBack },
+  ],
+  '500': [
+    { label: 'Full Kit', image: cric500Kit },
+    { label: 'Jersey Front', image: cric500JerseyFront },
+    { label: 'Jersey Back', image: cric500JerseyBack },
+    { label: 'Pants Front', image: cric500PantsFront },
+    { label: 'Pants Back', image: cric500PantsBack },
+  ],
+  '600': [
+    { label: 'Full Kit', image: cric600Kit },
+    { label: 'Jersey Front', image: cric600JerseyFront },
+    { label: 'Jersey Back', image: cric600JerseyBack },
+    { label: 'Pants Front', image: cric600PantsFront },
+    { label: 'Pants Back', image: cric600PantsBack },
+  ],
+  '700': [
+    { label: 'Full Kit', image: cric700Kit },
+    { label: 'Jersey Front', image: cric700JerseyFront },
+    { label: 'Jersey Back', image: cric700JerseyBack },
+    { label: 'Pants Front', image: cric700PantsFront },
+    { label: 'Pants Back', image: cric700PantsBack },
+  ],
+  '800': [
+    { label: 'Full Kit', image: cric800Kit },
+    { label: 'Jersey Front', image: cric800JerseyFront },
+    { label: 'Jersey Back', image: cric800JerseyBack },
+    { label: 'Pants Front', image: cric800PantsFront },
+    { label: 'Pants Back', image: cric800PantsBack },
+  ],
+  '900': [
+    { label: 'Full Kit', image: cric900Kit },
+    { label: 'Jersey Front', image: cric900JerseyFront },
+    { label: 'Jersey Back', image: cric900JerseyBack },
+    { label: 'Pants Front', image: cric900PantsFront },
+    { label: 'Pants Back', image: cric900PantsBack },
+  ],
+  '1000': [
+    { label: 'Full Kit', image: cric1000Kit },
+    { label: 'Jersey Front', image: cric1000JerseyFront },
+    { label: 'Jersey Back', image: cric1000JerseyBack },
+    { label: 'Pants Front', image: cric1000PantsFront },
+    { label: 'Pants Back', image: cric1000PantsBack },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
+  cricket: cricketGallery,
 };
 
 /**

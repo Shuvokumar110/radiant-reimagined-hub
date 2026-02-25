@@ -161,11 +161,37 @@ import trackCompression from "@/assets/products/track-compression.jpg";
 import trackWarmups from "@/assets/products/track-warmups.jpg";
 import trackTees from "@/assets/products/track-tees.jpg";
 
-// Product images - Cricket
-import cricketJersey from "@/assets/products/cricket-jersey.jpg";
-import cricketPants from "@/assets/products/cricket-pants.jpg";
-import cricketTraining from "@/assets/products/cricket-training.jpg";
-import cricketSweater from "@/assets/products/cricket-sweater.jpg";
+// Product images - Cricket (10 styles: 100-1000)
+import cric100Kit from "@/assets/products/cricket/cric-100-kit.png";
+import cric100JerseyFront from "@/assets/products/cricket/cric-100-jersey-front.png";
+import cric100PantsFront from "@/assets/products/cricket/cric-100-pants-front.png";
+import cric200Kit from "@/assets/products/cricket/cric-200-kit.png";
+import cric200JerseyFront from "@/assets/products/cricket/cric-200-jersey-front.png";
+import cric200PantsFront from "@/assets/products/cricket/cric-200-pants-front.png";
+import cric300Kit from "@/assets/products/cricket/cric-300-kit.png";
+import cric300JerseyFront from "@/assets/products/cricket/cric-300-jersey-front.png";
+import cric300PantsFront from "@/assets/products/cricket/cric-300-pants-front.png";
+import cric400Kit from "@/assets/products/cricket/cric-400-kit.png";
+import cric400JerseyFront from "@/assets/products/cricket/cric-400-jersey-front.png";
+import cric400PantsFront from "@/assets/products/cricket/cric-400-pants-front.png";
+import cric500Kit from "@/assets/products/cricket/cric-500-kit.png";
+import cric500JerseyFront from "@/assets/products/cricket/cric-500-jersey-front.png";
+import cric500PantsFront from "@/assets/products/cricket/cric-500-pants-front.png";
+import cric600Kit from "@/assets/products/cricket/cric-600-kit.png";
+import cric600JerseyFront from "@/assets/products/cricket/cric-600-jersey-front.png";
+import cric600PantsFront from "@/assets/products/cricket/cric-600-pants-front.png";
+import cric700Kit from "@/assets/products/cricket/cric-700-kit.png";
+import cric700JerseyFront from "@/assets/products/cricket/cric-700-jersey-front.png";
+import cric700PantsFront from "@/assets/products/cricket/cric-700-pants-front.png";
+import cric800Kit from "@/assets/products/cricket/cric-800-kit.png";
+import cric800JerseyFront from "@/assets/products/cricket/cric-800-jersey-front.png";
+import cric800PantsFront from "@/assets/products/cricket/cric-800-pants-front.png";
+import cric900Kit from "@/assets/products/cricket/cric-900-kit.png";
+import cric900JerseyFront from "@/assets/products/cricket/cric-900-jersey-front.png";
+import cric900PantsFront from "@/assets/products/cricket/cric-900-pants-front.png";
+import cric1000Kit from "@/assets/products/cricket/cric-1000-kit.png";
+import cric1000JerseyFront from "@/assets/products/cricket/cric-1000-jersey-front.png";
+import cric1000PantsFront from "@/assets/products/cricket/cric-1000-pants-front.png";
 
 // Product images - Business
 import businessPolo from "@/assets/products/business-polo.jpg";
@@ -378,10 +404,41 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'netball-skirt', name: 'Skirt', shortDescription: 'Athletic netball skirt', basePrice: 25, image: soccerShorts, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
   cricket: [
-    { id: 'cricket-jersey', name: 'Cricket Jersey', shortDescription: 'Performance cricket jersey', basePrice: 45, image: cricketJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'cricket-pants', name: 'Pants', shortDescription: 'Traditional cricket pants', basePrice: 40, image: cricketPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'cricket-training', name: 'Training Kit', shortDescription: 'Practice and training gear', basePrice: 55, image: cricketTraining, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
-    { id: 'cricket-sweater', name: 'Sweater/Warmup', shortDescription: 'Classic cricket sweater', basePrice: 65, image: cricketSweater, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    // Full Kits (Jersey + Pants)
+    { id: 'cric-kit-100', name: 'Full Kit (Style 100)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-200', name: 'Full Kit (Style 200)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-300', name: 'Full Kit (Style 300)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-400', name: 'Full Kit (Style 400)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-500', name: 'Full Kit (Style 500)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-600', name: 'Full Kit (Style 600)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-700', name: 'Full Kit (Style 700)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-800', name: 'Full Kit (Style 800)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-900', name: 'Full Kit (Style 900)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric900Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'cric-kit-1000', name: 'Full Kit (Style 1000)', shortDescription: 'Jersey + Pants', basePrice: 75, image: cric1000Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+
+    // Jerseys
+    { id: 'cric-jersey-100', name: 'Jersey (Style 100)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric100JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-200', name: 'Jersey (Style 200)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric200JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-300', name: 'Jersey (Style 300)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric300JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-400', name: 'Jersey (Style 400)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric400JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-500', name: 'Jersey (Style 500)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric500JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-600', name: 'Jersey (Style 600)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric600JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-700', name: 'Jersey (Style 700)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric700JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-800', name: 'Jersey (Style 800)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric800JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-900', name: 'Jersey (Style 900)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric900JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'cric-jersey-1000', name: 'Jersey (Style 1000)', shortDescription: 'Sublimated cricket jersey', basePrice: 45, image: cric1000JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+
+    // Pants
+    { id: 'cric-pants-100', name: 'Pants (Style 100)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric100PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-200', name: 'Pants (Style 200)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric200PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-300', name: 'Pants (Style 300)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric300PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-400', name: 'Pants (Style 400)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric400PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-500', name: 'Pants (Style 500)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric500PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-600', name: 'Pants (Style 600)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric600PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-700', name: 'Pants (Style 700)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric700PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-800', name: 'Pants (Style 800)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric800PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-900', name: 'Pants (Style 900)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric900PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'cric-pants-1000', name: 'Pants (Style 1000)', shortDescription: 'Sublimated cricket pants', basePrice: 40, image: cric1000PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
   ],
   business: [
     { id: 'business-polo', name: 'Polo Shirts', shortDescription: 'Professional polo shirts', basePrice: 35, image: businessPolo, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
