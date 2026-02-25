@@ -92,7 +92,7 @@ import bask900Socks from "@/assets/products/basketball/bask-900-socks.png";
 import basketballShootingShirt from "@/assets/products/basketball-shooting-shirt.jpg";
 import basketballWarmup from "@/assets/products/basketball-warmup.jpg";
 
-// Product images - Volleyball (6 styles: 100-600)
+// Product images - Volleyball (8 styles: 100-800)
 import vol100Kit from "@/assets/products/volleyball/vol-100-kit.png";
 import vol100JerseyFront from "@/assets/products/volleyball/vol-100-jersey-front.png";
 import vol100MensJerseyFront from "@/assets/products/volleyball/vol-100-mens-jersey-front.png";
@@ -121,8 +121,14 @@ import vol500Socks from "@/assets/products/volleyball/vol-500-socks.png";
 import vol600Kit from "@/assets/products/volleyball/vol-600-kit.png";
 import vol600JerseyFront from "@/assets/products/volleyball/vol-600-jersey-front.png";
 import vol600MensJerseyFront from "@/assets/products/volleyball/vol-600-mens-jersey-front.png";
-import vol600ShortsFront from "@/assets/products/volleyball/vol-600-shorts-back.png";
-import vol600Socks from "@/assets/products/volleyball/vol-200-socks.png"; // fallback - no 600 socks yet
+import vol600ShortsFront from "@/assets/products/volleyball/vol-600-shorts-front.png";
+import vol600Socks from "@/assets/products/volleyball/vol-600-socks.png";
+import vol700Kit from "@/assets/products/volleyball/vol-700-kit.png";
+import vol700JerseyFront from "@/assets/products/volleyball/vol-700-jersey-front.png";
+import vol700MensJerseyFront from "@/assets/products/volleyball/vol-700-mens-jersey-front.png";
+import vol700ShortsFront from "@/assets/products/volleyball/vol-700-shorts-front.png";
+import vol700Socks from "@/assets/products/volleyball/vol-700-socks.png";
+import vol800Kit from "@/assets/products/volleyball/vol-800-kit.png";
 
 // Product images - American Football
 import footballGameJersey from "@/assets/products/football-game-jersey.jpg";
@@ -314,6 +320,8 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'vol-kit-400', name: 'Full Kit (Style 400)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: vol400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'vol-kit-500', name: 'Full Kit (Style 500)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: vol500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'vol-kit-600', name: 'Full Kit (Style 600)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: vol600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'vol-kit-700', name: 'Full Kit (Style 700)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: vol700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'vol-kit-800', name: 'Full Kit (Style 800)', shortDescription: 'Jersey + Shorts + Socks', basePrice: 65, image: vol800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     // Jerseys
     { id: 'vol-jersey-100-w', name: 'Jersey Women (Style 100)', shortDescription: 'Women\'s V-neck volleyball jersey', basePrice: 35, image: vol100JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
     { id: 'vol-jersey-100-m', name: 'Jersey Men (Style 100)', shortDescription: 'Men\'s V-neck volleyball jersey', basePrice: 35, image: vol100MensJerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
@@ -327,6 +335,8 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'vol-jersey-500-m', name: 'Jersey Men (Style 500)', shortDescription: 'Men\'s V-neck dynamic design jersey', basePrice: 35, image: vol500MensJerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
     { id: 'vol-jersey-600-w', name: 'Jersey Women (Style 600)', shortDescription: 'Women\'s V-neck geometric design jersey', basePrice: 35, image: vol600JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
     { id: 'vol-jersey-600-m', name: 'Jersey Men (Style 600)', shortDescription: 'Men\'s V-neck geometric design jersey', basePrice: 35, image: vol600MensJerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'vol-jersey-700-w', name: 'Jersey Women (Style 700)', shortDescription: 'Women\'s V-neck accent design jersey', basePrice: 35, image: vol700JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'vol-jersey-700-m', name: 'Jersey Men (Style 700)', shortDescription: 'Men\'s V-neck accent design jersey', basePrice: 35, image: vol700MensJerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
     // Shorts
     { id: 'vol-shorts-100', name: 'Shorts (Style 100)', shortDescription: 'Athletic volleyball shorts', basePrice: 25, image: vol100ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
     { id: 'vol-shorts-200', name: 'Shorts (Style 200)', shortDescription: 'Wave design volleyball shorts', basePrice: 25, image: vol200ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
@@ -334,6 +344,7 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'vol-shorts-400', name: 'Shorts (Style 400)', shortDescription: 'Stripe design volleyball shorts', basePrice: 25, image: vol400ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
     { id: 'vol-shorts-500', name: 'Shorts (Style 500)', shortDescription: 'Dynamic design volleyball shorts', basePrice: 25, image: vol500ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
     { id: 'vol-shorts-600', name: 'Shorts (Style 600)', shortDescription: 'Geometric design volleyball shorts', basePrice: 25, image: vol600ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'vol-shorts-700', name: 'Shorts (Style 700)', shortDescription: 'Accent design volleyball shorts', basePrice: 25, image: vol700ShortsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
     // Socks
     { id: 'vol-socks-100', name: 'Socks (Style 100)', shortDescription: 'Pro-grade volleyball socks', basePrice: 12, image: vol100Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
     { id: 'vol-socks-200', name: 'Socks (Style 200)', shortDescription: 'Wave design volleyball socks', basePrice: 12, image: vol200Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
@@ -341,6 +352,7 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'vol-socks-400', name: 'Socks (Style 400)', shortDescription: 'Stripe design volleyball socks', basePrice: 12, image: vol400Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
     { id: 'vol-socks-500', name: 'Socks (Style 500)', shortDescription: 'Dynamic design volleyball socks', basePrice: 12, image: vol500Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
     { id: 'vol-socks-600', name: 'Socks (Style 600)', shortDescription: 'Geometric design volleyball socks', basePrice: 12, image: vol600Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'vol-socks-700', name: 'Socks (Style 700)', shortDescription: 'Accent design volleyball socks', basePrice: 12, image: vol700Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
   ],
   netball: [
     { id: 'netball-dress', name: 'Netball Dress', shortDescription: 'Performance netball dress', basePrice: 45, image: soccerJerseyShort, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
