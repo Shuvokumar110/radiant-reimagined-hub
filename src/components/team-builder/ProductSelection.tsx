@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Clock, Zap, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Zap, Users, Images, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTeamBuilder } from "@/context/TeamBuilderContext";
 import { productsBySport, sportCategories, ProductType } from "@/data/teamBuilderData";
+import { getProductGalleryImages, GalleryImage } from "@/data/productGalleryImages";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 type ViewMode = 'choose' | 'kits' | 'jerseys' | 'shorts' | 'socks';
 
@@ -38,7 +45,6 @@ export function ProductSelection() {
 
   const handleProductSelect = (product: ProductType) => {
     if (viewMode === 'kits') {
-      // Full kit → go to Design
       dispatch({ type: 'SET_ORDER_MODE', mode: 'kit' });
       dispatch({ type: 'SET_PRODUCT', product });
     } else if (viewMode === 'jerseys') {
@@ -50,7 +56,6 @@ export function ProductSelection() {
     } else if (viewMode === 'socks') {
       dispatch({ type: 'SET_INDIVIDUAL_SELECTION', itemType: 'socks', product });
       dispatch({ type: 'SET_ORDER_MODE', mode: 'individual' });
-      // Use the jersey as the primary product and advance to Design
       const jersey = state.individualSelections.jersey;
       if (jersey) {
         dispatch({ type: 'SET_PRODUCT', product: jersey });
@@ -175,7 +180,7 @@ export function ProductSelection() {
               </div>
             )}
 
-            <ProductGrid products={getProducts()} onSelect={handleProductSelect} />
+            <ProductGrid products={getProducts()} onSelect={handleProductSelect} sport={sport} />
           </motion.div>
         )}
 
@@ -188,7 +193,7 @@ export function ProductSelection() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <ProductGrid products={allProducts} onSelect={(p) => dispatch({ type: 'SET_PRODUCT', product: p })} />
+            <ProductGrid products={allProducts} onSelect={(p) => dispatch({ type: 'SET_PRODUCT', product: p })} sport={sport} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -196,66 +201,206 @@ export function ProductSelection() {
   );
 }
 
-function ProductGrid({ products, onSelect }: { products: ProductType[]; onSelect: (p: ProductType) => void }) {
+function ProductGrid({ products, onSelect, sport }: { products: ProductType[]; onSelect: (p: ProductType) => void; sport: string }) {
+  const [galleryProduct, setGalleryProduct] = useState<{ product: ProductType; images: GalleryImage[] } | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const openGallery = (e: React.MouseEvent, product: ProductType) => {
+    e.stopPropagation();
+    const images = getProductGalleryImages(product.id, sport);
+    if (images.length > 0) {
+      setGalleryProduct({ product, images });
+      setActiveImageIndex(0);
+    }
+  };
+
+  const closeGallery = () => {
+    setGalleryProduct(null);
+    setActiveImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (galleryProduct) {
+      setActiveImageIndex((prev) => (prev + 1) % galleryProduct.images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (galleryProduct) {
+      setActiveImageIndex((prev) => (prev - 1 + galleryProduct.images.length) % galleryProduct.images.length);
+    }
+  };
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
-      {products.map((product, index) => (
-        <motion.div
-          key={product.id}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.04 * Math.min(index, 8) }}
-          whileHover={{ y: -3 }}
-          className="group"
-        >
-          <button
-            onClick={() => onSelect(product)}
-            className="w-full text-left"
-          >
-            <div className="relative bg-muted rounded-xl overflow-hidden aspect-[4/3] mb-2.5 shadow-sm group-hover:shadow-lg transition-all">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                <Badge variant="secondary" className="bg-background/90 text-foreground text-[10px] px-1.5 py-0.5">
-                  {product.fabricType}
-                </Badge>
-                <Badge
-                  variant="secondary"
-                  className={`text-[10px] px-1.5 py-0.5 ${
-                    product.leadTime === 'Rush'
-                      ? 'bg-yellow-500/90 text-black'
-                      : 'bg-background/90 text-foreground'
-                  }`}
-                >
-                  {product.leadTime === 'Rush' ? (
-                    <><Zap className="w-2.5 h-2.5 mr-0.5" /> Rush</>
-                  ) : (
-                    <><Clock className="w-2.5 h-2.5 mr-0.5" /> Std</>
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+        {products.map((product, index) => {
+          const galleryImages = getProductGalleryImages(product.id, sport);
+          const hasGallery = galleryImages.length > 1;
+
+          return (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.04 * Math.min(index, 8) }}
+              whileHover={{ y: -3 }}
+              className="group"
+            >
+              <button
+                onClick={() => onSelect(product)}
+                className="w-full text-left"
+              >
+                <div className="relative bg-muted rounded-xl overflow-hidden aspect-[4/3] mb-2.5 shadow-sm group-hover:shadow-lg transition-all">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                    <Badge variant="secondary" className="bg-background/90 text-foreground text-[10px] px-1.5 py-0.5">
+                      {product.fabricType}
+                    </Badge>
+                    <Badge
+                      variant="secondary"
+                      className={`text-[10px] px-1.5 py-0.5 ${
+                        product.leadTime === 'Rush'
+                          ? 'bg-yellow-500/90 text-black'
+                          : 'bg-background/90 text-foreground'
+                      }`}
+                    >
+                      {product.leadTime === 'Rush' ? (
+                        <><Zap className="w-2.5 h-2.5 mr-0.5" /> Rush</>
+                      ) : (
+                        <><Clock className="w-2.5 h-2.5 mr-0.5" /> Std</>
+                      )}
+                    </Badge>
+                  </div>
+                  <div className="absolute bottom-2 right-2">
+                    <span className="px-2 py-1 bg-background rounded-full text-[11px] font-semibold">
+                      ${product.basePrice}/ea
+                    </span>
+                  </div>
+                  {/* View All Images button */}
+                  {hasGallery && (
+                    <div
+                      className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={(e) => openGallery(e, product)}
+                    >
+                      <span className="inline-flex items-center gap-1 px-2 py-1 bg-foreground/80 text-background rounded-full text-[10px] font-medium cursor-pointer hover:bg-foreground transition-colors">
+                        <Images className="w-3 h-3" />
+                        {galleryImages.length} Views
+                      </span>
+                    </div>
                   )}
-                </Badge>
+                </div>
+                <h3 className="text-sm font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
+                  {product.name}
+                </h3>
+                <p className="text-xs text-muted-foreground line-clamp-1">
+                  {product.shortDescription}
+                </p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="flex items-center gap-1">
+                    <Users className="w-3 h-3 text-muted-foreground" />
+                    <span className="text-[10px] text-muted-foreground">Min. {product.moq} units</span>
+                  </div>
+                  {hasGallery && (
+                    <span
+                      className="text-[10px] text-primary underline cursor-pointer hover:text-primary/80 md:hidden"
+                      onClick={(e) => openGallery(e, product)}
+                    >
+                      View all images
+                    </span>
+                  )}
+                </div>
+              </button>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Gallery Modal */}
+      <Dialog open={!!galleryProduct} onOpenChange={(open) => !open && closeGallery()}>
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 gap-0 overflow-hidden">
+          <DialogHeader className="p-4 pb-2 border-b border-border">
+            <DialogTitle className="text-lg font-bold">
+              {galleryProduct?.product.name} — All Views
+            </DialogTitle>
+          </DialogHeader>
+
+          {galleryProduct && (
+            <div className="flex flex-col md:flex-row h-full min-h-0">
+              {/* Main Image */}
+              <div className="flex-1 relative bg-muted flex items-center justify-center p-4 min-h-[300px] md:min-h-[400px]">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeImageIndex}
+                    src={galleryProduct.images[activeImageIndex].image}
+                    alt={galleryProduct.images[activeImageIndex].label}
+                    className="max-w-full max-h-[50vh] md:max-h-[60vh] object-contain"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </AnimatePresence>
+
+                {/* Navigation arrows */}
+                {galleryProduct.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 hover:bg-background flex items-center justify-center shadow-md transition-colors"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 hover:bg-background flex items-center justify-center shadow-md transition-colors"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+
+                {/* Active label */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                  <span className="px-3 py-1.5 bg-foreground/80 text-background text-xs font-medium rounded-full">
+                    {galleryProduct.images[activeImageIndex].label}
+                  </span>
+                </div>
               </div>
-              <div className="absolute bottom-2 right-2">
-                <span className="px-2 py-1 bg-background rounded-full text-[11px] font-semibold">
-                  ${product.basePrice}/ea
-                </span>
+
+              {/* Thumbnail strip */}
+              <div className="md:w-48 border-t md:border-t-0 md:border-l border-border bg-background p-3 overflow-y-auto">
+                <div className="grid grid-cols-4 md:grid-cols-2 gap-2">
+                  {galleryProduct.images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImageIndex(i)}
+                      className={`relative rounded-lg overflow-hidden aspect-square border-2 transition-all ${
+                        i === activeImageIndex
+                          ? 'border-primary ring-1 ring-primary'
+                          : 'border-transparent hover:border-border'
+                      }`}
+                    >
+                      <img
+                        src={img.image}
+                        alt={img.label}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute bottom-0 left-0 right-0 bg-foreground/70 text-background text-[8px] text-center py-0.5 leading-tight">
+                        {img.label}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-            <h3 className="text-sm font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
-              {product.name}
-            </h3>
-            <p className="text-xs text-muted-foreground line-clamp-1">
-              {product.shortDescription}
-            </p>
-            <div className="flex items-center gap-1 mt-1">
-              <Users className="w-3 h-3 text-muted-foreground" />
-              <span className="text-[10px] text-muted-foreground">Min. {product.moq} units</span>
-            </div>
-          </button>
-        </motion.div>
-      ))}
-    </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
