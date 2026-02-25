@@ -284,12 +284,12 @@ function ProductGrid({ products, onSelect, sport }: { products: ProductType[]; o
                   {/* View All Images button */}
                   {hasGallery && (
                     <div
-                      className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute bottom-2 left-2"
                       onClick={(e) => openGallery(e, product)}
                     >
                       <span className="inline-flex items-center gap-1 px-2 py-1 bg-foreground/80 text-background rounded-full text-[10px] font-medium cursor-pointer hover:bg-foreground transition-colors">
                         <Images className="w-3 h-3" />
-                        {galleryImages.length} Views
+                        View All Images
                       </span>
                     </div>
                   )}
