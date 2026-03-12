@@ -230,6 +230,24 @@ import businessWorkShirts from "@/assets/products/business-work-shirts.jpg";
 import businessJackets from "@/assets/products/business-jackets.jpg";
 import businessCaps from "@/assets/products/business-caps.jpg";
 
+// Product images - Training Suits (Tracksuits) styles 100-800
+import tsuit100Kit from "@/assets/products/tracksuit/tsuit-100-kit.png";
+import tsuit100JacketFront from "@/assets/products/tracksuit/tsuit-100-jacket-front.png";
+import tsuit200Kit from "@/assets/products/tracksuit/tsuit-200-kit.png";
+import tsuit200JacketFront from "@/assets/products/tracksuit/tsuit-200-jacket-front.png";
+import tsuit300Kit from "@/assets/products/tracksuit/tsuit-300-kit.png";
+import tsuit300JacketFront from "@/assets/products/tracksuit/tsuit-300-jacket-front.png";
+import tsuit400Kit from "@/assets/products/tracksuit/tsuit-400-kit.png";
+import tsuit400JacketFront from "@/assets/products/tracksuit/tsuit-400-jacket-front.png";
+import tsuit500Kit from "@/assets/products/tracksuit/tsuit-500-kit.png";
+import tsuit500JacketFront from "@/assets/products/tracksuit/tsuit-500-jacket-front.png";
+import tsuit600Kit from "@/assets/products/tracksuit/tsuit-600-kit.png";
+import tsuit600JacketFront from "@/assets/products/tracksuit/tsuit-600-jacket-front.png";
+import tsuit700Kit from "@/assets/products/tracksuit/tsuit-700-kit.png";
+import tsuit700JacketFront from "@/assets/products/tracksuit/tsuit-700-jacket-front.png";
+import tsuit800Kit from "@/assets/products/tracksuit/tsuit-800-kit.png";
+import tsuit800JacketFront from "@/assets/products/tracksuit/tsuit-800-jacket-front.png";
+
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
