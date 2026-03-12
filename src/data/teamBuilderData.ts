@@ -139,12 +139,42 @@ import vol900MensJerseyFront from "@/assets/products/volleyball/vol-900-mens-jer
 import vol900ShortsFront from "@/assets/products/volleyball/vol-900-shorts-front.png";
 import vol900Socks from "@/assets/products/volleyball/vol-900-socks.png";
 
-// Product images - American Football
-import footballGameJersey from "@/assets/products/football-game-jersey.jpg";
-import footballPracticeJersey from "@/assets/products/football-practice-jersey.jpg";
-import footballPants from "@/assets/products/football-pants.jpg";
-import footballFlagSet from "@/assets/products/football-flag-set.jpg";
-import footballWarmup from "@/assets/products/football-warmup.jpg";
+// Product images - American Football (7 styles: 100-700)
+// Style 100
+import foot100Kit from "@/assets/products/football/foot-100-kit.png";
+import foot100JerseyFront from "@/assets/products/football/foot-100-jersey-front.png";
+import foot100PantsFront from "@/assets/products/football/foot-100-pants-front.png";
+import foot100Socks from "@/assets/products/football/foot-100-socks.png";
+// Style 200
+import foot200Kit from "@/assets/products/football/foot-200-kit.png";
+import foot200JerseyFront from "@/assets/products/football/foot-200-jersey-front.png";
+import foot200PantsFront from "@/assets/products/football/foot-200-pants-front.png";
+import foot200Socks from "@/assets/products/football/foot-200-socks.png";
+// Style 300
+import foot300Kit from "@/assets/products/football/foot-300-kit.png";
+import foot300JerseyFront from "@/assets/products/football/foot-300-jersey-front.png";
+import foot300PantsFront from "@/assets/products/football/foot-300-pants-front.png";
+import foot300Socks from "@/assets/products/football/foot-300-socks.png";
+// Style 400
+import foot400Kit from "@/assets/products/football/foot-400-kit.png";
+import foot400JerseyFront from "@/assets/products/football/foot-400-jersey-front.png";
+import foot400PantsFront from "@/assets/products/football/foot-400-pants-front.png";
+import foot400Socks from "@/assets/products/football/foot-400-socks.png";
+// Style 500
+import foot500Kit from "@/assets/products/football/foot-500-kit.png";
+import foot500JerseyFront from "@/assets/products/football/foot-500-jersey-front.png";
+import foot500PantsFront from "@/assets/products/football/foot-500-pants-front.png";
+import foot500Socks from "@/assets/products/football/foot-500-socks.png";
+// Style 600
+import foot600Kit from "@/assets/products/football/foot-600-kit.png";
+import foot600JerseyFront from "@/assets/products/football/foot-600-jersey-front.png";
+import foot600PantsFront from "@/assets/products/football/foot-600-pants-front.png";
+import foot600Socks from "@/assets/products/football/foot-600-socks.png";
+// Style 700
+import foot700Kit from "@/assets/products/football/foot-700-kit.png";
+import foot700JerseyFront from "@/assets/products/football/foot-700-jersey-front.png";
+import foot700PantsFront from "@/assets/products/football/foot-700-pants-front.png";
+import foot700Socks from "@/assets/products/football/foot-700-socks.png";
 
 // Product images - Baseball/Softball
 import baseballJerseyButton from "@/assets/products/baseball-jersey-button.jpg";
@@ -333,11 +363,41 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'basketball-warmup', name: 'Warmup Suit', shortDescription: 'Complete warmup set', basePrice: 85, image: basketballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 10, category: 'Warmup' },
   ],
   american_football: [
-    { id: 'football-game-jersey', name: 'Game Jersey', shortDescription: 'Official game-day jersey', basePrice: 65, image: footballGameJersey, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'football-practice-jersey', name: 'Practice Jersey', shortDescription: 'Durable practice jersey', basePrice: 45, image: footballPracticeJersey, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
-    { id: 'football-pants', name: 'Pants', shortDescription: 'Padded football pants', basePrice: 55, image: footballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'football-flag-set', name: 'Flag Football Set', shortDescription: 'Complete flag football kit', basePrice: 40, image: footballFlagSet, fabricType: 'Sublimated', leadTime: 'Rush', moq: 18 },
-    { id: 'football-warmup', name: 'Warmup Gear', shortDescription: 'Team warmup apparel', basePrice: 75, image: footballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    // Full Kits (Jersey + Pants + Socks)
+    { id: 'foot-kit-100', name: 'Full Kit (Style 100)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-200', name: 'Full Kit (Style 200)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-300', name: 'Full Kit (Style 300)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-400', name: 'Full Kit (Style 400)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-500', name: 'Full Kit (Style 500)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-600', name: 'Full Kit (Style 600)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'foot-kit-700', name: 'Full Kit (Style 700)', shortDescription: 'Jersey + Pants + Socks', basePrice: 75, image: foot700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+
+    // Jerseys
+    { id: 'foot-jersey-100', name: 'Jersey (Style 100)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot100JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-200', name: 'Jersey (Style 200)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot200JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-300', name: 'Jersey (Style 300)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot300JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-400', name: 'Jersey (Style 400)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot400JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-500', name: 'Jersey (Style 500)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot500JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-600', name: 'Jersey (Style 600)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot600JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'foot-jersey-700', name: 'Jersey (Style 700)', shortDescription: 'Sublimated game jersey', basePrice: 45, image: foot700JerseyFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+
+    // Pants (mapped to 'Shorts' category for flow compatibility)
+    { id: 'foot-pants-100', name: 'Pants (Style 100)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot100PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-200', name: 'Pants (Style 200)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot200PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-300', name: 'Pants (Style 300)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot300PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-400', name: 'Pants (Style 400)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot400PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-500', name: 'Pants (Style 500)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot500PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-600', name: 'Pants (Style 600)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot600PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'foot-pants-700', name: 'Pants (Style 700)', shortDescription: 'Sublimated football pants', basePrice: 40, image: foot700PantsFront, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+
+    // Socks
+    { id: 'foot-socks-100', name: 'Socks (Style 100)', shortDescription: 'Performance football socks', basePrice: 12, image: foot100Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-200', name: 'Socks (Style 200)', shortDescription: 'Performance football socks', basePrice: 12, image: foot200Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-300', name: 'Socks (Style 300)', shortDescription: 'Performance football socks', basePrice: 12, image: foot300Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-400', name: 'Socks (Style 400)', shortDescription: 'Performance football socks', basePrice: 12, image: foot400Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-500', name: 'Socks (Style 500)', shortDescription: 'Performance football socks', basePrice: 12, image: foot500Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-600', name: 'Socks (Style 600)', shortDescription: 'Performance football socks', basePrice: 12, image: foot600Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'foot-socks-700', name: 'Socks (Style 700)', shortDescription: 'Performance football socks', basePrice: 12, image: foot700Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
   ],
   baseball_softball: [
     { id: 'baseball-jersey-button', name: 'Jersey (Button)', shortDescription: 'Traditional button-front jersey', basePrice: 45, image: baseballJerseyButton, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },

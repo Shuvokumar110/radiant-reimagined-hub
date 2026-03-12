@@ -66,14 +66,16 @@ export function ProductSelection() {
   };
 
   const stepIndex = viewMode === 'jerseys' ? 0 : viewMode === 'shorts' ? 1 : viewMode === 'socks' ? 2 : -1;
-  const stepLabels = ['Jersey', 'Shorts', 'Socks'];
+  const usesPants = sport === 'american_football' || sport === 'cricket';
+  const bottomLabel = usesPants ? 'Pants' : 'Shorts';
+  const stepLabels = ['Jersey', bottomLabel, 'Socks'];
 
   const getSubtitle = () => {
     switch (viewMode) {
       case 'choose': return 'Choose how you want to order';
       case 'kits': return 'Select a full kit';
       case 'jerseys': return 'Step 1 of 3 — Select a jersey';
-      case 'shorts': return 'Step 2 of 3 — Select shorts';
+      case 'shorts': return `Step 2 of 3 — Select ${usesPants ? 'pants' : 'shorts'}`;
       case 'socks': return 'Step 3 of 3 — Select socks';
     }
   };
