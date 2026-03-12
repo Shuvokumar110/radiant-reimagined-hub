@@ -66,7 +66,9 @@ export function ProductSelection() {
   };
 
   const stepIndex = viewMode === 'jerseys' ? 0 : viewMode === 'shorts' ? 1 : viewMode === 'socks' ? 2 : -1;
-  const stepLabels = ['Jersey', 'Shorts', 'Socks'];
+  const usesPants = sport === 'american_football' || sport === 'cricket';
+  const bottomLabel = usesPants ? 'Pants' : 'Shorts';
+  const stepLabels = ['Jersey', bottomLabel, 'Socks'];
 
   const getSubtitle = () => {
     switch (viewMode) {

@@ -428,10 +428,120 @@ const cricketGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+// American Football styles 100-700
+import foot100Kit from "@/assets/products/football/foot-100-kit.png";
+import foot100JerseyFront from "@/assets/products/football/foot-100-jersey-front.png";
+import foot100JerseyBack from "@/assets/products/football/foot-100-jersey-back.png";
+import foot100PantsFront from "@/assets/products/football/foot-100-pants-front.png";
+import foot100PantsBack from "@/assets/products/football/foot-100-pants-back.png";
+import foot100Socks from "@/assets/products/football/foot-100-socks.png";
+
+import foot200Kit from "@/assets/products/football/foot-200-kit.png";
+import foot200JerseyFront from "@/assets/products/football/foot-200-jersey-front.png";
+import foot200JerseyBack from "@/assets/products/football/foot-200-jersey-back.png";
+import foot200PantsFront from "@/assets/products/football/foot-200-pants-front.png";
+import foot200PantsBack from "@/assets/products/football/foot-200-pants-back.png";
+import foot200Socks from "@/assets/products/football/foot-200-socks.png";
+
+import foot300Kit from "@/assets/products/football/foot-300-kit.png";
+import foot300JerseyFront from "@/assets/products/football/foot-300-jersey-front.png";
+import foot300JerseyBack from "@/assets/products/football/foot-300-jersey-back.png";
+import foot300PantsFront from "@/assets/products/football/foot-300-pants-front.png";
+import foot300PantsBack from "@/assets/products/football/foot-300-pants-back.png";
+import foot300Socks from "@/assets/products/football/foot-300-socks.png";
+
+import foot400Kit from "@/assets/products/football/foot-400-kit.png";
+import foot400JerseyFront from "@/assets/products/football/foot-400-jersey-front.png";
+import foot400JerseyBack from "@/assets/products/football/foot-400-jersey-back.png";
+import foot400PantsFront from "@/assets/products/football/foot-400-pants-front.png";
+import foot400PantsBack from "@/assets/products/football/foot-400-pants-back.png";
+import foot400Socks from "@/assets/products/football/foot-400-socks.png";
+
+import foot500Kit from "@/assets/products/football/foot-500-kit.png";
+import foot500JerseyFront from "@/assets/products/football/foot-500-jersey-front.png";
+import foot500JerseyBack from "@/assets/products/football/foot-500-jersey-back.png";
+import foot500PantsFront from "@/assets/products/football/foot-500-pants-front.png";
+import foot500PantsBack from "@/assets/products/football/foot-500-pants-back.png";
+import foot500Socks from "@/assets/products/football/foot-500-socks.png";
+
+import foot600Kit from "@/assets/products/football/foot-600-kit.png";
+import foot600JerseyFront from "@/assets/products/football/foot-600-jersey-front.png";
+import foot600JerseyBack from "@/assets/products/football/foot-600-jersey-back.png";
+import foot600PantsFront from "@/assets/products/football/foot-600-pants-front.png";
+import foot600PantsBack from "@/assets/products/football/foot-600-pants-back.png";
+import foot600Socks from "@/assets/products/football/foot-600-socks.png";
+
+import foot700Kit from "@/assets/products/football/foot-700-kit.png";
+import foot700JerseyFront from "@/assets/products/football/foot-700-jersey-front.png";
+import foot700JerseyBack from "@/assets/products/football/foot-700-jersey-back.png";
+import foot700PantsFront from "@/assets/products/football/foot-700-pants-front.png";
+import foot700PantsBack from "@/assets/products/football/foot-700-pants-back.png";
+import foot700Socks from "@/assets/products/football/foot-700-socks.png";
+
+const footballGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: foot100Kit },
+    { label: 'Jersey Front', image: foot100JerseyFront },
+    { label: 'Jersey Back', image: foot100JerseyBack },
+    { label: 'Pants Front', image: foot100PantsFront },
+    { label: 'Pants Back', image: foot100PantsBack },
+    { label: 'Socks', image: foot100Socks },
+  ],
+  '200': [
+    { label: 'Full Kit', image: foot200Kit },
+    { label: 'Jersey Front', image: foot200JerseyFront },
+    { label: 'Jersey Back', image: foot200JerseyBack },
+    { label: 'Pants Front', image: foot200PantsFront },
+    { label: 'Pants Back', image: foot200PantsBack },
+    { label: 'Socks', image: foot200Socks },
+  ],
+  '300': [
+    { label: 'Full Kit', image: foot300Kit },
+    { label: 'Jersey Front', image: foot300JerseyFront },
+    { label: 'Jersey Back', image: foot300JerseyBack },
+    { label: 'Pants Front', image: foot300PantsFront },
+    { label: 'Pants Back', image: foot300PantsBack },
+    { label: 'Socks', image: foot300Socks },
+  ],
+  '400': [
+    { label: 'Full Kit', image: foot400Kit },
+    { label: 'Jersey Front', image: foot400JerseyFront },
+    { label: 'Jersey Back', image: foot400JerseyBack },
+    { label: 'Pants Front', image: foot400PantsFront },
+    { label: 'Pants Back', image: foot400PantsBack },
+    { label: 'Socks', image: foot400Socks },
+  ],
+  '500': [
+    { label: 'Full Kit', image: foot500Kit },
+    { label: 'Jersey Front', image: foot500JerseyFront },
+    { label: 'Jersey Back', image: foot500JerseyBack },
+    { label: 'Pants Front', image: foot500PantsFront },
+    { label: 'Pants Back', image: foot500PantsBack },
+    { label: 'Socks', image: foot500Socks },
+  ],
+  '600': [
+    { label: 'Full Kit', image: foot600Kit },
+    { label: 'Jersey Front', image: foot600JerseyFront },
+    { label: 'Jersey Back', image: foot600JerseyBack },
+    { label: 'Pants Front', image: foot600PantsFront },
+    { label: 'Pants Back', image: foot600PantsBack },
+    { label: 'Socks', image: foot600Socks },
+  ],
+  '700': [
+    { label: 'Full Kit', image: foot700Kit },
+    { label: 'Jersey Front', image: foot700JerseyFront },
+    { label: 'Jersey Back', image: foot700JerseyBack },
+    { label: 'Pants Front', image: foot700PantsFront },
+    { label: 'Pants Back', image: foot700PantsBack },
+    { label: 'Socks', image: foot700Socks },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
   cricket: cricketGallery,
+  american_football: footballGallery,
 };
 
 /**
