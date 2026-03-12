@@ -530,6 +530,15 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'business-work-shirts', name: 'Work Shirts', shortDescription: 'Durable work shirts', basePrice: 40, image: businessWorkShirts, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
     { id: 'business-jackets', name: 'Jackets/Hoodies', shortDescription: 'Corporate outerwear', basePrice: 65, image: businessJackets, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
     { id: 'business-caps', name: 'Caps', shortDescription: 'Branded headwear', basePrice: 20, image: businessCaps, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
+    // Training Suits
+    { id: 'tsuit-kit-100', name: 'Training Suit (Style 100)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-200', name: 'Training Suit (Style 200)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-300', name: 'Training Suit (Style 300)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-400', name: 'Training Suit (Style 400)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-500', name: 'Training Suit (Style 500)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-600', name: 'Training Suit (Style 600)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-700', name: 'Training Suit (Style 700)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-800', name: 'Training Suit (Style 800)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
 };
 
