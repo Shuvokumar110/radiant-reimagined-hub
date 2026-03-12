@@ -75,7 +75,7 @@ export function ProductSelection() {
       case 'choose': return 'Choose how you want to order';
       case 'kits': return 'Select a full kit';
       case 'jerseys': return 'Step 1 of 3 — Select a jersey';
-      case 'shorts': return 'Step 2 of 3 — Select shorts';
+      case 'shorts': return `Step 2 of 3 — Select ${usesPants ? 'pants' : 'shorts'}`;
       case 'socks': return 'Step 3 of 3 — Select socks';
     }
   };
