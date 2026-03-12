@@ -139,12 +139,42 @@ import vol900MensJerseyFront from "@/assets/products/volleyball/vol-900-mens-jer
 import vol900ShortsFront from "@/assets/products/volleyball/vol-900-shorts-front.png";
 import vol900Socks from "@/assets/products/volleyball/vol-900-socks.png";
 
-// Product images - American Football
-import footballGameJersey from "@/assets/products/football-game-jersey.jpg";
-import footballPracticeJersey from "@/assets/products/football-practice-jersey.jpg";
-import footballPants from "@/assets/products/football-pants.jpg";
-import footballFlagSet from "@/assets/products/football-flag-set.jpg";
-import footballWarmup from "@/assets/products/football-warmup.jpg";
+// Product images - American Football (7 styles: 100-700)
+// Style 100
+import foot100Kit from "@/assets/products/football/foot-100-kit.png";
+import foot100JerseyFront from "@/assets/products/football/foot-100-jersey-front.png";
+import foot100PantsFront from "@/assets/products/football/foot-100-pants-front.png";
+import foot100Socks from "@/assets/products/football/foot-100-socks.png";
+// Style 200
+import foot200Kit from "@/assets/products/football/foot-200-kit.png";
+import foot200JerseyFront from "@/assets/products/football/foot-200-jersey-front.png";
+import foot200PantsFront from "@/assets/products/football/foot-200-pants-front.png";
+import foot200Socks from "@/assets/products/football/foot-200-socks.png";
+// Style 300
+import foot300Kit from "@/assets/products/football/foot-300-kit.png";
+import foot300JerseyFront from "@/assets/products/football/foot-300-jersey-front.png";
+import foot300PantsFront from "@/assets/products/football/foot-300-pants-front.png";
+import foot300Socks from "@/assets/products/football/foot-300-socks.png";
+// Style 400
+import foot400Kit from "@/assets/products/football/foot-400-kit.png";
+import foot400JerseyFront from "@/assets/products/football/foot-400-jersey-front.png";
+import foot400PantsFront from "@/assets/products/football/foot-400-pants-front.png";
+import foot400Socks from "@/assets/products/football/foot-400-socks.png";
+// Style 500
+import foot500Kit from "@/assets/products/football/foot-500-kit.png";
+import foot500JerseyFront from "@/assets/products/football/foot-500-jersey-front.png";
+import foot500PantsFront from "@/assets/products/football/foot-500-pants-front.png";
+import foot500Socks from "@/assets/products/football/foot-500-socks.png";
+// Style 600
+import foot600Kit from "@/assets/products/football/foot-600-kit.png";
+import foot600JerseyFront from "@/assets/products/football/foot-600-jersey-front.png";
+import foot600PantsFront from "@/assets/products/football/foot-600-pants-front.png";
+import foot600Socks from "@/assets/products/football/foot-600-socks.png";
+// Style 700
+import foot700Kit from "@/assets/products/football/foot-700-kit.png";
+import foot700JerseyFront from "@/assets/products/football/foot-700-jersey-front.png";
+import foot700PantsFront from "@/assets/products/football/foot-700-pants-front.png";
+import foot700Socks from "@/assets/products/football/foot-700-socks.png";
 
 // Product images - Baseball/Softball
 import baseballJerseyButton from "@/assets/products/baseball-jersey-button.jpg";
