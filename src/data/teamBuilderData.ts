@@ -267,7 +267,7 @@ export const sportCategories: SportCategory[] = [
   { id: 'volleyball', name: 'Volleyball', image: sportVolleyball },
   { id: 'netball', name: 'Netball', image: sportNetball },
   { id: 'cricket', name: 'Cricket', image: sportCricket },
-  { id: 'business', name: 'Business', image: sportBusiness },
+  { id: 'business', name: 'Business / Training Suits', image: sportBusiness },
 ];
 
 export const productsBySport: Record<SportType, ProductType[]> = {
