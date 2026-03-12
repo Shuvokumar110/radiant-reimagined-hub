@@ -537,11 +537,120 @@ const footballGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+// Training Suit (Tracksuit) styles 100-800
+import tsuit100Kit from "@/assets/products/tracksuit/tsuit-100-kit.png";
+import tsuit100JacketFront from "@/assets/products/tracksuit/tsuit-100-jacket-front.png";
+import tsuit100JacketBack from "@/assets/products/tracksuit/tsuit-100-jacket-back.png";
+import tsuit100PantsFront from "@/assets/products/tracksuit/tsuit-100-pants-front.png";
+import tsuit100PantsBack from "@/assets/products/tracksuit/tsuit-100-pants-back.png";
+
+import tsuit200Kit from "@/assets/products/tracksuit/tsuit-200-kit.png";
+import tsuit200JacketFront from "@/assets/products/tracksuit/tsuit-200-jacket-front.png";
+import tsuit200JacketBack from "@/assets/products/tracksuit/tsuit-200-jacket-back.png";
+import tsuit200PantsFront from "@/assets/products/tracksuit/tsuit-200-pants-front.png";
+import tsuit200PantsBack from "@/assets/products/tracksuit/tsuit-200-pants-back.png";
+
+import tsuit300Kit from "@/assets/products/tracksuit/tsuit-300-kit.png";
+import tsuit300JacketFront from "@/assets/products/tracksuit/tsuit-300-jacket-front.png";
+import tsuit300JacketBack from "@/assets/products/tracksuit/tsuit-300-jacket-back.png";
+import tsuit300PantsFront from "@/assets/products/tracksuit/tsuit-300-pants-front.png";
+import tsuit300PantsBack from "@/assets/products/tracksuit/tsuit-300-pants-back.png";
+
+import tsuit400Kit from "@/assets/products/tracksuit/tsuit-400-kit.png";
+import tsuit400JacketFront from "@/assets/products/tracksuit/tsuit-400-jacket-front.png";
+import tsuit400JacketBack from "@/assets/products/tracksuit/tsuit-400-jacket-back.png";
+import tsuit400PantsFront from "@/assets/products/tracksuit/tsuit-400-pants-front.png";
+import tsuit400PantsBack from "@/assets/products/tracksuit/tsuit-400-pants-back.png";
+
+import tsuit500Kit from "@/assets/products/tracksuit/tsuit-500-kit.png";
+import tsuit500JacketFront from "@/assets/products/tracksuit/tsuit-500-jacket-front.png";
+import tsuit500JacketBack from "@/assets/products/tracksuit/tsuit-500-jacket-back.png";
+import tsuit500PantsFront from "@/assets/products/tracksuit/tsuit-500-pants-front.png";
+import tsuit500PantsBack from "@/assets/products/tracksuit/tsuit-500-pants-back.png";
+
+import tsuit600Kit from "@/assets/products/tracksuit/tsuit-600-kit.png";
+import tsuit600JacketFront from "@/assets/products/tracksuit/tsuit-600-jacket-front.png";
+import tsuit600JacketBack from "@/assets/products/tracksuit/tsuit-600-jacket-back.png";
+import tsuit600PantsFront from "@/assets/products/tracksuit/tsuit-600-pants-front.png";
+import tsuit600PantsBack from "@/assets/products/tracksuit/tsuit-600-pants-back.png";
+
+import tsuit700Kit from "@/assets/products/tracksuit/tsuit-700-kit.png";
+import tsuit700JacketFront from "@/assets/products/tracksuit/tsuit-700-jacket-front.png";
+import tsuit700JacketBack from "@/assets/products/tracksuit/tsuit-700-jacket-back.png";
+import tsuit700PantsFront from "@/assets/products/tracksuit/tsuit-700-pants-front.png";
+import tsuit700PantsBack from "@/assets/products/tracksuit/tsuit-700-pants-back.png";
+
+import tsuit800Kit from "@/assets/products/tracksuit/tsuit-800-kit.png";
+import tsuit800JacketFront from "@/assets/products/tracksuit/tsuit-800-jacket-front.png";
+import tsuit800JacketBack from "@/assets/products/tracksuit/tsuit-800-jacket-back.png";
+import tsuit800PantsFront from "@/assets/products/tracksuit/tsuit-800-pants-front.png";
+import tsuit800PantsBack from "@/assets/products/tracksuit/tsuit-800-pants-back.png";
+
+const tracksuitGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: tsuit100Kit },
+    { label: 'Jacket Front', image: tsuit100JacketFront },
+    { label: 'Jacket Back', image: tsuit100JacketBack },
+    { label: 'Pants Front', image: tsuit100PantsFront },
+    { label: 'Pants Back', image: tsuit100PantsBack },
+  ],
+  '200': [
+    { label: 'Full Kit', image: tsuit200Kit },
+    { label: 'Jacket Front', image: tsuit200JacketFront },
+    { label: 'Jacket Back', image: tsuit200JacketBack },
+    { label: 'Pants Front', image: tsuit200PantsFront },
+    { label: 'Pants Back', image: tsuit200PantsBack },
+  ],
+  '300': [
+    { label: 'Full Kit', image: tsuit300Kit },
+    { label: 'Jacket Front', image: tsuit300JacketFront },
+    { label: 'Jacket Back', image: tsuit300JacketBack },
+    { label: 'Pants Front', image: tsuit300PantsFront },
+    { label: 'Pants Back', image: tsuit300PantsBack },
+  ],
+  '400': [
+    { label: 'Full Kit', image: tsuit400Kit },
+    { label: 'Jacket Front', image: tsuit400JacketFront },
+    { label: 'Jacket Back', image: tsuit400JacketBack },
+    { label: 'Pants Front', image: tsuit400PantsFront },
+    { label: 'Pants Back', image: tsuit400PantsBack },
+  ],
+  '500': [
+    { label: 'Full Kit', image: tsuit500Kit },
+    { label: 'Jacket Front', image: tsuit500JacketFront },
+    { label: 'Jacket Back', image: tsuit500JacketBack },
+    { label: 'Pants Front', image: tsuit500PantsFront },
+    { label: 'Pants Back', image: tsuit500PantsBack },
+  ],
+  '600': [
+    { label: 'Full Kit', image: tsuit600Kit },
+    { label: 'Jacket Front', image: tsuit600JacketFront },
+    { label: 'Jacket Back', image: tsuit600JacketBack },
+    { label: 'Pants Front', image: tsuit600PantsFront },
+    { label: 'Pants Back', image: tsuit600PantsBack },
+  ],
+  '700': [
+    { label: 'Full Kit', image: tsuit700Kit },
+    { label: 'Jacket Front', image: tsuit700JacketFront },
+    { label: 'Jacket Back', image: tsuit700JacketBack },
+    { label: 'Pants Front', image: tsuit700PantsFront },
+    { label: 'Pants Back', image: tsuit700PantsBack },
+  ],
+  '800': [
+    { label: 'Full Kit', image: tsuit800Kit },
+    { label: 'Jacket Front', image: tsuit800JacketFront },
+    { label: 'Jacket Back', image: tsuit800JacketBack },
+    { label: 'Pants Front', image: tsuit800PantsFront },
+    { label: 'Pants Back', image: tsuit800PantsBack },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
   cricket: cricketGallery,
   american_football: footballGallery,
+  business: tracksuitGallery,
 };
 
 /**

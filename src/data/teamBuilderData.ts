@@ -230,6 +230,24 @@ import businessWorkShirts from "@/assets/products/business-work-shirts.jpg";
 import businessJackets from "@/assets/products/business-jackets.jpg";
 import businessCaps from "@/assets/products/business-caps.jpg";
 
+// Product images - Training Suits (Tracksuits) styles 100-800
+import tsuit100Kit from "@/assets/products/tracksuit/tsuit-100-kit.png";
+import tsuit100JacketFront from "@/assets/products/tracksuit/tsuit-100-jacket-front.png";
+import tsuit200Kit from "@/assets/products/tracksuit/tsuit-200-kit.png";
+import tsuit200JacketFront from "@/assets/products/tracksuit/tsuit-200-jacket-front.png";
+import tsuit300Kit from "@/assets/products/tracksuit/tsuit-300-kit.png";
+import tsuit300JacketFront from "@/assets/products/tracksuit/tsuit-300-jacket-front.png";
+import tsuit400Kit from "@/assets/products/tracksuit/tsuit-400-kit.png";
+import tsuit400JacketFront from "@/assets/products/tracksuit/tsuit-400-jacket-front.png";
+import tsuit500Kit from "@/assets/products/tracksuit/tsuit-500-kit.png";
+import tsuit500JacketFront from "@/assets/products/tracksuit/tsuit-500-jacket-front.png";
+import tsuit600Kit from "@/assets/products/tracksuit/tsuit-600-kit.png";
+import tsuit600JacketFront from "@/assets/products/tracksuit/tsuit-600-jacket-front.png";
+import tsuit700Kit from "@/assets/products/tracksuit/tsuit-700-kit.png";
+import tsuit700JacketFront from "@/assets/products/tracksuit/tsuit-700-jacket-front.png";
+import tsuit800Kit from "@/assets/products/tracksuit/tsuit-800-kit.png";
+import tsuit800JacketFront from "@/assets/products/tracksuit/tsuit-800-jacket-front.png";
+
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
@@ -267,7 +285,7 @@ export const sportCategories: SportCategory[] = [
   { id: 'volleyball', name: 'Volleyball', image: sportVolleyball },
   { id: 'netball', name: 'Netball', image: sportNetball },
   { id: 'cricket', name: 'Cricket', image: sportCricket },
-  { id: 'business', name: 'Business', image: sportBusiness },
+  { id: 'business', name: 'Business / Training Suits', image: sportBusiness },
 ];
 
 export const productsBySport: Record<SportType, ProductType[]> = {
@@ -512,6 +530,15 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'business-work-shirts', name: 'Work Shirts', shortDescription: 'Durable work shirts', basePrice: 40, image: businessWorkShirts, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
     { id: 'business-jackets', name: 'Jackets/Hoodies', shortDescription: 'Corporate outerwear', basePrice: 65, image: businessJackets, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
     { id: 'business-caps', name: 'Caps', shortDescription: 'Branded headwear', basePrice: 20, image: businessCaps, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
+    // Training Suits
+    { id: 'tsuit-kit-100', name: 'Training Suit (Style 100)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-200', name: 'Training Suit (Style 200)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-300', name: 'Training Suit (Style 300)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-400', name: 'Training Suit (Style 400)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-500', name: 'Training Suit (Style 500)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-600', name: 'Training Suit (Style 600)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-700', name: 'Training Suit (Style 700)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-800', name: 'Training Suit (Style 800)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
   ],
 };
 
