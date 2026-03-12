@@ -400,12 +400,18 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'foot-socks-700', name: 'Socks (Style 700)', shortDescription: 'Performance football socks', basePrice: 12, image: foot700Socks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
   ],
   baseball_softball: [
-    { id: 'baseball-jersey-button', name: 'Jersey (Button)', shortDescription: 'Traditional button-front jersey', basePrice: 45, image: baseballJerseyButton, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'baseball-jersey-pullover', name: 'Jersey (Pullover)', shortDescription: 'Modern pullover jersey', basePrice: 40, image: baseballJerseyPullover, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'baseball-pants', name: 'Pants', shortDescription: 'Pro-style baseball pants', basePrice: 35, image: baseballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'baseball-socks', name: 'Socks', shortDescription: 'Stirrup or solid socks', basePrice: 12, image: baseballSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18 },
-    { id: 'baseball-full-uniform', name: 'Full Uniform Bundle', shortDescription: 'Jersey + Pants + Socks', basePrice: 85, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'baseball-warmup', name: 'Warmup Gear', shortDescription: 'Pre-game warmup apparel', basePrice: 65, image: baseballWarmup, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
+    // Full Kits
+    { id: 'bb-kit-button', name: 'Full Kit (Button Style)', shortDescription: 'Button jersey + Pants + Socks', basePrice: 85, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'bb-kit-pullover', name: 'Full Kit (Pullover Style)', shortDescription: 'Pullover jersey + Pants + Socks', basePrice: 80, image: baseballFullUniform, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    // Jerseys
+    { id: 'bb-jersey-button', name: 'Jersey (Button)', shortDescription: 'Traditional button-front jersey', basePrice: 45, image: baseballJerseyButton, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    { id: 'bb-jersey-pullover', name: 'Jersey (Pullover)', shortDescription: 'Modern pullover jersey', basePrice: 40, image: baseballJerseyPullover, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Jersey' },
+    // Pants
+    { id: 'bb-pants-button', name: 'Pants (Button Style)', shortDescription: 'Pro-style baseball pants', basePrice: 35, image: baseballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    { id: 'bb-pants-pullover', name: 'Pants (Pullover Style)', shortDescription: 'Pro-style baseball pants', basePrice: 35, image: baseballPants, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Shorts' },
+    // Socks
+    { id: 'bb-socks-button', name: 'Socks (Button Style)', shortDescription: 'Stirrup or solid socks', basePrice: 12, image: baseballSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
+    { id: 'bb-socks-pullover', name: 'Socks (Pullover Style)', shortDescription: 'Stirrup or solid socks', basePrice: 12, image: baseballSocks, fabricType: 'Heat Press', leadTime: 'Rush', moq: 18, category: 'Socks' },
   ],
   volleyball: [
     // Full Kits

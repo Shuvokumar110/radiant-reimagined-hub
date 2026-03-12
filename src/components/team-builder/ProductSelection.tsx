@@ -66,7 +66,7 @@ export function ProductSelection() {
   };
 
   const stepIndex = viewMode === 'jerseys' ? 0 : viewMode === 'shorts' ? 1 : viewMode === 'socks' ? 2 : -1;
-  const usesPants = sport === 'american_football' || sport === 'cricket';
+  const usesPants = sport === 'american_football' || sport === 'cricket' || sport === 'baseball_softball';
   const bottomLabel = usesPants ? 'Pants' : 'Shorts';
   const stepLabels = ['Jersey', bottomLabel, 'Socks'];
 
