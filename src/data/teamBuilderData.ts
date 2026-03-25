@@ -268,6 +268,11 @@ import hood800Front from "@/assets/products/hoodie/hood-800-front.png";
 import hood900Kit from "@/assets/products/hoodie/hood-900-kit.png";
 import hood900Front from "@/assets/products/hoodie/hood-900-front.png";
 
+// Product images - Sports Jerseys (Styles 100-300)
+import jer100Kit from "@/assets/products/jersey/jer-100-kit.png";
+import jer200Kit from "@/assets/products/jersey/jer-200-kit.png";
+import jer300Kit from "@/assets/products/jersey/jer-300-kit.png";
+
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
