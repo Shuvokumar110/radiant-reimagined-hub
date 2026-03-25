@@ -278,6 +278,11 @@ import jer600Kit from "@/assets/products/jersey/jer-600-kit.png";
 import jer700Kit from "@/assets/products/jersey/jer-700-kit.png";
 import jer800Kit from "@/assets/products/jersey/jer-800-kit.png";
 
+// Product images - Polo Jerseys (Styles 100-300)
+import polo100Kit from "@/assets/products/polo/polo-100-kit.png";
+import polo200Kit from "@/assets/products/polo/polo-200-kit.png";
+import polo300Kit from "@/assets/products/polo/polo-300-kit.png";
+
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
@@ -590,6 +595,11 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'jer-kit-600', name: 'Sports Jersey (Style 600)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'jer-kit-700', name: 'Sports Jersey (Style 700)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'jer-kit-800', name: 'Sports Jersey (Style 800)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+
+    // Polo Jerseys
+    { id: 'polo-kit-100', name: 'Polo Jersey (Style 100)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'polo-kit-200', name: 'Polo Jersey (Style 200)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'polo-kit-300', name: 'Polo Jersey (Style 300)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
   ],
 };
 
