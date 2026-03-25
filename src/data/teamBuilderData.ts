@@ -609,6 +609,9 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'polo-kit-400', name: 'Polo Jersey (Style 400)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'polo-kit-500', name: 'Polo Jersey (Style 500)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'polo-kit-600', name: 'Polo Jersey (Style 600)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'polo-kit-700', name: 'Polo Jersey (Style 700)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'polo-kit-800', name: 'Polo Jersey (Style 800)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'polo-kit-900', name: 'Polo Jersey (Style 900)', shortDescription: 'Custom sublimated polo jersey', basePrice: 45, image: polo900Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
   ],
 };
 
