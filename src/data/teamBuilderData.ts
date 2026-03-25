@@ -570,6 +570,11 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'hood-kit-700', name: 'Hoodie (Style 700)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'hood-kit-800', name: 'Hoodie (Style 800)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'hood-kit-900', name: 'Hoodie (Style 900)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood900Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+
+    // Sports Jerseys
+    { id: 'jer-kit-100', name: 'Sports Jersey (Style 100)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'jer-kit-200', name: 'Sports Jersey (Style 200)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'jer-kit-300', name: 'Sports Jersey (Style 300)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
   ],
 };
 
