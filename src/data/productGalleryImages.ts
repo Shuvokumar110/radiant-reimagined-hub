@@ -732,6 +732,15 @@ import jer200Back from "@/assets/products/jersey/jer-200-back.png";
 import jer300Kit from "@/assets/products/jersey/jer-300-kit.png";
 import jer300Front from "@/assets/products/jersey/jer-300-front.png";
 import jer300Back from "@/assets/products/jersey/jer-300-back.png";
+import jer400Kit from "@/assets/products/jersey/jer-400-kit.png";
+import jer400Front from "@/assets/products/jersey/jer-400-front.png";
+import jer400Back from "@/assets/products/jersey/jer-400-back.png";
+import jer500Kit from "@/assets/products/jersey/jer-500-kit.png";
+import jer500Front from "@/assets/products/jersey/jer-500-front.png";
+import jer500Back from "@/assets/products/jersey/jer-500-back.png";
+import jer600Kit from "@/assets/products/jersey/jer-600-kit.png";
+import jer600Front from "@/assets/products/jersey/jer-600-front.png";
+import jer600Back from "@/assets/products/jersey/jer-600-back.png";
 
 const jerseyGallery: Record<string, GalleryImage[]> = {
   '100': [
@@ -748,6 +757,21 @@ const jerseyGallery: Record<string, GalleryImage[]> = {
     { label: 'Full Kit', image: jer300Kit },
     { label: 'Jersey Front', image: jer300Front },
     { label: 'Jersey Back', image: jer300Back },
+  ],
+  '400': [
+    { label: 'Full Kit', image: jer400Kit },
+    { label: 'Jersey Front', image: jer400Front },
+    { label: 'Jersey Back', image: jer400Back },
+  ],
+  '500': [
+    { label: 'Full Kit', image: jer500Kit },
+    { label: 'Jersey Front', image: jer500Front },
+    { label: 'Jersey Back', image: jer500Back },
+  ],
+  '600': [
+    { label: 'Full Kit', image: jer600Kit },
+    { label: 'Jersey Front', image: jer600Front },
+    { label: 'Jersey Back', image: jer600Back },
   ],
 };
 
