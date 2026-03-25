@@ -810,6 +810,15 @@ import polo500Back from "@/assets/products/polo/polo-500-back.png";
 import polo600Kit from "@/assets/products/polo/polo-600-kit.png";
 import polo600Front from "@/assets/products/polo/polo-600-front.png";
 import polo600Back from "@/assets/products/polo/polo-600-back.png";
+import polo700Kit from "@/assets/products/polo/polo-700-kit.png";
+import polo700Front from "@/assets/products/polo/polo-700-front.png";
+import polo700Back from "@/assets/products/polo/polo-700-back.png";
+import polo800Kit from "@/assets/products/polo/polo-800-kit.png";
+import polo800Front from "@/assets/products/polo/polo-800-front.png";
+import polo800Back from "@/assets/products/polo/polo-800-back.png";
+import polo900Kit from "@/assets/products/polo/polo-900-kit.png";
+import polo900Front from "@/assets/products/polo/polo-900-front.png";
+import polo900Back from "@/assets/products/polo/polo-900-back.png";
 
 const poloGallery: Record<string, GalleryImage[]> = {
   '100': [
@@ -841,6 +850,21 @@ const poloGallery: Record<string, GalleryImage[]> = {
     { label: 'Full Kit', image: polo600Kit },
     { label: 'Polo Front', image: polo600Front },
     { label: 'Polo Back', image: polo600Back },
+  ],
+  '700': [
+    { label: 'Full Kit', image: polo700Kit },
+    { label: 'Polo Front', image: polo700Front },
+    { label: 'Polo Back', image: polo700Back },
+  ],
+  '800': [
+    { label: 'Full Kit', image: polo800Kit },
+    { label: 'Polo Front', image: polo800Front },
+    { label: 'Polo Back', image: polo800Back },
+  ],
+  '900': [
+    { label: 'Full Kit', image: polo900Kit },
+    { label: 'Polo Front', image: polo900Front },
+    { label: 'Polo Back', image: polo900Back },
   ],
 };
 
