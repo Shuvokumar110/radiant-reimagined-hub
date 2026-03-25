@@ -278,13 +278,16 @@ import jer600Kit from "@/assets/products/jersey/jer-600-kit.png";
 import jer700Kit from "@/assets/products/jersey/jer-700-kit.png";
 import jer800Kit from "@/assets/products/jersey/jer-800-kit.png";
 
-// Product images - Polo Jerseys (Styles 100-600)
+// Product images - Polo Jerseys (Styles 100-900)
 import polo100Kit from "@/assets/products/polo/polo-100-kit.png";
 import polo200Kit from "@/assets/products/polo/polo-200-kit.png";
 import polo300Kit from "@/assets/products/polo/polo-300-kit.png";
 import polo400Kit from "@/assets/products/polo/polo-400-kit.png";
 import polo500Kit from "@/assets/products/polo/polo-500-kit.png";
 import polo600Kit from "@/assets/products/polo/polo-600-kit.png";
+import polo700Kit from "@/assets/products/polo/polo-700-kit.png";
+import polo800Kit from "@/assets/products/polo/polo-800-kit.png";
+import polo900Kit from "@/assets/products/polo/polo-900-kit.png";
 
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
