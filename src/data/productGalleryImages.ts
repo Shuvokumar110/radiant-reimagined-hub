@@ -586,6 +586,35 @@ import tsuit800JacketBack from "@/assets/products/tracksuit/tsuit-800-jacket-bac
 import tsuit800PantsFront from "@/assets/products/tracksuit/tsuit-800-pants-front.png";
 import tsuit800PantsBack from "@/assets/products/tracksuit/tsuit-800-pants-back.png";
 
+// Hoodie styles 100-900
+import hood100Kit from "@/assets/products/hoodie/hood-100-kit.png";
+import hood100Front from "@/assets/products/hoodie/hood-100-front.png";
+import hood100Back from "@/assets/products/hoodie/hood-100-back.png";
+import hood200Kit from "@/assets/products/hoodie/hood-200-kit.png";
+import hood200Front from "@/assets/products/hoodie/hood-200-front.png";
+import hood200Back from "@/assets/products/hoodie/hood-200-back.png";
+import hood300Kit from "@/assets/products/hoodie/hood-300-kit.png";
+import hood300Front from "@/assets/products/hoodie/hood-300-front.png";
+import hood300Back from "@/assets/products/hoodie/hood-300-back.png";
+import hood400Kit from "@/assets/products/hoodie/hood-400-kit.png";
+import hood400Front from "@/assets/products/hoodie/hood-400-front.png";
+import hood400Back from "@/assets/products/hoodie/hood-400-back.png";
+import hood500Kit from "@/assets/products/hoodie/hood-500-kit.png";
+import hood500Front from "@/assets/products/hoodie/hood-500-front.png";
+import hood500Back from "@/assets/products/hoodie/hood-500-back.png";
+import hood600Kit from "@/assets/products/hoodie/hood-600-kit.png";
+import hood600Front from "@/assets/products/hoodie/hood-600-front.png";
+import hood600Back from "@/assets/products/hoodie/hood-600-back.png";
+import hood700Kit from "@/assets/products/hoodie/hood-700-kit.png";
+import hood700Front from "@/assets/products/hoodie/hood-700-front.png";
+import hood700Back from "@/assets/products/hoodie/hood-700-back.png";
+import hood800Kit from "@/assets/products/hoodie/hood-800-kit.png";
+import hood800Front from "@/assets/products/hoodie/hood-800-front.png";
+import hood800Back from "@/assets/products/hoodie/hood-800-back.png";
+import hood900Kit from "@/assets/products/hoodie/hood-900-kit.png";
+import hood900Front from "@/assets/products/hoodie/hood-900-front.png";
+import hood900Back from "@/assets/products/hoodie/hood-900-back.png";
+
 const tracksuitGallery: Record<string, GalleryImage[]> = {
   '100': [
     { label: 'Full Kit', image: tsuit100Kit },
@@ -645,6 +674,54 @@ const tracksuitGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+const hoodieGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: hood100Kit },
+    { label: 'Hoodie Front', image: hood100Front },
+    { label: 'Hoodie Back', image: hood100Back },
+  ],
+  '200': [
+    { label: 'Full Kit', image: hood200Kit },
+    { label: 'Hoodie Front', image: hood200Front },
+    { label: 'Hoodie Back', image: hood200Back },
+  ],
+  '300': [
+    { label: 'Full Kit', image: hood300Kit },
+    { label: 'Hoodie Front', image: hood300Front },
+    { label: 'Hoodie Back', image: hood300Back },
+  ],
+  '400': [
+    { label: 'Full Kit', image: hood400Kit },
+    { label: 'Hoodie Front', image: hood400Front },
+    { label: 'Hoodie Back', image: hood400Back },
+  ],
+  '500': [
+    { label: 'Full Kit', image: hood500Kit },
+    { label: 'Hoodie Front', image: hood500Front },
+    { label: 'Hoodie Back', image: hood500Back },
+  ],
+  '600': [
+    { label: 'Full Kit', image: hood600Kit },
+    { label: 'Hoodie Front', image: hood600Front },
+    { label: 'Hoodie Back', image: hood600Back },
+  ],
+  '700': [
+    { label: 'Full Kit', image: hood700Kit },
+    { label: 'Hoodie Front', image: hood700Front },
+    { label: 'Hoodie Back', image: hood700Back },
+  ],
+  '800': [
+    { label: 'Full Kit', image: hood800Kit },
+    { label: 'Hoodie Front', image: hood800Front },
+    { label: 'Hoodie Back', image: hood800Back },
+  ],
+  '900': [
+    { label: 'Full Kit', image: hood900Kit },
+    { label: 'Hoodie Front', image: hood900Front },
+    { label: 'Hoodie Back', image: hood900Back },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
@@ -660,9 +737,14 @@ const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
 export function getProductGalleryImages(productId: string, sport: string): GalleryImage[] {
   const styleNumber = extractStyleNumber(productId);
   if (!styleNumber) return [];
-  
+
+  if (sport === 'business') {
+    if (productId.startsWith('hood-')) return hoodieGallery[styleNumber] || [];
+    if (productId.startsWith('tsuit-')) return tracksuitGallery[styleNumber] || [];
+  }
+
   const sportGallery = sportGalleries[sport];
   if (!sportGallery) return [];
-  
+
   return sportGallery[styleNumber] || [];
 }
