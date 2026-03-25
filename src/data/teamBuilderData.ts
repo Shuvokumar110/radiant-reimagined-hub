@@ -551,14 +551,25 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'business-jackets', name: 'Jackets/Hoodies', shortDescription: 'Corporate outerwear', basePrice: 65, image: businessJackets, fabricType: 'Embroidered', leadTime: 'Standard', moq: 18 },
     { id: 'business-caps', name: 'Caps', shortDescription: 'Branded headwear', basePrice: 20, image: businessCaps, fabricType: 'Embroidered', leadTime: 'Rush', moq: 18 },
     // Training Suits
-    { id: 'tsuit-kit-100', name: 'Training Suit (Style 100)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-200', name: 'Training Suit (Style 200)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-300', name: 'Training Suit (Style 300)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-400', name: 'Training Suit (Style 400)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-500', name: 'Training Suit (Style 500)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-600', name: 'Training Suit (Style 600)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-700', name: 'Training Suit (Style 700)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
-    { id: 'tsuit-kit-800', name: 'Training Suit (Style 800)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18 },
+    { id: 'tsuit-kit-100', name: 'Training Suit (Style 100)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-200', name: 'Training Suit (Style 200)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-300', name: 'Training Suit (Style 300)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-400', name: 'Training Suit (Style 400)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-500', name: 'Training Suit (Style 500)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-600', name: 'Training Suit (Style 600)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-700', name: 'Training Suit (Style 700)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'tsuit-kit-800', name: 'Training Suit (Style 800)', shortDescription: 'Sublimated jacket + pants set', basePrice: 85, image: tsuit800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+
+    // Hoodies
+    { id: 'hood-kit-100', name: 'Hoodie (Style 100)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood100Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-200', name: 'Hoodie (Style 200)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood200Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-300', name: 'Hoodie (Style 300)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood300Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-400', name: 'Hoodie (Style 400)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-500', name: 'Hoodie (Style 500)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-600', name: 'Hoodie (Style 600)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-700', name: 'Hoodie (Style 700)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-800', name: 'Hoodie (Style 800)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'hood-kit-900', name: 'Hoodie (Style 900)', shortDescription: 'Custom sublimated hoodie', basePrice: 65, image: hood900Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
   ],
 };
 
