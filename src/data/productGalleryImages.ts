@@ -722,6 +722,35 @@ const hoodieGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+// Sports Jersey gallery imports
+import jer100Kit from "@/assets/products/jersey/jer-100-kit.png";
+import jer100Front from "@/assets/products/jersey/jer-100-front.png";
+import jer100Back from "@/assets/products/jersey/jer-100-back.png";
+import jer200Kit from "@/assets/products/jersey/jer-200-kit.png";
+import jer200Front from "@/assets/products/jersey/jer-200-front.png";
+import jer200Back from "@/assets/products/jersey/jer-200-back.png";
+import jer300Kit from "@/assets/products/jersey/jer-300-kit.png";
+import jer300Front from "@/assets/products/jersey/jer-300-front.png";
+import jer300Back from "@/assets/products/jersey/jer-300-back.png";
+
+const jerseyGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: jer100Kit },
+    { label: 'Jersey Front', image: jer100Front },
+    { label: 'Jersey Back', image: jer100Back },
+  ],
+  '200': [
+    { label: 'Full Kit', image: jer200Kit },
+    { label: 'Jersey Front', image: jer200Front },
+    { label: 'Jersey Back', image: jer200Back },
+  ],
+  '300': [
+    { label: 'Full Kit', image: jer300Kit },
+    { label: 'Jersey Front', image: jer300Front },
+    { label: 'Jersey Back', image: jer300Back },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
@@ -739,6 +768,7 @@ export function getProductGalleryImages(productId: string, sport: string): Galle
   if (!styleNumber) return [];
 
   if (sport === 'business') {
+    if (productId.startsWith('jer-')) return jerseyGallery[styleNumber] || [];
     if (productId.startsWith('hood-')) return hoodieGallery[styleNumber] || [];
     if (productId.startsWith('tsuit-')) return tracksuitGallery[styleNumber] || [];
   }
