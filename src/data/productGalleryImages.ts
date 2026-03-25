@@ -791,6 +791,35 @@ const jerseyGallery: Record<string, GalleryImage[]> = {
   ],
 };
 
+// Polo Jersey gallery images
+import polo100Kit from "@/assets/products/polo/polo-100-kit.png";
+import polo100Front from "@/assets/products/polo/polo-100-front.png";
+import polo100Back from "@/assets/products/polo/polo-100-back.png";
+import polo200Kit from "@/assets/products/polo/polo-200-kit.png";
+import polo200Front from "@/assets/products/polo/polo-200-front.png";
+import polo200Back from "@/assets/products/polo/polo-200-back.png";
+import polo300Kit from "@/assets/products/polo/polo-300-kit.png";
+import polo300Front from "@/assets/products/polo/polo-300-front.png";
+import polo300Back from "@/assets/products/polo/polo-300-back.png";
+
+const poloGallery: Record<string, GalleryImage[]> = {
+  '100': [
+    { label: 'Full Kit', image: polo100Kit },
+    { label: 'Polo Front', image: polo100Front },
+    { label: 'Polo Back', image: polo100Back },
+  ],
+  '200': [
+    { label: 'Full Kit', image: polo200Kit },
+    { label: 'Polo Front', image: polo200Front },
+    { label: 'Polo Back', image: polo200Back },
+  ],
+  '300': [
+    { label: 'Full Kit', image: polo300Kit },
+    { label: 'Polo Front', image: polo300Front },
+    { label: 'Polo Back', image: polo300Back },
+  ],
+};
+
 const sportGalleries: Record<string, Record<string, GalleryImage[]>> = {
   volleyball: volleyballGallery,
   basketball: basketballGallery,
@@ -808,6 +837,7 @@ export function getProductGalleryImages(productId: string, sport: string): Galle
   if (!styleNumber) return [];
 
   if (sport === 'business') {
+    if (productId.startsWith('polo-')) return poloGallery[styleNumber] || [];
     if (productId.startsWith('jer-')) return jerseyGallery[styleNumber] || [];
     if (productId.startsWith('hood-')) return hoodieGallery[styleNumber] || [];
     if (productId.startsWith('tsuit-')) return tracksuitGallery[styleNumber] || [];
