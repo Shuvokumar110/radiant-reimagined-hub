@@ -278,6 +278,11 @@ import jer600Kit from "@/assets/products/jersey/jer-600-kit.png";
 import jer700Kit from "@/assets/products/jersey/jer-700-kit.png";
 import jer800Kit from "@/assets/products/jersey/jer-800-kit.png";
 
+// Product images - Polo Jerseys (Styles 100-300)
+import polo100Kit from "@/assets/products/polo/polo-100-kit.png";
+import polo200Kit from "@/assets/products/polo/polo-200-kit.png";
+import polo300Kit from "@/assets/products/polo/polo-300-kit.png";
+
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
 export interface SportCategory {
