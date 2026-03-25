@@ -268,13 +268,15 @@ import hood800Front from "@/assets/products/hoodie/hood-800-front.png";
 import hood900Kit from "@/assets/products/hoodie/hood-900-kit.png";
 import hood900Front from "@/assets/products/hoodie/hood-900-front.png";
 
-// Product images - Sports Jerseys (Styles 100-600)
+// Product images - Sports Jerseys (Styles 100-800)
 import jer100Kit from "@/assets/products/jersey/jer-100-kit.png";
 import jer200Kit from "@/assets/products/jersey/jer-200-kit.png";
 import jer300Kit from "@/assets/products/jersey/jer-300-kit.png";
 import jer400Kit from "@/assets/products/jersey/jer-400-kit.png";
 import jer500Kit from "@/assets/products/jersey/jer-500-kit.png";
 import jer600Kit from "@/assets/products/jersey/jer-600-kit.png";
+import jer700Kit from "@/assets/products/jersey/jer-700-kit.png";
+import jer800Kit from "@/assets/products/jersey/jer-800-kit.png";
 
 export type SportType = 'soccer' | 'basketball' | 'american_football' | 'baseball_softball' | 'volleyball' | 'netball' | 'cricket' | 'business';
 
@@ -586,6 +588,8 @@ export const productsBySport: Record<SportType, ProductType[]> = {
     { id: 'jer-kit-400', name: 'Sports Jersey (Style 400)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer400Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'jer-kit-500', name: 'Sports Jersey (Style 500)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer500Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
     { id: 'jer-kit-600', name: 'Sports Jersey (Style 600)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer600Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'jer-kit-700', name: 'Sports Jersey (Style 700)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer700Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
+    { id: 'jer-kit-800', name: 'Sports Jersey (Style 800)', shortDescription: 'Custom sublimated sports jersey', basePrice: 45, image: jer800Kit, fabricType: 'Sublimated', leadTime: 'Standard', moq: 18, category: 'Full Kit' },
   ],
 };
 
