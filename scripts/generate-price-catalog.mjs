@@ -36,9 +36,19 @@ for (const line of block.split("\n")) {
 
 // Hand-written boot products (src/data/products.ts) keep their own ids/prices.
 const productsSrc = readFileSync("src/data/products.ts", "utf8");
-const legacy = productsSrc.matchAll(/id:\s*(\d+),\s*\n\s*sku:[^\n]*\n\s*name:[^\n]*\n\s*slug:[^\n]*\n\s*category:[^\n]*\n\s*price:\s*"From \$([0-9.]+)"/g);
-for (const m of legacy) {
-  catalog[Number(m[1])] = { price: Number(m[2]), moq: 1 };
+const legacyBlocks = productsSrc.split(/\n  \{\n/).slice(1);
+for (const blockText of legacyBlocks) {
+  const id = blockText.match(/id:\s*(\d+),/);
+  const price = blockText.match(/price:\s*"(?:From )?\$([0-9.]+)"/);
+  if (!id || !price) continue;
+  const variants = [...blockText.matchAll(
+    /\{\s*outsole:\s*"([^"]+)",\s*color:\s*"([^"]+)",\s*price:\s*"\$([0-9.]+)"\s*\}/g
+  )].map((v) => ({ outsole: v[1], color: v[2], price: Number(v[3]) }));
+  catalog[Number(id[1])] = {
+    price: Number(price[1]),
+    moq: 1,
+    ...(variants.length ? { variants } : {}),
+  };
 }
 
 mkdirSync("supabase/functions/_shared", { recursive: true });
