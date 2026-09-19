@@ -54,6 +54,7 @@ function AppContent() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/videos" element={<VideoGallery />} />
         <Route path="/custom-team-outfit" element={<CustomTeamOutfit />} />
+        <Route path="/custom-outfit" element={<CustomTeamOutfit />} />
         <Route path="/about" element={<About />} />
         <Route path="/affiliate" element={<AffiliateProgram />} />
         <Route path="/programs/high-school" element={<HighSchoolPrograms />} />
