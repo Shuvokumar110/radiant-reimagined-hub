@@ -1,1 +1,7 @@
 project_id = "gzmeiutukdsrqjkswkwg"
+
+[functions.place-order]
+verify_jwt = false
+
+[functions.get-order]
+verify_jwt = false
