@@ -54,7 +54,7 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
   private max?: number;
   private mode: "select" | "insert" | "update" | "delete" = "select";
   private payload: any;
-  private single = false;
+  private singleRow = false;
 
   constructor(private tableName: string) {}
 
@@ -106,12 +106,12 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
   }
 
   maybeSingle() {
-    this.single = true;
+    this.singleRow = true;
     return this;
   }
 
   single() {
-    this.single = true;
+    this.singleRow = true;
     return this;
   }
 
@@ -132,7 +132,7 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
         ...row,
       }));
       setTable(this.tableName, [...rows, ...created]);
-      return this.single ? created[0] ?? null : created;
+      return this.singleRow ? created[0] ?? null : created;
     }
 
     if (this.mode === "update") {
@@ -144,14 +144,14 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
         return merged;
       });
       setTable(this.tableName, next);
-      return this.single ? updated[0] ?? null : updated;
+      return this.singleRow ? updated[0] ?? null : updated;
     }
 
     if (this.mode === "delete") {
       const kept = rows.filter((row) => !this.matches(row));
       const removed = rows.filter((row) => this.matches(row));
       setTable(this.tableName, kept);
-      return this.single ? removed[0] ?? null : removed;
+      return this.singleRow ? removed[0] ?? null : removed;
     }
 
     let result = rows.filter((row) => this.matches(row));
@@ -165,7 +165,7 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
       });
     }
     if (this.max != null) result = result.slice(0, this.max);
-    return this.single ? result[0] ?? null : result;
+    return this.singleRow ? result[0] ?? null : result;
   }
 
   then<R1 = { data: T; error: null }, R2 = never>(
