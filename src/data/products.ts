@@ -154,6 +154,12 @@ const legacyProducts: Product[] = [
   },
 ];
 
+// Team-builder derived catalog (all sports / all styles) appended to the
+// hand-written boot products above.
+import { generatedProducts } from "./generatedShopProducts";
+
+export const products: Product[] = [...legacyProducts, ...generatedProducts];
+
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
