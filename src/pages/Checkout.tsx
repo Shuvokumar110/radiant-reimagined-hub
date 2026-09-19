@@ -347,8 +347,8 @@ export default function Checkout() {
                   )}
                 </Button>
                 <p className="text-xs text-muted-foreground mt-4 text-center">
-                  We'll confirm your order by email and send a payment link before production
-                  starts.
+                  Our team reviews every order and contacts you with a payment link before
+                  production starts.
                 </p>
               </motion.div>
             </div>

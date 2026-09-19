@@ -121,7 +121,7 @@ export default function OrderConfirmation() {
                     {order.payment_status} · Status {order.fulfillment_status}
                   </p>
                   <p className="text-sm text-muted-foreground mt-2">
-                    A confirmation has been sent to {order.email}. Our team will follow up with your
+                    Keep this page for your records. Our team will contact {order.email} with your
                     payment link and production timeline.
                   </p>
                 </div>
