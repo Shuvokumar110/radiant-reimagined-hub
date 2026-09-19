@@ -30,6 +30,14 @@ export interface Product {
   outsoles: string[];
   colors?: string[];
   variants?: ProductVariant[];
+  /** Minimum order quantity (team products) */
+  moq?: number;
+  /** Numeric unit price in USD, used for cart + checkout math */
+  unitPrice?: number;
+  /** Sport key for team-builder derived products */
+  sport?: string;
+  /** Labels matching each entry in `images` */
+  galleryLabels?: string[];
 }
 
 export const categories = [
@@ -50,7 +58,7 @@ export const categories = [
   "Special Edition",
 ];
 
-export const products: Product[] = [
+const legacyProducts: Product[] = [
   {
     id: 2195,
     sku: "TIDI-672",
@@ -145,6 +153,12 @@ export const products: Product[] = [
     ]
   },
 ];
+
+// Team-builder derived catalog (all sports / all styles) appended to the
+// hand-written boot products above.
+import { generatedProducts } from "./generatedShopProducts";
+
+export const products: Product[] = [...legacyProducts, ...generatedProducts];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
