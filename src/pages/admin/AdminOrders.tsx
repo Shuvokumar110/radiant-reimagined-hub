@@ -6,9 +6,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/lib/localBackend';
 import { useToast } from '@/hooks/use-toast';
-import type { Database } from '@/integrations/supabase/types';
 
-type OrderStatus = Database['public']['Enums']['order_status'];
+type OrderStatus =
+  | 'draft'
+  | 'submitted'
+  | 'proof_sent'
+  | 'changes_requested'
+  | 'approved'
+  | 'in_production'
+  | 'shipped'
+  | 'delivered';
 
 const STATUS_OPTIONS: OrderStatus[] = [
   'draft', 'submitted', 'proof_sent', 'changes_requested', 'approved', 'in_production', 'shipped', 'delivered',

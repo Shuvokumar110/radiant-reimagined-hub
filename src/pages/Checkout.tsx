@@ -64,6 +64,7 @@ export default function Checkout() {
             image: i.image,
             size: i.size,
             quantity: i.quantity,
+            unitPrice: i.unitPrice,
           })),
         },
       });
