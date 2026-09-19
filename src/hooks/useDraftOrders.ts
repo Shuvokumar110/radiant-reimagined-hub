@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/localBackend';
 import { useAuth } from './useAuth';
 import { TeamBuilderState } from '@/context/TeamBuilderContext';
 import { useToast } from './use-toast';

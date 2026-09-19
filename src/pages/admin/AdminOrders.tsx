@@ -4,11 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/localBackend';
 import { useToast } from '@/hooks/use-toast';
-import type { Database } from '@/integrations/supabase/types';
 
-type OrderStatus = Database['public']['Enums']['order_status'];
+type OrderStatus =
+  | 'draft'
+  | 'submitted'
+  | 'proof_sent'
+  | 'changes_requested'
+  | 'approved'
+  | 'in_production'
+  | 'shipped'
+  | 'delivered';
 
 const STATUS_OPTIONS: OrderStatus[] = [
   'draft', 'submitted', 'proof_sent', 'changes_requested', 'approved', 'in_production', 'shipped', 'delivered',

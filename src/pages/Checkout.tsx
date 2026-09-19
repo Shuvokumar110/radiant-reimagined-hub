@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/localBackend";
 import { SHIPPING_OPTIONS, ShippingMethod, shippingCost, formatPrice } from "@/lib/shipping";
 
 export default function Checkout() {
@@ -64,6 +64,7 @@ export default function Checkout() {
             image: i.image,
             size: i.size,
             quantity: i.quantity,
+            unitPrice: i.unitPrice,
           })),
         },
       });
