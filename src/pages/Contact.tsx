@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const contactRegions = [
   {
@@ -32,11 +34,50 @@ const locations = [
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selects, setSelects] = useState({ program: "", quantity: "", timeline: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
     setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 2000);
+
+    const details = [
+      selects.program && `Program: ${selects.program}`,
+      selects.quantity && `Estimated quantity: ${selects.quantity}`,
+      selects.timeline && `Timeline: ${selects.timeline}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const { error } = await supabase.from("contact_messages").insert({
+      name: `${data.get("firstName") ?? ""} ${data.get("lastName") ?? ""}`.trim(),
+      email: String(data.get("email") ?? ""),
+      phone: (data.get("phone") as string) || null,
+      organization: (data.get("organization") as string) || null,
+      subject: selects.program ? `Quote request - ${selects.program}` : "Website enquiry",
+      message: details
+        ? `${data.get("message") ?? ""}\n\n${details}`
+        : String(data.get("message") ?? ""),
+    });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      toast({
+        title: "Message not sent",
+        description: "Something went wrong. Please try again or email us directly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Message sent",
+      description: "Thanks for reaching out - our team will reply within one business day.",
+    });
+    form.reset();
+    setSelects({ program: "", quantity: "", timeline: "" });
   };
 
   return (
@@ -108,11 +149,11 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" required className="h-12 rounded-xl border-2" />
+                    <Input id="firstName" name="firstName" placeholder="John" required className="h-12 rounded-xl border-2" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" required className="h-12 rounded-xl border-2" />
+                    <Input id="lastName" name="lastName" placeholder="Doe" required className="h-12 rounded-xl border-2" />
                   </div>
                 </div>
 
@@ -120,7 +161,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <Label htmlFor="email">Email *</Label>
                     <Input
-                      id="email"
+                      id="email" name="email"
                       type="email"
                       placeholder="john@example.com"
                       required
@@ -129,7 +170,7 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone</Label>
-                    <Input id="phone" type="tel" placeholder="(123) 456-7890" className="h-12 rounded-xl border-2" />
+                    <Input id="phone" name="phone" type="tel" placeholder="(123) 456-7890" className="h-12 rounded-xl border-2" />
                   </div>
                 </div>
 
@@ -137,7 +178,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <Label htmlFor="organization">Organization / Team *</Label>
                     <Input
-                      id="organization"
+                      id="organization" name="organization"
                       placeholder="Your team or organization name"
                       required
                       className="h-12 rounded-xl border-2"
@@ -145,7 +186,7 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="program">Program Type *</Label>
-                    <Select required>
+                    <Select required name="program" onValueChange={(v) => setSelects((p) => ({ ...p, program: v }))}>
                       <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="Select program type" />
                       </SelectTrigger>
@@ -163,7 +204,7 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="quantity">Estimated Quantity</Label>
-                    <Select>
+                    <Select onValueChange={(v) => setSelects((p) => ({ ...p, quantity: v }))}>
                       <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="Select quantity range" />
                       </SelectTrigger>
@@ -177,7 +218,7 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="timeline">Timeline</Label>
-                    <Select>
+                    <Select onValueChange={(v) => setSelects((p) => ({ ...p, timeline: v }))}>
                       <SelectTrigger className="h-12 rounded-xl border-2">
                         <SelectValue placeholder="When do you need it?" />
                       </SelectTrigger>
@@ -195,7 +236,7 @@ export default function Contact() {
                 <div className="space-y-2">
                   <Label htmlFor="message">Message *</Label>
                   <Textarea
-                    id="message"
+                    id="message" name="message"
                     placeholder="Tell us about your project requirements, customization needs, and any specific questions..."
                     rows={6}
                     required
