@@ -2,12 +2,14 @@ import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAdminRole } from '@/hooks/useAdminRole';
 import { useAuth } from '@/hooks/useAuth';
-import { LayoutDashboard, ShoppingCart, Users, FileText, LogOut, Shield, ChevronLeft } from 'lucide-react';
+import { LayoutDashboard, ShoppingCart, Users, FileText, LogOut, Shield, ChevronLeft, Package, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { label: 'Orders', href: '/admin/orders', icon: ShoppingCart },
+  { label: 'Team Orders', href: '/admin/orders', icon: ShoppingCart },
+  { label: 'Shop Orders', href: '/admin/shop-orders', icon: Package },
+  { label: 'Messages', href: '/admin/messages', icon: Mail },
   { label: 'Users', href: '/admin/users', icon: Users },
   { label: 'Content', href: '/admin/content', icon: FileText },
 ];
