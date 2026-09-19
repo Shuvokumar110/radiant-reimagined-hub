@@ -30,6 +30,14 @@ export interface Product {
   outsoles: string[];
   colors?: string[];
   variants?: ProductVariant[];
+  /** Minimum order quantity (team products) */
+  moq?: number;
+  /** Numeric unit price in USD, used for cart + checkout math */
+  unitPrice?: number;
+  /** Sport key for team-builder derived products */
+  sport?: string;
+  /** Labels matching each entry in `images` */
+  galleryLabels?: string[];
 }
 
 export const categories = [
