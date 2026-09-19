@@ -108,6 +108,11 @@ export default function Account() {
                 <LogOut className="w-4 h-4" /> Sign Out
               </Button>
             </div>
+
+            <div className="max-w-3xl mx-auto mt-14">
+              <h2 className="text-2xl font-semibold mb-6">My orders</h2>
+              <OrderHistory />
+            </div>
           </div>
         </section>
       </Layout>
