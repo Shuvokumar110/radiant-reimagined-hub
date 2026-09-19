@@ -58,7 +58,7 @@ export const categories = [
   "Special Edition",
 ];
 
-export const products: Product[] = [
+const legacyProducts: Product[] = [
   {
     id: 2195,
     sku: "TIDI-672",
