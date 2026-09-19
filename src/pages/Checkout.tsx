@@ -1,103 +1,104 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Send, Check, ShoppingBag } from "lucide-react";
+import { Loader2, Lock, ShoppingBag } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
+import { FadeInUp } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { FadeInUp } from "@/components/ui/animated-text";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { SHIPPING_OPTIONS, ShippingMethod, shippingCost, formatPrice } from "@/lib/shipping";
 
 export default function Checkout() {
+  const { items, totalItems, subtotal, clearCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const { items, totalItems, clearCart } = useCart();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const [formData, setFormData] = useState({
+  const [submitting, setSubmitting] = useState(false);
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>("standard");
+  const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     organization: "",
-    message: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+    notes: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    if (user?.email) {
+      setForm((f) => (f.email ? f : { ...f, email: user.email as string }));
+    }
+  }, [user]);
+
+  const shipping = shippingCost(shippingMethod, subtotal);
+  const total = subtotal + shipping;
+
+  const update = (field: keyof typeof form, value: string) =>
+    setForm((f) => ({ ...f, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (items.length === 0) return;
+    setSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("place-order", {
+        body: {
+          shippingMethod,
+          customer: form,
+          items: items.map((i) => ({
+            productId: i.productId,
+            slug: i.slug,
+            name: i.name,
+            category: i.category,
+            image: i.image,
+            size: i.size,
+            quantity: i.quantity,
+          })),
+        },
+      });
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    clearCart();
-
-    toast({
-      title: "Quote Request Submitted!",
-      description: "We'll get back to you within 24-48 hours with pricing details.",
-    });
+      clearCart();
+      navigate(`/order-confirmation?orderId=${data.orderId}&email=${encodeURIComponent(form.email)}`);
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "We couldn't place your order",
+        description: "Please check your details and try again, or contact us for help.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  if (items.length === 0 && !isSubmitted) {
+  if (items.length === 0) {
     return (
       <Layout>
-        <section className="pt-32 md:pt-40 pb-20 min-h-screen flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
+        <section className="pt-40 pb-24 bg-background min-h-[70vh]">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
             <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground mb-6" />
-            <h1 className="text-2xl font-semibold mb-4">Your cart is empty</h1>
-            <p className="text-muted-foreground mb-8">Add some items before checking out.</p>
-            <Button asChild size="lg" className="bg-foreground text-background hover:bg-foreground/90">
+            <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
+            <p className="text-muted-foreground mb-8">
+              Add products to your cart before checking out.
+            </p>
+            <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
               <Link to="/shop">Browse Products</Link>
             </Button>
-          </motion.div>
-        </section>
-      </Layout>
-    );
-  }
-
-  if (isSubmitted) {
-    return (
-      <Layout>
-        <section className="pt-32 md:pt-40 pb-20 min-h-screen flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center max-w-lg mx-auto px-4"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
-              className="w-20 h-20 bg-foreground text-background rounded-full flex items-center justify-center mx-auto mb-8"
-            >
-              <Check className="h-10 w-10" />
-            </motion.div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Quote Request Submitted!</h1>
-            <p className="text-muted-foreground mb-8">
-              Thank you for your interest. Our team will review your request and get back to you
-              within 24-48 hours with detailed pricing information.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-foreground text-background hover:bg-foreground/90">
-                <Link to="/shop">Continue Shopping</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/">Return Home</Link>
-              </Button>
-            </div>
-          </motion.div>
+          </div>
         </section>
       </Layout>
     );
@@ -105,220 +106,253 @@ export default function Checkout() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-12 md:pb-16 bg-foreground text-background">
+      <section className="pt-32 md:pt-40 pb-12 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6">
           <FadeInUp>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/10 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 bg-background rounded-full" />
+              <Lock className="h-3 w-3" />
               <span className="text-xs font-medium tracking-widest uppercase text-background/70">
-                Complete Your Order
+                Secure Checkout
               </span>
             </div>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              <span className="text-background">Request.</span>
-              <br />
-              <span className="text-background/50">A Quote.</span>
+            <h1 className="text-4xl md:text-5xl font-bold">
+              <span className="text-background">Checkout.</span>{" "}
+              <span className="text-background/50">
+                {totalItems} {totalItems === 1 ? "item" : "items"}
+              </span>
             </h1>
-          </FadeInUp>
-          <FadeInUp delay={0.2}>
-            <p className="text-background/70 max-w-xl mt-6">
-              Complete the form below and we'll provide you with custom pricing for your order.
-            </p>
           </FadeInUp>
         </div>
       </section>
 
-      {/* Checkout Form */}
-      <section className="py-12 md:py-16 lg:py-20 bg-background">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
-          <motion.button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-            whileHover={{ x: -4 }}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm">Back to Cart</span>
-          </motion.button>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            {/* Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="lg:col-span-2 space-y-10">
+              {/* Contact */}
+              <div>
+                <h2 className="text-xl font-semibold mb-6">Contact details</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="firstName" className="text-sm font-medium mb-2 block">
-                      First Name *
-                    </label>
+                    <Label htmlFor="firstName">First name *</Label>
                     <Input
                       id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
                       required
-                      className="h-12"
+                      value={form.firstName}
+                      onChange={(e) => update("firstName", e.target.value)}
                     />
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="text-sm font-medium mb-2 block">
-                      Last Name *
-                    </label>
+                    <Label htmlFor="lastName">Last name *</Label>
                     <Input
                       id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
                       required
-                      className="h-12"
+                      value={form.lastName}
+                      onChange={(e) => update("lastName", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => update("email", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone</Label>
+                    <Input
+                      id="phone"
+                      value={form.phone}
+                      onChange={(e) => update("phone", e.target.value)}
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <Label htmlFor="organization">Club / organization</Label>
+                    <Input
+                      id="organization"
+                      value={form.organization}
+                      onChange={(e) => update("organization", e.target.value)}
                     />
                   </div>
                 </div>
+              </div>
 
-                <div>
-                  <label htmlFor="email" className="text-sm font-medium mb-2 block">
-                    Email Address *
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="h-12"
-                  />
+              {/* Shipping address */}
+              <div>
+                <h2 className="text-xl font-semibold mb-6">Shipping address</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="sm:col-span-2">
+                    <Label htmlFor="address1">Address *</Label>
+                    <Input
+                      id="address1"
+                      required
+                      value={form.address1}
+                      onChange={(e) => update("address1", e.target.value)}
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <Label htmlFor="address2">Apartment, suite (optional)</Label>
+                    <Input
+                      id="address2"
+                      value={form.address2}
+                      onChange={(e) => update("address2", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="city">City *</Label>
+                    <Input
+                      id="city"
+                      required
+                      value={form.city}
+                      onChange={(e) => update("city", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="state">State / region</Label>
+                    <Input
+                      id="state"
+                      value={form.state}
+                      onChange={(e) => update("state", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="postalCode">Postal code *</Label>
+                    <Input
+                      id="postalCode"
+                      required
+                      value={form.postalCode}
+                      onChange={(e) => update("postalCode", e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="country">Country *</Label>
+                    <Input
+                      id="country"
+                      required
+                      value={form.country}
+                      onChange={(e) => update("country", e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Shipping method */}
+              <div>
+                <h2 className="text-xl font-semibold mb-6">Delivery</h2>
+                <div className="space-y-3">
+                  {SHIPPING_OPTIONS.map((option) => (
+                    <label
+                      key={option.id}
+                      className={`flex items-center justify-between gap-4 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                        shippingMethod === option.id
+                          ? "border-foreground"
+                          : "border-border hover:border-muted-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="shipping"
+                          className="accent-foreground"
+                          checked={shippingMethod === option.id}
+                          onChange={() => setShippingMethod(option.id)}
+                        />
+                        <div>
+                          <p className="font-medium">{option.label}</p>
+                          <p className="text-sm text-muted-foreground">{option.description}</p>
+                        </div>
+                      </div>
+                      <span className="font-medium">
+                        {shippingCost(option.id, subtotal) === 0
+                          ? "Free"
+                          : formatPrice(shippingCost(option.id, subtotal))}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="notes">Order notes</Label>
+                <Textarea
+                  id="notes"
+                  rows={4}
+                  placeholder="Sizes breakdown, names and numbers, deadlines..."
+                  value={form.notes}
+                  onChange={(e) => update("notes", e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Summary */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-6 sm:p-8 bg-muted rounded-lg sticky top-32"
+              >
+                <h2 className="text-xl font-semibold mb-6">Order summary</h2>
+                <div className="space-y-4 max-h-64 overflow-y-auto pr-1 mb-6">
+                  {items.map((item) => (
+                    <div key={item.key} className="flex gap-3">
+                      <div className="w-14 h-14 rounded-md overflow-hidden bg-background flex-shrink-0">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{item.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {item.size ? `${item.size} · ` : ""}Qty {item.quantity}
+                        </p>
+                      </div>
+                      <span className="text-sm font-medium">
+                        {formatPrice(item.unitPrice * item.quantity)}
+                      </span>
+                    </div>
+                  ))}
                 </div>
 
-                <div>
-                  <label htmlFor="phone" className="text-sm font-medium mb-2 block">
-                    Phone Number
-                  </label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="h-12"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="organization" className="text-sm font-medium mb-2 block">
-                    Team / Organization
-                  </label>
-                  <Input
-                    id="organization"
-                    name="organization"
-                    value={formData.organization}
-                    onChange={handleChange}
-                    placeholder="Your team or organization name"
-                    className="h-12"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="text-sm font-medium mb-2 block">
-                    Additional Notes
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Any special requirements, customizations, or questions..."
-                    className="min-h-[120px] resize-none"
-                  />
+                <div className="space-y-3 border-t border-border pt-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Subtotal</span>
+                    <span>{formatPrice(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Shipping</span>
+                    <span>{shipping === 0 ? "Free" : formatPrice(shipping)}</span>
+                  </div>
+                  <div className="flex justify-between font-semibold text-lg border-t border-border pt-3">
+                    <span>Total</span>
+                    <span>{formatPrice(total)}</span>
+                  </div>
                 </div>
 
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={isSubmitting}
-                  className="w-full bg-foreground text-background hover:bg-foreground/90 h-14"
+                  disabled={submitting}
+                  className="w-full mt-6 bg-foreground text-background hover:bg-foreground/90"
                 >
-                  {isSubmitting ? (
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="w-5 h-5 border-2 border-background border-t-transparent rounded-full"
-                    />
-                  ) : (
+                  {submitting ? (
                     <>
-                      <Send className="h-5 w-5 mr-2" />
-                      Submit Quote Request
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Placing order...
                     </>
+                  ) : (
+                    "Place Order"
                   )}
                 </Button>
-              </form>
-            </motion.div>
-
-            {/* Order Summary */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="bg-muted rounded-2xl p-6 lg:p-8 sticky top-28">
-                <h2 className="text-xl font-bold mb-6">Order Summary</h2>
-                
-                <div className="space-y-4 mb-6">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex gap-4">
-                      <div className="w-16 h-16 bg-background rounded-lg overflow-hidden flex-shrink-0">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-medium text-sm">{item.name}</h4>
-                        <p className="text-xs text-muted-foreground">
-                          {item.size && `Size: ${item.size} • `}Qty: {item.quantity}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="border-t border-border pt-4">
-                  <div className="flex justify-between font-semibold mb-2">
-                    <span>Total Items</span>
-                    <span>{totalItems}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Our team will provide detailed pricing based on your selections and any
-                    customization requirements.
-                  </p>
-                </div>
-
-                <div className="mt-6 p-4 bg-background rounded-lg">
-                  <h4 className="font-medium text-sm mb-2">What happens next?</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                      <span>We'll review your request within 24-48 hours</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                      <span>Receive a detailed quote via email</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                      <span>Discuss customizations with our team</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+                <p className="text-xs text-muted-foreground mt-4 text-center">
+                  We'll confirm your order by email and send a payment link before production
+                  starts.
+                </p>
+              </motion.div>
+            </div>
+          </form>
         </div>
       </section>
     </Layout>
