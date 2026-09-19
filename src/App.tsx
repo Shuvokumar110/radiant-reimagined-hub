@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -34,6 +35,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminContent from "./pages/admin/AdminContent";
+import AdminShopOrders from "./pages/admin/AdminShopOrders";
+import AdminMessages from "./pages/admin/AdminMessages";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +64,8 @@ function AppContent() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/orders/:id" element={<OrderConfirmation />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/terms" element={<TermsOfService />} />
@@ -67,6 +73,8 @@ function AppContent() {
         <Route path="/shipping-returns" element={<ShippingReturns />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/shop-orders" element={<AdminShopOrders />} />
+        <Route path="/admin/messages" element={<AdminMessages />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/content" element={<AdminContent />} />
         <Route path="*" element={<NotFound />} />
@@ -79,6 +87,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <CartProvider>
+        <WishlistProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
@@ -88,6 +97,7 @@ const App = () => (
             </MaintenanceMode>
           </BrowserRouter>
         </TooltipProvider>
+        </WishlistProvider>
       </CartProvider>
     </AuthProvider>
   </QueryClientProvider>

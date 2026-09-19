@@ -10,6 +10,60 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminRole } from "@/hooks/useAdminRole";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { formatPrice } from "@/lib/shipping";
+
+function OrderHistory() {
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("shop_orders")
+        .select("*")
+        .order("created_at", { ascending: false });
+      setOrders(data || []);
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) {
+    return <p className="text-sm text-muted-foreground">Loading your orders...</p>;
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="p-6 border rounded-xl text-center">
+        <p className="text-muted-foreground mb-4">You haven't placed any orders yet.</p>
+        <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
+          <Link to="/shop">Browse Products</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {orders.map((order) => (
+        <Link
+          key={order.id}
+          to={`/orders/${order.id}`}
+          className="flex flex-wrap items-center justify-between gap-3 p-5 border rounded-xl hover:border-foreground/30 transition-colors"
+        >
+          <div>
+            <p className="font-semibold">{order.order_number}</p>
+            <p className="text-xs text-muted-foreground">
+              {new Date(order.created_at).toLocaleDateString()} · Payment {order.payment_status} ·{" "}
+              {order.fulfillment_status}
+            </p>
+          </div>
+          <span className="font-medium">{formatPrice(Number(order.total))}</span>
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 export default function Account() {
   const [isLogin, setIsLogin] = useState(true);
@@ -107,6 +161,11 @@ export default function Account() {
               <Button variant="outline" onClick={handleSignOut} className="w-full gap-2">
                 <LogOut className="w-4 h-4" /> Sign Out
               </Button>
+            </div>
+
+            <div className="max-w-3xl mx-auto mt-14">
+              <h2 className="text-2xl font-semibold mb-6">My orders</h2>
+              <OrderHistory />
             </div>
           </div>
         </section>
