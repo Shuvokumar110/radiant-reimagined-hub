@@ -1,137 +1,45 @@
+# Turn the site into a working online store
 
+Today the shop pages list no products, the cart empties on refresh, the wishlist is a hard-coded demo list, and checkout only pretends to submit. This plan makes buying work end to end with real card payments, while keeping the custom team-order (quote) flow as it is.
 
-# TiDi Apparel - Luxurious Black & White Redesign
+## 1. Shop catalog from the images you already uploaded
 
-A complete reimagining of TiDi Apparel's website with a premium black and white aesthetic, cinematic interactions, and maximum luxury feel.
+- Fill every shop category (soccer, basketball, american football, baseball/softball, volleyball, netball, cricket, tracksuits, hoodies, polo jerseys, sports jerseys) from the product images already in the project.
+- Each listing gets a name, style number, price, main image and the full set of views, so the product page shows the same gallery as the team builder.
+- Category pages get working sort and price filtering, plus a product page with size and quantity selection.
 
----
+## 2. Cart that sticks around
 
-## 🎨 Design Foundation
+- Cart saved on the device so it survives refresh and navigation; signed-in shoppers keep their cart across devices.
+- Same for the wishlist: real saving, add/remove from any product card or product page, and "move to cart".
+- Correct line totals, quantity limits, and per-size lines (one product in two sizes = two lines).
 
-**Color Palette:**
-- Primary: Pure Black (#000000) & Pure White (#FFFFFF)
-- Accents: Elegant silver/platinum gradients for luxury elements
-- Product images displayed in full color to create stunning visual contrast
+## 3. Real checkout with card payment
 
-**Typography:**
-- Elegant serif headings for luxury feel
-- Clean sans-serif body text for readability
-- Large, bold display text for hero sections
+- Guest checkout allowed; signing in is optional and just pre-fills details.
+- Checkout collects contact and shipping address, shows an order summary with subtotal, shipping and total.
+- Payment by card through Lovable's built-in Stripe payments (no Stripe account setup needed from you). The shopper is taken to a secure payment page and returned to a confirmation page.
+- Orders are recorded only after payment succeeds, with a readable order number.
 
-**Visual Style:**
-- High contrast black/white sections
-- Generous white space
-- Premium glass-morphism effects
-- Subtle grain textures for depth
+## 4. Orders visible to you and the customer
 
----
+- Confirmation page showing what was bought and the order number.
+- Customer account area lists their past shop orders with status.
+- Admin area gets a shop-orders view: order list, items, customer details, payment status, and a status selector (paid, processing, shipped, delivered, cancelled).
 
-## ✨ Interactive & Dynamic Features
+## 5. Keep the existing quote flow
 
-**Smooth Scroll Experience:**
-- Buttery-smooth locomotion scroll
-- Sections that flow seamlessly into each other
-- Slow, deliberate scroll speed for luxurious feel
+The custom team outfit builder keeps submitting quote requests, unchanged, and the contact form is wired up so messages are actually stored and visible in admin instead of being discarded.
 
-**Cinematic Animations:**
-- Parallax hero images with depth layers
-- Text reveals that slide and fade elegantly
-- Product cards that lift with dramatic shadows on hover
-- Section transitions with staggered element animations
+## Technical notes
 
-**Cursor & Mouse Effects:**
-- Custom cursor that transforms on interactive elements
-- Magnetic buttons that attract the cursor
-- Hover states with smooth scaling and glow effects
+- New backend tables: `shop_products` (optional cache/override of the static catalog), `shop_orders`, `shop_order_items`, `cart_items`, `wishlist_items`, `contact_messages`. RLS: users read/write their own rows; admins read all; order inserts happen server-side.
+- Cart/wishlist: `CartContext` rewritten with localStorage persistence plus Supabase sync when authenticated; cart item key becomes `productId + size`.
+- Payments: enable built-in Stripe payments, then two edge functions — `create-checkout` (creates a Stripe Checkout session from server-recalculated prices) and `stripe-webhook` (verifies signature, marks the order paid, clears the cart). Prices are never trusted from the client.
+- Catalog: generated `src/data/shopProducts.ts` entries derived from the existing asset folders, sharing the gallery map used by `productGalleryImages.ts`.
+- Routes added: `/checkout/success`, `/orders/:id`, `/admin/shop-orders`, `/admin/messages`. Admin routes stay behind the existing admin-role check.
+- Shipping: flat-rate options at checkout (standard/express) with a free-shipping threshold; tax left out for now.
 
-**Dynamic Elements:**
-- Floating navigation that changes on scroll
-- Animated number counters
-- Infinite scrolling affiliate logo marquee
-- Subtle particle effects in hero sections
+## Not included
 
----
-
-## 📄 Page Structure
-
-### 1. Homepage
-- **Cinematic Hero:** Full-screen video/image background with "Built for Champions" headline, animated infinity logo, and smooth scroll indicator
-- **Brand Story Section:** Split-screen layout with animated text reveals about TiDi's mission
-- **5-Step Process:** Interactive timeline with animated step transitions - Plan, Design, Approve, Produce, Deliver
-- **Special Order Soccer:** Dramatic product showcase featuring Italian-made boots with premium leather details
-- **Featured Products Carousel:** Full-color products floating against black background
-- **Product Categories Grid:** Hoverable category cards with image zoom effects
-- **Affiliates Marquee:** Smooth infinite scroll of partner logos
-- **Call-to-Action:** Dramatic full-width section with "Request Quote" button
-
-### 2. Shop Page
-- **Category Filter Bar:** Sleek dropdown/pill filters
-- **Product Grid:** Cards with hover lift effects, quick-view overlays, and wishlist hearts
-- **Product Details:** Category badges, "Kangaroo Leather" tags, and quality indicators
-- **Products shown in full color against black/white UI
-
-### 3. Program Pages (4 pages)
-**High School Programs | Collegiate Athletics | Club & Travel | Leagues & Academies**
-
-Each page includes:
-- **Hero Section:** "Pride On and Off the Field" with program-specific imagery
-- **Key Highlights:** Animated feature cards (school colors, durable fabrics, bulk ordering)
-- **5-Step Process:** Interactive delivery timeline
-- **Complete Outfit Solutions:** Product category showcase
-- **Why Choose TiDi:** Animated benefit cards
-- **Trust Badges:** Pro-Grade Quality, Worldwide Delivery, Effortless Process with icon animations
-- **Request Pricing CTA:** Prominent call-to-action button
-
-### 4. Account & Utility Pages
-- **My Account:** Login/register forms with elegant styling
-- **Wishlist:** Saved products with remove functionality
-- **Cart:** Product list with quantity controls and contact-for-quote button
-- **Contact/Quote Request:** Beautiful form for pricing inquiries
-
----
-
-## 🔧 Technical Features
-
-**Navigation:**
-- Transparent header that transforms to solid on scroll
-- Mobile hamburger menu with full-screen overlay animation
-- TiDi infinity logo prominently displayed
-- Cart and wishlist counters
-
-**Footer:**
-- Multi-column layout with links to all pages
-- Social media icons
-- Newsletter signup
-- "Text Us" floating widget recreation
-
-**Responsive Design:**
-- Fully optimized for mobile, tablet, and desktop
-- Touch-friendly interactions on mobile
-- Adaptive animations based on device capabilities
-
----
-
-## 📦 Content Migration
-
-All original content preserved:
-- Hero headlines and taglines
-- Program descriptions and highlights
-- Product names and categories
-- The 5-step process content
-- Feature descriptions (Pro-Grade Quality, Worldwide Delivery, etc.)
-- Affiliate partnerships section
-
----
-
-## 🚀 Deliverables
-
-1. **Homepage** - Cinematic landing with all major sections
-2. **Shop Page** - Product grid with filters and quick view
-3. **4 Program Pages** - High School, Collegiate, Club & Travel, Leagues & Academies
-4. **Account Page** - Login/register functionality
-5. **Wishlist Page** - Saved products view
-6. **Cart Page** - Shopping cart with quote request
-7. **Reusable Components** - Navigation, footer, product cards, process timeline
-
-This redesign will transform TiDi Apparel into a premium, immersive digital experience that matches the quality of the athletic apparel they create.
-
+Discount codes, inventory/stock counts, refunds from the admin area, and order-status emails. Say the word and any of these can follow.
