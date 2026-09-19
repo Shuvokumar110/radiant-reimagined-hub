@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState, ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/localBackend";
 import { useAuth } from "@/hooks/useAuth";
 
 export interface WishlistItem {

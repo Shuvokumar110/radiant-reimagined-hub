@@ -4,7 +4,7 @@ import { CheckCircle2, Loader2, Package } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { FadeInUp } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/localBackend";
 import { formatPrice } from "@/lib/shipping";
 
 interface OrderItem {
