@@ -19,13 +19,13 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   const product = getProductBySlug(slug || "");
   const { addToCart } = useCart();
+  const { isWishlisted: checkWishlisted, toggleWishlist } = useWishlist();
   
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedOutsole, setSelectedOutsole] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
 
   // Get current price based on variant selection
   const currentPrice = useMemo(() => {
