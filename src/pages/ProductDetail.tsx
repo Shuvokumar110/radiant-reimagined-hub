@@ -7,7 +7,12 @@ import { Button } from "@/components/ui/button";
 import { FadeInUp } from "@/components/ui/animated-text";
 import { getProductBySlug, products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { toast } from "@/hooks/use-toast";
+
+function parsePrice(value: string): number {
+  return parseFloat(value.replace(/[^0-9.]/g, "")) || 0;
+}
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
