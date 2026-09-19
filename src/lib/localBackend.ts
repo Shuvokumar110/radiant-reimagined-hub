@@ -48,7 +48,9 @@ const nowISO = () => new Date().toISOString();
 
 type Filter = { type: "eq" | "in"; column: string; value: any };
 
-class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
+type QueryResult<T> = { data: T; error: { message: string } | null };
+
+class LocalQuery<T = any> implements PromiseLike<QueryResult<T>> {
   private filters: Filter[] = [];
   private sort?: { column: string; ascending: boolean };
   private max?: number;
@@ -168,8 +170,8 @@ class LocalQuery<T = any> implements PromiseLike<{ data: T; error: null }> {
     return this.singleRow ? result[0] ?? null : result;
   }
 
-  then<R1 = { data: T; error: null }, R2 = never>(
-    onfulfilled?: ((value: { data: T; error: null }) => R1 | PromiseLike<R1>) | null,
+  then<R1 = QueryResult<T>, R2 = never>(
+    onfulfilled?: ((value: QueryResult<T>) => R1 | PromiseLike<R1>) | null,
     onrejected?: ((reason: any) => R2 | PromiseLike<R2>) | null
   ): PromiseLike<R1 | R2> {
     let outcome: { data: any; error: any };
@@ -241,7 +243,9 @@ const auth = {
     return {
       data: {
         subscription: {
-          unsubscribe: () => authListeners.delete(cb),
+          unsubscribe: () => {
+            authListeners.delete(cb);
+          },
         },
       },
     };
