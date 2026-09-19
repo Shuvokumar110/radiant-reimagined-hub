@@ -14,6 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
+      cart_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          image: string | null
+          moq: number | null
+          name: string
+          product_id: number
+          quantity: number
+          size: string | null
+          slug: string | null
+          unit_price: number
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          moq?: number | null
+          name: string
+          product_id: number
+          quantity?: number
+          size?: string | null
+          slug?: string | null
+          unit_price?: number
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          moq?: number | null
+          name?: string
+          product_id?: number
+          quantity?: number
+          size?: string | null
+          slug?: string | null
+          unit_price?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean
+          message: string
+          name: string
+          organization: string | null
+          phone: string | null
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean
+          message: string
+          name: string
+          organization?: string | null
+          phone?: string | null
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          name?: string
+          organization?: string | null
+          phone?: string | null
+          subject?: string | null
+        }
+        Relationships: []
+      }
       design_templates: {
         Row: {
           created_at: string
@@ -195,6 +276,146 @@ export type Database = {
         }
         Relationships: []
       }
+      shop_order_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          image: string | null
+          line_total: number
+          name: string
+          order_id: string
+          product_id: number | null
+          quantity: number
+          size: string | null
+          slug: string | null
+          unit_price: number
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          line_total: number
+          name: string
+          order_id: string
+          product_id?: number | null
+          quantity: number
+          size?: string | null
+          slug?: string | null
+          unit_price: number
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          line_total?: number
+          name?: string
+          order_id?: string
+          product_id?: number | null
+          quantity?: number
+          size?: string | null
+          slug?: string | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shop_order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "shop_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shop_orders: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          city: string | null
+          country: string | null
+          created_at: string
+          currency: string
+          email: string
+          first_name: string
+          fulfillment_status: Database["public"]["Enums"]["shop_fulfillment_status"]
+          id: string
+          last_name: string
+          notes: string | null
+          order_number: string
+          organization: string | null
+          paid_at: string | null
+          payment_status: Database["public"]["Enums"]["shop_payment_status"]
+          phone: string | null
+          postal_code: string | null
+          shipping_cost: number
+          shipping_method: string
+          state: string | null
+          stripe_session_id: string | null
+          subtotal: number
+          total: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          currency?: string
+          email: string
+          first_name: string
+          fulfillment_status?: Database["public"]["Enums"]["shop_fulfillment_status"]
+          id?: string
+          last_name: string
+          notes?: string | null
+          order_number: string
+          organization?: string | null
+          paid_at?: string | null
+          payment_status?: Database["public"]["Enums"]["shop_payment_status"]
+          phone?: string | null
+          postal_code?: string | null
+          shipping_cost?: number
+          shipping_method?: string
+          state?: string | null
+          stripe_session_id?: string | null
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          currency?: string
+          email?: string
+          first_name?: string
+          fulfillment_status?: Database["public"]["Enums"]["shop_fulfillment_status"]
+          id?: string
+          last_name?: string
+          notes?: string | null
+          order_number?: string
+          organization?: string | null
+          paid_at?: string | null
+          payment_status?: Database["public"]["Enums"]["shop_payment_status"]
+          phone?: string | null
+          postal_code?: string | null
+          shipping_cost?: number
+          shipping_method?: string
+          state?: string | null
+          stripe_session_id?: string | null
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       team_orders: {
         Row: {
           billing_address: Json | null
@@ -315,6 +536,42 @@ export type Database = {
         }
         Relationships: []
       }
+      wishlist_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          image: string | null
+          name: string
+          product_id: number
+          slug: string | null
+          unit_price: number | null
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          name: string
+          product_id: number
+          slug?: string | null
+          unit_price?: number | null
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string | null
+          name?: string
+          product_id?: number
+          slug?: string | null
+          unit_price?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -340,6 +597,13 @@ export type Database = {
         | "shipped"
         | "delivered"
       proof_status: "pending" | "approved" | "revision_requested"
+      shop_fulfillment_status:
+        | "new"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
+      shop_payment_status: "pending" | "paid" | "failed" | "refunded"
       sport_type:
         | "soccer"
         | "basketball"
@@ -487,6 +751,14 @@ export const Constants = {
         "delivered",
       ],
       proof_status: ["pending", "approved", "revision_requested"],
+      shop_fulfillment_status: [
+        "new",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+      ],
+      shop_payment_status: ["pending", "paid", "failed", "refunded"],
       sport_type: [
         "soccer",
         "basketball",
