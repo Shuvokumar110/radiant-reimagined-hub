@@ -82,13 +82,15 @@ export default function ProductDetail() {
     ].filter(Boolean).join(" / ");
     
     addToCart({
-      id: product.id,
+      productId: product.id,
+      slug: product.slug,
       name: product.name,
       category: product.category,
-      price: currentPrice,
+      unitPrice: parsePrice(currentPrice),
       image: product.image,
       size: variantInfo,
-    }, quantity);
+      moq: product.moq,
+    }, Math.max(quantity, product.moq ?? 1));
     
     toast({
       title: "Added to cart",
@@ -329,16 +331,30 @@ export default function ProductDetail() {
                     Add to Cart
                   </Button>
                   <motion.button
-                    onClick={() => setIsWishlisted(!isWishlisted)}
+                    onClick={() => {
+                      toggleWishlist({
+                        productId: product.id,
+                        slug: product.slug,
+                        name: product.name,
+                        category: product.category,
+                        image: product.image,
+                        unitPrice: parsePrice(currentPrice),
+                      });
+                      toast({
+                        title: checkWishlisted(product.id)
+                          ? "Removed from wishlist"
+                          : "Saved to wishlist",
+                      });
+                    }}
                     className={`w-14 h-14 rounded-lg border-2 flex items-center justify-center transition-colors ${
-                      isWishlisted
-                        ? "bg-red-500 border-red-500 text-white"
+                      checkWishlisted(product.id)
+                        ? "bg-destructive border-destructive text-destructive-foreground"
                         : "border-border hover:border-foreground"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Heart className={`h-5 w-5 ${isWishlisted ? "fill-current" : ""}`} />
+                    <Heart className={`h-5 w-5 ${checkWishlisted(product.id) ? "fill-current" : ""}`} />
                   </motion.button>
                 </div>
               </FadeInUp>
