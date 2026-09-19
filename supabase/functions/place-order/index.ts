@@ -7,7 +7,19 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-type CatalogEntry = { price: number; moq: number };
+type CatalogVariant = { outsole: string; color: string; price: number };
+type CatalogEntry = { price: number; moq: number; variants?: CatalogVariant[] };
+
+// Variant info arrives as a label such as "Size 9 / FG Outsole / Black".
+function resolvePrice(entry: CatalogEntry | undefined, size?: string): number {
+  if (!entry) return 0;
+  if (!entry.variants?.length || !size) return entry.price;
+  const label = size.toLowerCase();
+  const match = entry.variants.find(
+    (v) => label.includes(v.outsole.toLowerCase()) && label.includes(v.color.toLowerCase())
+  );
+  return match ? match.price : entry.price;
+}
 const catalog = priceCatalog as Record<string, CatalogEntry>;
 
 const SHIPPING_RATES: Record<string, number> = { standard: 25, express: 60 };
@@ -71,7 +83,7 @@ Deno.serve(async (req) => {
     // Prices come from the server catalog only — never from the client.
     const priced = items.map((item) => {
       const entry = catalog[String(item.productId)];
-      const unitPrice = entry ? entry.price : 0;
+      const unitPrice = resolvePrice(entry, item.size);
       const quantity = Math.min(Math.max(Math.floor(Number(item.quantity) || 1), 1), 10000);
       return {
         product_id: item.productId,
